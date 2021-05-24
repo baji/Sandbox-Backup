@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Notify_Due_Reminder</fullName>
+        <description>Notify Due Reminder</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>davidro@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All/Task_Due_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>Test</fullName>
+        <description>Test</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>urvashi.dagara@infoglen.awana</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Task_Due_Reminder</template>
+    </alerts>
+    <alerts>
+        <fullName>notification_email_to_GO_Specialist</fullName>
+        <description>notification email to GO Specialist</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>go@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Awana_GO/GO_Club_Specialist_notification</template>
+    </alerts>
+    <alerts>
+        <fullName>test1</fullName>
+        <description>test</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>urvashi.dagara@infoglen.awana</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Task_Due_Reminder</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Activity_Type</fullName>
+        <field>Activity_Type__c</field>
+        <formula>Text(Type)</formula>
+        <name>Activity Type</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Activity Type</fullName>
+        <actions>
+            <name>Activity_Type</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Task.Type</field>
+            <operation>equals</operation>
+            <value>Church Visit,Club Visit,Commander Visit,Pastor Visit</value>
+        </criteriaItems>
+        <description>Populate text field Activity Type with the Type selected for the activity in order to be able to report on it.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send notification to GO Club Specialist</fullName>
+        <actions>
+            <name>notification_email_to_GO_Specialist</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Task.Type</field>
+            <operation>equals</operation>
+            <value>GO</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Task.Subject</field>
+            <operation>equals</operation>
+            <value>GO Signup Notification</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Task Due Reminder</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Task.IsReminderSet</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Notify_Due_Reminder</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Task.ActivityDate</offsetFromField>
+            <timeLength>-1</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+</Workflow>

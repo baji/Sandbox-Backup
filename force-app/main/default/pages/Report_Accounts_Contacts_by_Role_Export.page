@@ -1,0 +1,44 @@
+<apex:page showHeader="false" controller="Report_Accounts_by_Role_Export" contentType="application/vnd.ms-excel#Report_Accounts_and_Contacts_by_Roles.xls" language="en-US" cache="true" readonly="true" standardStylesheets="true">
+
+
+    <apex:dataTable value="{!allResults}" var="acc" >
+  <!--  <apex:pageBlockTable value="{!allResults}" var="acc" > -->
+              
+        <apex:column headerValue="Account Name" >{!acc.Name}</apex:column>
+        <apex:column headerValue="Customer ID" >{!acc.Mailing_Address_Book__c}</apex:column>
+        <apex:column headerValue="City" >{!acc.Physical_City__c}</apex:column>
+        <apex:column headerValue="State" >{!acc.Physical_State__c}</apex:column>
+        <apex:column headerValue="Contact Name" >        
+        <apex:repeat value="{!acc.npe5__Affiliations__r}" var="c">
+            {!c.npe5__Contact__r.Name}<br/>
+        </apex:repeat> 
+        </apex:column>
+        <apex:column headerValue="Contact Email" >
+        <apex:repeat value="{!acc.npe5__Affiliations__r}" var="c">
+            {!c.npe5__Contact__r.Email}<br/>
+        </apex:repeat> 
+        </apex:column>
+        <apex:column headerValue="Awana Role" >
+        <apex:repeat value="{!acc.npe5__Affiliations__r}" var="c">
+            {!c.Awana_Role__c}<br/>
+        </apex:repeat> 
+        </apex:column>
+        <apex:column headerValue="Church Role" >
+        <apex:repeat value="{!acc.npe5__Affiliations__r}" var="c">
+            {!c.Church_Role__c}<br/>
+        </apex:repeat> 
+        </apex:column>
+      
+        <apex:column headerValue="Primary Missionary" >
+        
+        <apex:repeat value="{!acc.accountTeamMemberS}" var="c">
+            {!c.user.name}<br/>
+        </apex:repeat>
+        </apex:column>
+       
+        <apex:column headerValue="Account Owner" >{!acc.Owner.Name}</apex:column>
+    <!-- </apex:pageBlockTable> -->
+    </apex:dataTable>
+
+    
+</apex:page>

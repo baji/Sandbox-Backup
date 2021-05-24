@@ -1,0 +1,84 @@
+<apex:page controller="OrderEntryStatus" contentType="{!ContentType}" title="Orders to Pick" tabStyle="Orders_To_Pick__tab">
+    <apex:sectionHeader title="Orders to Pick" subtitle="{!UPPER(StatusType)}"/>
+    <apex:form >
+        <apex:actionFunction name="CallUseCustomQuery" action="{!CallUseCustomQuery}" rerender="" >
+            <apex:param name="CallUseCustomQuery_UseCustomQuery" assignTo="{!UseCustomQuery}" value="" /> 
+        </apex:actionFunction>
+        <apex:actionFunction name="GeneratePickTicket" action="{!GeneratePickTicket}" rerender="" oncomplete="var gpt = document.getElementById('GeneratePickTicket_{!OrderId}'); gpt.innerHTML='Done'; gpt.onclick=''; gpt.style.removeProperty('text-decoration');" >
+            <apex:param name="GeneratePickTicket_OrderId" assignTo="{!OrderId}" value="" />
+        </apex:actionFunction>
+    </apex:form>
+    <apex:form >
+        <apex:outputPanel style="padding-bottom:15px;" layout="block" rendered="{!IF(ISBLANK(ContentType),TRUE,FALSE)}">
+            <div style="float:left;">
+                <span style="padding-left:15px;">Status Type:&nbsp;&nbsp;&nbsp;</span>
+                <span>
+                    <apex:selectList value="{!StatusType}" size="1">
+                        <apex:selectOption itemValue="rush_orders_to_pick" itemLabel="Rush Orders to Pick" />
+                        <apex:selectOption itemValue="orders_to_pick" itemLabel="Orders to Pick" />
+                        <apex:selectOption itemValue="canada_orders_to_pick" itemLabel="Canada Orders to Pick" />
+                        <apex:selectOption itemValue="backorders_to_pick" itemLabel="Back-Orders to Pick" />
+                    </apex:selectList>
+                </span> 
+                <span><apex:commandButton value="Go!" action="{!QueryOrders}" /></span>
+                <span><a style="color:grey; cursor:pointer;" 
+                    onclick="var search = document.getElementById('Search'); if(search.style.display=='none'){search.style.display='';}else{search.style.display='none';}"
+                    >Search</a>
+                </span>
+            </div>
+            <div style="text-align:right;">&lt;
+                <apex:commandLink action="{!QueryPreviousOrders}" rendered="{!HasPreviousOrders}">Previous</apex:commandlink>
+                <apex:commandLink rendered="{!!HasPreviousOrders}" style="text-decoration:none;cursor:default;">Previous</apex:commandLink>
+                |&nbsp;
+                <apex:commandLink action="{!QueryNextOrders}" rendered="{!HasNextOrders}">Next</apex:commandlink>
+                <apex:commandLink rendered="{!!HasNextOrders}" style="text-decoration:none;cursor:default;">Next</apex:commandLink>
+                &gt;
+            </div> 
+        </apex:outputPanel>
+        <div style="padding-left:15px;padding-right:15px;padding-bottom:15px;display:none;" id="Search">
+            <table cellpadding="1px">
+                <tr>
+                    <td>Search (Order Name List):</td>
+                    <td><apex:inputText style="width:200px;" value="{!CustomNameSearch}"></apex:inputText></td>
+                </tr>
+                <tr>
+                    <td>Number of Orders to Display:</td>
+                    <td><apex:inputText style="width:50px;" value="{!OrdersToPickLimit}"></apex:inputText></td>
+                </tr>
+                <tr>
+                    <td><apex:commandButton value="Go!" action="{!QueryOrders}" /></td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+        <apex:pageBlock title="Orders ({!if(OrdersSize>0,(SetControllerPageSize*SetControllerPageNumber)-SetControllerPageSize+1,0)}-{!min(SetControllerPageSize*SetControllerPageNumber,SetControllerResultSize)}/{!SetControllerResultSize}{!IF(OrdersSize==7500,'+','')})" >       
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Export to Excel" action="{!ExportToExcel}" />
+                <apex:commandButton value="Generate Pick Tickets for Listed Orders" action="{!GeneratePickTickets}" disabled="{!IF(TotalBatchJobs=TotalProcessingBatchJobs,FALSE,TRUE)}" />
+                <apex:commandButton value="Generate Pick Tickets for All Backorders" action="{!GenerateAllBackorderPickTickets}" disabled="{!IF(TotalBatchJobs=TotalProcessingBatchJobs,FALSE,TRUE)}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!Orders}" var="o">
+                <apex:column HeaderValue="Action" style="font-weight:bold;">
+                    <apex:outputLink value="/search/SearchResults?sbstr={!o.Name}" >Search</apex:outputLink>&nbsp;|&nbsp;<a 
+                        id="GeneratePickTicket_{!o.Id}" style="text-decoration:underline; cursor:pointer;"
+                        onclick="this.disabled='true'; this.innerHTML='...'; GeneratePickTicket('{!o.Id}');" >Make Pick Ticket</a>
+                </apex:column>
+                <apex:column HeaderValue="Name">
+                    <apex:outputLink value="/{!o.Id}" target="_blank">{!o.Name}</apex:outputLink>
+                </apex:column>
+                <apex:column value="{!o.TotalAmount}" />
+                <apex:column value="{!o.Status}" />
+                <apex:column value="{!o.HasOrderLineItem__c}" headerValue="Products" />
+                <apex:column value="{!o.CreatedDate}" />
+                <apex:column headerValue="# of PT(s)">
+                    <apex:outputText value="{!CEILING(o.Total_Pick_Tickets__c)}" />
+                    <!-- 
+                    <apex:repeat value="{!o.Pick_Tickets__r}" var="PickTicket" >
+                        <apex:outputLink value="/{!PickTicket.Id}" target="_blank">{!RIGHT(PickTicket.Name,LEN(PickTicket.Name)-FIND('-',PickTicket.Name,4))}</apex:outputLink>&nbsp;
+                    </apex:repeat>
+                     -->
+                </apex:column>
+            </apex:pageBlockTable>        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

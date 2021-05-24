@@ -1,0 +1,13 @@
+<apex:page standardController="Contact" extensions="MAOppContactExtension" title="MA Opportunities">
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!MAOpps}" var="MAOpp">
+            <apex:column >
+                <apex:outputLink value="/{!MAOpp.Id}" target="_parent">{!MAOpp.Name}</apex:outputLink>
+            </apex:column>
+             <apex:column value="{!MAOpp.CreatedDate}" />
+            <apex:column value="{!MAOpp.Type}" />
+            <apex:column value="{!MAOpp.Interest__c}" />
+            <apex:column value="{!MAOpp.StageName}" />
+            </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

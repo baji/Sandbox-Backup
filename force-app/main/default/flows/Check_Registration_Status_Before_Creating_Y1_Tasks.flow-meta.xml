@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <description>Notify Admins when an Account Registration Status is neither New nor Reinstated for  Create Y1 Tasks.</description>
+        <name>Notify_Admin_when_Acocun_Registration_is_not_New_Nor_Reinstated_for_Y1_Tasks</name>
+        <label>Notify Admin when Acocun Registration is not New Nor Reinstated for Y1 Tasks</label>
+        <locationX>925</locationX>
+        <locationY>174</locationY>
+        <actionName>Account.Notify_Admin_when_Account_Registration_is_not_New_Nor_Reinstated_for_Y1_Tasks</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>varAccountId</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <name>Check_Registration_Status</name>
+        <label>Check Registration Status</label>
+        <locationX>526</locationX>
+        <locationY>160</locationY>
+        <defaultConnector>
+            <targetReference>Notify_Admin_when_Acocun_Registration_is_not_New_Nor_Reinstated_for_Y1_Tasks</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>Registration Status Failure</defaultConnectorLabel>
+        <rules>
+            <name>Registration_Status_Is_OK</name>
+            <conditionLogic>or</conditionLogic>
+            <conditions>
+                <leftValueReference>varRegStatus</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>New</stringValue>
+                </rightValue>
+            </conditions>
+            <conditions>
+                <leftValueReference>varRegStatus</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <stringValue>Reinstated</stringValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>Create_Y1_Tasks</targetReference>
+            </connector>
+            <label>Registration Status Is OK</label>
+        </rules>
+    </decisions>
+    <description>Flow check&apos;s valid rgistration statuses of either New or Reinstated before passing OnwerID and Id of account to Check Primary Missionary flow.</description>
+    <interviewLabel>Check Registration Status Before Creating Y1 Tasks {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Check Registration Status Before Creating Y1 Tasks</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordLookups>
+        <name>Get_Account</name>
+        <label>Get Account</label>
+        <locationX>292</locationX>
+        <locationY>162</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Check_Registration_Status</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varAccountId</elementReference>
+            </value>
+        </filters>
+        <object>Account</object>
+        <outputAssignments>
+            <assignToReference>varAccountOwnerId</assignToReference>
+            <field>OwnerId</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>varRegStatus</assignToReference>
+            <field>Registration_Status__c</field>
+        </outputAssignments>
+    </recordLookups>
+    <startElementReference>Get_Account</startElementReference>
+    <status>Active</status>
+    <subflows>
+        <name>Create_Y1_Tasks</name>
+        <label>Create Y1 Tasks</label>
+        <locationX>547</locationX>
+        <locationY>344</locationY>
+        <flowName>New_or_Reinstated_Y1_Church_Tasks</flowName>
+        <inputAssignments>
+            <name>varAccountId</name>
+            <value>
+                <elementReference>varAccountId</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <name>varAccountOwnerId</name>
+            <value>
+                <elementReference>varAccountOwnerId</elementReference>
+            </value>
+        </inputAssignments>
+    </subflows>
+    <variables>
+        <name>varAccountId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varAccountOwnerId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varRegStatus</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+</Flow>

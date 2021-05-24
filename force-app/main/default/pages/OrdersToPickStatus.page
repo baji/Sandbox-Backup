@@ -1,0 +1,44 @@
+<apex:page controller="OrderEntryStatus" title="Orders to Pick Status" tabStyle="Orders_To_Pick__tab" >
+    <style>
+        .progressBar{
+            background-color: #f8f8f8;
+            border:1px solid #DDDDDD;
+            height: 24px;
+            width: 500px;
+            -moz-border-radius: 5px; 
+            -webkit-border-radius: 5px;
+        }
+        .progress{
+            background-color: #F7B64B;
+            border:1px solid #E78F08;
+            height: 100%;
+            margin: -1px;
+            text-align: center;
+            -moz-border-radius: 5px; 
+            -webkit-border-radius: 5px;
+            line-height: 24px;
+        }
+    </style>
+    <apex:sectionHeader title="Orders to Pick Status" subtitle="Processing Batch..."/>
+    <apex:form >
+        <apex:actionPoller action="{!BatchPickTicketStatus}" rerender="PercentComplete, ReturnLink" interval="5" />
+        <br />
+        <apex:outputPanel layout="block" style="text-align:center; font-size:18pt; width:100%;">
+            Processing Pick Tickets...
+        </apex:outputPanel>
+        <br />
+        <apex:outputPanel layout="block" style="width:500px; text-align:center; margin:auto;" id="PercentComplete">
+            <div class="progressBar">
+                <div class="progress" style="width: {!((TotalProcessingBatchJobs+1)/(TotalBatchJobs+1))*100}%;">
+                    {!TotalProcessingBatchJobs} / {!TotalBatchJobs}
+                </div>
+            </div>
+        </apex:outputPanel>
+        <br />
+        <apex:outputPanel layout="block" id="ReturnLink">
+            <apex:outputPanel layout="block" style="text-align:center; " rendered="{!IF(AND(TotalBatchJobs=TotalProcessingBatchJobs,TotalBatchJobs>0),TRUE,FALSE)}">
+                <apex:outputLink value="{!$Page.OrdersToPick}">Go Back to the Orders to Pick Page</apex:outputLink>
+            </apex:outputPanel>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

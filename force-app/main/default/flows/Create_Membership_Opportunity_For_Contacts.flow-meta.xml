@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>49.0</apiVersion>
+    <description>An opporutnity of embership Prospect type is created whenever the Created Membership Prospect button is clicked on a contact detl page.</description>
+    <formulas>
+        <name>varCloseDate</name>
+        <dataType>Date</dataType>
+        <expression>today()+45</expression>
+    </formulas>
+    <formulas>
+        <name>varDay</name>
+        <dataType>String</dataType>
+        <expression>IF(
+DAY(Today()) &lt; 10, 
+&apos;0&apos;&amp;Text(DAY(Today())), Text(DAY(Today()))
+)</expression>
+    </formulas>
+    <formulas>
+        <name>varMonth</name>
+        <dataType>String</dataType>
+        <expression>IF(
+MONTH(Today()) &lt; 10, 
+&apos;0&apos;&amp;Text(MONTH(Today())), Text(MONTH(Today()))
+)</expression>
+    </formulas>
+    <formulas>
+        <description>Provieds today&apos;s date as part of the dynamically-created  opporthnity name</description>
+        <name>varToday</name>
+        <dataType>String</dataType>
+        <expression>{!varMonth}&amp;&quot;/&quot;&amp;{!varDay}&amp;&quot;/&quot;&amp;{!varYear}</expression>
+    </formulas>
+    <formulas>
+        <name>varYear</name>
+        <dataType>String</dataType>
+        <expression>TEXT(year(today()))</expression>
+    </formulas>
+    <interviewLabel>Create Membership Opportunity For Contact {!$Flow.CurrentDateTime}</interviewLabel>
+    <label>Create Membership Opportunity For Contacts</label>
+    <processType>AutoLaunchedFlow</processType>
+    <recordCreates>
+        <name>Create_Membersip_Prospect_Opp</name>
+        <label>Create Membersip Prospect Opp</label>
+        <locationX>509</locationX>
+        <locationY>539</locationY>
+        <inputAssignments>
+            <field>CloseDate</field>
+            <value>
+                <elementReference>varCloseDate</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Name</field>
+            <value>
+                <stringValue>{!varFname} {!varLname} {!varOppType} {!varToday}</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>StageName</field>
+            <value>
+                <stringValue>Evaluating</stringValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>Type</field>
+            <value>
+                <elementReference>varOppType</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>npsp__Primary_Contact__c</field>
+            <value>
+                <elementReference>varContactId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>Opportunity</object>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Contact_Name_for_Opportunity_Name</name>
+        <label>Get Contact Name for Opportunity Name</label>
+        <locationX>498</locationX>
+        <locationY>165</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Create_Membersip_Prospect_Opp</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>varContactId</elementReference>
+            </value>
+        </filters>
+        <object>Contact</object>
+        <outputAssignments>
+            <assignToReference>varFname</assignToReference>
+            <field>FirstName</field>
+        </outputAssignments>
+        <outputAssignments>
+            <assignToReference>varLname</assignToReference>
+            <field>LastName</field>
+        </outputAssignments>
+    </recordLookups>
+    <startElementReference>Get_Contact_Name_for_Opportunity_Name</startElementReference>
+    <status>Draft</status>
+    <variables>
+        <name>varContactFullName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <name>varContactId</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+    </variables>
+    <variables>
+        <description>First name used for Opporutnity dynamic name.</description>
+        <name>varFname</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <description>Household account of Contact</description>
+        <name>varHousehold</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>varHouseholdName</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>varLname</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+    </variables>
+    <variables>
+        <name>varOppType</name>
+        <dataType>String</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <stringValue>Membership Prospect</stringValue>
+        </value>
+    </variables>
+</Flow>

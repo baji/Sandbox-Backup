@@ -1,0 +1,1848 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>ChangeStatustoAdded</fullName>
+        <description>Change Status to Added</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>donnap@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>erikt@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>isabele@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>marquitab@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/ChangeStatustoAdded</template>
+    </alerts>
+    <alerts>
+        <fullName>Dropped_Church</fullName>
+        <description>Dropped Church</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <recipients>
+            <recipient>erikt@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Droppedchurch</template>
+    </alerts>
+    <alerts>
+        <fullName>Dropped_Hispanic_Church</fullName>
+        <description>Dropped Hispanic Church</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <recipients>
+            <recipient>isabele@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Customer_Care_Templates/Dropped_Hispanic_Church</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_to_Account_Owner_when_Registration_Status_changes</fullName>
+        <description>Email to Account Owner when Registration Status changes</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Primary Missionary</recipient>
+            <type>accountTeam</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Missionary_Templates/Notify_Account_Owner_when_registration_status_changes</template>
+    </alerts>
+    <alerts>
+        <fullName>Mozo_Free_Trial_Welcome_To_Full_Email</fullName>
+        <ccEmails>donotreply@awana.org.npsp3</ccEmails>
+        <description>Mozo Free Trial Welcome To Full Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Mozo_Free_Trial_ContactID__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Mozo_Templates/Mozo_30_Welcome_to_Full</template>
+    </alerts>
+    <alerts>
+        <fullName>Mozo_Start_Free_Trial_Welcome_Email</fullName>
+        <ccEmails>donotreply@awana.org</ccEmails>
+        <description>Mozo Start Free Trial Welcome Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Mozo_Free_Trial_ContactID__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Mozo_Templates/Mozo_30_Welcome</template>
+    </alerts>
+    <alerts>
+        <fullName>New_Hispanic_Church</fullName>
+        <description>New Hispanic Church</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>isabele@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Customer_Care_Templates/New_Spanish_Church</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_Account_Owner_when_Account_Registration_is_New_for_Y1_Tasks</fullName>
+        <description>Notify Account Owner when Account Registration is New for Y1 Tasks</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/New_Account_Registration_For_Y1_Tasks</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_Account_Owner_when_Account_Registration_is_Reinstated_for_Y1_Tasks</fullName>
+        <description>Notify Account Owner when Account Registration is Reinstated for Y1 Tasks</description>
+        <protected>false</protected>
+        <recipients>
+            <type>accountOwner</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/Reinstated_Account_Registration_For_Y1_Tasks</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_Admin_when_Account_PM_Is_Not_Found</fullName>
+        <description>Notify Admin when Account PM Is Not Found</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>SF_Administrator</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/Account_has_no_Primary_Missionary_for_Y1_Tasks</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_Admin_when_Account_Registration_is_not_New_Nor_Reinstated_for_Y1_Tasks</fullName>
+        <description>Notify Admin when Account Registration is not New Nor Reinstated for Y1 Tasks</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>SF_Administrator</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/Account_Registration_Not_New_Nor_Reinstated_For_Y1_Tasks</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_Admin_when_Canada_church_is_changed_to_International</fullName>
+        <description>Notify Admin when Canada church is changed to International</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>erikt@awana.church</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/Canada_church_changed_to_International</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_Admin_when_IC19_Zone_Not_Found_For_Account</fullName>
+        <description>Notify Admin when IC19 Zone Not Found For Account</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>SF_Administrator</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Missionary_Templates/IC19_Zone_Value_does_not_Exist_for_this_Account</template>
+    </alerts>
+    <alerts>
+        <fullName>Notify_Admins_when_Creating_Account_Teams_for_Dropped_Reg_Status</fullName>
+        <ccEmails>bajibasha.s@accionlabs.com</ccEmails>
+        <description>Notify Admins when Creating Account Teams for Dropped Reg Status</description>
+        <protected>false</protected>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/Creating_Account_Teams_for_Dropped_Reg_Status</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Account_Health_Update_Emails</fullName>
+        <description>Send Account Health Update Emails</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Account_Health/Send_Account_Update_Email</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Mozo_Free_Trail_Cancellation_or_Expired_Email</fullName>
+        <ccEmails>donotreply@awana.org</ccEmails>
+        <description>Send Mozo Free Trail Cancellation or  Expired Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Mozo_Free_Trial_ContactID__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <recipients>
+            <field>Lifeline_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Mozo_Templates/Mozo_30_Cancelled_Expired</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Mozo_Free_Trial_Expiration_Reminder_for_30_Days_Past</fullName>
+        <description>Send Mozo Free Trial Expiration Reminder for 30 Days Past</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Mozo_Free_Trial_ContactID__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <recipients>
+            <field>Lifeline_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Mozo_Templates/MFT_Start_date_30_days_eblast</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Mozo_Free_Trial_Expiration_Reminder_for_5_Days_Before_Trial_Expiration</fullName>
+        <ccEmails>erikt@awana.org</ccEmails>
+        <description>Send Mozo Free Trial Expiration Reminder for 5 Days Before Trial Expiration</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Mozo_Free_Trial_ContactID__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Mozo_Templates/MFT_Start_date_5_days_eblast</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Mozo_Free_Trial_Expiration_Reminder_for_60_Days_Past</fullName>
+        <description>Send Mozo Free Trial Expiration Reminder for 60 Days Past</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Mozo_Free_Trial_ContactID__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Mozo_Templates/MFT_Start_date_60_days_eblast</template>
+    </alerts>
+    <alerts>
+        <fullName>Send_Welcome_Email_to_New_Member_church</fullName>
+        <description>Send Welcome Email to New Member church</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Applicant__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Membership_Templates/Welcome_to_Awana_Global</template>
+    </alerts>
+    <alerts>
+        <fullName>change_alert</fullName>
+        <description>change alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>erikt@awana.church</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Admin_only_Templates/Contact_change</template>
+    </alerts>
+    <alerts>
+        <fullName>notification_email_to_Chief_Relationship_Officer1</fullName>
+        <description>notification email to Chief Relationship Officer</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>brianr@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Account_Health/x20_Days_notification_to_Chief_Relationship_Officer</template>
+    </alerts>
+    <alerts>
+        <fullName>notification_email_to_Primary_Missionary</fullName>
+        <description>notification email to Primary Missionary</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Primary Missionary</recipient>
+            <type>accountTeam</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Account_Health/Notification_for_Missionary</template>
+    </alerts>
+    <alerts>
+        <fullName>notification_email_to_Primary_Missionary1</fullName>
+        <description>notification email to Primary Missionary1</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>Primary Missionary</recipient>
+            <type>accountTeam</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Account_Health/X30_Days_notification_to_Missionary</template>
+    </alerts>
+    <alerts>
+        <fullName>notification_email_to_Regional_Director1</fullName>
+        <description>notification email to Regional Director</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>State Director</recipient>
+            <type>accountTeam</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Account_Health/x60_Days_notification_to_Regional_Director</template>
+    </alerts>
+    <alerts>
+        <fullName>notification_email_to_Vice_President_of_US_Field_Operations1</fullName>
+        <description>notification email to Vice President of US Field Operations</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>edg@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Account_Health/X90_Days_notification_to_VP_US_Field_Operations</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Arizona_and_New_Mex</fullName>
+        <field>OwnerId</field>
+        <lookupValue>tims@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Arizona and New Mex</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Canada_Clarke</fullName>
+        <description>sfdc-272 change update to Erik</description>
+        <field>OwnerId</field>
+        <lookupValue>erikt@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Canada (Clarke)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Canada_Friesen</fullName>
+        <description>removed Len and Pam Friesen as Account Owner per Charlotte Johnson
+Executive Assistant on 12/8/2016</description>
+        <field>OwnerId</field>
+        <lookupValue>erikt@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Canada (Friesen)</name>
+        <notifyAssignee>true</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Canada_Froom</fullName>
+        <description>ADDED ERIK AS ACCOUNT OWNER 
+SFDC-272</description>
+        <field>OwnerId</field>
+        <lookupValue>erikt@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Canada (Froom)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Canada_Quist</fullName>
+        <description>Changed to Erik from Alistair (to deactivate)</description>
+        <field>OwnerId</field>
+        <lookupValue>erikt@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Canada (Quist)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Central_Atlantic_Re</fullName>
+        <field>OwnerId</field>
+        <lookupValue>erikt@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Central Atlantic Re</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Central_Region</fullName>
+        <field>OwnerId</field>
+        <lookupValue>joelc@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Central Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_El_Paso_Texas</fullName>
+        <field>OwnerId</field>
+        <lookupValue>cindyv@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - El Paso Texas</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Florida_and_Georgia</fullName>
+        <field>OwnerId</field>
+        <lookupValue>dougs@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Florida and Georgia</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_HSA_Schambach</fullName>
+        <field>OwnerId</field>
+        <lookupValue>erikt@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - HSA (Schambach)</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Kinsey</fullName>
+        <field>OwnerId</field>
+        <lookupValue>d.kinsey@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Kinsey</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Mid_America_Region</fullName>
+        <field>OwnerId</field>
+        <lookupValue>miker@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Mid-America Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_North_Central_Regio</fullName>
+        <field>OwnerId</field>
+        <lookupValue>arlynn@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - North Central Regio</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Northeast_Region</fullName>
+        <field>OwnerId</field>
+        <lookupValue>dougs@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Northeast Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Northwest_Region</fullName>
+        <field>OwnerId</field>
+        <lookupValue>jerryb@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Northwest Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Pac_West_Region</fullName>
+        <field>OwnerId</field>
+        <lookupValue>mikes@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Pac West Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Southeast_Region</fullName>
+        <field>OwnerId</field>
+        <lookupValue>davidro@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Southeast Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Texas_Oklahoma_and</fullName>
+        <description>Contains TX, OK, and HI</description>
+        <field>OwnerId</field>
+        <lookupValue>martic@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Texas, Oklahoma and</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Account_Assignment_Texas_and_Oklahoma</fullName>
+        <field>OwnerId</field>
+        <lookupValue>tomch@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Account Assignment - Texas and Oklahoma</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Add_http_to_Account_website</fullName>
+        <field>Website</field>
+        <formula>&quot;http://&quot; &amp; Website</formula>
+        <name>Add http to Account website</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canada_Territory</fullName>
+        <field>GO_Territory__c</field>
+        <literalValue>Canada</literalValue>
+        <name>Canada Territory</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Central_Territory</fullName>
+        <field>GO_Territory__c</field>
+        <literalValue>Central Territory</literalValue>
+        <name>Central Territory</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_Intl_Church_Owner_to_Robin</fullName>
+        <field>OwnerId</field>
+        <lookupValue>robinc@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>Change Intl Church Owner to Robin</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Change_Status_to_Dropped</fullName>
+        <field>Status__c</field>
+        <literalValue>Dropped</literalValue>
+        <name>Change Status to Dropped</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Eastern_Territory</fullName>
+        <field>GO_Territory__c</field>
+        <literalValue>Eastern Territory</literalValue>
+        <name>Eastern Territory</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Field_Update_Temp</fullName>
+        <field>GO_End_Date__c</field>
+        <formula>DATE(2017,06,30)</formula>
+        <name>Field Update Temp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Last_Synced_with_Intacct</fullName>
+        <field>Last_Synced_with_Intacct__c</field>
+        <formula>NOW()</formula>
+        <name>Last Synced with Intacct</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NTA_Homeschool_Type_Co_op</fullName>
+        <description>Update Type to Homeschool - Co-op</description>
+        <field>Type</field>
+        <literalValue>Homeschool - Co-op</literalValue>
+        <name>NTA Homeschool Type Co-op</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NTA_Homeschool_Type_Multi_family</fullName>
+        <description>Update Type to Homeschool - Multi-family</description>
+        <field>Type</field>
+        <literalValue>Homeschool - Multi-family</literalValue>
+        <name>NTA Homeschool Type Multi-family</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>NTA_Homeschool_Type_Single_family</fullName>
+        <field>Type</field>
+        <literalValue>Homeschool - Single-family</literalValue>
+        <name>NTA Homeschool Type Single-family</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Populate_Intacct_Customer_ID</fullName>
+        <field>IntacctID__c</field>
+        <formula>Mailing_Address_Book__c</formula>
+        <name>Populate Intacct Customer ID</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Populate_Reason_Dropped</fullName>
+        <field>Reason_Dropped__c</field>
+        <literalValue>Automatically Expired</literalValue>
+        <name>Populate Reason Dropped</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>RegistrationDate</fullName>
+        <field>Registration_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Registration Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reset_Mozo_Trial_End_Date</fullName>
+        <field>Mozo_Trial_End_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Reset Mozo Trial End Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reset_Mozo_Trial_End_Date_For_Full_Purch</fullName>
+        <field>Mozo_Trial_End_Date__c</field>
+        <formula>TODAY()</formula>
+        <name>Reset Mozo Trial End Date For Full Purch</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reset_Mozo_Trial_Status</fullName>
+        <field>Mozo_Trial_Status__c</field>
+        <literalValue>Former</literalValue>
+        <name>Reset Mozo Trial Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Reset_Mozo_Trial_Status_For_Full_Purchas</fullName>
+        <description>When a Full Mozo Registration Order has been purchased reset the status.</description>
+        <field>Mozo_Trial_Status__c</field>
+        <literalValue>Former</literalValue>
+        <name>Reset Mozo Trial Status For Full Purchas</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>TR_Update_Reg_Level_to_R0</fullName>
+        <field>Registration_Level__c</field>
+        <literalValue>R0</literalValue>
+        <name>TR - Update Reg Level to R0</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>TR_Update_Reg_Status_to_Dropped</fullName>
+        <field>Registration_Status__c</field>
+        <literalValue>Dropped</literalValue>
+        <name>TR - Update Reg Status to Dropped</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Uncheck_Change_Status_to_Dropped</fullName>
+        <field>Change_Status_to_Dropped__c</field>
+        <literalValue>0</literalValue>
+        <name>Uncheck Change Status to Dropped</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Unset_Intacct_synced</fullName>
+        <description>Unset Account_synced_with_Intacct__c.</description>
+        <field>Account_synced_with_Intacct__c</field>
+        <literalValue>0</literalValue>
+        <name>Unset Intacct synced</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Account_Health_Time</fullName>
+        <field>Account_Health_Time__c</field>
+        <formula>NOW()</formula>
+        <name>Update Account Health Time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_GO_Flag</fullName>
+        <field>Go_Signup_Date_Updated__c</field>
+        <literalValue>1</literalValue>
+        <name>Update GO Flag</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Go_Flag_Temp</fullName>
+        <field>Go_Signup_Date_Updated__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Go Flag Temp</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Most_Recent_Date_Added</fullName>
+        <field>Most_Recent_Date_Added__c</field>
+        <formula>today()</formula>
+        <name>Update Most Recent Date Added</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Most_Recent_Date_Dropped</fullName>
+        <field>Most_Recent_Date_Dropped__c</field>
+        <formula>today()</formula>
+        <name>Update Most Recent Date Dropped</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Western_Territory</fullName>
+        <field>GO_Territory__c</field>
+        <literalValue>Western Territory</literalValue>
+        <name>Western Territory</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>ACQ -  Account Health Time Update</fullName>
+        <actions>
+            <name>Update_Account_Health_Time</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Displays the time and date when the Account Health pick list was last updated.</description>
+        <formula>ISCHANGED(Account_Health__c) &amp;&amp; NOT ISPICKVAL(Account_Health__c, &apos;--None--&apos;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>ACQ - Merge Duplicate Account</fullName>
+        <actions>
+            <name>Merge_Duplicate_Account</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( RecordType.DeveloperName=&quot;US Organization&quot;, NOT( ISBLANK( Duplicate_Account__c ) ) )</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>ACQ - New Account</fullName>
+        <actions>
+            <name>ChangeStatustoAdded</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Church,Homeschool - Co-op,Homeschool - Multi-family</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </criteriaItems>
+        <description>Sends out an email notification when a new US Organization is created</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Add http to Account website</fullName>
+        <actions>
+            <name>Add_http_to_Account_website</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Website</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Website</field>
+            <operation>notContain</operation>
+            <value>http</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Change Acct Attendance</fullName>
+        <active>true</active>
+        <description>Send new and changed Church Attendance to the Call Center database through Cast Iron.</description>
+        <formula>(ISCHANGED( Church_Attendance__c)  || ISCHANGED(Registration_Number__c))&amp;&amp;  BEGINS( Registration_Number__c , &apos;US&apos;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Change International Church Owner to Robin Camerer</fullName>
+        <actions>
+            <name>Change_Intl_Church_Owner_to_Robin</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND (  RecordTypeId = &apos;0122F0000008WUc&apos;,  OwnerId != &apos;0052F000000Thd6&apos; )</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Change Name</fullName>
+        <actions>
+            <name>change_alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>When the first or last name is changed send an e-mail</description>
+        <formula>AND(NOT(ISNEW()),ISCHANGED(Name))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Change Status to Dropped</fullName>
+        <actions>
+            <name>Change_Status_to_Dropped</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Populate_Reason_Dropped</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>RegistrationDate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Uncheck_Change_Status_to_Dropped</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Change_Status_to_Dropped__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>International Church</value>
+        </criteriaItems>
+        <description>Used for International Church</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Dropped Canada Church</fullName>
+        <actions>
+            <name>Followup_Dropped_Canada_Church</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Canada Church</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Dropped</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Dropped Church</fullName>
+        <actions>
+            <name>Dropped_Church</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Church</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Registration_Status__c</field>
+            <operation>equals</operation>
+            <value>Dropped</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Primary_Ethnic_Group__c</field>
+            <operation>notEqual</operation>
+            <value>Hispanic</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Dropped Hispanic Church</fullName>
+        <actions>
+            <name>Dropped_Hispanic_Church</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Primary_Ethnic_Group__c</field>
+            <operation>equals</operation>
+            <value>Hispanic</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Dropped</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Church</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>GO Canada</fullName>
+        <actions>
+            <name>Canada_Territory</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Canada Church</value>
+        </criteriaItems>
+        <description>Updates the Territory &amp; Specialist field with the corresponding State when Account record is created.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>GO Central</fullName>
+        <actions>
+            <name>Central_Territory</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND (2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10 OR 11 OR 12 OR 13 OR 14 OR 15 OR 16 OR 17)</booleanFilter>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>SD</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>NE</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>OK</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>TX</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>MN</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>IA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>MO</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>AR</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>LA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>MS</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>AL</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>TN</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>IL</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>WI</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>KS</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>ND</value>
+        </criteriaItems>
+        <description>Updates the Territory &amp; Specialist field with the corresponding State when Account record is created.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>GO Eastern</fullName>
+        <actions>
+            <name>Eastern_Territory</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND (2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10 OR 11 OR 12 OR 13 OR 14 OR 15 OR 16 OR 17 OR 18 OR 19 OR 20 OR 21 OR 22)</booleanFilter>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>IN</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>OH</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>KY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>WV</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>GA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>FL</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>SC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>NC</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>VA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>MD</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>DE</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>NJ</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>CT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>RI</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>PA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>NY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>MA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>VT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>NH</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>ME</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>MI</value>
+        </criteriaItems>
+        <description>Updates the Territory &amp; Specialist field with the corresponding State when Account record is created.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>GO Western</fullName>
+        <actions>
+            <name>Western_Territory</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND (2 OR 3 OR 4 OR 5 OR 6 OR 7 OR 8 OR 9 OR 10 OR 11 OR 12 OR 13 OR 14)</booleanFilter>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>OR</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>CA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>MT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>ID</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>WY</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>UT</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>CO</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>AZ</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>NM</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>AK</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>HI</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>NV</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Physical_State__c</field>
+            <operation>equals</operation>
+            <value>WA</value>
+        </criteriaItems>
+        <description>Updates the Territory &amp; Specialist field with the corresponding State when Account record is created.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Last Synced with Intacct</fullName>
+        <actions>
+            <name>Last_Synced_with_Intacct</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.Account_synced_with_Intacct__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mozo Free Trial Cancelled Expired</fullName>
+        <actions>
+            <name>Send_Mozo_Free_Trail_Cancellation_or_Expired_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Reset_Mozo_Trial_End_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Reset_Mozo_Trial_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <description>Send Cancellation email  and resets the Enddate to today&apos;s date if Mozo Trial Status is set to &quot;Former&quot; from Current. (415)</description>
+        <formula>AND(ISCHANGED(Mozo_Trial_Status__c), ISPICKVAL (PRIORVALUE(Mozo_Trial_Status__c),&apos;CURRENT&apos;),ISPICKVAL(Mozo_Trial_Status__c , &quot;Former&quot;),ISPICKVAL(MOZO_Level__c , &quot;M0&quot;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mozo Free Trial Expiration Reminder</fullName>
+        <active>false</active>
+        <description>Sends out various Email Alerts notifying the customer of pending expiration of their Mozo Free Trial (416)</description>
+        <formula>ISPICKVAL(Mozo_Trial_Status__c , &quot;Current&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_Mozo_Free_Trial_Expiration_Reminder_for_30_Days_Past</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Account.Mozo_Trial_Start_Date__c</offsetFromField>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_Mozo_Free_Trial_Expiration_Reminder_for_5_Days_Before_Trial_Expiration</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Account.Mozo_Trial_End_Date__c</offsetFromField>
+            <timeLength>-5</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>Send_Mozo_Free_Trial_Expiration_Reminder_for_60_Days_Past</name>
+                <type>Alert</type>
+            </actions>
+            <offsetFromField>Account.Mozo_Trial_Start_Date__c</offsetFromField>
+            <timeLength>60</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Mozo Free Trial Welcome</fullName>
+        <actions>
+            <name>Mozo_Start_Free_Trial_Welcome_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>Sends A Welcome Email when a user starts a Mozo Free Trial (417)</description>
+        <formula>AND (ISCHanged(Mozo_Trial_Status__c),ISPICKVAL(Mozo_Trial_Status__c,&apos;Current&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Mozo Free Trial Welcome To Full</fullName>
+        <actions>
+            <name>Mozo_Free_Trial_Welcome_To_Full_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Reset_Mozo_Trial_End_Date_For_Full_Purch</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Reset_Mozo_Trial_Status_For_Full_Purchas</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <description>Fires as soon as a customer selects a Mozo level between  M1 - M4 and ends their Mozo Free Trial  (419)</description>
+        <formula>AND (ISCHANGED(MOZO_Level__c) &amp;&amp; ISPICKVAL( Mozo_Trial_Status__c , &apos;Current&apos;)) &amp;&amp;  ISPICKVAL(Registration_Level__c,&apos;R1&apos;) &amp;&amp; (ISPICKVAL( MOZO_Level__c,&apos;M4&apos;) || ISPICKVAL( MOZO_Level__c,&apos;M3&apos;) || ISPICKVAL( MOZO_Level__c,&apos;M2&apos;) ||ISPICKVAL( MOZO_Level__c,&apos;M1&apos;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>NTA Homeschool Type Co-op</fullName>
+        <actions>
+            <name>NTA_Homeschool_Type_Co_op</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Docusign_Account_Type__c</field>
+            <operation>contains</operation>
+            <value>Homeschool - Co-op</value>
+        </criteriaItems>
+        <description>Update Type to Homeschool - Co-op</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>NTA Homeschool Type Multi-family</fullName>
+        <actions>
+            <name>NTA_Homeschool_Type_Multi_family</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Docusign_Account_Type__c</field>
+            <operation>contains</operation>
+            <value>Homeschool - Multi-family</value>
+        </criteriaItems>
+        <description>Update Type to Homeschool - Multi-family</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>NTA Homeschool Type Single Family</fullName>
+        <actions>
+            <name>NTA_Homeschool_Type_Single_family</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Pending</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Docusign_Account_Type__c</field>
+            <operation>contains</operation>
+            <value>Single-family</value>
+        </criteriaItems>
+        <description>Update Type to Homeschool - Single-family</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Active Canada Church</fullName>
+        <actions>
+            <name>Followup_New_Canada_Church</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Canada Church</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Added,Renewed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Name</field>
+            <operation>notContain</operation>
+            <value>RCCG</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Denomination__c</field>
+            <operation>notEqual</operation>
+            <value>Redeemed Christian Church of God</value>
+        </criteriaItems>
+        <description>Creates a task assigned to Charlotte when a new Canada church is made added/renewed and is not RCCG</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Active Canada Church - RCCG</fullName>
+        <actions>
+            <name>Followup_New_Canada_Church_RCCG</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND (3 OR 4)</booleanFilter>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Canada Church</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Added,Renewed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Name</field>
+            <operation>contains</operation>
+            <value>RCCG</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Denomination__c</field>
+            <operation>equals</operation>
+            <value>Redeemed Christian Church of God</value>
+        </criteriaItems>
+        <description>Creates a task assigned to Rebekah when a new Canada church is made added/renewed and is RCCG</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>New Hispanic Church</fullName>
+        <actions>
+            <name>New_Hispanic_Church</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>Remove after 3/31/2018</description>
+        <formula>AND (($RecordType.Name = &quot;US Organization&quot;) &amp;&amp; ISPICKVAL( Primary_Ethnic_Group__c ,&quot;Hispanic&quot;),ISPICKVAL( Status__c , &quot;Added&quot;),(ISPICKVAL( PRIORVALUE( Status__c ) , &quot;Prospect&quot; )|| ISPICKVAL( PRIORVALUE( Status__c ), &quot;Ready to Activate&quot;)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Notify Jen when Canada church is changed to International</fullName>
+        <actions>
+            <name>Notify_Admin_when_Canada_church_is_changed_to_International</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Registration_Number__c</field>
+            <operation>startsWith</operation>
+            <value>CA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>International Church</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Populate Intacct Customer ID</fullName>
+        <actions>
+            <name>Populate_Intacct_Customer_ID</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Household Account,Individual</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Registration Date</fullName>
+        <actions>
+            <name>RegistrationDate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>Update_Most_Recent_Date_Dropped</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Used for International Churches - When the Status is Dropped, write current date to Registration Date</description>
+        <formula>ISPICKVAL( Status__c,&quot;Dropped&quot;)&amp;&amp; OR(RecordType.Id =&quot;01250000000DkaE&quot;,RecordType.Id=&quot;01250000000Do3S&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send Notification Email When Account Health Is Updated</fullName>
+        <actions>
+            <name>Send_Account_Health_Update_Emails</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <description>Sends an email to Account Owners whenever someone  changes the Account Health field.</description>
+        <formula>AND (ISChanged(Account_Health__c), NOT ISPICKVAL(Account_Health__c,&apos;None&apos;), $RecordType.Name =&apos;US Organization&apos;,ISPICKVAL(Type,&apos;Church&apos;), LastModifiedById &lt;&gt; OwnerId)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Send notifications when Account health changes to Red</fullName>
+        <actions>
+            <name>notification_email_to_Primary_Missionary</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>ISPICKVAL(Account_Health__c , &quot;Problems: Don&apos;t Know How To Fix&quot;) &amp;&amp;  NOT ISPICKVAL(Registration_Status__c, &quot;Dropped&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <actions>
+                <name>notification_email_to_Vice_President_of_US_Field_Operations1</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>90</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>notification_email_to_Chief_Relationship_Officer1</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>120</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>notification_email_to_Primary_Missionary1</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>30</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+        <workflowTimeTriggers>
+            <actions>
+                <name>notification_email_to_Regional_Director1</name>
+                <type>Alert</type>
+            </actions>
+            <timeLength>60</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Synced Item changed</fullName>
+        <actions>
+            <name>Unset_Intacct_synced</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Any field that is synced with Intacct is changed.</description>
+        <formula>ISCHANGED( Name )  || ISCHANGED( BillingStreet )  || ISCHANGED( BillingCity )  || ISCHANGED(BillingState)  || ISCHANGED(BillingPostalCode)  ||  ISCHANGED(BillingCountry)  ||   ISCHANGED(ShippingStreet)  ||   ISCHANGED(ShippingCity)  ||   ISCHANGED(ShippingState)  ||   ISCHANGED(ShippingPostalCode)  ||   ISCHANGED(ShippingCountry)  ||   ISCHANGED( Fax )  ||   ISCHANGED( Phone )  ||   ISCHANGED( Website )  ||   ISCHANGED( Customer_Type__c )  ||      ISCHANGED( Default_Terms__c )  ||   ISCHANGED( Delivery_Options__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>TR - Update Reg Level to R0 for New Accounts</fullName>
+        <actions>
+            <name>TR_Update_Reg_Level_to_R0</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>When a US Organization Account is created, update registration level to R0</description>
+        <formula>RecordType.Name =&quot;US Organization&quot;</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>TR - Update Reg Stat to Dropped</fullName>
+        <actions>
+            <name>TR_Update_Reg_Level_to_R0</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Update Registration Level to R0 when Registration Status is Dropped</description>
+        <formula>AND(ISCHANGED( Registration_Status__c ), RecordType.Name =&quot;US Organization&quot;, ISPICKVAL( Registration_Status__c , &apos;Dropped&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>TR - Update Reg Status to Dropped</fullName>
+        <actions>
+            <name>TR_Update_Reg_Level_to_R0</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>TR_Update_Reg_Status_to_Dropped</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>When Account Status is changed from Added to Dropped, Registration Status is updated to Dropped</description>
+        <formula>AND(ISCHANGED(Status__c), ISPICKVAL(Status__c, &apos;Dropped&apos;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>US Church Ready To Activate</fullName>
+        <actions>
+            <name>ChangeStatustoAdded</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Ready to Activate</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Type</field>
+            <operation>equals</operation>
+            <value>Church</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+        <workflowTimeTriggers>
+            <timeLength>2</timeLength>
+            <workflowTimeTriggerUnit>Days</workflowTimeTriggerUnit>
+        </workflowTimeTriggers>
+    </rules>
+    <rules>
+        <fullName>Update Most Recent Date Added</fullName>
+        <actions>
+            <name>Update_Most_Recent_Date_Added</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Updates Most Recent Date Added when Registration Status is changed to New or Reinstated</description>
+        <formula>ISCHANGED(Registration_Status__c ) &amp;&amp;   OR(ISPICKVAL( Registration_Status__c , &apos;New&apos;) ,ISPICKVAL( Registration_Status__c , &apos;Reinstated&apos;) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Most Recent Date Dropped</fullName>
+        <actions>
+            <name>Update_Most_Recent_Date_Dropped</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>ISCHANGED( Registration_Status__c ) &amp;&amp;  ISPICKVAL( Registration_Status__c , &apos;Dropped&apos;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Registration Date</fullName>
+        <actions>
+            <name>RegistrationDate</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>used to update registration date for invoiced registrations</description>
+        <formula>ISCHANGED(Status__c) &amp;&amp;  ISPICKVAL(PRIORVALUE(Status__c), &quot;Renewed&quot;)  &amp;&amp;  ISPICKVAL(Status__c, &quot;Added&quot;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Followup_Dropped_Canada_Church</fullName>
+        <assignedTo>charlottej@awana.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>A church has dropped Awana!</description>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>true</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Follow-up: Dropped Canada Church</subject>
+    </tasks>
+    <tasks>
+        <fullName>Followup_New_Canada_Church</fullName>
+        <assignedTo>charlottej@awana.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>A new church has registered with Awana!</description>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>true</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Follow-up: New Canada Church</subject>
+    </tasks>
+    <tasks>
+        <fullName>Followup_New_Canada_Church_RCCG</fullName>
+        <assignedTo>charlottej@awana.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>A new RCCG church has registered with Awana!</description>
+        <dueDateOffset>7</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Follow-up: New RCCG Canada Church</subject>
+    </tasks>
+    <tasks>
+        <fullName>Merge_Duplicate_Account</fullName>
+        <assignedTo>erikt@awana.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>Please merge this account the the account indicated in the Duplicate Account field</description>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Merge Duplicate Account</subject>
+    </tasks>
+</Workflow>

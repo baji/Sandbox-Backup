@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Negative_Freight_Warning</fullName>
+        <description>Negative Freight Warning</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>erikt@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Admin_only_Templates/Negative_Freight_Warning</template>
+    </alerts>
+    <alerts>
+        <fullName>OPP_Alert_JP_if_Opportunity_Line_Type_is_not_equal_to_Product_Line_Type</fullName>
+        <description>OPP - Alert JP if Opportunity Line Type is not equal to Product Line Type</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <recipients>
+            <recipient>jasonp@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/Incorrect_Product_LIne_Type</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Decrement_Quantity_w_Quantity_Cancelled</fullName>
+        <field>Quantity</field>
+        <formula>Quantity - Quantity_Canceled__c</formula>
+        <name>Decrement Quantity w/ Quantity Cancelled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Quantity_Shipped</fullName>
+        <description>Update Quantity Shipped with the same calculation as Quantity Fillable</description>
+        <field>Quantity_Shipped__c</field>
+        <formula>0</formula>
+        <name>Update Quantity Shipped</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>Decrement Quantity With Quantity Cancelled</fullName>
+        <actions>
+            <name>Decrement_Quantity_w_Quantity_Cancelled</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>OrderItem.Quantity_Canceled__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Negative Freight Warning</fullName>
+        <actions>
+            <name>Negative_Freight_Warning</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Product2.Name</field>
+            <operation>contains</operation>
+            <value>Freight</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OrderItem.TotalPrice</field>
+            <operation>lessThan</operation>
+            <value>USD 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Name</field>
+            <operation>startsWith</operation>
+            <value>O-</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Submitted</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OPP - Incorrect Line Type</fullName>
+        <actions>
+            <name>OPP_Alert_JP_if_Opportunity_Line_Type_is_not_equal_to_Product_Line_Type</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>OrderItem.Product_Line_Type_Check__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>This workflow sends out an email if the Opportunity product line type is not equal to the Product line type</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>TR -Registration Product Purchased</fullName>
+        <active>false</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>OrderItem.ProductCode</field>
+            <operation>equals</operation>
+            <value>70002,70003,70004</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>OrderItem.Upgrade_Level__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>WF updates Order field when a classic or premium registration product is purchased</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Quantity Shipped</fullName>
+        <actions>
+            <name>Update_Quantity_Shipped</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Open</value>
+        </criteriaItems>
+        <description>Update Quantity Shipped when the Order has an &quot;Order Open&quot; status and an Order Product is created/updated.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

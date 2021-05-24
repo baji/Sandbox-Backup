@@ -1,0 +1,73 @@
+<apex:page showHeader="false" sidebar="false"  standardController="Address__c" extensions="AddressControllerExtension" >
+	<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js" />
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" />
+    <apex:includeScript value="/soap/ajax/21.0/connection.js" />
+    <apex:includeScript value="/soap/ajax/21.0/apex.js" /> 
+    <apex:includeScript value="https://sfv5.online.qas.com/SalesforceV5RapidSearch/Scripts/allEDQForSalesforce.js"/> 
+    <apex:includeScript value="https://sfv5.online.qas.com/SalesforceV5RapidSearch/Scripts/edqDetailPageButton.js"/>
+    
+    <script type="text/javascript">
+    var j$A = jQuery.noConflict();    
+    
+    
+    sforce.connection.sessionId='{!GETSESSIONID()}';
+    var touchpointName = "AccountCustomAddress";
+    var sObjectName = "Address__c";
+    var recordId = "{!Address__c.Id}";
+    window.EDQConfigurationsUrl='{!URLFOR("/resource/EDQConfigurations")}'
+    window.EDQGlobalSettingsUrl='{!URLFOR("/resource/EDQGlobalSettings")}'
+    window.EDQSessionTokenUrl='{!URLFOR("/resource/EDQSessionToken")}' 
+    
+    j$A(document).ready(function()
+    {
+	
+    	var sessionId = '{!GETSESSIONID()}';
+    
+    	document.getElementById('validateText').style.display = "none";
+    	 document.getElementById('addButton').style.display = "none";
+   
+        	AddressControllerExtension.getAddressEDQCustomSetting(recordId,sessionId , function(result, event){
+                if(event.status) {
+                       if(result == false)
+                       {
+                            AddressControllerExtension.insertAddressEDQCustomSetting(recordId,sessionId, function(result, event){
+                                //alert('Line no 29 in JS  ' +event.status);
+                                if(event.status) 
+                                {
+                                    //alert(' Line no 31 in JS result '+result  );
+                                    document.getElementById('addButton').click();
+                                }
+                            });
+                        }
+                        else 
+                        {
+                            //alert(result);
+                            //document.getElementById('addButton').style.visibility = "hidden";
+                            //window.resizeTo(200, 200);
+                            //alert('after window resizing');
+                            document.getElementById('validateText').style.display = "inline";
+                            
+                        }
+                    }
+                    else
+                    {
+                        alert('Line no 41 in JS ');
+                    }
+            });
+	});
+    function buttonclicked(element){
+        var button = element instanceof HTMLInputElement && element.getAttribute("type") ==
+            "button" ? element : this;
+        EDQ.DataQuality.Salesforce.DetailPageButton.invokeAddressVerification2(button,
+                                                                               touchpointName, sObjectName, recordId);
+        document.getElementById("addButton").disabled = true;                                                                       
+     }
+    
+    </script>
+    <body>
+    <input type="button" id="addButton" value="" onclick="buttonclicked(this)"/>
+    <!-- apex:outputText id="validateText" value="Address Validated, Please Click on Save Validated Address button" /-->
+    <div id="validateText">Address Validated, Please Click on Save Validated Address button</div>
+    </body>
+    
+</apex:page>

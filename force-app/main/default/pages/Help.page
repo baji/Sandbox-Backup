@@ -1,0 +1,51 @@
+<apex:page title="Help">
+<div id="wrapper">
+<div style="padding:20px;">
+    
+    <h1 style="font-size:16px">Welcome</h1>
+    
+    <p>Welcome to Awana Resources and Tools (ART).  This site is designed to provide tools for you as a club commander or leader with creative materials and ideas as well as instructions and inspiration as you serve your Awana club members and help them come to know, love and serve Christ.</p>
+    
+    <p>In this Help section, we will provide information to help you:</p>
+    
+    <p><br /></p>
+
+    <p>
+        <h2>General</h2>
+        <ul>
+            <li><a href="{!URLFOR($Resource.HowToNavigate)}" target="_blank">Navigate the site</a></li>
+            <li><a href="{!URLFOR($Resource.Registration)}" target="_blank">Register yourself or your team members</a></li>
+            <li><a href="{!URLFOR($Resource.FAQ)}" target="_blank">Answer Frequently Asked Questions (FAQ's)</a></li>
+        </ul>
+    </p>
+    
+    <p>
+        <h2>Help for Leaders</h2>
+        <ul>
+            <li><a href="{!URLFOR($Resource.ART_Leaders, 'LinksForLeaders.pdf')}" onClick="javascript: _gaq.push(['_trackPageview', '/help/links-for-leaders.pdf']);" target="_blank">Links for Leaders</a></li>
+            <li><a href="{!URLFOR($Resource.MyProfileInformationTabLeader)}" target="_blank">Update your personal information</a></li>
+            <li><a href="{!URLFOR($Resource.RequestingCredits)}" target="_blank">Request Credits</a></li>
+        </ul>
+    </p>
+    
+    <p>
+        <h2>Help for Commanders</h2>
+        <ul>
+            <li><a href="{!URLFOR($Resource.LinksForCommanders)}" target="_blank">Links for Commanders</a></li>
+            <li><a href="{!URLFOR($Resource.MyProfileInformationTabCommander)}" target="_blank">Update your profile information or your church information</a></li>
+        </ul>
+    </p>
+    
+    <p>
+        <h2>Help for Training Tracker</h2>
+        <ul>
+            <li><a href="https://awana.box.net/shared/static/8ksa4igaju.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/help/training-tracker-basic-nav.pdf']);" target="_blank">Training Tracker Basic Navigation</a></li>
+            <li><a href="https://awana.box.net/shared/static/mfhvs7qbx6.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/help/training-tracker-requesting-credits.pdf']);" target="_blank">Training Tracker Requesting Credits</a></li>
+            <li><a href="https://awana.box.net/shared/static/jc5qinks1v.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/help/training-tracker-accept-reject-credits.pdf']);" target="_blank">Training Tracker Accepting and Rejecting Credits</a></li>
+        </ul>
+    </p>
+</div>
+
+
+</div>
+</apex:page>

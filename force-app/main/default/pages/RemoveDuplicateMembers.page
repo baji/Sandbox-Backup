@@ -1,0 +1,17 @@
+<apex:page standardController="Campaign" extensions="CampDupRemove" standardStylesheets="false" doctype="html-5.0">
+    <head>
+        <apex:slds />
+    </head>
+    <body>
+        <apex:form >
+            <apex:pageBlock >
+                <center>
+                    <p>Are you sure want to delete duplicate campaign members ?</p>
+                    <br></br>
+                    <apex:commandButton value="Ok" action="{!removeDuplicate}" styleClass="slds-button slds-button_brand"/>
+                    <apex:commandButton value="Cancel" action="{!cancel}" styleClass="slds-button slds-button_brand"/>
+                </center>
+            </apex:pageBlock>    
+        </apex:form>
+    </body>
+</apex:page>

@@ -1,0 +1,3 @@
+<apex:page standardController="opportunity" recordSetVar="opportunities" tabStyle="Opportunity" sidebar="false" extensions="ViewReceiptClass" action="{!redirectToList}">
+ 
+</apex:page>

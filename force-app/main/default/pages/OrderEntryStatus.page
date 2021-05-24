@@ -1,0 +1,86 @@
+<apex:page controller="OrderEntryStatus" contentType="{!ContentType}" tabStyle="Opportunity" title="Order Status">
+    <apex:sectionHeader title="Order Status" subtitle="{!UPPER(StatusType)}"/>
+    {!ContentType}
+    <apex:form >
+        <apex:actionFunction name="ResubmitOrder" action="{!ResubmitOrder}" rerender="" oncomplete="document.getElementById('Resubmit_{!OrderId}').innerHTML='Done';" >
+            <apex:param name="ResubmitOrder_orderId" assignTo="{!OrderId}" value="" /> 
+            <apex:param name="ResubmitOrder_orderStatus" assignTo="{!OrderStatus}" value="" /> 
+        </apex:actionFunction>
+        <apex:actionFunction name="CancelOrder" action="{!ResubmitOrder}" rerender="" oncomplete="document.getElementById('Cancel_{!OrderId}').innerHTML='Done';" >
+            <apex:param name="ResubmitOrder_orderId" assignTo="{!OrderId}" value="" /> 
+            <apex:param name="ResubmitOrder_orderStatus" assignTo="{!OrderStatus}" value="" /> 
+        </apex:actionFunction>
+        <apex:actionFunction name="CallUseCustomQuery" action="{!CallUseCustomQuery}" rerender="" >
+            <apex:param name="CallUseCustomQuery_UseCustomQuery" assignTo="{!UseCustomQuery}" value="" /> 
+        </apex:actionFunction>
+    </apex:form>
+    <apex:form >
+        <apex:outputPanel style="padding-bottom:15px;" layout="block" rendered="{!IF(ISBLANK(ContentType),TRUE,FALSE)}">
+            <span style="padding-left:15px;">Status Type:&nbsp;&nbsp;&nbsp;</span>
+            <span>
+                <apex:selectList value="{!StatusType}" size="1">
+                    <apex:selectOption itemValue="error" itemLabel="Orders with errors this Fiscal Year" />
+                    <apex:selectOption itemValue="duplicates" itemLabel="Duplicate Order Names this Fiscal Year" />
+                    <apex:selectOption itemValue="error_no_so" itemLabel="Orders with errors and no Sales Order Document this Fiscal Year" />
+                    <apex:selectOption itemValue="error_no_fip" itemLabel="Orders with errors and no FIP Document this Fiscal Year" />
+                    <apex:selectOption itemValue="error_no_shipper" itemLabel="Orders with errors and no Shipper Document this Fiscal Year" />
+                    <apex:selectOption itemValue="error_no_invoice" itemLabel="Orders with errors and no Sales Invoice Document this Fiscal Year" />
+                </apex:selectList>
+            </span> 
+            <span><apex:commandButton value="Go!" action="{!QueryOrders}" /></span>
+            <span><a style="color:white; cursor:wait;" 
+                ondblclick="var con = document.getElementById('CustomQuery'); if(con.style.display=='none'){con.style.display='';CallUseCustomQuery(true);}else{con.style.display='none';CallUseCustomQuery(false);}"
+                >.</a>
+            </span> 
+        </apex:outputPanel>
+        <div style="padding-left:15px;padding-right:15px;padding-bottom:15px;display:none;" id="CustomQuery">
+            <apex:outputText value="Custom Query: " /><br /> 
+            <apex:inputTextArea style="width:80%;" rows="6" value="{!CustomQuery}"></apex:inputTextArea><br />
+            <apex:commandButton value="Go!" action="{!QueryOrders}" />
+        </div>
+        <apex:pageBlock title="Orders ({!OrdersSize}{!IF(OrdersSize==500,'+','')})" >        
+            <apex:pageBlockButtons >
+                <apex:commandButton rendered="{!IF(StatusType=='duplicates', TRUE, FALSE)}" 
+                    value="Delete duplicate Orders with errors and no Line Items" action="{!DeleteDuplicateErrorsWithNoLineItems}" />
+                <apex:commandButton value="Export to Excel" action="{!ExportToExcel}" />
+            </apex:pageBlockButtons>
+            <apex:pageBlockTable value="{!Orders}" var="o">
+                <apex:column HeaderValue="Action" style="font-weight:bold;">
+                    <apex:outputLink value="/search/SearchResults?sbstr={!o.Name}" >Search</apex:outputLink>&nbsp;|&nbsp;<a 
+                        id="Resubmit_{!o.Id}" style="text-decoration:underline; cursor:pointer;"
+                        onclick="this.disabled='true'; this.innerHTML='...'; ResubmitOrder('{!o.Id}','Order Submitted');" >Submit</a>&nbsp;|&nbsp;<a 
+                        id="Cancel_{!o.Id}" style="text-decoration:underline; cursor:pointer;"
+                        onclick="this.disabled='true'; this.innerHTML='...'; CancelOrder('{!o.Id}','Order Cancelled');" >Cancel</a>&nbsp;|&nbsp;
+                    <apex:outputLink value="/setup/own/deleteredirect.jsp?delID={!o.Id}&retURL={!$CurrentPage.URL}" >Del</apex:outputLink>
+                </apex:column>
+                <apex:column HeaderValue="Name">
+                    <apex:outputLink value="/{!o.Id}" target="_blank">{!o.Name}</apex:outputLink>
+                </apex:column>
+                <apex:column value="{!o.TotalAmount}" />
+                <apex:column value="{!o.Status}" />
+                <apex:column value="{!o.HasOrderLineItem__c}" headerValue="Products" />
+                <apex:column value="{!o.CreatedDate}" />
+                <!--<apex:column headerValue="SO">
+                    <apex:repeat value="{!o.R00N40000001jWqUEAU__r}" var="SalesOrder" >
+                        <apex:outputLink value="/{!SalesOrder.Id}" target="_blank">{!RIGHT(SalesOrder.Name,LEN(SalesOrder.Name)-FIND('-',SalesOrder.Name,4))}</apex:outputLink>&nbsp;
+                    </apex:repeat>
+                </apex:column>-->
+                <!--<apex:column headerValue="FIP">
+                    <apex:repeat value="{!o.R00N40000001jWqZEAU__r}" var="FIP" >
+                        <apex:outputLink value="/{!FIP.Id}" target="_blank">{!RIGHT(FIP.Name,LEN(FIP.Name)-FIND('-',FIP.Name,5))}</apex:outputLink>&nbsp;
+                    </apex:repeat>
+                </apex:column> -->
+                <!--<apex:column headerValue="SH">
+                    <apex:repeat value="{!o.R00N40000001jWpoEAE__r}" var="Shipper" >
+                        <apex:outputLink value="/{!Shipper.Id}" target="_blank">{!RIGHT(Shipper.Name,LEN(Shipper.Name)-FIND('-',Shipper.Name,4))}</apex:outputLink>&nbsp;
+                    </apex:repeat>
+                </apex:column>
+                <apex:column headerValue="SI">
+                    <apex:repeat value="{!o.R00N40000001jWpMEAU__r}" var="SalesInvoice" >
+                        <apex:outputLink value="/{!SalesInvoice.Id}" target="_blank">{!RIGHT(SalesInvoice.Name,LEN(SalesInvoice.Name)-FIND('-',SalesInvoice.Name,4))}</apex:outputLink>&nbsp;
+                    </apex:repeat>
+                </apex:column>-->
+            </apex:pageBlockTable>        
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

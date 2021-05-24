@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Canada_Email_PT_Ship_Confirm</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Canada Email PT Ship Confirm</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Canada_Email_PT_Ship_Confirm_Tracking</template>
+    </alerts>
+    <alerts>
+        <fullName>Canada_Email_PT_Ship_Confirm_activity_history</fullName>
+        <ccEmails>jasonp@awana.org</ccEmails>
+        <description>Canada Email PT Ship Confirm (activity history)</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>SF_Administrator</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Email_PT_Ship_Confirm_activity_history</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_PT_Ship_Confirm</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Email PT Ship Confirm</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Email_PT_Ship_Confirm_With_Tracking</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_PT_Ship_Confirm_activity_history</fullName>
+        <ccEmails>Jasonp@awana.org</ccEmails>
+        <description>Email PT Ship Confirm (activity history).  Do we still need this???</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>SF_Administrator</recipient>
+            <type>group</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Email_PT_Ship_Confirm_activity_history</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_PT_Ship_Confirm_pickup_BR</fullName>
+        <description>Email PT Ship Confirm (pickup BR)</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Email_PT_Ship_Confirm_Pickup_BR</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_PT_Ship_Confirm_pickup_PL</fullName>
+        <description>Email PT Ship Confirm (pickup PL)</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Customer_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Email_PT_Ship_Confirm_Pickup_PL</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Clear_Error_Log_When_Pick_Ticket_Closes</fullName>
+        <field>Pick_Ticket_Error_Log__c</field>
+        <name>Clear Error Log When Pick Ticket Closes</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Customer_Email_on_Pick_Ticket</fullName>
+        <field>Customer_Email__c</field>
+        <formula>Order__r.Chargent_Order__r.ChargentOrders__Billing_Email__c</formula>
+        <name>Customer Email on Pick Ticket</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Email_alert_track</fullName>
+        <description>Task created to track at what time email trigger when pick ticket created/edited</description>
+        <field>In_Jennifer__c</field>
+        <formula>NOW()</formula>
+        <name>Email alert track</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Pick_Number_Increment</fullName>
+        <field>Pick_Number_Increment__c</field>
+        <formula>Order__r.Total_Pick_Tickets__c + 1</formula>
+        <name>Pick Number Increment</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Pick_Ticket_Closed_Date</fullName>
+        <field>Pick_Ticket_Closed_Date__c</field>
+        <formula>TODAY ()</formula>
+        <name>Pick Ticket Closed Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>Package_Shipped_Checked</fullName>
+        <apiVersion>29.0</apiVersion>
+        <description>Sends pick ticket number to ShipmentComplete integration</description>
+        <endpointUrl>https://ci6.awana.org/tCloseShip</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>castiron@awana.org</integrationUser>
+        <name>Package Shipped Checked</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Pickticket_Cancelled</fullName>
+        <apiVersion>19.0</apiVersion>
+        <endpointUrl>https://ci6.awana.org/tPTCancelledw</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>castiron@awana.org</integrationUser>
+        <name>Pickticket Cancelled</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Pickticket_Closed</fullName>
+        <apiVersion>19.0</apiVersion>
+        <endpointUrl>https://ci6.awana.org/tPTClosedw</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>urvashi.dagara@infoglen.awana</integrationUser>
+        <name>Pickticket Closed</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Pickticket_Open</fullName>
+        <apiVersion>19.0</apiVersion>
+        <endpointUrl>https://ci6.awana.org/tPTOpenedw</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>castiron@awana.org</integrationUser>
+        <name>Pickticket Open</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Canada Email PT Ship Confirm</fullName>
+        <actions>
+            <name>Canada_Email_PT_Ship_Confirm</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Canada_Email_PT_Ship_Confirm_activity_history</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Customer_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Package_Shipped__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Company__c</field>
+            <operation>equals</operation>
+            <value>Awana Canada,Awana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Shipping_Country__c</field>
+            <operation>equals</operation>
+            <value>CANADA,canada,Canada</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Shipment_Created__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </criteriaItems>
+        <description>Ship Confirmation Emails solely  for Canadian orders</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Clear Error Log When Pick Ticket Closes</fullName>
+        <actions>
+            <name>Clear_Error_Log_When_Pick_Ticket_Closes</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Canceled,Closed</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Customer Email on Pick Ticket</fullName>
+        <actions>
+            <name>Customer_Email_on_Pick_Ticket</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>NOT(ISNULL(Order__r.Chargent_Order__r.ChargentOrders__Billing_Email__c))</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email PT Ship Confirm</fullName>
+        <actions>
+            <name>Email_PT_Ship_Confirm</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Email_PT_Ship_Confirm_activity_history</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Customer_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Package_Shipped__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Shipping_Country__c</field>
+            <operation>equals</operation>
+            <value>United States,US,UNITED STATES</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Company__c</field>
+            <operation>equals</operation>
+            <value>Awana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Shipment_Created__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email PT Ship Confirm %28pickup BR%29</fullName>
+        <actions>
+            <name>Email_PT_Ship_Confirm_pickup_BR</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Customer_Email__c</field>
+            <operation>notEqual</operation>
+            <value>NULL</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Package_Shipped__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Shipping_Type__c</field>
+            <operation>equals</operation>
+            <value>Pickup (Bode Rd)</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email PT Ship Confirm %28pickup PL%29</fullName>
+        <actions>
+            <name>Email_PT_Ship_Confirm_pickup_PL</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Customer_Email__c</field>
+            <operation>notEqual</operation>
+            <value>NULL</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Package_Shipped__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Shipping_Type__c</field>
+            <operation>equals</operation>
+            <value>Pickup (Penny Ln)</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Package Shipped Checked</fullName>
+        <actions>
+            <name>Package_Shipped_Checked</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Passes pick ticket number to Cast Iron. The date is then writted to the DateCompleted field in the ShipmentQueue table in the Intacct SQL database on HQ-NDB-01.</description>
+        <formula>AND(ISCHANGED( Package_Shipped__c ), PRIORVALUE( Package_Shipped__c )=False,NOT(LastModifiedBy.FirstName=&quot;Cast Iron&quot;))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Pick Number Increment</fullName>
+        <actions>
+            <name>Pick_Number_Increment</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Status__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Pick Ticket Closed Date</fullName>
+        <actions>
+            <name>Pick_Ticket_Closed_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Closed</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Pickticket Cancelled</fullName>
+        <actions>
+            <name>Pickticket_Cancelled</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Canceled</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Pickticket Closed</fullName>
+        <actions>
+            <name>Pickticket_Closed</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Status_Closed__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Pickticket Open</fullName>
+        <actions>
+            <name>Pickticket_Open</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Pick_Ticket__c.Status__c</field>
+            <operation>equals</operation>
+            <value>Open</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+</Workflow>

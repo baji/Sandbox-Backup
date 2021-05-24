@@ -1,0 +1,8 @@
+<apex:page standardController="dsfs__DocuSign_Recipient_Status__c" recordSetVar="opportunities" tabStyle="dsfs__DocuSign_Recipient_Status__c" extensions="ReportViewController" action="{!redirectToreport}">
+<apex:pageBlock >
+<apex:form >
+<apex:pageMessages />
+<apex:commandButton title="Back" action="{!redirectToList}" value="Back To List View"/>
+</apex:form>
+</apex:pageBlock>
+</apex:page>

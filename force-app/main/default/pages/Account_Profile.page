@@ -1,0 +1,136 @@
+<apex:page standardController="Account" extensions="ActiveProgramsExtension" showHeader="false" renderAs="pdf">
+<apex:pageBlock title="Account Profile">
+   
+      <table>
+         <tr>
+             <td width="15%"><apex:outputLabel value="Account: " for="accountname"/></td>
+              <td width="35%"><apex:outputField id="accountname" value="{!Account.Name}"/></td>       
+              <td width="15%"><apex:outputLabel value="Phone: " for="phone"/></td>
+              <td width="35%"><apex:outputField id="phone" value="{!Account.Phone}"/></td>
+          </tr>
+          <tr>
+             <td width="15%"><apex:outputLabel value="Customer ID: " for="customerid"/></td>
+              <td width="35%"><apex:outputField id="customerid" value="{!Account.Mailing_Address_Book__c}"/></td>       
+              <td width="15%"><apex:outputLabel value="Fax: " for="fax"/></td>
+              <td width="35%"><apex:outputField id="fax" value="{!Account.fax}"/></td>
+          </tr>
+          <tr>
+             <td width="15%"><apex:outputLabel value="Registration Number: " for="regno"/></td>
+              <td width="35%"><apex:outputField id="regno" value="{!Account.Registration_Number__c}"/></td>       
+              <td width="15%"><apex:outputLabel value="Website: " for="website"/></td>
+              <td width="35%"><apex:outputField id="website" value="{!Account.Website}"/></td>
+          </tr>   
+          <tr>
+             <td width="15%"><apex:outputLabel value="Registration Date: " for="regdate"/></td>
+              <td width="35%"><apex:outputField id="regdate" value="{!Account.Registration_Date__c}"/></td>       
+              <td width="15%"><apex:outputLabel value="Denomination: " for="denomination"/></td>
+              <td width="35%"><apex:outputField id="denomination" value="{!Account.Denomination__c}"/></td>
+          </tr> 
+          <tr>
+              <td width="15%"><apex:outputLabel value="Date Established: " for="dateestablished"/></td>
+              <td width="35%"><apex:outputField id="dateestablished" value="{!Account.DateEstablished__c}"/></td>      
+              <td width="15%"><apex:outputLabel value="Church Attendance: " for="churchattendance"/></td>
+              <td width="35%"><apex:outputField id="churchattendance" value="{!Account.Church_Attendance__c}"/></td>
+          </tr>   
+          <tr>
+              <td width="15%"><apex:outputLabel value="Commander: " for="commander"/></td>
+              <td width="35%"><apex:outputField id="commander" value="{!Account.Commander__c}"/></td>    
+              <td width="15%"><apex:outputLabel value="Primary Ethnic Group: " for="ethnicgroup"/></td>
+              <td width="35%"><apex:outputField id="ethnicgroup" value="{!Account.Primary_Ethnic_Group__c}"/></td>
+          </tr>  
+          <tr>
+             <td width="15%"><apex:outputLabel value="Current FY Sales: " for="currentsales"/></td>
+             <td width="35%"><apex:outputField id="currentsales" value="{!Account.Current_FY_Opportunity_Summary__c}"/></td>     
+             <td width="15%"><apex:outputLabel value="Owner: " for="owner"/></td>
+             <td width="35%"><apex:outputField id="owner" value="{!Account.owner.name}"/></td>  
+          </tr> 
+          <tr>
+             <td width="15%"><apex:outputLabel value="Previous FY Sales: " for="prevsales"/></td>
+             <td width="35%"><apex:outputField id="prevsales" value="{!Account.Previous_FY_Opportunity_Summary__c}"/></td>  
+             <td width="15%"><apex:outputLabel value="Donor ID: " for="donorid"/></td>
+             <td width="35%"><apex:outputField id="donorid" value="{!Account.Donor_System_ID__c}"/></td>  
+          </tr> 
+          <tr>
+              <td width="15%"><apex:outputLabel value="Total Sales: " for="totalsales"/></td>
+             <td width="35%"><apex:outputField id="totalsales" value="{!Account.Opportunity_Summary_RollUp__c}"/></td>
+             <td width="15%"><apex:outputLabel value="Hold Comments: " for="holdcomments"/></td>
+             <td width="35%"><apex:outputField id="holdcomments" value="{!Account.Hold_Comments__c}"/></td>
+          </tr>                    
+     </table>
+   </apex:pageBlock> 
+   <apex:pageBlock title="Address Information">
+      <table>
+         <tr>
+             <td width="15%"><apex:outputLabel value="Street: " for="street"/></td>
+             <td width="35%"><apex:outputField id="street1" value="{!Account.Physical_Street_1__c}"/></td>
+             
+         </tr>
+         <tr>
+             <td width="15%"><apex:outputLabel value="Street 2: " for="street2"/></td>
+             <td width="35%"><apex:outputField id="street2" value="{!Account.Physical_Street_2__c}"/></td>
+             
+         </tr>
+         <tr>
+             <td width="15%"><apex:outputLabel value="Street 3: " for="street3"/></td>
+             <td width="35%"><apex:outputField id="street3" value="{!Account.PhysicalStreet3__c}"/></td>
+             
+         </tr>
+         <tr>        
+              <td width="15%"><apex:outputLabel value="City: " for="city"/></td>
+              <td width="35%"><apex:outputField id="city" value="{!Account.Physical_City__c}"/></td>
+          </tr> 
+          <tr>        
+              <td width="15%"><apex:outputLabel value="State: " for="state"/></td>
+              <td width="35%"><apex:outputField id="state" value="{!Account.Physical_State__c}"/></td>
+          </tr> 
+          <tr>        
+              <td width="15%"><apex:outputLabel value="Zip Code: " for="zipcode"/></td>
+              <td width="35%"><apex:outputField id="zipcode" value="{!Account.Physical_Zip__c}"/></td>
+          </tr> 
+           </table>           
+   </apex:pageBlock>
+   <!--This shows the old view using Programs field in Account
+    <apex:pageBlock title="Active Programs">
+       <table>
+         <tr>
+             <td width="15%"><apex:outputLabel value="Puggles: " for="Puggles"/></td>
+             <td width="35%"><apex:outputField id="puggles" value="{!Account.Active_Puggles_Clubs__c}"/></td>
+             <td width="15%"><apex:outputLabel value="Trek: " for="Trek"/></td>
+             <td width="35%"><apex:outputField id="trek" value="{!Account.Active_Trek_Clubs__c}"/></td>
+             
+         </tr>
+         <tr>
+             <td width="15%"><apex:outputLabel value="Cubbies: " for="Cubbies"/></td>
+             <td width="35%"><apex:outputField id="cubbies" value="{!Account.Active_Cubbies_Clubs__c}"/></td>
+             <td><apex:outputLabel value="Journey: " for="Journey"/></td>
+             <td><apex:outputField id="journey" value="{!Account.Active_Journey_Clubs__c}"/></td>
+         </tr>
+         <tr>    
+             <td><apex:outputLabel value="Sparks: " for="Sparks"/></td>
+             <td><apex:outputField id="sparks" value="{!Account.Active_Sparks_Clubs__c}"/></td>
+             <td><apex:outputLabel value="High Power Soccer: " for="HPS"/></td>
+             <td><apex:outputField id="HPS" value="{!Account.High_Power_Soccer__c}"/></td>
+             
+         </tr>
+         <tr>
+             <td><apex:outputLabel value="T&T: " for="TnT"/></td>
+             <td><apex:outputField id="tnt" value="{!Account.Active_T_T_Clubs__c}"/></td>
+             <td><apex:outputLabel value="Awana at Home: " for="atHome"/></td>
+             <td><apex:outputField id="atHome" value="{!Account.Awana_at_Home__c}"/></td>
+         </tr>
+         
+       </table>      
+       
+    </apex:PageBlock>  
+    -->
+    <BR></br>
+    <BR></br>
+    <BR></br>
+     <apex:pageBlock >
+        <apex:pageBlockTable value="{!ActivePrograms}" var="ActiveProg">
+            <BR><apex:column value="{!ActiveProg.Name}">
+            </apex:column></br>
+            </apex:pageBlockTable>
+    </apex:pageBlock>
+     
+</apex:page>

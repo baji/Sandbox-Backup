@@ -1,0 +1,14 @@
+<apex:page standardcontroller="Receipt__c" extensions="GenerateReceiptsController" sidebar="false" lightningStyleSheets="true">
+<apex:form >
+<apex:slds /> 
+    <apex:pageBlock id="ReceiptPage">
+    <apex:pageMessages />
+        <div align="center" draggable="false" >
+        <apex:commandButton action="{!executeBatch}" value="Generate Receipt"  rendered="{!showGenerateReceipt}"/>
+        <apex:actionPoller action="{!checkBatchStatus}" reRender="ReceiptPage" interval="5" rendered="{!redirect}"/>
+        <apex:commandButton action="{!cancelBatch}" value="Home" />
+        <apex:commandButton action="{!redirectReceipt}" value="View Receipt" rendered="{!showViewReceipt}"/>
+        </div>
+    </apex:pageBlock>
+</apex:form>
+</apex:page>

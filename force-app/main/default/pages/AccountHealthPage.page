@@ -1,0 +1,25 @@
+<apex:page standardController="Account" extensions="AccountHealthController">
+<style>
+    .bPageBlock {
+    border-top: 0px;
+    }
+</style>
+
+<table class="detailList">
+    <tbody>
+        <tr>
+            <th class="labelCol vfLabelColTextWrap  first  last " scope="row" style="width:1%">
+                <label for="j_id0:j_id2:j_id3:j_id4:CreateHealthList" style="margin-left: 10px;font-family:Helvetica;font-size:11px;font-weight: bold;width: 50%">
+                    Account Health Code: 
+                </label>
+            </th>
+            <td></td>
+            <td class="dataCol  first  last ">
+                <input id="HealthCode" style="margin-left: 1px;font-family:Helvetica;font-size:13px;font-weight: bold;width:90%; background:{!WhichColor};" type="text"/>
+            </td>
+            <td class="labelCol empty">&nbsp;</td>
+            <td class="dataCol empty">&nbsp;</td>
+        </tr>
+    </tbody>
+</table>
+</apex:page>

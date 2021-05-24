@@ -1,0 +1,1280 @@
+<apex:page showheader="true" sidebar="true" standardStylesheets="true" standardController="Order" id="OrderEntryPage" title="Order Entry" >
+    
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" />
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" />
+    <apex:includeScript value="/soap/ajax/21.0/connection.js" />
+    <apex:includeScript value="/soap/ajax/21.0/apex.js" /> 
+    <apex:includeScript value="https://sfv5.online.qas.com/SalesforceV5RapidSearch/Scripts/allEDQForSalesforce.js"/> 
+    <apex:includeScript value="https://sfv5.online.qas.com/SalesforceV5RapidSearch/Scripts/edqDetailPageButton.js"/> 
+    <!--<apex:includeScript value="https://d79i1fxsrar4t.cloudfront.net/jquery.liveaddress/5.1/jquery.liveaddress.min.js"/>-->
+    <script type="text/javascript" src="{!$Resource.LiveAddress}" />
+    <script type="text/javascript">
+        function startLoader(){
+        $("body").addClass("loading");                        
+    }        
+    function stopLoader(){
+        $("body").removeClass("loading");       
+    }
+    
+    
+    // get the session id
+    var __sfdcSessionId = '{!GETSESSIONID()}';
+    
+    // get image urls for preloading
+    var __loading_url = '{!URLFOR($Resource.Loading_SpinningArrows)}';
+    var __plus_url = '{!URLFOR($Resource.Small_Circle_Plus)}';
+    var __checkmark_url = '{!URLFOR($Resource.Small_Circle_Checkmark)}';
+    var __information_url = '{!URLFOR($Resource.Small_Circle_Information)}';
+    var __exclamation_url = '{!URLFOR($Resource.Small_Circle_Exclamation)}';
+    var __delete_url = '{!URLFOR($Resource.Small_Circle_Delete)}';
+    var __update_url = '{!URLFOR($Resource.Small_update)}';
+    var __puzzle_url = '{!URLFOR($Resource.Small_Puzzle_Piece)}';
+    window.EDQConfigurationsUrl='{!URLFOR("/resource/EDQConfigurations")}' 
+    window.EDQGlobalSettingsUrl='{!URLFOR("/resource/EDQGlobalSettings")}' 
+    window.EDQSessionTokenUrl='{!URLFOR("/resource/EDQSessionToken")}' 
+    
+    
+    
+    </script> 
+    
+    <script type="text/javascript" src="{!$Resource.OrderEntry1_JavaScript}" />
+    
+    <apex:stylesheet value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/ui-lightness/jquery-ui.css" />
+    
+    <style>
+        .ui-autocomplete-loading { background: url('{!$Resource.Loading_SpinningArrows}') right center no-repeat; }
+        .prices { font-family: "Courier New", Courier, monospace; font-weight:bold; font-size:1.1em; text-align:right; width:120px; }
+        .top-label { font-size:12px; }
+        .two-pixel-padding { padding:2px; } 
+        .input-container-left { display: inline-block; }
+        .input-container-left div { float:left; }
+        .credit-card-input { float: left; border-right: 1px dashed #AAA; padding-right: 10px; margin-right: 10px; width:auto; }
+        .address-input { overflow:hidden; width:auto; }
+        .select-address-table { border-collapse:collapse; width:100%; }
+        .required { color:red; padding-left:2px; }
+        .modal {
+        display:    none;
+        position:   fixed;
+        z-index:    1000;
+        top:        0;
+        left:       0;
+        height:     100%;
+        width:      100%;
+        background: rgba( 255, 255, 255, .8 ) 
+        url('http://i.stack.imgur.com/FhHRx.gif') 
+        50% 50% 
+        no-repeat;
+        }
+        
+        /* When the body has the loading class, we turn
+        the scrollbar off with overflow:hidden */
+        body.loading .modal {
+        overflow: hidden;   
+        }
+        
+        /* Anytime the body has the loading class, our
+        modal element will be visible */
+        body.loading .modal {
+        display: block;
+        }
+    </style>
+    
+    <body>
+        <apex:sectionHeader title="Order Entry" subtitle="New Order" id="OrderEntryHeader" />
+        
+        <apex:form >
+            <apex:actionfunction name="refresher" action="{!quicksave}" reRender="OrderTotal" />
+        </apex:form>
+        
+        <!--  -->
+        <div id="CreateOrderPageBlockContainer" style="display:none;"> 
+            <apex:pageBlock id="CreateOrderPageBlock" >
+                
+                <apex:facet name="header" >
+                    <div class="pbHeader" style="border-bottom: 1px solid #DBDBDB; padding: 12px;">
+                        <div id="CreateOrderTitleLeft" style="display:inline; "><h2>Create Order</h2></div>
+                        <div id="CreateOrderTitleRight" style="display:inline; float:right;"><a id="ShowOrHide">hide</a></div>
+                    </div>
+                </apex:facet>
+                
+                <apex:pageBlockSection columns="2" id="CreateOrderDetail" >
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Select Company: " for="CreateOrderCompany"  />
+                        <select id="CreateOrderCompany" onChange="getPriceBooksByCompany();"></select>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem id="IsSalesCreditContainer" helptext="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                        <apex:outputLabel value="Sales Credit:" for="IsSalesCredit" id="IsSalesCreditLabel" />
+                        <input type="checkbox" id="IsSalesCredit" onClick="getAllPriceBooks();" />
+                    </apex:pageBlockSectionItem>  
+                    
+                    <apex:pageBlockSectionItem > 
+                        <apex:outputPanel id="FindAccountContainer" >
+                            <apex:outputLabel value="Select Account: " for="FindAffiliations"  />
+                        </apex:outputPanel>
+                        <select id="FindAffiliations" onChange="getWhichTypeObject();"></select>
+                        <input type="hidden" id="FindAccount" style="width:220px;" />
+                        <a id="FindAccountLink" style="display:none;"><image src="{!$Resource.Small_Circle_Information}" style="vertical-align: middle;" /></a>&nbsp;
+                        <input type="hidden" id="FindAccountSalesforceId" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem id="OriginalOrderDateContainer" >
+                        <apex:outputLabel value="Original Order Date (related to Credit): " for="OriginalOrderDate" id="OriginalOrderDateLabel" />
+                        <input type="text" id="OriginalOrderDate" disabled="true" />
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem id="CustomerIdContainer" >            
+                        <apex:outputLabel value="Customer ID" for="DisplayCustomerId" id="DisplayCustomerIdLabel"/>
+                        <div id="DisplayCustomerIdContainer">
+                            <a id="DisplayCustomerId"></a>  
+                        </div>                                       
+                    </apex:pageBlockSectionItem>    
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Contact Name: " for="DisplayContactName" id="DisplayContactNameLabel" />
+                        <div id="DisplayContactNameContainer">
+                            <a id="DisplayContactName"></a>  
+                        </div>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value="Membership Days Remaining: " for="FindExpireDays" id="FindExpireDaysLabel" />
+                        <div id="FindExpireDaysContainer">
+                            <a id="FindExpireDays"></a>  
+                        </div>
+                    </apex:pageBlockSectionItem>            
+                    
+                    <apex:pageBlockSectionItem id="FindChurchRoleContainer" >
+                        <apex:outputLabel value="Church Role: " for="FindChurchRole" id="FindChurchRoleLabel" />
+                        <div id="FindChurchRoleContainer" >
+                            <a id="FindChurchRole"></a>
+                        </div>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem helptext="Pricebook determines the price of every item enetered in an order. Changing this after [Save & Enter items] is clicked will delete all line items (Products). ">
+                        <apex:outputLabel value="Select Price Book: " for="CreateOrderPriceBook" />
+                        <select id="CreateOrderPriceBook" onChange="getWhichCompany();"></select>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem id="FindAwanaRoleContainer" >
+                        <apex:outputLabel value="Awana Role: " for="FindAwanaRole" id="FindAwanaRoleLabel" />
+                        <div id="FindAwanaRoleContainer" >
+                            <a id="FindAwanaRole"></a>
+                        </div>
+                    </apex:pageBlockSectionItem>
+                    
+                    <apex:pageBlockSectionItem id="IsAccountOnHoldContainer">
+                        <apex:outputLabel value="Account on Hold: " for="AccountOnHold" id="AccountOnHoldLabel" />
+                        <input type="checkbox" id="AccountOnHold" disabled="true"/>
+                    </apex:pageBlockSectionItem>      
+                    
+                    <apex:pageBlockSectionItem id="FindOtherRoleContainer" >
+                        <apex:outputLabel value="Other Role: " for="FindOtherRole" id="FindOtherRoleLabel" />
+                        <div id="FindOtherRoleContainer" >
+                            <a id="FindOtherRole"></a>
+                        </div>
+                    </apex:pageBlockSectionItem>   
+                    
+                    <apex:pageBlockSectionItem id="SalesTaxExemptionHoldContainer">
+                        <apex:outputLabel value="Sales Tax Exemption Hold: " for="SalesTaxExemptionHold" id="SalesTaxExemptionHoldLabel" />
+                        <input type="checkbox" id="SalesTaxExemptionHold" disabled="true"/>
+                    </apex:pageBlockSectionItem>          
+                    
+                    <apex:pageBlockSectionItem id="IsAccountOwnerContainer" helptext="Check this box to note that this is an Account Owner who can perform Membership Upgrades. Account Onwers have the Church/Awana Role of Pastor,Club Secretary, or Commander.">
+                        <apex:outputLabel value="Organization Owner: " for="IsAccountOwner" id="IsAccountOwnerLabel" />
+                        <input type="checkbox" id="IsAccountOwner" disabled="true"/>
+                    </apex:pageBlockSectionItem>   
+                    
+                    
+                    <apex:pageBlockSectionItem >
+                        <apex:outputPanel >
+                            <input type="hidden" id="CreateOrderContact" />
+                        </apex:outputPanel>
+                    </apex:pageBlockSectionItem>
+                    <apex:pageBlockSectionItem id="AffiliateIdContainer" >
+                        <input id="AffiliateId" type="hidden" name="AffiliateId" />
+                    </apex:pageBlockSectionItem>
+                    
+                </apex:pageBlockSection> 
+                
+                <apex:outputPanel >
+                    <p id="CreateOrderAreYouSure"></p>
+                </apex:outputPanel>
+                
+                <apex:pageBlockButtons location="bottom" >
+                    <apex:outputPanel id="pbButtons" >
+                        <input type="button" value="Create Order" id="btnCreateOrder" onclick="createOrder();" />
+                    </apex:outputPanel>
+                </apex:pageBlockButtons>
+                
+            </apex:pageBlock>
+        </div>  
+        <!--  -->
+        
+        <div id="updateBillingPageBlockContainer" style="display:none;">                      
+            <apex:pageBlock id="updateBillingInformationBlock">
+                <apex:pageBlockSection columns="1" id="updateBillingInformation" title="Update Billing Information">                    
+                        <apex:pageBlockSectionItem > 
+                            <apex:outputLabel value="Billing Street: " for="accBillingStreet" id="AccbillingStreetLabel" />
+                            <input type="text" id="acccBillingStreet"/>
+                        </apex:pageBlockSectionItem>   
+                        
+                        <apex:pageBlockSectionItem >    
+                            <apex:outputLabel value="Billing City: " for="accBillingCity" id="AccbillingCityLabel" />
+                            <input type="text" id="acccBillingCity"/>                
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >             
+                            <apex:outputLabel value="Billing State/Province: " for="accBillingState" id="AccbillingStateLabel" />
+                            <input type="text" id="acccBillingState"/>
+                            <select id="CreateStateValue" style="display:none;width: 178px;"></select>  
+                        </apex:pageBlockSectionItem>
+                        
+                        <apex:pageBlockSectionItem >   
+                            <apex:outputLabel value="Billing Zip/Postal Code: " for="accBillingZipcode" id="AccbillingZipcodeLabel" />
+                            <input type="text" id="acccBillingZipcode"/>
+                        </apex:pageBlockSectionItem>                  
+                        
+                        <apex:pageBlockSectionItem >            
+                            <apex:outputLabel value="Billing Country: " for="accBillingState" id="AccbillingCountryLabel"/>                
+                            <select id="acccBillingCountry" onchange="getRelatedStates(this.value,'billing');" style="width: 178px;">
+                            <option>-----Select Country----</option>    
+                            <option>UNITED STATES</option>
+                                <option>AFGHANISTAN</option>
+                                <option>ALAND ISLANDS</option>
+                                <option>ALBANIA</option>
+                                <option>ALGERIA</option>
+                                <option>AMERICAN SAMOA</option>
+                                <option>ANDORRA</option>
+                                <option>ANGOLA</option>
+                                <option>ANGUILLA</option>
+                                <option>ANTARCTICA</option>
+                                <option>ANTIGUA AND BARBUDA</option>
+                                <option>ARGENTINA</option>
+                                <option>ARMENIA</option>
+                                <option>ARUBA</option>
+                                <option>AUSTRALIA</option>
+                                <option>AUSTRIA</option>
+                                <option>AZERBAIJAN</option>
+                                <option>BAHAMAS</option>
+                                <option>BAHRAIN</option>
+                                <option>BANGLADESH</option>
+                                <option>BARBADOS</option>
+                                <option>BELARUS</option>
+                                <option>BELGIUM</option>
+                                <option>BELIZE</option>
+                                <option>BENIN</option>
+                                <option>BERMUDA</option>
+                                <option>BHUTAN</option>
+                                <option>BOLIVIA</option>
+                                <option>BONAIRE, SINT EUSTATIUS AND SABA</option>
+                                <option>BOSNIA AND HERZEGOVINA</option>
+                                <option>BOTSWANA</option>
+                                <option>BOUVET ISLAND</option>
+                                <option>BRAZIL</option>
+                                <option>BRITISH INDIAN OCEAN TERRITORY</option>
+                                <option>BRUNEI DARUSSALAM</option>
+                                <option>BULGARIA</option>
+                                <option>BURKINA FASO</option>
+                                <option>BURUNDI</option>
+                                <option>CAMBODIA</option>
+                                <option>CAMEROON</option>
+                                <option>CANADA</option>
+                                <option>CAPE VERDE</option>
+                                <option>CAYMAN ISLANDS</option>
+                                <option>CENTRAL AFRICAN REPUBLIC</option>
+                                <option>CHAD</option>
+                                <option>CHILE</option>
+                                <option>CHINA</option>
+                                <option>CHRISTMAS ISLAND</option>
+                                <option>COCOS (KEELING) ISLANDS</option>
+                                <option>COLOMBIA</option>
+                                <option>COMOROS</option>
+                                <option>CONGO</option>
+                                <option>CONGO, DEMOCRATIC REPUBLIC</option>
+                                <option>COOK ISLANDS</option>
+                                <option>COSTA RICA</option>
+                                <option>CÔTE D'IVOIRE</option>
+                                <option>CROATIA</option>
+                                <option>CURAÇAO</option>
+                                <option>CUBA</option>
+                                <option>CYPRUS</option>
+                                <option>CZECH REPUBLIC</option>
+                                <option>DENMARK</option>
+                                <option>DJIBOUTI</option>
+                                <option>DOMINICA</option>
+                                <option>DOMINICAN REPUBLIC</option>
+                                <option>ECUADOR</option>
+                                <option>EGYPT</option>
+                                <option>EL SALVADOR</option>
+                                <option>EQUATORIAL GUINEA</option>
+                                <option>ERITREA</option>
+                                <option>ESTONIA</option>
+                                <option>ESWATINI</option>
+                                <option>ETHIOPIA</option>
+                                <option>FALKLAND ISLANDS (MALVINAS)</option>
+                                <option>FAROE ISLANDS</option>
+                                <option>FIJI</option>
+                                <option>FINLAND</option>
+                                <option>FRANCE</option>
+                                <option>FRENCH GUIANA</option>
+                                <option>FRENCH POLYNESIA</option>
+                                <option>FRENCH SOUTHERN TERRITORIES</option>
+                                <option>GABON</option>
+                                <option>GAMBIA</option>
+                                <option>GEORGIA</option>
+                                <option>GERMANY</option>
+                                <option>GHANA</option>
+                                <option>GIBRALTAR</option>
+                                <option>GREECE</option>
+                                <option>GREENLAND</option>
+                                <option>GRENADA</option>
+                                <option>GUADELOUPE</option>
+                                <option>GUAM</option>
+                                <option>GUATEMALA</option>
+                                <option>GUERNSEY</option>
+                                <option>GUINEA</option>
+                                <option>GUINEA-BISSAU</option>
+                                <option>GUYANA</option>
+                                <option>HAITI</option>
+                                <option>HEARD IS. &amp; MCDONALD ISLANDS</option>
+                                <option>HONDURAS</option>
+                                <option>HONG KONG</option>
+                                <option>HUNGARY</option>
+                                <option>ICELAND</option>
+                                <option>INDIA</option>
+                                <option>INDONESIA</option>
+                                <option>IRAN, ISLAMIC REPUBLIC OF</option>
+                                <option>IRAQ</option>
+                                <option>IRELAND</option>
+                                <option>ISLE OF MAN</option>
+                                <option>ISRAEL</option>
+                                <option>ITALY</option>
+                                <option>JAMAICA</option>
+                                <option>JAPAN</option>
+                                <option>JERSEY</option>
+                                <option>JORDAN</option>
+                                <option>KAZAKHSTAN</option>
+                                <option>KENYA</option>
+                                <option>KIRIBATI</option>
+                                <option>KOREA, DEMO. PEOPLE'S REP.</option>
+                                <option>KOREA, REPUBLIC OF</option>
+                                <option>KUWAIT</option>
+                                <option>KYRGYZSTAN</option>
+                                <option>LAO</option>
+                                <option>LATVIA</option>
+                                <option>LEBANON</option>
+                                <option>LESOTHO</option>
+                                <option>LIBERIA</option>
+                                <option>LIBYAN ARAB JAMAHIRIYA</option>
+                                <option>LIECHTENSTEIN</option>
+                                <option>LITHUANIA</option>
+                                <option>LUXEMBOURG</option>
+                                <option>MACAO</option>
+                                <option>MACEDONIA</option>
+                                <option>MADAGASCAR</option>
+                                <option>MALAWI</option>
+                                <option>MALAYSIA</option>
+                                <option>MALDIVES</option>
+                                <option>MALI</option>
+                                <option>MALTA</option>
+                                <option>MARSHALL ISLANDS</option>
+                                <option>MARTINIQUE</option>
+                                <option>MAURITANIA</option>
+                                <option>MAURITIUS</option>
+                                <option>MAYOTTE</option>
+                                <option>MEXICO</option>
+                                <option>MICRONESIA</option>
+                                <option>MOLDOVA, REPUBLIC OF</option>
+                                <option>MONACO</option>
+                                <option>MONGOLIA</option>
+                                <option>MONTENEGRO</option>
+                                <option>MONTSERRAT</option>
+                                <option>MOROCCO</option>
+                                <option>MOZAMBIQUE</option>
+                                <option>MYANMAR</option>
+                                <option>NAMIBIA</option>
+                                <option>NAURU</option>
+                                <option>NEPAL</option>
+                                <option>NETHERLANDS</option>
+                                <option>NETHERLANDS ANTILLES</option>
+                                <option>NEW CALEDONIA</option>
+                                <option>NEW ZEALAND</option>
+                                <option>NICARAGUA</option>
+                                <option>NIGER</option>
+                                <option>NIGERIA</option>
+                                <option>NIUE</option>
+                                <option>NORFOLK ISLAND</option>
+                                <option>NORTHERN MARIANA ISLANDS</option>
+                                <option>NORWAY</option>
+                                <option>OMAN</option>
+                                <option>PAKISTAN</option>
+                                <option>PALAU</option>
+                                <option>PALESTINIAN TERRITORY, OCCUPIED</option>
+                                <option>PANAMA</option>
+                                <option>PAPUA NEW GUINEA</option>
+                                <option>PARAGUAY</option>
+                                <option>PERU</option>
+                                <option>PHILIPPINES</option>
+                                <option>PITCAIRN</option>
+                                <option>POLAND</option>
+                                <option>PORTUGAL</option>
+                                <option>PUERTO RICO</option>
+                                <option>QATAR</option>
+                                <option>REUNION</option>
+                                <option>ROMANIA</option>
+                                <option>RUSSIAN FEDERATION</option>
+                                <option>RWANDA</option>
+                                <option>SAINT BARTHELEMY</option>
+                                <option>SAINT HELENA</option>
+                                <option>SAINT KITTS AND NEVIS</option>
+                                <option>SAINT LUCIA</option>
+                                <option>SAINT MARTIN</option>
+                                <option>SAINT PIERRE AND MIQUELON</option>
+                                <option>SAINT VINCENT AND THE GRENADINES</option>
+                                <option>SAMOA</option>
+                                <option>SAN MARINO</option>
+                                <option>SAO TOME AND PRINCIPE</option>
+                                <option>SAUDI ARABIA</option>
+                                <option>SENEGAL</option>
+                                <option>SERBIA</option>
+                                <option>SEYCHELLES</option>
+                                <option>SIERRA LEONE</option>
+                                <option>SINGAPORE</option>
+                                <option>SINT MAARTEN</option>
+                                <option>SLOVAKIA</option>
+                                <option>SLOVENIA</option>
+                                <option>SOLOMON ISLANDS</option>
+                                <option>SOMALIA</option>
+                                <option>SOUTH AFRICA</option>
+                                <option>SOUTH SUDAN</option>
+                                <option>S. GEORGIA &amp; S. SANDWICH IS.</option>
+                                <option>SPAIN</option>
+                                <option>SRI LANKA</option>
+                                <option>SUDAN</option>
+                                <option>SURINAME</option>
+                                <option>SVALBARD AND JAN MAYEN</option>
+                                <option>SWEDEN</option>
+                                <option>SWITZERLAND</option>
+                                <option>SYRIAN ARAB REPUBLIC</option>
+                                <option>TAIWAN</option>
+                                <option>TAJIKISTAN</option>
+                                <option>TANZANIA, UNITED REPUBLIC OF</option>
+                                <option>THAILAND</option>
+                                <option>TIMOR-LESTE</option>
+                                <option>TOGO</option>
+                                <option>TOKELAU</option>
+                                <option>TONGA</option>
+                                <option>TRINIDAD AND TOBAGO</option>
+                                <option>TUNISIA</option>
+                                <option>TURKEY</option>
+                                <option>TURKMENISTAN</option>
+                                <option>TURKS AND CAICOS ISLANDS</option>
+                                <option>TUVALU</option>
+                                <option>UGANDA</option>
+                                <option>UKRAINE</option>
+                                <option>UNITED ARAB EMIRATES</option>
+                                <option>UNITED KINGDOM</option>
+                                <option>US MINOR OUTLYING ISLANDS</option>
+                                <option>URUGUAY</option>
+                                <option>UZBEKISTAN</option>
+                                <option>VANUATU</option>
+                                <option>VATICAN CITY STATE</option>
+                                <option>VENEZUELA</option>
+                                <option>VIETNAM</option>
+                                <option>VIRGIN ISLANDS, BRITISH</option>
+                                <option>VIRGIN ISLANDS, U.S.</option>
+                                <option>WALLIS AND FUTUNA</option>
+                                <option>WESTERN SAHARA</option>
+                                <option>YEMEN</option>
+                                <option>ZAMBIA</option>
+                                <option>ZIMBABWE</option>
+                            </select>                   
+                        </apex:pageBlockSectionItem>    
+                </apex:pageBlockSection>    
+                
+                <apex:pageBlockButtons location="bottom" >
+                    <apex:outputPanel id="pbAddressButtons" >
+                        <input type="button" value="Update Address" id="btnUpdateAddress" onclick="updateAccBillAddress();"/>
+                    </apex:outputPanel>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+            
+        </div>
+        <!--  -->
+        <apex:pageBlock id="OrderDetailPageBlock" >
+            
+            <apex:facet name="header" >
+                <div class="pbHeader" style="border-bottom: 1px solid #DBDBDB; padding: 12px;">
+                    <div id="OrderDetailTitleLeft" style="display:inline; "><h2>Order Summary</h2></div>
+                    <div id="OrderDetailTitleRight" style="display:inline; float:right;"><a id="ShowOrHide">hide</a></div>
+                </div>
+            </apex:facet>
+            
+            <apex:pageBlockSection columns="2" id="OrderDetailSection" title="Order">
+                <apex:pageBlockSectionItem >
+                    
+                    <apex:outputLabel value="Order Number: " for="OrderDetailNumber" id="OrderDetailNumberLabel" />
+                    <div id="OrderDetailNumberContainer">
+                        <a id="OrderDetailNumber"></a>
+                    </div>
+                </apex:pageBlockSectionItem>   
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Order Created Date: " for="OrderDetailDateStarted" id="OrderDetailDateStartedLabel" />
+                    <div id="OrderDetailDateStarted"></div>
+                </apex:pageBlockSectionItem>               
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Order Name: " for="OrderDetailName" id="OrderDetailNameLabel" />
+                    <div id="OrderDetailNameContainer">
+                        <a id="OrderDetailName"></a>
+                    </div>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Order Status: " for="OrderDetailStage" id="OrderDetailStageLabel" />
+                    <div id="OrderDetailStage"></div>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Company: " for="OrderDetailCompany" id="OrderDetailCompanyLabel" />
+                    <div id="OrderDetailCompany"></div>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Contact Name: " for="OrderDetailContact" id="OrderDetailContactLabel" />
+                    <div id="OrderDetailContactContainer">
+                        <a id="OrderDetailContact"></a>
+                    </div>
+                </apex:pageBlockSectionItem>                
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Account: " for="OrderDetailAccount" id="OrderDetailAccountLabel" />
+                    <div id="OrderDetailAccountContainer">
+                        <a id="OrderDetailAccount"></a>
+                    </div>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Church Role: " for="OrderChurchRole" id="OrderChurchRoleLabel" />
+                    <div id="OrderChurchRoleContainer">
+                        <a id="OrderChurchRole"></a>
+                    </div>
+                </apex:pageBlockSectionItem>    
+                
+                <apex:pageBlockSectionItem id="OrderCustomerIdContainer" >            
+                    <apex:outputLabel value="Customer Id" for="OrderDisplayCustomerId" id="OrderDisplayCustomerIdLabel"/>
+                    <div id="OrderDisplayCustomerIdContainer">
+                        <a id="OrderDisplayCustomerId"></a>  
+                    </div>                                       
+                </apex:pageBlockSectionItem>  
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Awana Role: " for="OrderAwanaRole" id="OrderAwanaRoleLabel" />
+                    <div id="OrderAwanaRoleContainer">
+                        <a id="OrderAwanaRole"></a>
+                    </div>
+                </apex:pageBlockSectionItem>   
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Membership Days Remaining: " for="OrderDaysLeft" id="OrderDaysLeftLabel" />
+                    <div id="OrderDaysLeftContainer">
+                        <a id="OrderDaysLeft"></a>
+                    </div>
+                </apex:pageBlockSectionItem>     
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Other Role: " for="OrderOtherRole" id="OrderOtherRoleLabel" />
+                    <div id="OrderOtherRoleContainer">
+                        <a id="OrderOtherRole"></a>
+                    </div>
+                </apex:pageBlockSectionItem>   
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Price Book: " for="OrderDetailPriceBook" id="OrderDetailPriceBookLabel" />
+                    <div id="OrderDetailPriceBook"></div>
+                </apex:pageBlockSectionItem>  
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Organization Owner: " for="AccountOwnerHtml" id="AccountOwnerHtmlLabel" />
+                    <div id="AccountOwnerHtmlContainer">
+                        <a id="AccountOwnerHtml"></a>
+                    </div>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>                    
+            
+            <apex:pageBlockSection columns="2" id="OrderAddressInformation" title="Billing & Shipping Information">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Billing Address: " for="OrderBillingAddress" id="OrderBillingAddressLabel" />
+                    <div id="OrderBillingAddress">
+                        <div id="OrderBillingAddressDetail" style="display:none;">
+                            <span id="OrderBillingAddressFirstName"></span>&nbsp;
+                            <span id="OrderBillingAddressLastName"></span><br/>
+                            <span id="OrderBillingAddressLineOne"></span><br/>
+                            <span id="OrderBillingAddressLineTwo"></span><br/>
+                            <span id="OrderBillingAddressCity"></span>&nbsp;
+                            <span id="OrderBillingAddressState"></span>&nbsp;
+                            <span id="OrderBillingAddressZip"></span><br/>
+                            <!--<span id="OrderBillingAddressCounty"></span><br/>-->
+                            <span id="OrderBillingAddressCountry"></span><br/>
+                        </div>
+                    </div>
+                </apex:pageBlockSectionItem>
+           
+                 <apex:pageBlockSectionItem >
+                            <apex:outputLabel value="Shipping Address: " for="OrderShippingAddress" id="OrderShippingAddressLabel"/>
+                            <div id="OrderShippingAddressDetail" style="display:none;">
+                                <span id="OrderShippingAddressFirstName"></span>&nbsp;
+                                <span id="OrderShippingAddressLastName"></span><br/>
+                                <span id="OrderShippingAddressLineOne"></span><br/>
+                                <span id="OrderShippingAddressLineTwo"></span><br/>
+                                <span id="OrderShippingAddressCity"></span>&nbsp;
+                                <span id="OrderShippingAddressState"></span>&nbsp;
+                                <span id="OrderShippingAddressZip"></span><br/>
+                                <!--<span id="OrderShippingAddressCounty"></span><br/>-->
+                                <span id="OrderShippingAddressCountry"></span><br/>
+                            </div>
+                            <input type="button" style="cursor:pointer;" id="OrderShippingAddressChangeLink" 
+                                   onclick="openSelectAddressDialog('Shipping');" value="Change Shipping Address" /> <!--giving - margin-left as requirement on SF-124-->
+                 </apex:pageBlockSectionItem>
+                 
+                <c:ForSSAddressVerification Order="{!Order}"/>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="2" id="OrderContactInformation" title="Order Contact Information">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Billing E-mail: " for="OrderEmail" id="OrderEmailLabel" />
+                    <input type="text" id="OrderEmail" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Billing Phone: " for="OrderPhone" id="OrderPhoneLabel" />
+                    <input type="text" id="OrderPhone" onblur="formatPhone(this);" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection columns="2" id="OrderOtherInformation" title="Other">
+                        <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Purchase Order or Customer Reference: " for="PurchaseOrder" id="PurchaseOrderLabel" />
+                    <input type="text" id="PurchaseOrder" />
+                </apex:pageBlockSectionItem>
+                
+                 <apex:pageBlockSectionItem > 
+                    <apex:outputLabel value="Coupon Issued:" for="couponIssued" id="couponIssuedLabel"/>
+                    <input type="text" id="couponIssued" />&nbsp;<!--<a href="" onclick="fetchRelatedCouponCode();" style="cursor: pointer;">Check Code</a>-->
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem > 
+                    <apex:outputLabel value="Extra Email Addresses:" title="Extra emails to send"/>
+                    <textarea id="extraEmailId" rows="4" cols="50" placeholder="Enter multiple email addresses separated by a comma(,) to whom you want to send an email once an order is confirmed."/>            
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Notes: " for="OrderNotes" id="OrderNotesLabel" />
+                    <textarea id="OrderNotes" rows="4" cols="50"/>   
+                    <!--<input type="text" id="OrderNotes" />-->
+                </apex:pageBlockSectionItem>
+               
+            </apex:pageBlockSection>   
+                        
+                <apex:pageBlockButtons location="bottom" >
+                    <apex:outputPanel id="pbButton" style="margin-left: 140Px;">                   
+                      <input type="button" class="" value="Save" id="PartialSaveOrder" onclick="saveOrderPartial();"  style="cursor: pointer;"/>                
+                    </apex:outputPanel>
+                </apex:pageBlockButtons>
+                        
+                        </apex:pageBlock>
+        <!--Subscription header  -->
+        
+        <!--End Subscription header  -->
+        <apex:pageBlock id="EnterItemsPageBlock" >
+            
+            <apex:facet name="header" >
+                <div class="pbHeader" style="border-bottom: 1px solid #DBDBDB; padding: 12px;">
+                    <div id="EnterItemsTitleLeft" style="display:inline; width:40%;"><div style="float:left;width:140px;"><h2>Enter Items</h2></div></div>
+                    <div style="display:inline; padding-left:20%; " id="EnterItemsButtonSpacer"></div>
+                    <div style="display:inline; "><input type="button" value="Mozo Products" onclick="openMembershipProductsPricesMenu();"  id="MembershipProducts"/></div>
+                    <div style="display:inline; "><input type="button" value="Remove All Products" onclick="removeAllProducts();" /></div>
+                    
+                    <div id="EnterItemsTitleRight" style="display:inline; float:right;"><a id="ShowOrHide">hide</a></div>
+                </div>
+            </apex:facet>
+            
+            <apex:pageBlockSection columns="1" id="EnterItemsInput">
+                <table cellpadding="0" cellspacing="2px" border="0">
+                    <tr>
+                        <td>Product Name or Number</td>
+                        <td>Quantity</td>
+                        <td>Each Price</td>
+                        <!--<td></td>
+<td>Promo Code</td>
+<td>Price Discount</td>-->
+                    </tr>
+                    <tr>
+                        <td style="padding-right:10px;">
+                            <input type="text" id="FindProduct" style="width:140px;" onfocus="this.select();" onkeypress="addProductInputOverrideKeypress(this,event);"></input>
+                </td>
+                <td style="padding-right:10px;">
+                    <input type="text" id="ProductQuantity" style="width:50px;" maxlength="7" onfocus="this.select();" onkeypress="changeInput(this,event);" onblur="addProductInputOverrideKeypress(this,event);"></input> <!-- MSoni commented : onkeypress="addProductInputOverrideKeypress(this,event);" -->
+        </td>
+        <td style="padding-right:10px;">
+            <input type="text" id="ProductPrice" style="width:50px;" maxlength="10" onfocus="this.select();" onkeypress="addProductInputOverrideKeypress(this,event);"></input>
+</td>
+
+<td style="padding-right:10px;">
+    <input type="button" value="Add Product" style="margin-top:0px;" id="btnAddProduct"  onclick="addProduct();" />
+</td>
+<td style="padding-right:10px;">
+    <input type="button" value="Apply Coupon" style="margin-top:0px;" id="btnApplyCoupon" onclick="applyPromoCode(false);" disabled="disabled" class="btnDisabled"/>
+</td>
+<td style="padding-right:10px;">
+    <input type="button" value="Remove Coupon" style="margin-top:0px;" id="btnRemoveCoupon" onclick="RemovePromoCode(false);" disabled="disabled" class="btnDisabled"/>
+</td>
+<td style="padding-right:10px;">
+    <input type="button" value="Free Freight " style="margin-top:0px;" id="btnFreeFreight" onclick="applyDiscountOnProducts(true,null);" disabled="disabled" class="btnDisabled"/>
+</td>
+<!--<td><select id="PromoCodes" style="width:110px" onfocus="this.select();" onmousedown="UpdatePromoCodeKeyPress(this, event);"  onChange="getDiscountPrice();"></select>
+</td> 
+<td>
+<input type="text" id="PriceDiscount" style="width:100px;" maxlength="9" onfocus="this.select();" ></input>
+</td>
+<td></td>
+<td>
+
+<span  id="PromoCodeDescription" style="color:blue;text-align:center"></span>&nbsp;
+
+</td> -->
+
+</tr>
+</table>
+</apex:pageBlockSection> 
+<apex:pageBlockSection columns="1" id="EnterItemsDetail"> 
+    <table cellpadding="2px" cellspacing="0" border="0" id="OrderLineItems" class="list" >
+        <thead>
+            <tr class="headerRow">
+                <th><input type="checkbox" id="AllProductsId" onClick="selectAllProducts(this);" style="margin-left: auto;"/></th>
+                <th>ID</th>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>BO</th>
+                <th>Shp</th>
+                <th>List</th>
+                <th>Sales</th>
+                <th>Discount Percentage %</th>
+                <th>Extended</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</apex:pageBlockSection> 
+</apex:pageBlock>
+<!--  -->
+
+<!--  -->
+<apex:form id="PaymentInformationPageform">
+    <apex:pageBlock id="PaymentInformationPageBlock" >
+        
+        <apex:facet name="header">
+            <div class="pbHeader" style="border-bottom: 1px solid #DBDBDB; padding: 12px;">
+                <div id="PaymentInformationTitleLeft" style="display:inline; width:40%;"><div style="float:left;width:140px;"><h2>Payment Information</h2></div></div>
+                <div style="display:inline; padding-left:20%; " id="PaymentInformationButtonSpacer"></div>
+                <div style="display:inline; "><input type="button" disabled="disabled" class="btnDisabled" value="Refresh" id="PaymentInformationRefreshOrder" onclick="window.location=window.location;" /></div>
+                <div style="display:inline; "><input type="button" disabled="disabled" class="btnDisabled" value="Save" id="PaymentInformationSaveOrder" onclick="saveOrder();" /></div>
+                <div style="display:inline; "><input type="button" disabled="disabled" class="btnDisabled" value="Calculate Delivery" id="PaymentInformationCalculateDelivery" onclick="calculateFreight();" /></div>
+                <div style="display:inline; "><input type="button" disabled="disabled" class="btnDisabled" value="Calculate Tax" id="PaymentInformationCalculateTax" onclick="calculateTax();" /></div>
+                <!--  <div style="display:inline; "><input type="button" disabled="disabled" class="btnDisabled" value="Authorize Credit Card" id="PaymentInformationAuthorizeCreditCard" onclick="authorizeCreditCard();" /></div> -->
+                <div style="display:inline; "><input type="button" disabled="disabled" class="btnDisabled" value="Finish Order" id="PaymentInformationFinishOrder" onclick="submitOrder();" /></div>
+                <div id="PaymentInformationTitleRight" style="display:inline; float:right;"><a id="ShowOrHide">hide</a></div>
+            </div>
+        </apex:facet>
+        
+        <apex:pageBlockSection columns="2" id="OrderPaymentInformation" >
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Shipping Carrier: " for="OrderPaymentCarrier" id="OrderPaymentCarrierLabel" />
+                <apex:inputField value="{!Order.Shipping_Carrier__c}"  id="OrderPaymentCarrier"  style="display:none;" />
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Shipping Type: " for="OrderAddressInformationShippingType" id="OrderAddressInformationShippingTypeLabel" />
+                <select id="OrderAddressInformationShippingType"  onchange="getShipCost();" style="display:none;"></select>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Product Total: " for="ProductTotal" id="ProductTotalLabel" />
+                <div id="ProductTotal" class="prices"></div>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem id="orderPaymentTermsSection">  
+                <apex:outputLabel value="Order Payment Terms: " for="OrderPaymentTerms" id="OrderPaymentTermsLabel" />        
+                <apex:outputPanel >
+                    <apex:inputField value="{!Order.Payment_Terms__c}" id="OrderPaymentTerms"/>      
+                    
+                    <script type="text/javascript">
+                    (function(){
+                        var e = document.querySelectorAll('[id$="OrderPaymentTerms"]')[0];
+                        if(e != null){
+                        for (var i=0; i<e.length; i++) {                    
+                            if (e.options[i].value == 'Credit Card - Paid' || e.options[i].value == 'Payment to be Collected' || e.options[i].value == 'Sales Credit' || e.options[i].value == 'Sales Credit - Refunded') {
+                                e.remove(i);
+                                if(e.options[i].value == 'Sales Credit - Refunded'){
+                                    e.remove(i);
+                                }
+                            }
+                        }     
+                            }
+                    })();
+                    </script>
+                </apex:outputPanel>      
+                
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Estimated Tax: " for="EstimatedTax" id="EstimatedTaxLabel" />
+                <div id="EstimatedTax" class="prices"></div>
+            </apex:pageBlockSectionItem>
+            <!--  -->
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Credit Card Information: " for="OrderPaymentCreditCard" id="OrderPaymentCreditCardLabel" />
+                <div id="OrderPaymentCreditCard" >
+                    <div id="OrderPaymentCreditCardDetail" style="display:none;">
+                        <span id="OrderPaymentCreditCardName"></span><br/>
+                        <span id="OrderPaymentCreditCardType"></span>
+                        <span id="OrderPaymentCreditCardNumber"></span><br/>
+                        <span id="OrderPaymentCreditCardMonth"></span>/
+                        <span id="OrderPaymentCreditCardYear"></span>&nbsp;
+                        <span id="OrderPaymentCreditCardSecurity"></span><br/>
+                    </div>
+                    <input type="button" style="cursor:pointer;" id="ChangeCreditCardAndBillingButton" 
+                           onclick="openSelectAddressDialog('Billing');" value="Enter Credit Card and Billing Address" />
+                </div>
+            </apex:pageBlockSectionItem>
+            <!--  -->
+            <apex:pageBlockSectionItem >
+                <apex:outputLabel value="Delivery Charges: " for="DeliveryCharges" id="DeliveryChargesLabel" />
+                <div id="DeliveryCharges" class="prices"></div>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem id="CreditCardTransactionsContainer">
+                <apex:outputLabel value="Credit Card Transactions: " for="CreditCardTransactions" id="CreditCardTransactionsLabel" />
+                <div id="CreditCardTransactions">
+                    
+                </div>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem id="OrderTotalContainer">
+                <apex:outputLabel value="Order Total Amount: " for="OrderTotal" id="OrderTotalLabel" />
+                <div id="OrderTotal" class="prices"></div>
+            </apex:pageBlockSectionItem>
+        </apex:pageBlockSection> 
+    </apex:pageBlock>
+</apex:form>
+
+<!-- Address Dialog 
+<apex:form >
+    <div id="SelectAddressDialog" style="display:none;">
+        <div id="AddressInput" class="address-input" >
+            <h1>Enter or Select</h1><br/> 
+            <h1>Address Information</h1><br/><br/>
+            <div><input type="hidden" id="SelectAddressType" /></div>
+            <div id="SelectAddressLoading" style="text-align:center;"></div>
+            <div id="SelectAddressList" >
+                <table id="SelectAddressListTable" cellpadding="3px" class="select-address-table" />
+            </div>
+            <br/><hr/><br/>
+            <div id="AddAddressInput" >
+                <div class="input-container-left">
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;First Name</label><br />
+                        <input type="text" id="AddAddressFirstName" />
+                    </div>
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;Last Name</label><span class="required">*</span><br />
+                        <input type="text" id="AddAddressLastName" />
+                    </div>
+                </div><br/>
+                <div class="input-container-left">
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;Address Line One</label><span class="required">*</span><br />
+                        <input type="text" id="AddAddressLineOne" />
+                    </div>
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;Address Line Two</label><br />
+                        <input type="text" id="AddAddressLineTwo" />
+                    </div>
+                </div><br/>
+                <div class="input-container-left">
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;City</label><br />
+                        <input type="text" id="AddAddressCity" />
+                    </div>
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;State</label><br />
+                        <input type="text" id="AddAddressState" maxlength="2" size="2" />
+                    </div>
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;Zip Code</label><span class="required">*</span><br />
+                        <input type="text" id="AddAddressZipCode" maxlength="10" size="10" />
+                    </div>
+                </div><br/>
+                <div class="input-container-left">
+                    <!--<div class="two-pixel-padding">
+<label class="top-label">&nbsp;County</label><br />
+<input type="text" id="AddAddressCounty" />
+</div>-->
+<!--
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;Country</label><br />    
+                        <select id="AddAddressCountry" style="width:200px;">
+                            <option selected="selected">UNITED STATES</option>
+                            <option>AFGHANISTAN</option>
+                            <option>LAND ISLANDS</option>
+                            <option>ALBANIA</option>
+                            <option>ALGERIA</option>
+                            <option>AMERICAN SAMOA</option>
+                            <option>ANDORRA</option>
+                            <option>ANGOLA</option>
+                            <option>ANGUILLA</option>
+                            <option>ANTARCTICA</option>
+                            <option>ANTIGUA AND BARBUDA</option>
+                            <option>ARGENTINA</option>
+                            <option>ARMENIA</option>
+                            <option>ARUBA</option>
+                            <option>AUSTRALIA</option>
+                            <option>AUSTRIA</option>
+                            <option>AZERBAIJAN</option>
+                            <option>BAHAMAS</option>
+                            <option>BAHRAIN</option>
+                            <option>BANGLADESH</option>
+                            <option>BARBADOS</option>
+                            <option>BELARUS</option>
+                            <option>BELGIUM</option>
+                            <option>BELIZE</option>
+                            <option>BENIN</option>
+                            <option>BERMUDA</option>
+                            <option>BHUTAN</option>
+                            <option>BOLIVIA</option>
+                            <option>BOSNIA AND HERZEGOVINA</option>
+                            <option>BOTSWANA</option>
+                            <option>BOUVET ISLAND</option>
+                            <option>BRAZIL</option>
+                            <option>BRITISH INDIAN OCEAN TERRITORY</option>
+                            <option>BRUNEI DARUSSALAM</option>
+                            <option>BULGARIA</option>
+                            <option>BURKINA FASO</option>
+                            <option>BURUNDI</option>
+                            <option>CAMBODIA</option>
+                            <option>CAMEROON</option>
+                            <option>CANADA</option>
+                            <option>CAPE VERDE</option>
+                            <option>CAYMAN ISLANDS</option>
+                            <option>CENTRAL AFRICAN REPUBLIC</option>
+                            <option>CHAD</option>
+                            <option>CHILE</option>
+                            <option>CHINA</option>
+                            <option>CHRISTMAS ISLAND</option>
+                            <option>COCOS (KEELING) ISLANDS</option>
+                            <option>COLOMBIA</option>
+                            <option>COMOROS</option>
+                            <option>CONGO</option>
+                            <option>CONGO</option>
+                            <option>COOK ISLANDS</option>
+                            <option>COSTA RICA</option>
+                            <option>C?TE D'IVOIRE</option>
+                            <option>CROATIA</option>
+                            <option>CUBA</option>
+                            <option>CYPRUS</option>
+                            <option>CZECH REPUBLIC</option>
+                            <option>DENMARK</option>
+                            <option>DJIBOUTI</option>
+                            <option>DOMINICA</option>
+                            <option>DOMINICAN REPUBLIC</option>
+                            <option>ECUADOR</option>
+                            <option>EGYPT</option>
+                            <option>EL SALVADOR</option>
+                            <option>EQUATORIAL GUINEA</option>
+                            <option>ERITREA</option>
+                            <option>ESTONIA</option>
+                            <option>ETHIOPIA</option>
+                            <option>FALKLAND ISLANDS (MALVINAS)</option>
+                            <option>FAROE ISLANDS</option>
+                            <option>FIJI</option>
+                            <option>FINLAND</option>
+                            <option>FRANCE</option>
+                            <option>FRENCH GUIANA</option>
+                            <option>FRENCH POLYNESIA</option>
+                            <option>FRENCH SOUTHERN TERRITORIES</option>
+                            <option>GABON</option>
+                            <option>GAMBIA</option>
+                            <option>GEORGIA</option>
+                            <option>GERMANY</option>
+                            <option>GHANA</option>
+                            <option>GIBRALTAR</option>
+                            <option>GREECE</option>
+                            <option>GREENLAND</option>
+                            <option>GRENADA</option>
+                            <option>GUADELOUPE</option>
+                            <option>GUAM</option>
+                            <option>GUATEMALA</option>
+                            <option>GUERNSEY</option>
+                            <option>GUINEA</option>
+                            <option>GUINEA-BISSAU</option>
+                            <option>GUYANA</option>
+                            <option>HAITI</option>
+                            <option>HEARD ISLAND AND MCDONALD ISLANDS</option>
+                            <option>HOLY SEE (VATICAN CITY STATE)</option>
+                            <option>HONDURAS</option>
+                            <option>HONG KONG</option>
+                            <option>HUNGARY</option>
+                            <option>ICELAND</option>
+                            <option>INDIA</option>
+                            <option>INDONESIA</option>
+                            <option>IRAN</option>
+                            <option>IRAQ</option>
+                            <option>IRELAND</option>
+                            <option>ISLE OF MAN</option>
+                            <option>ISRAEL</option>
+                            <option>ITALY</option>
+                            <option>JAMAICA</option>
+                            <option>JAPAN</option>
+                            <option>JERSEY</option>
+                            <option>JORDAN</option>
+                            <option>KAZAKHSTAN</option>
+                            <option>KENYA</option>
+                            <option>KIRIBATI</option>
+                            <option>KOREA</option>
+                            <option>KOREA</option>
+                            <option>KUWAIT</option>
+                            <option>KYRGYZSTAN</option>
+                            <option>LAO PEOPLE'S DEMOCRATIC REPUBLIC</option>
+                            <option>LATVIA</option>
+                            <option>LEBANON</option>
+                            <option>LESOTHO</option>
+                            <option>LIBERIA</option>
+                            <option>LIBYAN ARAB JAMAHIRIYA</option>
+                            <option>LIECHTENSTEIN</option>
+                            <option>LITHUANIA</option>
+                            <option>LUXEMBOURG</option>
+                            <option>MACAO</option>
+                            <option>MACEDONIA</option>
+                            <option>MADAGASCAR</option>
+                            <option>MALAWI</option>
+                            <option>MALAYSIA</option>
+                            <option>MALDIVES</option>
+                            <option>MALI</option>
+                            <option>MALTA</option>
+                            <option>MARSHALL ISLANDS</option>
+                            <option>MARTINIQUE</option>
+                            <option>MAURITANIA</option>
+                            <option>MAURITIUS</option>
+                            <option>MAYOTTE</option>
+                            <option>MEXICO</option>
+                            <option>MICRONESIA</option>
+                            <option>MOLDOVA</option>
+                            <option>MONACO</option>
+                            <option>MONGOLIA</option>
+                            <option>MONTENEGRO</option>
+                            <option>MONTSERRAT</option>
+                            <option>MOROCCO</option>
+                            <option>MOZAMBIQUE</option>
+                            <option>MYANMAR</option>
+                            <option>NAMIBIA</option>
+                            <option>NAURU</option>
+                            <option>NEPAL</option>
+                            <option>NETHERLANDS</option>
+                            <option>NETHERLANDS ANTILLES</option>
+                            <option>NEW CALEDONIA</option>
+                            <option>NEW ZEALAND</option>
+                            <option>NICARAGUA</option>
+                            <option>NIGER</option>
+                            <option>NIGERIA</option>
+                            <option>NIUE</option>
+                            <option>NORFOLK ISLAND</option>
+                            <option>NORTHERN MARIANA ISLANDS</option>
+                            <option>NORWAY</option>
+                            <option>OMAN</option>
+                            <option>PAKISTAN</option>
+                            <option>PALAU</option>
+                            <option>PALESTINIAN TERRITORY</option>
+                            <option>PANAMA</option>
+                            <option>PAPUA NEW GUINEA</option>
+                            <option>PARAGUAY</option>
+                            <option>PERU</option>
+                            <option>PHILIPPINES</option>
+                            <option>PITCAIRN</option>
+                            <option>POLAND</option>
+                            <option>PORTUGAL</option>
+                            <option>PUERTO RICO</option>
+                            <option>QATAR</option>
+                            <option>R?UNION</option>
+                            <option>ROMANIA</option>
+                            <option>RUSSIAN FEDERATION</option>
+                            <option>RWANDA</option>
+                            <option>SAINT BARTH?LEMY</option>
+                            <option>SAINT HELENA</option>
+                            <option>SAINT LUCIA</option>
+                            <option>SAINT MARTIN</option>
+                            <option>SAINT PIERRE AND MIQUELON</option>
+                            <option>SAINT VINCENT AND THE GRENADINES</option>
+                            <option>SAMOA</option>
+                            <option>SAN MARINO</option>
+                            <option>SAO TOME AND PRINCIPE</option>
+                            <option>SAUDI ARABIA</option>
+                            <option>SENEGAL</option>
+                            <option>SERBIA</option>
+                            <option>SEYCHELLES</option>
+                            <option>SIERRA LEONE</option>
+                            <option>SINGAPORE</option>
+                            <option>SLOVAKIA</option>
+                            <option>SLOVENIA</option>
+                            <option>SOLOMON ISLANDS</option>
+                            <option>SOMALIA</option>
+                            <option>SOUTH AFRICA</option>
+                            <option>SOUTH GEORGIA AND THE SOUTH SANDWICH ISLANDS</option>
+                            <option>SPAIN</option>
+                            <option>SRI LANKA</option>
+                            <option>SUDAN</option>
+                            <option>SURINAME</option>
+                            <option>SVALBARD AND JAN MAYEN</option>
+                            <option>SWAZILAND</option>
+                            <option>SWEDEN</option>
+                            <option>SWITZERLAND</option>
+                            <option>SYRIAN ARAB REPUBLIC</option>
+                            <option>TAIWAN</option>
+                            <option>TAJIKISTAN</option>
+                            <option>TANZANIA</option>
+                            <option>THAILAND</option>
+                            <option>TIMOR-LESTE</option>
+                            <option>TOGO</option>
+                            <option>TOKELAU</option>
+                            <option>TONGA</option>
+                            <option>TRINIDAD AND TOBAGO</option>
+                            <option>TTS AND NEVIS</option>
+                            <option>TUNISIA</option>
+                            <option>TURKEY</option>
+                            <option>TURKMENISTAN</option>
+                            <option>TURKS AND CAICOS ISLANDS</option>
+                            <option>TUVALU</option>
+                            <option>UGANDA</option>
+                            <option>UKRAINE</option>
+                            <option>UNITED ARAB EMIRATES</option>
+                            <option>UNITED KINGDOM</option>
+                            <option>UNITED STATES MINOR OUTLYING ISLANDS</option>
+                            <option>URUGUAY</option>
+                            <option>UZBEKISTAN</option>
+                            <option>VANUATU</option>
+                            <option>VENEZUELA</option>
+                            <option>VIET NAM</option>
+                            <option>VIRGIN ISLANDS</option>
+                            <option>VIRGIN ISLANDS</option>
+                            <option>WALLIS AND FUTUNA</option>
+                            <option>WESTERN SAHARA</option>
+                            <option>YEMEN</option>
+                            <option>ZAMBIA</option>
+                            <option>ZIMBABWE</option>
+                        </select>
+                    </div>
+                </div><br/>
+            </div>
+        </div>
+    </div>
+</apex:form>
+<!-- End Address Dialog -->
+<apex:form >
+    <div id="SelectMozoDialog" style="display:none;">
+        
+        <div id="MozoInput" class="address-input" >
+            <div><input type="hidden" id="SelectMozoType" /></div>
+            <div id="SelectMozoLoading" style="text-align:center;"></div>
+            <div id="SelectMozoList" >
+                <table id="SelectMozoListTable" cellpadding="3px" class="select-address-table" />
+            </div>
+            <br/><hr/><br/>
+            <div id="AddMozoInput" >
+                <div class="input-container-left">
+                    <div class="two-pixel-padding">
+                        <label class="top-label">&nbsp;Selected Product</label><br />
+                        <input type="text" id="AddMozoUpgradeLevel" />
+                    </div>
+                    <div class="two-pixel-padding">
+                        <input type="hidden" id="AddMozoUpgradePrice" />
+                    </div>
+                    <div class="two-pixel-padding">
+                        <input type="hidden" id="isUpgrade" />
+                    </div>
+                </div><br/>
+            </div>
+        </div>
+    </div>
+</apex:form>
+<!-- Loading Dialog -->
+<div id="LoadingDialog" style="display:none;"></div>
+<!-- End Loading Dialog -->
+
+<!-- Bulk Add Products Dialog -->
+<div id="BulkAddProductsDialog" style="display:none;">
+    <span id="BulkAddProductsDialogInstructions">
+        Please enter multiple products and quantities using the selected delimiters. 
+        Include the first delimiter (star * or [tab]) between each product and quantity. 
+        Separate product-quantity pairs by the second delimiter (forward-slash / or [return]). 
+        New lines (returns) and white-space (tabs or spaces) will be ignored when using Number-Pad Entry Delimiters.
+    </span><br /><br />
+    
+    <div style="padding:10px;height:70%;"><textarea id="BulkAddProductInputList" style="width:100%;height:100%;" /></div>
+</div>
+<!-- End Bulk Add Products Dialog -->
+<!-- Bulk Add Products Dialog -->
+
+<!-- End Bulk Add Products Dialog -->
+<!-- Discount Dialog -->
+<div id="SelectDiscountTypeDialog" style="display:none;">
+    <span id="SelectDiscountTypeDialogInstructions">
+        Please enter discount quantities as whole or decimal numbers > 1. 
+        The code will internally make all the calculations for the percent or whole number discounts
+    </span><br /><br />
+    <input type="hidden" id="GetDiscountType" />
+    <input type="radio" name="SelectDiscountType" id="PercentType" value="percent" checked="checked" />
+    <label for="PercentType">Percentage discounts</label><br />
+    <input type="radio" name="SelectDiscountType" id="NumericType" value="number" />
+    <label for="NumericType">Numeric discounts</label><br />
+</div>
+<!-- End Discount Dialog -->
+
+<div id="promocodeModal" style="display:none;">
+    <span id="promocodeInsttruction">
+        Please select promocode and discount percentage.
+    </span><br /><br />
+    <select id="PromoCodes" style="width:110px" onfocus="this.select();" onmousedown="UpdatePromoCodeKeyPress(this, event);"  onChange="getDiscountPrice('Regular');"></select>          
+    <input type="text" id="PriceDiscount" style="width:100px;margin-bottom: 10px;" maxlength="9" onfocus="this.select();"/>
+    <div><span  id="PromoCodeDescription" style="color:blue;text-align:center"></span>&nbsp;</div>
+</div>
+
+<div id="availableCodeModal" style="display:none;">
+    <span id="availableCodeInstruction">
+        Please select promocode to copy.
+    </span><br /><br />
+    <select id="availableCodes" style="width:110px" onchange="copySelectedCodeToText(this.value)" ></select>          
+    <input type="text" id="selectedCode" style="width:100px;margin-bottom: 10px;" class="js-copyCodeText" />
+    <button class="js-textareacopybtn"  onclick="copySelectedCode();">Copy</button>
+    
+    <script type="text/javascript">
+    function copySelectedCode(){
+        var copyTextarea = document.querySelector('.js-copyCodeText');
+        var inputValue = j$("#selectedCode").val();
+        if(inputValue != "None" || inputValue != ""){
+        copyTextarea.select();
+        try {
+            var successful = document.execCommand('copy');
+            var msg = successful ? 'successfully' : 'unsuccessful';
+            alert('Code Coppied ' + msg);
+        } catch (err) {
+            alert('Oops, unable to copy');
+        }
+        closeDialog();
+        }else{
+            alert('Please select code to copy.');
+            j$("#selectedCode").val("");                  
+        }
+    } </script>
+</div>
+<div class="modal">Please wait..</div>
+</body>
+</apex:page>

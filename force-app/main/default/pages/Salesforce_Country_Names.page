@@ -1,0 +1,257 @@
+<apex:page title="Salesforce Country Names (Intacct)">
+    <apex:pageBlock title="Salesforce Country Names (Intacct)">
+        Below are the valid country names for Accounts and Addresses.<br/>
+        <ul>
+            <li>UNITED STATES</li>
+            <li>AFGHANISTAN</li>
+            <li>ALAND ISLANDS</li>
+            <li>ALBANIA</li>
+            <li>ALGERIA</li>
+            <li>AMERICAN SAMOA</li>
+            <li>ANDORRA</li>
+            <li>ANGOLA</li>
+            <li>ANGUILLA</li>
+            <li>ANTARCTICA</li>
+            <li>ANTIGUA AND BARBUDA</li>
+            <li>ARGENTINA</li>
+            <li>ARMENIA</li>
+            <li>ARUBA</li>
+            <li>AUSTRALIA</li>
+            <li>AUSTRIA</li>
+            <li>AZERBAIJAN</li>
+            <li>BAHAMAS</li>
+            <li>BAHRAIN</li>
+            <li>BANGLADESH</li>
+            <li>BARBADOS</li>
+            <li>BELARUS</li>
+            <li>BELGIUM</li>
+            <li>BELIZE</li>
+            <li>BENIN</li>
+            <li>BERMUDA</li>
+            <li>BHUTAN</li>
+            <li>BOLIVIA</li>
+            <li>BONAIRE, SINT EUSTATIUS AND SABA</li>
+            <li>BOSNIA AND HERZEGOVINA</li>
+            <li>BOTSWANA</li>
+            <li>BOUVET ISLAND</li>
+            <li>BRAZIL</li>
+            <li>BRITISH INDIAN OCEAN TERRITORY</li>
+            <li>BRUNEI DARUSSALAM</li>
+            <li>BULGARIA</li>
+            <li>BURKINA FASO</li>
+            <li>BURUNDI</li>
+            <li>CAMBODIA</li>
+            <li>CAMEROON</li>
+            <li>CANADA</li>
+            <li>CAPE VERDE</li>
+            <li>CAYMAN ISLANDS</li>
+            <li>CENTRAL AFRICAN REPUBLIC</li>
+            <li>CHAD</li>
+            <li>CHILE</li>
+            <li>CHINA</li>
+            <li>CHRISTMAS ISLAND</li>
+            <li>COCOS (KEELING) ISLANDS</li>
+            <li>COLOMBIA</li>
+            <li>COMOROS</li>
+            <li>CONGO</li>
+            <li>CONGO, DEMOCRATIC REPUBLIC</li>
+            <li>COOK ISLANDS</li>
+            <li>COSTA RICA</li>
+            <li>CÔTE D'IVOIRE</li>
+            <li>CROATIA</li>
+            <li>CURAÇAO</li>
+            <li>CUBA</li>
+            <li>CYPRUS</li>
+            <li>CZECH REPUBLIC</li>
+            <li>DENMARK</li>
+            <li>DJIBOUTI</li>
+            <li>DOMINICA</li>
+            <li>DOMINICAN REPUBLIC</li>
+            <li>ECUADOR</li>
+            <li>EGYPT</li>
+            <li>EL SALVADOR</li>
+            <li>EQUATORIAL GUINEA</li>
+            <li>ERITREA</li>
+            <li>ESTONIA</li>
+            <li>ESWATINI</li>
+            <li>ETHIOPIA</li>
+            <li>FALKLAND ISLANDS (MALVINAS)</li>
+            <li>FAROE ISLANDS</li>
+            <li>FIJI</li>
+            <li>FINLAND</li>
+            <li>FRANCE</li>
+            <li>FRENCH GUIANA</li>
+            <li>FRENCH POLYNESIA</li>
+            <li>FRENCH SOUTHERN TERRITORIES</li>
+            <li>GABON</li>
+            <li>GAMBIA</li>
+            <li>GEORGIA</li>
+            <li>GERMANY</li>
+            <li>GHANA</li>
+            <li>GIBRALTAR</li>
+            <li>GREECE</li>
+            <li>GREENLAND</li>
+            <li>GRENADA</li>
+            <li>GUADELOUPE</li>
+            <li>GUAM</li>
+            <li>GUATEMALA</li>
+            <li>GUERNSEY</li>
+            <li>GUINEA</li>
+            <li>GUINEA-BISSAU</li>
+            <li>GUYANA</li>
+            <li>HAITI</li>
+            <li>HEARD IS. &amp; MCDONALD ISLANDS</li>
+            <li>HONDURAS</li>
+            <li>HONG KONG</li>
+            <li>HUNGARY</li>
+            <li>ICELAND</li>
+            <li>INDIA</li>
+            <li>INDONESIA</li>
+            <li>IRAN, ISLAMIC REPUBLIC OF</li>
+            <li>IRAQ</li>
+            <li>IRELAND</li>
+            <li>ISLE OF MAN</li>
+            <li>ISRAEL</li>
+            <li>ITALY</li>
+            <li>JAMAICA</li>
+            <li>JAPAN</li>
+            <li>JERSEY</li>
+            <li>JORDAN</li>
+            <li>KAZAKHSTAN</li>
+            <li>KENYA</li>
+            <li>KIRIBATI</li>
+            <li>KOREA, REPUBLIC OF</li>
+            <li>KOREA, DEMO. PEOPLE'S REP.</li>
+            <li>KUWAIT</li>
+            <li>KYRGYZSTAN</li>
+            <li>LAO</li>
+            <li>LATVIA</li>
+            <li>LEBANON</li>
+            <li>LESOTHO</li>
+            <li>LIBERIA</li>
+            <li>LIBYAN ARAB JAMAHIRIYA</li>
+            <li>LIECHTENSTEIN</li>
+            <li>LITHUANIA</li>
+            <li>LUXEMBOURG</li>
+            <li>MACAO</li>
+            <li>MACEDONIA</li>
+            <li>MADAGASCAR</li>
+            <li>MALAWI</li>
+            <li>MALAYSIA</li>
+            <li>MALDIVES</li>
+            <li>MALI</li>
+            <li>MALTA</li>
+            <li>MARSHALL ISLANDS</li>
+            <li>MARTINIQUE</li>
+            <li>MAURITANIA</li>
+            <li>MAURITIUS</li>
+            <li>MAYOTTE</li>
+            <li>MEXICO</li>
+            <li>MICRONESIA</li>
+            <li>MOLDOVA, REPUBLIC OF</li>
+            <li>MONACO</li>
+            <li>MONGOLIA</li>
+            <li>MONTENEGRO</li>
+            <li>MONTSERRAT</li>
+            <li>MOROCCO</li>
+            <li>MOZAMBIQUE</li>
+            <li>MYANMAR</li>
+            <li>NAMIBIA</li>
+            <li>NAURU</li>
+            <li>NEPAL</li>
+            <li>NETHERLANDS</li>
+            <li>NETHERLANDS ANTILLES</li>
+            <li>NEW CALEDONIA</li>
+            <li>NEW ZEALAND</li>
+            <li>NICARAGUA</li>
+            <li>NIGER</li>
+            <li>NIGERIA</li>
+            <li>NIUE</li>
+            <li>NORFOLK ISLAND</li>
+            <li>NORTHERN MARIANA ISLANDS</li>
+            <li>NORWAY</li>
+            <li>OMAN</li>
+            <li>PAKISTAN</li>
+            <li>PALAU</li>
+            <li>PALESTINIAN TERRITORY, OCCUPIED</li>
+            <li>PANAMA</li>
+            <li>PAPUA NEW GUINEA</li>
+            <li>PARAGUAY</li>
+            <li>PERU</li>
+            <li>PHILIPPINES</li>
+            <li>PITCAIRN</li>
+            <li>POLAND</li>
+            <li>PORTUGAL</li>
+            <li>PUERTO RICO</li>
+            <li>QATAR</li>
+            <li>REUNION</li>
+            <li>ROMANIA</li>
+            <li>RUSSIAN FEDERATION</li>
+            <li>RWANDA</li>
+            <li>SAINT BARTHELEMY</li>
+            <li>SAINT HELENA</li>
+            <li>SAINT KITTS AND NEVIS</li>
+            <li>SAINT LUCIA</li>
+            <li>SAINT MARTIN</li>
+            <li>SAINT PIERRE AND MIQUELON</li>
+            <li>SAINT VINCENT AND THE GRENADINES</li>
+            <li>SAMOA</li>
+            <li>SAN MARINO</li>
+            <li>SAO TOME AND PRINCIPE</li>
+            <li>SAUDI ARABIA</li>
+            <li>SENEGAL</li>
+            <li>SERBIA</li>
+            <li>SEYCHELLES</li>
+            <li>SIERRA LEONE</li>
+            <li>SINGAPORE</li>
+            <li>SINT MAARTEN</li>
+            <li>SLOVAKIA</li>
+            <li>SLOVENIA</li>
+            <li>SOLOMON ISLANDS</li>
+            <li>SOMALIA</li>
+            <li>SOUTH AFRICA</li>
+            <li>SOUTH SUDAN</li>
+            <li>S. GEORGIA &amp; S. SANDWICH IS.</li>
+            <li>SPAIN</li>
+            <li>SRI LANKA</li>
+            <li>SUDAN</li>
+            <li>SURINAME</li>
+            <li>SVALBARD AND JAN MAYEN</li>
+            <li>SWEDEN</li>
+            <li>SWITZERLAND</li>
+            <li>SYRIAN ARAB REPUBLIC</li>
+            <li>TAIWAN</li>
+            <li>TAJIKISTAN</li>
+            <li>TANZANIA, UNITED REPUBLIC OF</li>
+            <li>THAILAND</li>
+            <li>TIMOR-LESTE</li>
+            <li>TOGO</li>
+            <li>TOKELAU</li>
+            <li>TONGA</li>
+            <li>TRINIDAD AND TOBAGO</li>
+            <li>TUNISIA</li>
+            <li>TURKEY</li>
+            <li>TURKMENISTAN</li>
+            <li>TURKS AND CAICOS ISLANDS</li>
+            <li>TUVALU</li>
+            <li>UGANDA</li>
+            <li>UKRAINE</li>
+            <li>UNITED ARAB EMIRATES</li>
+            <li>UNITED KINGDOM</li>
+            <li>US MINOR OUTLYING ISLANDS</li>
+            <li>URUGUAY</li>
+            <li>UZBEKISTAN</li>
+            <li>VANUATU</li>
+            <li>VATICAN CITY STATE</li>
+            <li>VENEZUELA</li>
+            <li>VIETNAM</li>
+            <li>VIRGIN ISLANDS, BRITISH</li>
+            <li>VIRGIN ISLANDS, U.S.</li>
+            <li>WALLIS AND FUTUNA</li>
+            <li>WESTERN SAHARA</li>
+            <li>YEMEN</li>
+            <li>ZAMBIA</li>
+            <li>ZIMBABWE</li>
+        </ul>
+    </apex:pageBlock>
+</apex:page>

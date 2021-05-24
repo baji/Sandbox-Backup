@@ -1,0 +1,13 @@
+<apex:page standardController="Convio_Batch__c" lightningStylesheets="true" extensions="ConvioGiftclass" action="{!processConvioGift}" sidebar="false">
+    <apex:form >
+    <apex:pageBlock id="ConvioBatchPage">
+    <apex:pageMessages ></apex:pageMessages>
+    <div style="text-align: center">
+        <!--<apex:commandButton value="Process Convio Batch" action="{!processConvioGift}" rendered="{!showProcessConvio}"/>-->
+        <apex:actionPoller action="{!checkBatchStatus}" reRender="ConvioBatchPage" interval="5" rendered="{!redirect}"/>
+        <apex:commandButton action="{!redirectConvio}" value="Back" rendered="{!showLink}"/>
+    </div>
+    </apex:pageBlock>
+    
+    </apex:form>
+</apex:page>

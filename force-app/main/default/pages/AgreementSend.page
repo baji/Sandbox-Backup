@@ -1,0 +1,92 @@
+<apex:page id="page" standardController="Account" extensions="AgreementEmailSend" showHeader="false">
+    
+    <html>
+        <body onload="moveTo(0,0); resizeTo(700,425);"></body>
+    </html>
+    <script language="JavaScript" type="text/javascript">
+    function closeWindow(){
+        window.top.close();
+    }
+    </script>
+    
+    <apex:form id="form">
+        <table>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                
+                <h1 style="font-size: 22px"> Send Document</h1>
+                
+                <td style="padding-left: 0px; padding-top: 10px">
+                    <apex:pageBlock >
+                        <apex:pageBlockSection >
+                            Please select the name of the Contact you are communicating with.
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    <apex:outputLabel style="padding-right: 10px;font-weight:bold;">Select Contact:</apex:outputLabel>
+                    <apex:selectList size="1" id="applicant" value="{!account.Applicant__c}">
+                        <apex:selectOptions value="{!contacts}" />
+                    </apex:selectList>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td style="padding-left: 1px; padding-top: 10px">
+                    <apex:pageBlock >
+                        <apex:pageBlockSection >
+                            Use Send Agreement if you wish to send the Document to the Contact.
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td style="padding-left: 1px; padding-top: 10px">
+                    <apex:outputLabel style="padding-right: 10px;font-weight:bold;">Select Language:</apex:outputLabel>
+                    
+                    <apex:selectList id="chooseLanguage" value="{!language}" size="1">
+                        <apex:selectOption itemValue="English" itemLabel="English"/>
+                        <apex:selectOption itemValue="Spanish" itemLabel="Spanish"/>
+                    </apex:selectList>
+                    &nbsp;
+                    <apex:commandButton action="{!sendAgreement}" value="Send Agreement" onComplete="if(confirm('Mail Sent Successfully')){closeWindow();}"></apex:commandButton>
+                    <!--<apex:commandButton action="{!sendAgreement}" value="Send Agreement" onComplete="closeWindow()"></apex:commandButton>-->
+                </td>
+            </tr>
+            <!--
+            <tr>
+                <td>
+                    &nbsp;
+                </td>            
+                <td style="padding-left: 0px; padding-top: 10px">
+                    <apex:pageBlock >
+                        <apex:pageBlockSection >
+                            Use Send to Me if you wish to send the Document to yourself.
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td style="padding-left: 95px;">
+                    <apex:commandButton action="{!sendToMe}" value="Send to Me" onComplete="if(confirm('Mail Sent Successfully')){closeWindow();}"></apex:commandButton>
+                </td>
+            </tr>
+-->
+        </table> 
+    </apex:form>
+</apex:page>

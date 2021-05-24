@@ -1,0 +1,42 @@
+<apex:page >
+<script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="//d79i1fxsrar4t.cloudfront.net/jquery.liveaddress/5.2/jquery.liveaddress.min.js"></script>
+
+
+ <!--<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" />
+ <apex:includeScript value="https://d79i1fxsrar4t.cloudfront.net/jquery.liveaddress/5.1/jquery.liveaddress.min.js"/>
+    <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" />
+    
+    <apex:includeScript value="/soap/ajax/21.0/connection.js" />
+    <apex:includeScript value="/soap/ajax/21.0/apex.js" /> -->
+
+<script type="text/javascript">
+var ss = jQuery.LiveAddress({
+  key: "30359933662776702",
+  waitForStreet: true,
+  debug: true,
+  autocomplete: 10,
+  target: "US",
+  addresses: [{
+    country: "#country",
+    address1: "#street",
+    locality: "#city",
+    administrative_area: "#state",
+    postal_code: "#ZIP"
+  }]
+});
+</script>
+<form>
+  <input type="text" id="country" name="country" placeholder="country"/>
+  <br/>
+  <br/>
+  <input type="text" id="street" name="street" placeholder="street"/>
+  <br/>
+  <input type="text" id="city" name="city" placeholder="city"/>
+  <br/>
+  <input type="text" id="state" name="state" placeholder="state"/>
+  <br/>
+  <input type="text" id="ZIP" name="ZIP" placeholder="ZIP"/>
+  <br/>
+</form>
+</apex:page>

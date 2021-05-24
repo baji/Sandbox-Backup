@@ -1,0 +1,185 @@
+<apex:page standardStylesheets="false" doctype="html-5.0" standardController="GL_Post_Report__c" Extensions="GLPostReport" id="pa">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+       <script src="{!URLFOR($Resource.aljs, 'aljs/jquery.aljs-all-with-moment.min.js')}"></script>
+       <script src="{!URLFOR($Resource.aljs, '/aljs/jquery.aljs-datepicker.min.js')}"></script>
+       <style>
+           .slds-border{
+               border: 1px solid #e3e3e3;
+                margin: 0 auto;
+           }
+           .msgIcon {
+                display: none!important
+            }
+            .customMessage * {
+                color: #fff!important
+            }
+            .customMessage {
+                margin: 5px 0!important;
+                max-width: 1280px;
+                opacity: 1!important;
+                width: 100%;
+                font-size: 12px;
+                border: 0px;
+                padding-left: 10px;
+            }
+            .message {
+                opacity: .1
+            }  
+            .slds-scope .slds-icon-standard-home {
+                background-color: #1b5297;
+            }
+       </style>
+       <head>      
+            <apex:slds />           
+       </head>
+       <body>
+        <!--Header Start---->
+        <div class="slds-page-header">
+        <div class="slds-media">
+          <div class="slds-media__figure">
+            <span class="slds-icon_container slds-icon-standard-home" title="GL Report">
+              <a href="/{!$Label.GLPostObjectId}">
+                <svg class="slds-icon" aria-hidden="true">
+                  <use href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#home')}"></use>
+              </svg>
+            </a>      
+          </span>
+          </div>
+          <div class="slds-media__body">
+            <h1 class="slds-page-header__title slds-truncate slds-align-middle" title="Rohde Corp - 80,000 Widgets">GL Post Report</h1>
+            <p class="slds-text-body_small slds-line-height_reset slds-p-top_xx-small">Click here to Preview  <b><a href="/00Of4000005VW8b" target="_blank">New Opportunity</a></b> Report</p>
+            <p class="slds-text-body_small slds-line-height_reset slds-p-top_xx-small">Click here to Preview  <b><a href="/00Of4000005VW8c" target="_blank">Gift Adjustment</a></b> Report</p>
+            <p class="slds-text-body_small slds-line-height_reset slds-p-top_xx-small">Click here to Preview <b><a href="/00Of4000005VW8v" target="_blank">Gift Allocation Adjustment</a></b> Report</p>
+          </div>
+        </div>
+      </div>
+      <!--Header End---->
+        <apex:form id="form">
+        <apex:pagemessages escape="false"/>
+        
+        <div class="slds-scope">
+        <apex:actionstatus id="counterStatus">
+            <apex:facet name="start">
+               <div class="demo-only">
+                  <div role="status" class="slds-spinner slds-spinner_large slds-spinner_brand">
+                    <span class="slds-assistive-text">Loading</span>
+                    <div class="slds-spinner__dot-a"></div>
+                    <div class="slds-spinner__dot-b"></div>
+                  </div>
+                </div>
+            </apex:facet>
+        </apex:actionstatus>
+        
+        <div class="slds-border slds-container_small slds-m-top_large">
+        
+        <div class="slds-align_absolute-center">
+        <div class="slds-form--stacked slds-float--left">
+            <div class="slds-form-element">
+                <label class="slds-form-element__label" for="date"></label>
+                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right">
+                    <svg aria-hidden="true" class="slds-input__icon slds-icon-text-default">
+                        <use href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#event')}"></use>
+                    </svg> 
+                    <!-- <apex:input type="text" styleClass="slds-input" id="start-date" label="Date Picker Label" value="{!FromDate}"/> -->
+                     <input id="start-date" class="slds-input" type="text" placeholder="Pick a Date" label="Date Picker Label"/>
+                   
+                    
+                </div>
+            </div>
+           <!--  <div class="slds-form-element">
+                <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right">
+                  <svg aria-hidden="true" class="slds-input__icon slds-icon-text-default">
+                       <use href="{!URLFOR($Asset.SLDS, '/assets/icons/utility-sprite/svg/symbols.svg#event')}"></use>
+                    </svg>
+                    <input id="end-date" class="slds-input" type="text" placeholder="Pick a End Date" label="Date Picker Label"/>
+                  </div>
+            </div> -->
+        </div>
+        </div>
+          <div class="slds-align_absolute-center slds-m-top_large">
+            <div class="">
+            <span class="slds-radio">
+              <input type="radio" id="radio-15" name="checkBox" value="isException" />
+              <label class="slds-radio__label" for="radio-15">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">Preview Exception</span>
+              </label>
+            </span>
+            <span class="slds-radio">
+              <input type="radio" id="radio-14" name="checkBox" value="isPreview" />
+              <label class="slds-radio__label" for="radio-14">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">Preview Data</span>
+              </label>
+            </span>
+            <span class="slds-radio">
+              <input type="radio" id="radio-13" name="checkBox" value="isExtract"/>
+              <label class="slds-radio__label" for="radio-13">
+                <span class="slds-radio_faux"></span>
+                <span class="slds-form-element__label">Extract Data</span>
+              </label>
+            </span>
+          </div>
+                 
+        </div>
+         <apex:actionFunction action="{!PostMethod}" name="SetTargetDate" reRender="form" status="counterStatus">
+            <apex:param name="fromDate" value=""/>
+            <!-- <apex:param name="toDate" value=""/> -->
+            <apex:param name="radioValue" value=""/>
+                        
+        </apex:actionFunction>      
+        
+        <center><button class="slds-button slds-button_brand slds-m-top_large slds-m-bottom_small" id="target">Submit</button> </center>
+        </div>
+        </div>
+      
+        
+        <script>
+         $(document).ready(function() { 
+         
+             overridePageMessages();
+             var startDate;
+            $('#start-date').datepicker({                               
+                numYearsBefore: 2,
+                numYearsAfter: 0,
+                format: 'MM/DD/YYYY',               
+                onSelect: function(datepicker, selectedDate) {
+                    startDate = moment(datepicker.selectedFullDate._d).format('YYYY-MM-DD');
+                }
+            });            
+             
+            $( "#target" ).click(function(e){
+                if(startDate == null){
+                    alert('Please pick date');                   
+                }else{                                   
+                    var radioValue = $("input[name='checkBox']:checked").val();
+                    if(radioValue == "isExtract"){
+                        SetTargetDate(startDate,radioValue);
+                        e.preventDefault();
+                    }else if(radioValue == "isPreview"){
+                        var currentPageUrl = "{!$CurrentPage.Url}";                     
+                        var url = currentPageUrl.replace('npsp_GLPostReportPage','apex/npsp_GLPostPreviewPage?FromDate='+startDate);
+                        window.open(url,'_blank');
+                        e.preventDefault();
+                    }else if(radioValue == "isException"){
+                        var currentPageUrl = "{!$CurrentPage.Url}";                     
+                        var url = currentPageUrl.replace('npsp_GLPostReportPage','apex/npsp_GLPostExceptionPage?FromDate='+startDate);
+                        window.open(url,'_blank');
+                        e.preventDefault();
+                    }else{
+                        alert('please select atleast Extract or Preview before submit');
+                    }
+                }                     
+            });
+        });
+        function overridePageMessages(){    
+            var textureEffect = '';                        
+            $('.confirmM3').addClass('slds-notify slds-notify--alert slds-theme--success  customMessage '+textureEffect);      
+            $('.confirmM3').removeClass('confirmM3'); 
+        }
+        </script>
+   </apex:form>
+   </body>
+   </html>
+</apex:page>

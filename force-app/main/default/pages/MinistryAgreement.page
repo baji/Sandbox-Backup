@@ -1,0 +1,358 @@
+<apex:page showHeader="false" controller="MAController">
+<apex:stylesheet value="{!URLFOR($Resource.Spinner, 'spinner.css')}"/>
+<apex:includeScript value="{!URLFOR($Resource.Spinner, 'jquery.min.js')}"/>
+<apex:includeScript value="{!URLFOR($Resource.Spinner, 'spinner.js')}"/>
+<script src="{!$Resource.jquery_ui}"></script>
+<apex:stylesheet value="{!$Resource.dialog_css}"/>
+<html>
+<body onload="callMain();">
+<script type="text/javascript">
+var j$ = jQuery.noConflict();
+j$.fx.speeds._default = 400;
+    j$(function() {
+        j$( "#dialog" ).dialog({
+            autoOpen: false,
+            show: "blind",
+            hide: "explode"
+        });
+    });
+
+function Scrolldown() {
+     window.scroll(0,300); 
+}
+function callMain(){
+    var ContactId = '{!$CurrentPage.parameters.Id}';
+    var AccountId = '{!$CurrentPage.parameters.cId}';
+        //alert(ContactId);
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.MAController.checkMA}',
+            ContactId,AccountId,
+            function(result, event){
+                if (event.status) {
+                    if(result != null){
+                        
+                        //if(result.imgUrl__c != "" && result.imgUrl__c != null && result.imgUrl__c != undefined){
+                            
+                           // Scrolldown();
+                        //}
+                        if(result.npe5__Contact__r.isAgreementSigned__c == true){
+                            document.getElementById("divMain").style.display = "none";
+                            document.getElementById("divMain1").style.display = "none";
+                            document.getElementById("divMainTC").style.display = "none";
+                            document.getElementById("dataDiv").style.display = "none";
+                            document.getElementById("duplicateDiv").style.display = "block";
+                        }
+                        else{
+                            
+                            document.getElementById("churchName").innerHTML = result.npe5__Organization__r.Name;
+                            document.getElementById("custId").innerHTML = result.npe5__Organization__r.Mailing_Address_Book__c;
+                            document.getElementById("signerName").innerHTML = result.npe5__Contact__r.Name;
+                            
+                            
+                        }
+                    }
+                    
+                    else{
+                        //Do Nothing
+                    }
+                }
+            });
+}   
+
+function exportToPDF(){
+    //if(document.getElementsByTagName('img').length == 0){
+    //    alert("Please upload you signature.");
+    //    return false;
+    //}
+    if(document.getElementById('tc').checked == false){
+        //alert("Please accept the terms and conditions.")
+        j$( "#dialog" ).dialog( "open" );
+            var ptag = document.getElementById('ptag');
+            ptag.innerHTML = 'Please accept the terms and conditions.';
+            return false;
+    }
+    else{
+        j$("#lightbox").show();
+        j$("#splashDiv").show();
+        var ContactId = '{!$CurrentPage.parameters.Id}';
+        var AccountId = '{!$CurrentPage.parameters.cId}';
+        //alert(ContactId);
+        Visualforce.remoting.Manager.invokeAction(
+            '{!$RemoteAction.MAController.createMA}',
+            ContactId,AccountId,
+            function(result, event){
+                if (event.status) {
+                    if(result == "success"){
+                        j$("#lightbox").hide();
+                        j$("#splashDiv").hide();
+                        window.location.replace("/apex/MinistryAgreementThankyou");
+                    }
+                    
+                    else{
+                        document.getElementById("divMain").style.display = "none";
+                        document.getElementById("divMain1").style.display = "none";
+                        document.getElementById("divMainTC").style.display = "none";
+                        document.getElementById("duplicateDiv").style.display = "block";
+                    }
+                }
+            });
+    }
+}
+</script>
+<style>
+.img{width:100px !important;}
+.apexp {float:left !important}
+body button, body .x-btn, body .btn, body .btnDisabled, body .btnCancel, body .menuButton .menuButtonButton{font-size:.7em;}
+.button {
+  display: inline-block;
+  padding: 0px 25px;
+  font-size: 24px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #ECA348;
+  border: none;
+  border-radius: 15px;
+  box-shadow: 0 5px #999;
+}
+.button:hover {background-color: #3e8e41}
+
+.button:active {
+  background-color: #3e8e41;
+  box-shadow: 0 5px #666;
+  transform: translateY(4px);
+}
+.title_span {
+ font-weight: bold;
+ color: grey;
+}
+
+.underline {
+    padding-bottom: 4px;
+    border-bottom: grey 1px solid;
+}
+.content-fontsize{font-size:12px;}
+/* The container */
+.container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 15px;
+  font-weight: 600;
+  padding-top:4px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #a4a9a8;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+</style>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<div class="splashStatus" id="splashDiv">
+    <div class="circle"><img src="{!URLFOR($Resource.Spinner, 'spinner.gif')}"/></div>
+    <div class="txt">Please Wait. Loading...</div>
+</div>
+<div class="lightbox" id="lightbox"></div>
+<div id="divMain">
+<table style="width:100%;">
+<tbody>
+<tr>
+<td>
+<table width="100%" align="center">
+<tbody>
+<tr>
+<td style="text-align: center;font-size:20px;padding-bottom:10px;" width="100%">
+<apex:image url="{!$Resource.AwanaLogo2}" style="width:20%;"/><br/><br/><br/>
+<h2><u>AWANA MINISTRY MEMBERSHIP AGREEMENT</u></h2>
+</td>
+</tr>
+</tbody>
+</table>
+<table style="width: 90%;text-align: justify;margin: auto;" id="tableMain">
+<tbody>
+<tr>
+<td style="width: 283px;">
+<table style="width: 97.9167%;">
+<tbody>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">1.</td>
+<td style="width: 89.2243%; font-size: 13px;">Awana Clubs International (ACI) develops youth ministry program materials (the &ldquo;program materials&rdquo;) and makes these available to local churches or organizations for use in their youth programs. The Awana intellectual property, including its name and branding is proprietary to ACI. ACI permits the local church or organization named below (&ldquo;Church&rdquo;) to brand its youth program as an &ldquo;Awana&rdquo; program provided the Church agrees to use the Awana program materials consistent with the principles expressed in this Agreement. The relationship between Church and ACI during the period this Agreement is in effect is referred to herein as &ldquo;membership.&rdquo;</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">2.</td>
+<td style="width: 89.2243%; font-size: 13px;">Membership expires 6/30 of each calendar year. This Agreement entitles the Church to enhanced member benefits, including use of intellectual property and reduced pricing. The member benefits are in effect while this Agreement is active. Unless renewed, membership and benefits expire on 6/30.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">3.</td>
+<td style="width: 89.2243%; font-size: 13px;">The Church and ACI agree that the Church including its youth program that uses program materials (the &ldquo;Awana program&rdquo;), is not a division, branch, or department of ACI. The Church and ACI further agree that their relative status is that of an independent purchaser and licensee (the Church) and provider and licensor (ACI) of the Awana materials and program.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">4.</td>
+<td style="width: 89.2243%; font-size: 13px;">The Church agrees that it is solely responsible for all aspects of all Awana programs that it conducts including the safety of all children and adults who are involved or participate. The Church is therefore solely responsible for selecting and directing all activities, games, and religious instruction, for selecting, maintaining and operating all equipment, vehicles, facilities and materials used in the Awana program, for selecting, training, and supervising all children, parents, employees, and volunteers who participate in the Awana program, and for child protection, including screening, selecting, training and supervising all volunteers, employees, and other personnel involved in and who plan, direct and carry out its Awana program. Volunteers, employees and other personnel involved in the Church&rsquo;s Awana program are not volunteers, employees or personnel of ACI, but are solely volunteers, employees and personnel of the Church. This provision survives any expiration or termination of this Agreement.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">5.</td>
+<td style="width: 89.2243%; font-size: 13px;">The Church shall indemnify, defend and hold harmless ACI and its successors and assigns, directors, officers, employees and agents for all claims, damages and liability arising out of the Church&rsquo;s Awana program or otherwise out of its use of Awana program materials, including but not limited to claims against ACI and its employees and other personnel, and claims brought by or against the Church, its members, employees, and participants in its Awana program and other youth programs, whether or not members of the Church. This provision survives any expiration or termination of this Agreement.</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td style="width: 279px;">
+<table width="100%">
+<tbody>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">6.</td>
+<td style="font-size: 13px;">The Church agrees that in using the Awana program materials and carrying out its Awana program it shall comply with all applicable local, state and federal laws, and shall maintain a policy or policies of insurance adequate to cover physical and other injuries to children and adults participating in, conducting, or leading its Awana program and other programs using Awana program materials.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">7.</td>
+<td style="font-size: 13px;">The Church agrees it shall be fully responsible for all state and local sales and other taxes applicable to its purchase of Awana program materials from ACI unless the Church provides ACI with a valid, unexpired exemption number/certificate prior to placing its order. In the event ACI relies on said exemption number/certificate which later proves to be invalid, the Church agrees to indemnify ACI for all back taxes, fines, interest, and penalties attributable to Church purchases from ACI.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">8.</td>
+<td style="font-size: 13px;">The Church agrees that all copyrights, trademarks, trade names, service marks and similar intellectual property rights in and to the Awana program materials provided by ACI under this Agreement, including the &ldquo;Awana&rdquo; name, are the property of ACI and are owned solely and exclusively by ACI. The Church agrees that it will not modify the Awana program materials or reproduce or use the Awana program materials in the production or sale of proprietary materials.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">9.</td>
+<td style="font-size: 13px;">The Church may use the Awana intellectual property, name, and branding only while this Agreement is in effect. The Church shall not assign or transfer any rights under this Agreement to another entity, group or person without ACI&rsquo;s prior written consent.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">10.</td>
+<td style="font-size: 13px;">This Agreement shall be governed by the laws of the State of Illinois. The parties agree that, if they are unable to resolve a dispute or claim between themselves with respect to this Agreement, the dispute or claim shall be submitted to biblically-based mediation and, if necessary, legally binding arbitration under a Christian mediation or conciliation process in accordance with the Rules of Procedure promulgated by Peacemakers Ministries, Inc. or its successor. Judgment upon an arbitration award may be entered in any court otherwise having jurisdiction.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">11.</td>
+<td style="font-size: 13px;">If any provision of this Agreement is determined to be invalid, illegal or unenforceable, the remaining provisions of this Agreement remain in full force, if the essential terms and conditions of the Agreement for each party remain valid, binding and enforceable.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">12.</td>
+<td style="font-size: 13px;">This Agreement and any new membership will terminate if the Church fails to renew its signed Ministry Membership Agreement each year. ACI may terminate a Church&rsquo;s membership if the Church breaches any provision of this Agreement at any time prior to the end of the current term in its sole discretion or without cause by giving written notice to the Church.</td>
+</tr>
+<tr>
+<td style="vertical-align: top; width: 1%; font-size: 13px;">13.</td>
+<td style="font-size: 13px;">Payment is due upon receipt of invoice. All past due accounts will be place on hold.</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="divMain1">
+<table>
+<tbody>
+<tr>
+<td style="padding-top: 30px;padding-bottom: 15px;font-size: 14px;padding-left: 90px;">Thank you for partnering with Awana in reaching kids in your community with the gospel so that they would know, love and serve Jesus Christ. The individual signing this Agreement on behalf of the Church certifies that s/he is authorized to sign this Agreement and that the governing body of the Church has approved this Agreement.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="dataDiv" style="padding-left: 90px;">
+
+<span style="font-size: 20px;">Church Name: </span><output id="churchName" style="font-size: 18px;font-weight:bold;padding-left: 50px;"></output><br/><br/>
+<span style="font-size: 20px;">Customer ID: </span><output id="custId" style="font-size: 18px;font-weight:bold; padding-left: 63px;"></output><br/><br/>
+<span style="font-size: 20px;">Contact Name: </span><output id="signerName" style="font-size: 18px;font-weight:bold;padding-left: 48px;"></output><br/><br/>
+<!--
+<span style="float:left;">Signature:</span>
+<apex:pageblock mode="maindetail">           
+    <apex:pageblocksection columns="1" >
+        <apex:form >
+        
+          <apex:image id="imgSign" value="{!photourl}" url="{!photourl}"  rendered="{!if((photourl == ''),false,true)}" styleclass="img">   </apex:image>  
+                      
+          <apex:inputFile id="inputFile" value="{!photo}"> </apex:inputFile> 
+          <apex:commandButton value="Upload Signature" action="{!uploadphoto}" />
+      </apex:form>                                    
+    </apex:pageblocksection>
+</apex:pageblock>
+-->
+<br/><br/>
+</div>
+<div style="padding-left: 90px;width: 100%;float: left;" id="divMainTC">
+<table>
+<tbody>
+<tr>
+<td style="font-size: 14px;">
+  <label class="container">I have read and agree to the Terms of Service
+  <input type="checkbox" id="tc"/>
+  <span class="checkmark"></span>
+</label><br/>
+<button class="button" id="btnExport" onclick="exportToPDF()" style="background-color:#ECA348;">Submit</button>
+<div id="dialog" title="Error">
+    <p id="ptag"> Sample Text</p>
+</div>    
+<br/><br/>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="duplicateDiv" style="display:none; font-size:18px;width: 100%;text-align: center;">
+<h1>Looks like you have already signed Awana Ministry Agreement, but thanks for your Interest!</h1>
+</div>
+</body>
+</html>
+</apex:page>

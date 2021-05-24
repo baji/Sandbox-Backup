@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Email_Alert_When_Product_Quantity_Is_Below</fullName>
+        <description>Email Alert When Product Quantity Is Below</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>davidro@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/Qty_stock_below_level_alert</template>
+    </alerts>
+    <alerts>
+        <fullName>Product_IsActive_Changed</fullName>
+        <description>Product IsActive Changed</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>davidro@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/Product_IsActive_Changed</template>
+    </alerts>
+    <alerts>
+        <fullName>Product_Quantity_Notification_Email</fullName>
+        <description>Product Quantity Notification Email</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>danc@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jonathane@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All/Product_Quantity_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>SH_Product_Weight_Changed</fullName>
+        <description>SH - Product Weight Changed</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>carlah@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jasonp@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>sarahh@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>sueb@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Admin_only_Templates/SH_Product_Weight_Changed</template>
+    </alerts>
+    <alerts>
+        <fullName>YM_Product_IsActive_Changed</fullName>
+        <ccEmails>sandic@awana.org</ccEmails>
+        <description>YM Product IsActive Changed</description>
+        <protected>false</protected>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All/YM_Product_IsActive_Changed</template>
+    </alerts>
+    <outboundMessages>
+        <fullName>BinFill</fullName>
+        <apiVersion>41.0</apiVersion>
+        <description>Send Min, Max, and Primary bin quantity to Cast Iron</description>
+        <endpointUrl>https://ci6.awana.org/tBinFillW</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>timr@awana.org</integrationUser>
+        <name>BinFill</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Bin_Change</fullName>
+        <apiVersion>41.0</apiVersion>
+        <endpointUrl>https://ci6.awana.org/tBinChangeWS</endpointUrl>
+        <fields>Bin__c</fields>
+        <fields>Id</fields>
+        <fields>ProductCode</fields>
+        <fields>Row__c</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>castiron@awana.org</integrationUser>
+        <name>Bin Change</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>Bin Change</fullName>
+        <actions>
+            <name>Bin_Change</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <formula>ISCHANGED( Row__c )  ||  ISCHANGED( Bin__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>BinMin</fullName>
+        <actions>
+            <name>BinFill</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <description>Bin quantity drops below Min quantity</description>
+        <formula>Quantity_in_Pick_Bin__c  &lt;  Min__c</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Non Awana products</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Product2.Family</field>
+            <operation>equals</operation>
+            <value>WCA</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product2.LastModifiedById</field>
+            <operation>notEqual</operation>
+            <value>005f4000000xGMKAA2</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Product2.LastModifiedById</field>
+            <operation>notEqual</operation>
+            <value>005f4000000xGKpAAM</value>
+        </criteriaItems>
+        <description>A Non Awana product is added or updated. For WCA items.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Product Activated</fullName>
+        <actions>
+            <name>Product_IsActive_Changed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Email sent to certain SF Users when a product is Activated</description>
+        <formula>AND (  IsActive = True,  PRIORVALUE(IsActive) = False,  OR(NOT(ISPICKVAL( Family,&quot;WCA&quot;)), NOT(ISPICKVAL(Family,&quot;RBP&quot;))) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Product Inactivated</fullName>
+        <actions>
+            <name>Product_IsActive_Changed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Email sent to certain SF Users when a product is Deactivated</description>
+        <formula>AND (  IsActive = False,  PRIORVALUE(IsActive) = True )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Product Quantity Threshold Notification</fullName>
+        <actions>
+            <name>Product_Quantity_Notification_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>This workflow rule validates if the product quantity is below threshold value and send an Email Notification.</description>
+        <formula>AND( Threshold_Notification__c,Quantity__c  &lt;  Product_Threshold_Value__c )</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Product Quantity Zero Alert</fullName>
+        <actions>
+            <name>Email_Alert_When_Product_Quantity_Is_Below</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Sends out alert when product quantity &lt;= 0</description>
+        <formula>AND( IsActive =TRUE, PRIORVALUE( Quantity__c )&gt;0 , Quantity__c &lt;=0)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Product Quantity alert</fullName>
+        <actions>
+            <name>Email_Alert_When_Product_Quantity_Is_Below</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Sends out alert when Product Quantity on Stock &lt;=5</description>
+        <formula>AND( IsActive =TRUE, PRIORVALUE( Quantity__c )&gt;5 , Quantity__c &lt;=5,Quantity__c &gt;0)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>SH - Product Weight Changed</fullName>
+        <actions>
+            <name>SH_Product_Weight_Changed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Sends out notificiation email when product weight is changed</description>
+        <formula>ISCHANGED( Weight__c )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>YM Product Activated</fullName>
+        <actions>
+            <name>YM_Product_IsActive_Changed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Email sandic@awana.org when a trek/journey product is activated</description>
+        <formula>AND(IsActive = True, PRIORVALUE(IsActive) = False,OR(ISPICKVAL (Family, &apos;Journey&apos;),ISPICKVAL (Family, &apos;Trek&apos;)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>YM Product Inactivated</fullName>
+        <actions>
+            <name>YM_Product_IsActive_Changed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Email sandic@awana.org when a trek/journey product is inactivated</description>
+        <formula>AND(IsActive = False, PRIORVALUE(IsActive) = True,OR(ISPICKVAL (Family, &apos;Journey&apos;),ISPICKVAL (Family, &apos;Trek&apos;)))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

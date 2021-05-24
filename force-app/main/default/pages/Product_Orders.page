@@ -1,0 +1,50 @@
+<apex:page showHeader="false" sidebar="false" standardController="Product2"  recordSetVar="Orders"  extensions="ProductRelatedOrdersExtension" >
+<script type="text/javascript">
+    function openInNewTab(orderId) {
+       var winURL = '/'+orderId;
+       var win = window.open(winURL, '_blank');
+       win.focus();
+    }
+</script>
+
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"/>
+<apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"/>
+<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.7.2/themes/ui-lightness/jquery-ui.css" type="text/css" media="all" />
+<apex:includeScript value="http://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.9.1/jquery.tablesorter.min.js"/>
+
+<script type="text/javascript">
+    $j = jQuery.noConflict();    
+    $j(document).ready(function () {
+    $j("[id$=theaddrs]").tablesorter();
+
+    });
+</script>
+
+    <apex:outputText rendered="{!NULLVALUE(OrdItemList.size,0)==0}" value="No records to display"></apex:outputText>
+
+<apex:pageBlock rendered="{!OrdItemList.size>0}">   
+   
+   <apex:pageBlockSection html-width="100%" columns="1">
+                <apex:pageBlockTable value="{!OrdItemList}" var="ord" id="theaddrs" styleClass="tablesorter" headerClass="header">
+                    <apex:column value="{!ord.OrderId}" onclick="openInNewTab('{!ord.OrderId}');return false;"/>
+                    <apex:column value="{!ord.Order.Name}"/>
+                    <apex:column value="{!ord.Order.Status}"/>
+                    <apex:column value="{!ord.Order.TotalOrderQuantity__c}"/>
+                    <apex:column value="{!ord.Order.TotalAmount}"/>
+                    <apex:column value="{!ord.Order.Created_Date_Time__c}"/>
+                    <apex:column value="{!ord.Order.Purchase_Order__c}"/>
+                    <apex:facet name="footer">Showing Page # {!pageNumber} of {!totalPages}</apex:facet>
+                </apex:pageBlockTable>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom" >
+   <apex:outputPanel id="myButtons">
+   <apex:form >
+        <apex:commandButton action="{!Beginning}" title="Beginning" value="<<" disabled="{!disablePrevious}" reRender="theaddrs,myButtons"/>
+        <apex:commandButton action="{!Previous}" title="Previous" value="<" disabled="{!disablePrevious}" reRender="theaddrs,myButtons"/>        
+        <apex:commandButton action="{!Next}" title="Next" value=">" disabled="{!disableNext}" reRender="theaddrs,myButtons"/>
+        <apex:commandButton action="{!End}" title="End" value=">>" disabled="{!disableNext}" reRender="theaddrs,myButtons"/>        
+   </apex:form>
+   </apex:outputPanel>
+   </apex:pageBlockButtons>
+</apex:pageBlock>
+</apex:page>

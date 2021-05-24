@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Awana_Start_Kit</fullName>
+        <ccEmails>jenniferl@awana.org.npsp3</ccEmails>
+        <description>Awana Start Kit</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>erikt@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All/Awana_Start_Kit</template>
+    </alerts>
+    <alerts>
+        <fullName>Campaign_Member_Exist_with_promo_code1</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Duplicate Contact submitted to Renewal Free Shipping Campaign</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>anveshk@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>davidro@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Membership_Templates/Notification_to_Admins</template>
+    </alerts>
+    <alerts>
+        <fullName>GO_Send_Awana_GO_Introduction</fullName>
+        <description>GO - Send Awana GO Introduction</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Awana_GO/Awana_GO_Introduction</template>
+    </alerts>
+    <rules>
+        <fullName>Awana Start Kit</fullName>
+        <actions>
+            <name>Awana_Start_Kit</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Campaign.Name</field>
+            <operation>equals</operation>
+            <value>Awana Start Kit</value>
+        </criteriaItems>
+        <description>Sends out notification when a campaign member to Awana Start Kit is added</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>GO - Send out Introduction Email</fullName>
+        <actions>
+            <name>GO_Send_Awana_GO_Introduction</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Campaign.Name</field>
+            <operation>contains</operation>
+            <value>Awana GO Potential</value>
+        </criteriaItems>
+        <description>Sends out Awana GO Introduction email when</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+</Workflow>

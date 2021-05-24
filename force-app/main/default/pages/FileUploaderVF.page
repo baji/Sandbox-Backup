@@ -1,0 +1,44 @@
+<apex:page showHeader="true" standardStylesheets="false" sidebar="true"  applyBodyTag="false" docType="html-5.0">
+    <!-- Script needed to embed Lightning Components in Visualforce pages. -->
+    <apex:includeScript value="/lightning/lightning.out.js" />
+    
+    <!-- Lightning Desktop extra styles and loading of Lightning Component-->
+    <script>
+
+            $Lightning.use("c:ContactFileUploadApp", function() {
+             $Lightning.createComponent("c:ContactFileUpload",
+                    { },
+                      "FileUploadPage",
+                      function(cmp) {
+               
+           });
+
+            });
+    
+    
+        // } 
+    </script>
+<html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">    
+
+<head>
+  <title>File Upload</title>
+  <!-- <apex:stylesheet value="{!URLFOR($Resource.SLDS100, 'assets/styles/salesforce-lightning-design-system-vf.css')}" /> -->
+</head>    
+
+<body>    
+
+  <!-- REQUIRED SLDS WRAPPER -->
+  <div class="slds">    
+    <!-- PRIMARY CONTENT WRAPPER -->
+    <div class="myapp">    
+      <div >
+        <div id="FileUploadPage"></div>
+      </div>
+      <!-- / PRIMARY CONTENT WRAPPER -->    
+
+    </div>
+  </div>
+  <!-- / REQUIRED SLDS WRAPPER -->    
+</body>
+</html>
+</apex:page>

@@ -1,0 +1,1098 @@
+<apex:page sidebar="{!!Contains($CurrentPage.URL,'http://awana')}"  title="Awana - Clip Art">
+<style type="text/css">
+#wrapper {
+    width:700px;
+}
+h2 {
+    clear:both;
+    border:1px solid #000;
+    background:#7bb3cd;
+    width:637px;
+    display:block;
+    font-family:Arial, Helvetica, sans-serif;
+    padding:11px 0;
+    text-indent:6px;
+    font-size:18px;
+}
+.ca-section {
+    width:637px;
+    border:1px solid #000;
+}
+.ca-listing,
+.ca-dbl-listing {
+    float:left;
+    text-align:center;
+    width:89px;
+    border:1px solid #000;
+    padding-bottom:10px;
+}
+.ca-dbl-listing {
+    width:180px;
+}
+.ca-img {
+    width:89px;
+    height:89px;
+    text-align:center;
+}
+    .ca-img img {
+        margin:0 auto;
+    }
+.last {
+    clear:both;
+    margin:0;
+    padding:0;
+    height:0;
+    width:0;
+}
+</style>
+<div id="wrapper">
+    <div id="warning"></div>
+    <h1>Awana Clip Art</h1>
+    <p>Registered churches are welcome to use this clip art to promote their local Awana ministry through fliers, bulletins, brochures, newsletters, posters, temporary banners, Web pages and other materials. Please read the guidelines that are available.</p>
+    <div id="corpLogoNoUse" oncontextmenu="return false;"><img src="{!$Resource.trans2x2}" width="700" height="59" alt="Awana logo use notice" onMouseDown="javascript:alert('Attention! The logo you are clicking is intellectual property of Awana Clubs International. The Awana corporate logo is not authorized for use by the local church. The logo represents the broader scope of ministries from Awana. You will continue to see the corporate logo on our Web sites, in our promotions and at conferences.');" /></div>
+    <h2>Logos</h2>
+    <div class="ca-section">
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/awana-clubs-color.gif')}" alt="Awana Clubs logo" width="89" height="39" /></div>
+            <a href="https://awana.box.net/shared/static/34ti794g2d.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-clubs-logo.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/o0zk72ndke.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-clubs-logo.eps']);">eps</a>
+        </div>
+        <div class="ca-dbl-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/awana-clubs-usage.gif')}" alt="Awana Clubs logo usage guidelines" width="141" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/srqmmndqyb.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-clubs-logo-usage-guidelines.pdf']);">Logo usage guidelines</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/awana-clubs-bw.gif')}" alt="Awana Clubs logo" width="89" height="41" /></div>
+            <a href="https://awana.box.net/shared/static/j7ciqzvff7.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-clubs-logo.jpg-bw']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/k63svebscf.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-clubs-logo-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/awana-clubs-rev.gif')}" alt="Awana Clubs logo reverse" width="89" height="41" /></div>
+            <a href="https://awana.box.net/shared/static/gdyazm54od.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-clubs-logo-rev.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/gin9hcvgb1.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-clubs-logo-rev.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/awana-games-color.gif')}" alt="AwanaGames logo" width="89" height="51" /></div>
+            <a href="https://awana.box.net/shared/static/dz5gqihqmb.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-games-logo.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/kzt0mhmlxu.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/awana-games-logo.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/gospel-wheel.gif')}" alt="Awana gospel wheel" width="89" height="90" /></div>
+            <a href="https://awana.box.net/shared/static/ep0jhshk0d.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/gospel-wheel.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/vmp98vrrmp.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/gospel-wheel.eps']);">eps</a>
+            <a href="https://awana.box.net/shared/static/689j4dk8ee.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/gospel-wheel.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/grand-prix-bw.gif.jpg')}" alt="Awana Grand Prix logo black and white" width="89" height="54" /></div>
+            <a href="https://awana.box.net/shared/static/bystzx9cfp.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/grand-prix-logo-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/g2yokooxuk.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/grand-prix-logo-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/grand-prix.gif.jpg')}" alt="Awana Grand Prix logo color" width="89" height="54" /></div>
+            <a href="https://awana.box.net/shared/static/ttd8d87a9v.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/grand-prix-logo.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/luc5n6otdr.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/grand-prix-logo.eps']);">eps</a>
+        </div>
+        <div class="ca-dbl-listing">
+            <div class="ca-img"><img src="{!$Resource.aym_logo_color}" width="113" height="50" alt="Awana YM Logo" /></div>
+            <a href="http://awana.org/youthministries/clipart/aym-clipart,default,pg.html" target="_blank"><strong>Awana YM Clip Art</strong></a>
+        </div>
+        <br class="last" />
+    </div>
+    <h2>Puggles</h2>
+    <div class="ca-section">
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggle.gif')}" alt="Puggle" width="67" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/gnhzg9qp4q.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/tknjydaufo.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggle-bw.gif')}" alt="Awana Puggle black and white" width="67" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/iq5j1l8etk.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/uo7ll78kxq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggle-butterfly-bw.gif')}" alt="Awana Puggle with Butterfly black and white" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/zga177pz17.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-w-butterfly-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/cxegd8sbkp.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-w-butterfly-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggle-butterfly.gif')}" alt="Awana Puggle with butterfly color" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/ghf3d71bzx.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-w-butterfly.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/tf68rxvkzu.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-w-butterfly.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggles-friends.gif')}" alt="Awana Puggles friends color" width="89" height="61" /></div>
+            <a href="https://awana.box.net/shared/static/24ug5dk53l.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-friends.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/tzhq7l0b5t.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-friends.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggles-friends-bw.gif')}" alt="Awana Puggles friends black and white" width="89" height="61" /></div>
+            <a href="https://awana.box.net/shared/static/oiz9t7y2zk.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-friends-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/xat1kzdokb.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-friends.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggle-head.gif')}" alt="Awana Puggle head color" width="89" height="84" /></div>
+            <a href="https://awana.box.net/shared/static/b8zd4qz8p4.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-head.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/koll29y8gn.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-head.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggle-head-bw.gif')}" alt="Awana Puggle head black and white" width="89" height="84" /></div>
+            <a href="https://awana.box.net/shared/static/jar5759qt1.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-head-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/i2znkx5324.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-head-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/alice-head.gif')}" alt="Awana Puggles Alice head color" width="89" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/zagl71jic5.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-alice-head.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/qi86gidb9i.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-alice-head.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/alice-head-bw.gif')}" alt="Awana Puggles Alice head black and white" width="89" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/tv78ds9tp8.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-alice-head-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/0gp24xd8sb.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-alice-head-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggle-sitting.gif')}" alt="Awana Puggle sitting color" width="89" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/y7npqjrv34.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-sitting.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/enspfklz8o.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-sitting.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggle-sitting-bw.gif')}" alt="Awana Puggle sitting black and white" width="89" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/e9kem8tkux.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-sitting-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/417gjrgltl.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-puggle-sitting-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sydney-head.gif')}" alt="Awana Puggles Sydney head color" width="89" height="67" /></div>
+            <a href="https://awana.box.net/shared/static/vcx2q31g49.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-sydney-head.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/r6moj03nnq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-sydney-head.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sydney-head-bw.gif')}" alt="Awana Puggles Sydney head black and white" width="89" height="67" /></div>
+            <a href="https://awana.box.net/shared/static/c2tbkhdbh5.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-sydney-head-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/77yzi6nkyb.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-sydney-head-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggles-logo-bw.gif')}" alt="Awana Puggles logo black and white" width="89" height="58" /></div>
+            <a href="https://awana.box.net/shared/static/p9f5d5dmrx.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-logo-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/0qi9hqovzu.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-logo-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggles-logo.gif')}" alt="Awana Puggles logo color" width="89" height="57" /></div>
+            <a href="https://awana.box.net/shared/static/ncoheza0lj.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-logo.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/zvy889tb4o.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-logo.eps']);">eps</a>
+        </div>
+        <div class="ca-dbl-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/puggles-logo-rev.gif')}" alt="Awana Puggles logo black and white reversed" width="89" height="58" /></div>
+            <a href="https://awana.box.net/shared/static/aoua49g762.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-logo-rev.jpg']);">png</a>
+            <a href="https://awana.box.net/shared/static/ze1opznutb.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/puggles-logo-rev.eps']);">eps</a>
+            <br />Reverse logo appears only over background.
+        </div>
+        <br class="last" />
+    </div>
+    <h2>Cubbies</h2>
+    <div class="ca-section">
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/CubbiesLogo_CMYK.gif')}" width="89" height="23" alt="Cubbies Logo in color" /></div>
+            <a href="https://awana.box.com/shared/static/batz0004gkci7j2dlh6r.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/CubbiesLogo_CMYK.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/ffpucbx39vmv02h5rcsz.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/CubbiesLogo_CMYK.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/w86wl96j7j068k37g9fg.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/CubbiesLogo_CMYK.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/vls6bq01tenxkd07f9ts.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/CubbiesLogo_CMYK.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/CubbiesLogo_BW.gif')}" width="89" height="23" alt="Cubbies Logo in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/e2r9ytudho83clkfwf6t.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/CubbiesLogo_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/7qt96mwy2q0ptv5bclgt.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/CubbiesLogo_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/8dhwg69oue7uf8ipkeuc.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/CubbiesLogo_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/qyq20a6p8xns0731z58h.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/CubbiesLogo_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/apple_tree.gif')}" width="65" height="89" alt="Apple Tree in color" /></div>
+            <a href="https://awana.box.com/shared/static/ojf00r89o9flvx1osn4k.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/apple_tree.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/iiikvfvd5bzfliyo4zlr.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/apple_tree.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/9c8sczl13jsi1xkvnyk3.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/apple_tree.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/lmhpeac0nl7woamzljqn.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/apple_tree.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_and_Friends_Color.gif')}" width="89" height="65" alt="Cubbie and friends in color" /></div>
+            <a href="https://awana.box.com/shared/static/2hbnb0wa6i7v07jnbpw9.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_and_Friends_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/i5k3935m1sxfitt0ddam.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_and_Friends_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/80gfumv5e18w9jwa2coj.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_and_Friends_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/nt4mal3cov7nsepvt2cl.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_and_Friends_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_and_Friends_BW.gif')}" width="89" height="65" alt="Cubbie and friends in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/z3tqg2gwnzb1nnkb9h2y.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_and_Friends_BW']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/joq825sq5socy0ylrkca.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_and_Friends_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/cnblelm6xvv2az79unt3.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_and_Friends_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/68lr3kkovgqt0qy6xfe0.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_and_Friends_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Arms_Up_Left_Color.gif')}" width="63" height="89" alt="Cubbie with arms up to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/32xyrf90zl9k6ec7wvkc.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/y2rd870wcg0l1rn63g2j.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/uizm4qrtr8a8rgjbzsyc.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/x5c659lnifs7zj79o4wy.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Arms_Up_Left_BW.gif')}" width="63" height="89" alt="Cubbie with arms up to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/6yr755zsqcyu7gl583g9.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/x9462y98kmotoghba621.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/67ry8udjeunupch8ymb7.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/pzd0o9722uev1d5nivzt.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Arms_Up_Right_Color.gif')}" width="63" height="89" alt="Cubbie with arms up to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/3ebaw5id75hnmoiny0or.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/rpbhckr3jfvqujs8vopn.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/xw0lw0epspl0ww12e57s.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/8p36ohfb597yr17ck8ao.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Arms_Up_Right_BW.gif')}" width="63" height="89" alt="Cubbie with arms up to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/2cacmtt11sagpyd6obs0.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/a5ph0e60301qycqurrdv.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/eowkmod3xqi9dedl0c4i.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/43rm9i37zo5n5jstutx7.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Arms_Up_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Cheering_Left.gif')}" width="61" height="89" alt="Cubbie cheering to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/rq0sc1itqqmex21hwiwi.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Left.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/ujox98j6465hn67at12j.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Left.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/p0aeo7aq36v0g9tuwaio.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Left.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/n2yw5pjqptsuc6gwof23.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Left.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Cheering_Left_BW.gif')}" width="61" height="89" alt="Cubbie cheering to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/5p88td7dfl9xoo1iqed3.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/dhr8clo2y8mnkpo93svb.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/3uly7kqnezatuw5r7gi7.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/8sf2m9n84yy3lr3iddpv.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Cheering_Right.gif')}" width="61" height="89" alt="Cubbie cheering to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/cb1j6ie0xwh12v7xp8t1.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Right.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/k69fo3hixvow64cgcj41.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Right.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/d3hd925799vdaaw1mv4k.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Right.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/ffweoy6db8b0q97btvbj.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Right.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Cheering_Right_BW.gif')}" width="61" height="89" alt="Cubbie cheering to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/czevwje898et2bpbs86l.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/pndg78q1tn631hpcexsv.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/rwhwuwkgx7iih7ob48uq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/h7fhtfq3b3stb0b0ojdh.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Cheering_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Head_FrontView_Color.gif')}" width="85" height="89" alt="Cubbie's Head front view in color" /></div>
+            <a href="https://awana.box.com/shared/static/xudiu0olfw5mowhc56qt.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_FrontView_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/6oy9azxg0fcy1ia2am89.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_FrontView_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/7btbuhk4kxqj0dozq0k2.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_FrontView_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/lpzmryyzgrcvx9fx8pbl.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_FrontView_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Head_FrontView_BW.gif')}" width="85" height="89" alt="Cubbies head front view in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/8z139d854w1asqq84dij.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_FrontView_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/k0zaerku3inop6wp3z4n.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_FrontView_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/wfdsximj6z1szdkdugse.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_FrontView_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/uec65jt8bvck0yy21cke.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_FrontView_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Head_SideView_Left_Color.gif')}" width="89" height="84" alt="Cubbie's head side view to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/gda4hw61jic98jd7hhr8.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/h2aa6ww7ctxrtm8pdedz.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/9ic0i3d6c4mx5q4mfj4u.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/vrbqcc8o7qmvj0rp1y89.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Head_SideView_Left_BW.gif')}" width="89" height="84" alt="Cubbie's head side view to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/4uhzmopqajpe014z0brc.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/yms8oc7ay5bivgcelju6.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/rd7jh71wr78rkdinn2ya.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/x5vzw5qrtvdpqpckwgdd.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Head_SideView_Right_Color.gif')}" width="89" height="84" alt="Cubbie's head side view to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/pjt2gptv836n8q8j7rii.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/i7clnqql0i8lfopojaqz.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/eeljte57ouf0mk1p8zvm.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/sjuy6xomhc2mcf60uebu.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Head_SideView_Right_BW.gif')}" width="89" height="84" alt="Cubbie's head side view to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/sj3yrrq575rr8cm0ywxz.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/9ivbswdpxxj6l0vh71fh.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/b6pooad3pocmlns6wnf0.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/sb3qtuf6i6mpmk0pt1p0.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Head_SideView_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Secret_Left_Color.gif')}" width="57" height="89" alt="Cubbie telling a secret and pointing to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/3xzdcj2z8kptwhnge2c5.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/ys2qltb165em0lrh1u1p.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/0y05300x8l5g328pzpo1.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/sf41cuw23kjg22lrwfxk.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Secret_Left_BW.gif')}" width="57" height="89" alt="Cubbie telling a secret and pointing to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/s0q87870glia57x32ukh.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/j4n4eb4tqr0l1rbuxz6j.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/g2a6i701amnpu2ih84c5.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/ot03qzs2fs046vt4ech1.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Secret_Right_Color.gif')}" width="57" height="89" alt="Cubbie telling a secret and pointing to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/np4l7566u9zr8ijty8bl.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/sra81tnn7jv6ymznmomh.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/iwxgk8qyp7i8cjna6ky7.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/odbpmnl72upcnlmb4yyi.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Secret_Right_BW.gif')}" width="57" height="89" alt="Cubbie telling a secret and pointing to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/gqb718jq5uw2qk5ard07.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/q583m84n8kz515beax75.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/qrrl8ue9x0gzjpqqj1v6.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/iwtv4wdb2km7yr4aj31z.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Secret_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Thumb_Left_Color.gif')}" width="60" height="89" alt="Cubbie pointing to himself to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/i5tjd3cu9kjxooy2hw8j.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/64jdl8tucw4holv0ebwo.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/ok72ke6mrq3jw1qymxd8.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/h90oesv7p9mixe01ga26.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Thumb_Left_BW.gif')}" width="60" height="89" alt="Cubbie pointing to himself to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/birm3sx3ljfhwylzgtsx.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/d4s5jca5nqj7djxiiyu6.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/6xgh3inc4rhw62pe3zw2.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/435ovxyph1i8qgt45ymr.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Thumb_Right_Color.gif')}" width="60" height="89" alt="Cubbie pointing to himself to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/k5e3osuedjn04u9u62u0.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/j2sknzuwd7zb7faqkg44.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/dp126kcvvvem57skmnj7.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/mlnpfgb2mnoayyh7t19y.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Thumb_Right_BW.gif')}" width="60" height="89" alt="Cubbie pointing to himself to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/qrrtjgy3aa8u7b2fc3r8.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/o0a7mqm94iwe3vk36i5v.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/te1pc30y4xipaobm0q7x.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/aeb8hv4qem7qbj94yu0n.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Thumb_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Waving_Left_Color.gif')}" width="56" height="89" alt="Cubbie waving to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/9k73rujkjdnbpzt27x8v.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/dsrsx3jdyzrr6s1fdbm1.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/ckmlo597ugfimbmwwr4v.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/klefnmebyt51tki1lcwl.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Waving_Left_BW.gif')}" width="56" height="89" alt="Cubbie waving to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/ynezhywodd2zafjn62vx.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/a4wlluuj78fhrhasf1gy.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/ee877esvlgrlvk0bqhgw.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/myvcncw6pz1oybgl52bm.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Waving_Right_Color.gif')}" width="56" height="89" alt="Cubbie waving to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/vpwe8f7dyjfhe44zdsqe.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/e6lubnntqzbwh5dt0kue.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/sai0xgnenwm2nmfdww1q.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/ugra9eofix8og43b3oqi.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Cubbie_Waving_Right_BW.gif')}" width="56" height="89" alt="Cubbie waving to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/ju0szv51vkedudfwxgbw.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/b8e5n34xuw5u9kopzz67.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/pravu3aop5ee0m764d2e.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/wpbo9izhp4vejhnqxph4.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Cubbie_Waving_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Catching_Ball_Left_Color.gif')}" width="61" height="89" alt="Katie catching a ball to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/63njt15r7ow2cmv7asb1.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/2cve3paxemyts0j16ytq.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/g8axf9q0z7p2z9n3qg0z.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/2ga38993pcbf2fq3srrg.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Catching_Ball_Left_BW.gif')}" width="61" height="89" alt="Katie catching a ball to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/nhw3zhueco5hgp0us9dw.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/zsnazu6w8ffy0ra5d62p.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/mzxopbmpuft4qn66kj1f.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/rxv2fgkx2f316nirzozr.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Catching_Ball_Right_Color.gif')}" width="61" height="89" alt="Katie catching a ball to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/xfi4or20kdzkxwhak308.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/tc891ijtvessrrml4990.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/78j2tz55kdpcuiymvuoq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/cmxnwr1d3i8ljxxsc69a.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Catching_Ball_Right_BW.gif')}" width="61" height="89" alt="Katie catching a ball to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/h8bgfp3clva779jqquzw.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/vdg6ebbj9mwdytnupegi.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/pok7oq3itw0b5yxzv7cq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/1l3fdu6fvw7ixng0mvcg.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Catching_Ball_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Head_3qtr_Left_Color.gif')}" width="77" height="89" alt="Katie's head in three-quarters to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/la3ge2p60qtlbo9jrvlh.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/bv870638kih5brtzcl0e.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/uxyb99alvlrj31p4ihu8.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/1hdw7uftg1wdyu3p7fno.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Head_3qtr_Left_BW.gif')}" width="77" height="89" alt="Katie's head in three-quarters to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/9qiirpqbuj21tmzjdfk4.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/oaj90xbl2b9od225ombr.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/fwa8p22lpzq0ri640u8l.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/03k84bxlmc4o60cawwmz.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Head_3qtr_Right_Color.gif')}" width="77" height="89" alt="Katie's head in three-quarters to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/i6tgfjrhut6y9yfj13fl.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/ljcr0wqhfz0lb8lizc9u.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/omve28ptec0q8xsg1cbc.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/2jwkolez0t6g8rqchzdc.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Head_3qtr_Right_BW.gif')}" width="77" height="89" alt="Katie's head in three-quarters to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/7fqonittu7u8ul48bqye.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/0pp33chzaoaiomgsmtfu.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/kin6aaa1vcgv2r4b29g6.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/d96ktsrcliknl81w2kf8.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_3qtr_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Head_FrontView_Color.gif')}" width="73" height="89" alt="Katie's head front view in color" /></div>
+            <a href="https://awana.box.com/shared/static/7q0wabs3soxm94re72y4.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_FrontView_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/juee2u8n7ier5esicoxd.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_FrontView_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/fk90dbt5gzlfxxm1nimt.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_FrontView_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/fi6hcptbgbx08nqazzmy.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_FrontView_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Head_FrontView_BW.gif')}" width="73" height="89" alt="Katie's head front view in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/czgyogvvvngnovhs1q9k.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_FrontView_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/t01uwuq196m9789wct1m.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_FrontView_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/d1zv3eam1xzhv8fhhmoz.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_FrontView_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/0lvi1wbbdag6zly1haaa.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Head_FrontView_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Running_Left_Color.gif')}" width="89" height="85" alt="Katie running to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/1spco8rzlzxpzudibd92.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/591p1pxrnc0zjaagcovv.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/hbquhg1qdexdu87jqaox.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/bto941uyt1dbkccqj7gv.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Running_Left_BW.gif')}" width="89" height="85" alt="Katie running to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/0lfvav5lm1xu5hrpwkxs.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/9pciffu1zgmmrjyy9mpt.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/4xhglpe37gz4efev4vgn.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/2tue31fv22poudhi7392.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Running_Right_Color.gif')}" width="89" height="85" alt="Katie running to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/md70izk2e6bkn8mybubc.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/2bqkyk62aemu88d1qqvf.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/x74f83g92rsd58fc3qmi.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/zalbmk2bv61lr5mbi6ym.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Running_Right_BW.gif')}" width="89" height="85" alt="Katie running to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/qu15bs46zwi24yyi3khb.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/gabsu91yazrjx2dk49it.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/er9lkqtaxeqccv2ca93c.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/91ndb0z6y3r59mwd6ke2.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Running_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Sitting_Left_Color.gif')}" width="74" height="89" alt="Katie sitting to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/ooqu3vxy81br62iflxjg.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/sojbhurx9tuwzogdjokp.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/5uk2adpfkxoqcwfl2s8n.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/tevuc7uvaxl1of0c4ft6.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Sitting_Left_BW.gif')}" width="74" height="89" alt="Katie sitting to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/xhcspjbg27sbyvqy0yas.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/0h3oex50y6q9ra394aun.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/i6clsaafkioze0hh8olf.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/cg10khwtb6p0zsew8tfq.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Sitting_Right_Color.gif')}" width="74" height="89" alt="Katie sitting to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/p08hequp8fokodw1y5r8.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/cxd86fjqyognn78h4gou.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/qge8dvdhb2kin8st8p8r.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/vz6c7fkrgfvisjf9czse.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Katie_Sitting_Right_BW.gif')}" width="74" height="89" alt="Katie sitting to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/ttnu2ihw9p9ly5uax350.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/m1mtn1aiowj35974tem2.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/a2zodtefcr0zx4ninibw.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/6fpxq5jmgl2z1ehnw7go.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Katie_Sitting_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Head_FrontView_Color.gif')}" width="89" height="80" alt="Luvie's head from the front in color" /></div>
+            <a href="https://awana.box.com/shared/static/7sdhbc4cwd58211lil77.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_FrontView_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/n9ghyft5n90yixhyhnzi.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_FrontView_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/lk4935c6rkejgwvubp0s.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_FrontView_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/l4epxjz3d6duaks790pa.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_FrontView_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Head_FrontView_BW.gif')}" width="89" height="80" alt="Luvie's head from the front in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/xazgiz7olb2sfepo7s8b.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_FrontView_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/5sd1t3rv51r7nj9i9ync.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_FrontView_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/oyl8fivyy95x0hla031o.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_FrontView_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/t93dxwl3ktzqe39qdrkk.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_FrontView_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Head_SideView_Left_Color.gif')}" width="83" height="89" alt="Luvie's head side view to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/ui2u4tusngrgrcfpgjbh.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/njpglsgd5i6yyh97wjte.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/gwts2bbrbsts8t5hx1pu.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/8ed9w1usuikxwl4zvx0m.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Head_SideView_Left_BW.gif')}" width="83" height="89" alt="Luvie's head side view to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/zi7uxifjhtjqkvjuv0p8.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/7oxaunmuwc0pe29rzei1.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/2rx3fz78hy7saeld80jr.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/u05rfoetr6h58c9djb16.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Head_SideView_Right_Color.gif')}" width="83" height="89" alt="Luvie's head side view to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/5eb3f1cnvzb70ei37abm.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/oq79oj0qd05r65lwnwge.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/g9mo3q61hiraaq1bnnas.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/n5pw2bba42umf2gyycv3.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Head_SideView_Right_BW.gif')}" width="83" height="89" alt="Luvie's head side view to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/n5xo6fsm571od9s2444t.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/k4k5so2wzqh93hkr2gzc.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/3ocdei0zyzjjwu5ej7mn.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/tnkbyskrkyy0tuqt8oyf.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Head_SideView_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Jumping_Left_Color.gif')}" width="61" height="89" alt="Luvie jumping to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/lfj0x5hthtulzp8e2n5e.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/k42rb23nu4nk8rrx5opi.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/7t64fk9xzbwqscmyfmgg.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/r4v8havd0kma9ad98snb.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Jumping_Left_BW.gif')}" width="61" height="89" alt="Luvie jumping to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/5n5w714267inzx29zeap.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/whqnbmu7q8fpivnph31o.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/fatrr068510zzvuqwqa9.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/m4p2phdnzsa8cfh67igl.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Jumping_Right_Color-.gif')}" width="61" height="89" alt="Luvie jumping to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/gfm9dxkrutcxnjq0iv3r.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Right_Color-.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/brc6q93gxio2hut8rwfv.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Right_Color-.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/msvomkit8vs9h76j4b7f.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Right_Color-.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/o5y8r6gp3whz029ufiz4.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Right_Color-.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Jumping_Right_BW.gif')}" width="61" height="89" alt="Luvie jumping to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/5avhtt8f9u44e5gvqvav.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/jen9e1o8zhdaj0nmetxx.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/z8ra0ebx0ee79jze8kkh.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/qqho4ns984f4e4fjgxwb.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Jumping_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Standing_Left_Color.gif')}" width="47" height="89" alt="Luvie standing to the left in color" /></div>
+            <a href="https://awana.box.com/shared/static/19gkcga0k4r8v70tq9y4.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Left_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/h0uba5nt5g8firw7d165.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Left_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/15vlew3w16o8fiuhtxwj.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Left_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/yi2gg7az8oys6h46dsx5.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Left_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Standing_Left_BW.gif')}" width="47" height="89" alt="Luvie standing to the left in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/2rz5rpz1k481d1wuo5se.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Left_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/9c15ef1fiy4estwmv8jy.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Left_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/gy56vrr7s12ex4eil70w.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Left_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/jnh7zwhgu63rb01xg1u4.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Left_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Standing_Right_Color.gif')}" width="47" height="89" alt="Luvie standing to the right in color" /></div>
+            <a href="https://awana.box.com/shared/static/6szx2iicmynrbkscsztb.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Right_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/anoduu5c98sbqgxo4dfl.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Right_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/lw1wdo3pyhzcxa9esm17.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Right_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/pb4h9pcipdq8qryg05hg.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Right_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.cubbies_2013_clip_art, 'images/Luvie_Standing_Right_BW.gif')}" width="47" height="89" alt="Luvie standing to the right in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/iz7nvfhrfbsa2sqs08to.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Right_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/ul99cnhgscvzf3pc9bx4.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Right_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/0n5vf5y2cu73pkqys37m.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Right_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/s4nsej2qayynl64enqgf.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Luvie_Standing_Right_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="https://awana.box.com/shared/static/5pgh0dexbkszvh907yr4.gif" width="50" height="89" alt="Timothy in color" /></div>
+            <a href="https://awana.box.com/shared/static/3jsdbgv3xoa8yrww3yva.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Full_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/mvmtrb1c1wqo7bf1tm5x.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Full_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/uelsww2lre824ssvpwn4.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Full_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/m4p2phdnzsa8cfh67igl.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Full_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="https://awana.box.com/shared/static/3diw0nbz3a40qwmqvita.gif" width="50" height="89" alt="Timothy in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/r69onnzmkktlgd58l1iq.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Full_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/nudy26b3jril3w0a1cbr.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Full_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/aawkflsyb0162pegpndq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Full_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/2v1p4ggq1f9d7bvlntkc.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Full_BW.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="https://awana.box.com/shared/static/53c0njmftlh072026w3v.gif" width="89" height="86" alt="Timothy's head in color" /></div>
+            <a href="https://awana.box.com/shared/static/86rbec90inj3kvc8vzas.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Head_Color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/b46wuwm4vsniq89c12yr.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Head_Color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/n1oyhcprrtubawwg31nk.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Head_Color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/y3td6m3tk2nxu2ek2jtw.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Head_Color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="https://awana.box.com/shared/static/tph3wjs7t737jcws9r58.gif" width="89" height="86" alt="Timothy's head in black and white" /></div>
+            <a href="https://awana.box.com/shared/static/9ha1ule57wou7i0e9stt.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Head_BW.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/qhoo18ql85tb50i7a01s.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Head_BW.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/4cntfb6uux96zj7ac0vg.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Head_BW.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/tyu3z0527oy6thy4b68s.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/Timothy_Head_BW.pdf']);">pdf</a>
+        </div>
+        <br class="last" />
+    </div>
+    <h2>Sparks</h2>
+    <div class="ca-section">
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-head.gif')}" alt="Sparky head" width="89" height="78" /></div>
+            <a href="https://awana.box.net/shared/static/dbd4nn3rix.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-head.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/xprzdo1mvz.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-head.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-head-bw.gif')}" alt="Sparky head" width="89" height="78" /></div>
+            <a href="https://awana.box.net/shared/static/nyzbdl1zdd.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-head-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/yeibfjm3mz.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-head-bw.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-ranger-head.gif')}" alt="Hiker head" width="89" height="74" /></div>
+            <a href="https://awana.box.net/shared/static/c6z2ra6ndp.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-hiker-head.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/4l07i58nc6.tif" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-hiker-head.tif']);">tif</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-winter-head.gif')}" alt="Climber head" width="70" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/5ht6vrjrk0.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-climber-head.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/flg2aruif3.tif" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-climber-head.tif']);">tif</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/hangglider-logo.gif')}" alt="HangGlider Patch" width="89" height="78" /></div>
+            <a href="https://awana.box.net/shared/static/k3auk822kj.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-hangglider-patch.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/vjr6t50e9e.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-hangglider-patch.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/wingrunner-logo.gif')}" alt="WingRunner Patch" width="89" height="78" /></div>
+            <a href="https://awana.box.net/shared/static/56zc9jelpj.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-wingrunner-patch.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/0hv40k3y9s.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-'wingrunner-patch.png]);">png</a>
+            <a href="https://awana.box.net/shared/static/6fvzkgs5z2.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/wingrunner-patch.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/skystormer-patch.gif')}" alt="SkyStormer Patch" width="78" height="78" /></div>
+            <a href="https://awana.box.net/shared/static/mbdo4tt5md.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-skystormer-patch.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/zjjh2msriy.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks--skystormer-patch.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparks-logo.gif.jpg')}" alt="Sparks logo" width="89" height="28" /></div>
+            <a href="https://awana.box.net/shared/static/q9z65j2hb9.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-logo.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/g9221v94qq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-logo.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparks-logo-bw.gif')}" alt="Sparks logo bw" width="89" height="26" /></div>
+            <a href="https://awana.box.net/shared/static/gz4s569aov.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-logo-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/mz4i07ljnu.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-logo-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparks-a-rama.gif')}" alt="Sparks-a-Rama color" width="89" height="40" /></div>
+            <a href="https://awana.box.net/shared/static/p4x1igl37u.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-a-rama.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/m33v9niv4n.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-a-rama.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparks-a-rama-bw.gif')}" alt="Sparks-a-Rama bw" width="89" height="39" /></div>
+            <a href="https://awana.box.net/shared/static/3cuh7p4cmy.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-a-rama-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/yin110dt2i.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-a-rama-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/chloe.gif')}" alt="Chloe" width="47" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/be6mgqmdyv.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-chloe.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/qjishktdqq.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-chloe.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/emma.gif')}" alt="Emma" width="65" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/p3fn0tr19m.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-emma.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/l6ahzzv5ay.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-emma.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/jacob.gif')}" alt="Jacob" width="70" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/tjj2xtuijv.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-jacob.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/2ufsjo6jy5.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-jacob.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/joel.gif')}" alt="Joel" width="52" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/kny1n5umbf.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-joel.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/4u52p61ck9.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-joel.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-wave.gif.jpg')}" alt="Sparky waving" width="55" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/h29a732tqf.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-waving.jpg']);">jpg</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-wave-bw.gif')}" alt="Sparky waving bw" width="56" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/o2yl1o7j24.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-waving-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/b14ph1851z.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-waving-bw.jpg']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/chloe-jacob-joel-reading.gif')}" alt="three characters" width="89" height="87" /></div>
+            <a href="https://awana.box.net/shared/static/nd8vk4pjig.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-three-characters.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/qbuz71pj7o.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-three-characters.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/chloe-chalkboard.gif')}" alt="Chloe at the chalk board" width="89" height="81" /></div>
+            <a href="https://awana.box.net/shared/static/cyfkxdosi1.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-chloe-at-chalkboard.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/hlp5p9ysi5.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-chloe-at-chalkboard.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-books.gif')}" alt="Sparky on books" width="58" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/ixevx4u4u0.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-on-books.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/7lsgjrvai1.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-on-books.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-congrats.gif')}" alt="Congratulations" width="89" height="56" /></div>
+            <a href="https://awana.box.net/shared/static/s8p2tk3x9o.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-congrats.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/38fzp2dbex.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-congrats.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-congrats-bw.gif')}" alt="Congratulations bw" width="89" height="57" /></div>
+            <a href="https://awana.box.net/shared/static/sfayt4akv9.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-congrats-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/0qpumj6voz.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-congrats-bw.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-great-job.gif')}" alt="Great Job" width="89" height="58" /></div>
+            <a href="https://awana.box.net/shared/static/l9kmo5tmbb.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-great-job.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/b3gt4xf0ht.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-great-job.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-great-job-bw.gif')}" alt="Great job bw" width="89" height="58" /></div>
+            <a href="https://awana.box.net/shared/static/8kkjyp1fji.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-great-job-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/ijvaohdrb7.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-great-job-bw.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/lets-celebrate.gif')}" alt="Let's Celebrate" width="89" height="60" /></div>
+            <a href="https://awana.box.net/shared/static/8azgkb7u2g.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-lets-celebrate.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/o1avlgugnx.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-lets-celebrate.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/lets-celebrate-bw.gif')}" alt="Let's Celebrate bw" width="89" height="60" /></div>
+            <a href="https://awana.box.net/shared/static/bop6tzihb9.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-lets-celebrate-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/i8e2spybl5.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-lets-celebrate-bw.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/merry-xmas.gif')}" alt="Merry Christmas" width="89" height="54" /></div>
+            <a href="https://awana.box.net/shared/static/ep9hacphvp.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-merry-christmas.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/d7b4v6yzi8.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-merry-christmas.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/merry-xmas-bw.gif')}" alt="Merry Christmas bw" width="89" height="54" /></div>
+            <a href="https://awana.box.net/shared/static/y4itgclohu.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-merry-christmas-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/yyq55zix5y.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-merry-christmas-bw.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-sign.gif')}" alt="Sparky with sign" width="72" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/pe3mrv9zfm.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-w-sign.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/6iq0qmtsf6.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-w-sign.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-sign-bw.gif')}" alt="Sparky with sign bw" width="72" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/srgujk1ijz.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-w-sign-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/o1os13h4kx.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-sparky-w-sign-bw.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/save-date.gif')}" alt="Save the date" width="89" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/4m19tzt1po.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-save-the-date.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/krlio4q7dc.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-save-the-date.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/save-date-bw.gif')}" alt="Save the date bw" width="89" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/8rkxkkc363.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-save-the-date-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/5p8k62vyv2.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-save-the-date-bw.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/big-news-bw.gif.jpg')}" alt="Big news bw" width="89" height="49" /></div>
+            <a href="https://awana.box.net/shared/static/4idsobgsgb.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-big-news-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/tkc2vc3y89.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-big-news-bw.png']);">png</a>
+        </div>
+        <br class="last" />
+    </div>
+    <h2>Sparks Coloring Pages</h2>
+    <div class="ca-section">
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-1.jpg')}" alt="Sparks color page 1" width="66" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/n0nqh3ba7b.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-page-1.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-2.gif')}" alt="Sparks color page 2" width="70" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/sch6ngilu2.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-page-2.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-3.gif')}" alt="Sparks color page 3" width="78" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/tgtqsmzip9.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-page-3.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-4.gif')}" alt="Sparky on bridge" width="70" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/oc4ka1sg6l.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-sparky-on-bridge.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-5.gif.jpg')}" alt="Chloe tea party" width="78" height="60" /></div>
+            <a href="https://awana.box.net/shared/static/zm3h7pm7iz.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-chloe-tea-party.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-6.gif.jpg')}" alt="Model Airplane" width="78" height="60" /></div>
+            <a href="https://awana.box.net/shared/static/gkmk9b7qmp.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-model-airplane.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-7.gif')}" alt="Sparky with flowers" width="70" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/gck0vfal6s.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-sparky-w-flowers.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-8.gif')}" alt="Sparky at gate" width="72" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/zp9t5y035x.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-sparky-at-gate.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-9.gif')}" alt="Sparky at picnic table" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/vbs0dvsicg.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-sparky-at-picnic-table.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-10.gif')}" alt="Sparky in tree" width="68" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/zyg3zgfdy2.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-sparky-in-tree.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/sparky-color-11.gif.jpg')}" alt="Boy with Binoculars" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/v2bj3vdja7.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/sparks-coloring-binoculars.pdf']);">pdf</a>
+        </div>
+        <br class="last" />
+    </div>
+    <h2>T&amp;T</h2>
+    <div class="ca-section">
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-2-boys.gif')}" alt="T and T 2 boys" width="81" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/cgp1khpy6t.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-2-boys.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/8e13kmojzp.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-2-boys.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-3-girls.gif')}" alt="T and T 3 friends" width="89" height="65" /></div>
+            <a href="https://awana.box.net/shared/static/fr3c76b1da.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-3-friends.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/i1zhj4eh8m.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-3-friends.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-gift.gif')}" alt="T and T Arthur and gift" width="82" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/iz6on5fjg7.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-arthur-and-gift.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/8yqkm97dzq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-arthur-and-gift.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-bookpile.gif')}" alt="T and T stack of Bibles" width="89" height="71" /></div>
+            <a href="https://awana.box.net/shared/static/hghgyn3jj3.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-stack-of-bibles.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/n1iryn8nql.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-stack-of-bibles.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-cartwheel.gif')}" alt="T and T Carlos cartwheel" width="89" height="80" /></div>
+            <a href="https://awana.box.net/shared/static/af11sfbvvs.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-carlos-cartwheel.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/v2kkqmvozv.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-carlos-cartwheel.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-car.gif')}" alt="T and T carpool" width="89" height="68" /></div>
+            <a href="https://awana.box.net/shared/static/d988cq6fah.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-carpool.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/z98s8r2k31.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-carpool.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-awana-acronym.gif')}" alt="T and T Eric preaching" width="89" height="83" /></div>
+            <a href="https://awana.box.net/shared/static/4xipzsq63h.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-eric-preaching.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/mp6unhmipv.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-eric-preaching.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-paper.gif')}" alt="T and T holding paper" width="89" height="68" /></div>
+            <a href="https://awana.box.net/shared/static/5ecl4hc3ic.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-holding-paper.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/4a9rc4shy7.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-holding-paper.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-reading.gif')}" alt="T and T Leah studying" width="82" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/rnpb275jxz.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-leah-studying.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/54e9iph8ll.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-leah-studying.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-chair.gif')}" alt="T and T red chair" width="89" height="76" /></div>
+            <a href="https://awana.box.net/shared/static/5fgihbescq.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-red-chair.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/aqjqehxnvq.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-red-chair.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-run.gif')}" alt="T and T Arthur running" width="60" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/1lbmnroxrf.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-arthur-running.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/vxj4sygmda.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-arthur-running.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-soccer.gif')}" alt="T and T soccer" width="72" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/5p6rzp6c6o.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-soccer.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/891y9o2vry.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-soccer.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-star.gif')}" alt="T and T Arthur on a star" width="72" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/uzerp6spv4.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-arthur-on-star.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/lxachhvf34.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-arthur-on-star.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-streamwood-cheer.gif')}" alt="T and T Streamwood" width="62" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/ns46k246ae.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-streamwood.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/yy7v0vkc6m.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-streamwood.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-blank-table.gif')}" alt="T and T sitting at a table" width="89" height="74" /></div>
+            <a href="https://awana.box.net/shared/static/2pe2eps5y5.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-sitting-at-table.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/raolunmc18.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-sitting-at-table.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-logo.gif')}" alt="T and T logo color" width="89" height="68" /></div>
+            <a href="https://awana.box.net/shared/static/ct050i4ynu.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-logo.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/sdpl1k17vy.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-logo.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-logo-bw.gif')}" alt="T and T logo black and white" width="89" height="65" /></div>
+            <a href="https://awana.box.net/shared/static/3s562zg1y1.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-logo-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/9ksnjnsk5r.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-logo-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-arthur.gif')}" alt="Arthur" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/4hqs0sqf5h.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-arthur.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/bxomf8y7p7.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-arthur.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-carlos.gif')}" alt="Carlos" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/4ph3e4kz80.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-carlos.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/64xk2tpss8.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-carlos.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-christy.gif')}" alt="Christy" width="69" height="89" /></div>
+            <a href="https://awana.box.com/shared/static/xrjqyj0jb98mrs9ds732.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-christy.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/yphmbhs5q5.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-christy.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-congrats.gif')}" alt="Congrats!" width="73" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/smf3afqcau.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-congrats.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/sv9y3sih31.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-congrats.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-erik-gift.gif')}" alt="Erik with a gift" width="55" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/992tjf5zph.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-erik-w-gift.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/cit7yiu6tt.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-erik-w-gift.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-erik.gif')}" alt="Erik" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/z953uu4zt9.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-erik.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/nnejijlp29.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-erik.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-wagon.gif')}" alt="Girls with a wagon" width="89" height="67" /></div>
+            <a href="https://awana.box.net/shared/static/i3s8ompn0o.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-girls-w-wagon.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/ztx12oiqku.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-girls-w-wagon.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-jalissa.gif')}" alt="Jalissa" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/4faiqigp6p.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-jalissa.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/qk1go71f5k.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-jalissa.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-leah-streamwood-carlos.gif')}" alt="Leah, Streamwood, and Carlos" width="89" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/kkleoqf3ri.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-leah-streamwood-carlos.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/159v3ljqcd.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-leah-streamwood-carlos.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-leah.gif')}" alt="Leah" width="69" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/05zfn9mjfh.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-leah.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/rlqb1o65lz.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-leah.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-streamwood-new.gif')}" alt="Streamwood" width="76" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/5ru4x5t39r.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-streamwood.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/18vj42prab.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-streamwood.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/tt-column.gif')}" alt="The Gang" width="37" height="89" /></div>
+            <a href="https://awana.box.net/shared/static/2t4upmmix7.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-gang.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/nu5h82lhtz.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-gang.png']);">png</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/UltAdventure-color.gif')}" alt="Ultimate Adventure Logo in Color" width="78" height="33" /></div>
+            <a href="https://awana.box.net/shared/static/x7jvu33j3u.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-ua-logo.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/7p0l0bb71k.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-ua-logo.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/UltAdventure-bw.gif')}" alt="Ultimate Adventure Logo in Black and White" width="78" height="32" /></div>
+            <a href="https://awana.box.net/shared/static/ov21zybxgt.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-ua-logo-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/o9uu1o7o5s.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-ua-logo-bw.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/UltChallenge-color.gif')}" alt="Ultimate Challenge Logo in Color" width="78" height="35" /></div>
+            <a href="https://awana.box.net/shared/static/l3atrv6ngt.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-uc-logo.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/ybesg1qpdv.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-uc-logo.eps']);">eps</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.clipart_images, 'clipart/UltChallenge-bw.gif')}" alt="Ultimate Challenge Logo in Black and White" width="78" height="34" /></div>
+            <a href="https://awana.box.net/shared/static/m7ylix716p.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-uc-logo-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.net/shared/static/pyitkix420.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/tt-uc-logo-bw.eps']);">eps</a>
+        </div>
+        <br class="last" />
+    </div>
+    <h2>TruthSeekers</h2>
+    <div class="ca-section">
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.truthseekers_clipart, 'gif/TruthSeekers_logo-line_color.gif')}" alt="TruthSeekers Logo Color" width="89" height="89" /></div>
+            <a href="https://awana.box.com/shared/static/ibgr5f3x1ix6cmzy1100.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers_logo-line_color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/wjl26bpkyxbei0qofp2s.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipartTruthSeekers_logo-line_color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/klhn0318b5a9z4jnatkt.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers_logo-line_color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/wzwa56i3y2z00yhhixxm.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers_logo-line_color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.truthseekers_clipart, 'gif/TruthSeekers_logo-line-bw.gif')}" alt="TruthSeekers Logo Black and White" width="83" height="89" /></div>
+            <a href="https://awana.box.com/shared/static/0d3b70tw5dfrd58bdcy6.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers_logo-line-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/26fmuk361aswqyb8uo5g.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers_logo-line-bw.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/yzliqv8mhr7u65fkxktx.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers_logo-line-bw.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/lpr1x06ki7tf21mnehut.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers_logo-line-bw.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.truthseekers_clipart, 'gif/TruthSeekers-word-color.gif')}" alt="TruthSeekers Word Color" width="89" height="20" /></div>
+            <a href="https://awana.box.com/shared/static/k5oo3g9ho7sfj7bmg3us.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers-word-color.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/qy8tkzrt6xixo2cz5vcw.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers-word-color.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/kswo6gipfviia12id6z2.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers-word-color.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/rgokgm8ds6f2phwa3t6e.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers-word-color.pdf']);">pdf</a>
+        </div>
+        <div class="ca-listing">
+            <div class="ca-img"><img src="{!URLFOR($Resource.truthseekers_clipart, 'gif/TruthSeekers-word-bw.gif')}" alt="TruthSeekers Word Black and White" width="89" height="20" /></div>
+            <a href="https://awana.box.com/shared/static/cjmct35dnoxhe8g174ee.jpg" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers-word-bw.jpg']);">jpg</a>
+            <a href="https://awana.box.com/shared/static/45x03oihii6t7t6q16xq.png" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers-word-bw.png']);">png</a>
+            <a href="https://awana.box.com/shared/static/2dxwqv8juc1h8ymlp2g6.eps" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers-word-bw.eps']);">eps</a>
+            <a href="https://awana.box.com/shared/static/clv2hhy8qiylmqdommhm.pdf" onClick="javascript: _gaq.push(['_trackPageview', '/clipart/TruthSeekers-word-bw.pdf']);">pdf</a>
+        </div>
+    </div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js" type="text/javascript" language="javascript"></script>
+<script type="text/javascript" language="javascript">
+$(document).ready(function() {
+    $("a").each(function(index){
+        if($(this).html() == "jpg") {
+            $(this).attr("href",$(this).attr("href").replace("servlet.ImageServer","servlet.ImageServer.jpg"));
+        } else if($(this).html() == "png") {
+            $(this).attr("href",$(this).attr("href").replace("servlet.ImageServer","servlet.ImageServer.png"));
+        } else if($(this).html() == "eps") {
+            $(this).attr("href",$(this).attr("href").replace("servlet.ImageServer","servlet.ImageServer.eps"));
+        } else if($(this).html() == "tif") {
+            $(this).attr("href",$(this).attr("href").replace("servlet.ImageServer","servlet.ImageServer.tif"));
+        }
+    })
+});
+</script>
+</apex:page>

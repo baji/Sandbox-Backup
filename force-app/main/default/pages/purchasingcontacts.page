@@ -1,0 +1,13 @@
+<apex:page standardController="Account" extensions="PurchasingContactsExtension">
+    <apex:pageBlock title="Purchasing Contacts">
+        <apex:pageBlockTable value="{!PurchasingContacts}" var="contact">
+            <apex:column >
+                <apex:outputLink value="/{!contact.Id}" target="_parent">{!contact.Name}</apex:outputLink>
+            </apex:column>
+            <apex:column value="{!contact.Email}" />
+            <apex:column value="{!contact.HomePhone}" />
+            <apex:column value="{!contact.MobilePhone}" />
+            <apex:column value="{!contact.OtherPhone}" />
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

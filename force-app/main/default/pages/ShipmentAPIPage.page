@@ -1,0 +1,230 @@
+<apex:page Controller="ShipmentAPI" lightningStylesheets="true" standardStylesheets="false" tabStyle="Order" title="Whitebox Shipments API">
+
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
+        <title>WhiteBox Shipments</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <!-- Import the Design System style sheet -->
+        <apex:slds />
+    </head>
+
+    <body>
+        <div class="slds-scope">
+            <!-- PAGE HEADER -->
+            <div class="slds-page-header" role="banner">
+                <!-- PAGE HEADER TOP ROW -->
+                <div class="slds-grid">
+                    <!-- PAGE HEADER / ROW 1 / COLUMN 1 -->
+                    <div class="slds-col">
+                        <!-- HEADING AREA -->
+                        <!-- MEDIA OBJECT = FIGURE + BODY -->
+                        <div class="slds-media">
+                            <div class="slds-media__figure">
+                                <svg aria-hidden="true" class="slds-icon slds-icon--large slds-icon-standard-user">
+                                    <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#orders')}"></use>
+                                </svg>
+                            </div>
+                            <div class="slds-media__body">
+                                <p class="slds-text-heading--label">Awana Order</p>
+                                <h1 class="slds-text-heading--medium">{!Ord.OrderNumber}</h1>
+                            </div>
+                        </div>
+                        <!-- / MEDIA OBJECT -->
+                        <!-- HEADING AREA -->
+                    </div>
+                    <!-- / PAGE HEADER / ROW 1 / COLUMN 1 -->
+                    <!-- PAGE HEADER / ROW 1 / COLUMN 2 -->
+                    <div class="slds-col slds-no-flex slds-align-middle">
+                        <div class="slds-button-group" role="group">
+                        </div>
+                    </div>
+                    <!-- / PAGE HEADER / ROW 1 / COLUMN 2 -->
+                </div>
+                <!-- / PAGE HEADER TOP ROW -->
+                <!-- PAGE HEADER DETAIL ROW -->
+                <div class="slds-grid slds-page-header__detail-row">
+                    <!-- PAGE HEADER / ROW 2 / COLUMN 1 -->
+                    <div class="slds-col--padded slds-size--1-of-4">
+                        <dl>
+                            <dt>
+                                <p class="slds-text-heading--label slds-truncate">WB Order ID</p>
+                            </dt>
+                            <dd>
+                                <p class="slds-text-body--regular slds-truncate">{!Ord.NG_Shipment_ID__c}</p>
+                            </dd>
+                        </dl>
+                    </div>
+                    <!-- PAGE HEADER / ROW 2 / COLUMN 2 -->
+                    <div class="slds-col--padded slds-size--1-of-4">
+                        <dl>
+                            <dt>
+                                <p class="slds-text-heading--label slds-truncate">Total Quantity Ordered</p>
+                            </dt>
+                            <dd>
+                                <p class="slds-text-body--regular slds-truncate">{!Ord.TotalOrderQuantity__c - 1}</p>
+                            </dd>
+                        </dl>
+                    </div>
+                    <!-- PAGE HEADER / ROW 2 / COLUMN 3 -->
+                    <div class="slds-col--padded slds-size--1-of-4">
+                        <dl>
+                            <dt>
+                                <p class="slds-text-heading--label slds-truncate">Total Pick Quantity Ordered</p>
+                            </dt>
+                            <dd>
+                                <p class="slds-text-body--regular slds-truncate">{!Ord.Total_Pick_Quantity_Ordered__c}</p>
+                            </dd>
+                        </dl>
+                    </div>
+                    <!-- PAGE HEADER / ROW 2 / COLUMN 4 -->
+                    <div class="slds-col--padded slds-size--1-of-4">
+                        <dl>
+                            <dt>
+                                <p class="slds-text-heading--label slds-truncate">Total Pick Quantity Shipped</p>
+                            </dt>
+                            <dd>
+                                <p class="slds-text-body--regular slds-truncate">{!Ord.Total_Pick_Quantity__c}</p>
+                            </dd>
+                        </dl>
+                    </div>
+                </div>
+                <!-- / PAGE HEADER DETAIL ROW -->
+            </div>
+            <!-- / PAGE HEADER -->
+
+            <!-- PRIMARY CONTENT WRAPPER -->
+            <div class="myapp">
+
+                <!-- RELATED LIST CARDS-->
+
+                <div class="slds-grid slds-m-top--large">
+
+                    <!-- Products v Shipments CARD -->
+                    <div class="slds-col slds-col-rule--right slds-p-right--large">
+
+                        <div class="slds-card">
+
+                            <header class="slds-card__header slds-grid">
+                                <div class="slds-col slds-media slds-media--center">
+                                    <div class="slds-media__figure">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--medium">
+                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#order_item')}"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h3 class="slds-text-heading--small">Order Items v Shipments</h3>
+                                    </div>
+                                </div>
+                                <div class="slds-col slds-no-flex">
+                                    <apex:form >
+                                        <apex:commandButton value="Export to Excel" action="{!export}" />
+                                    </apex:form>
+                                </div>
+                            </header>
+
+
+                            <!-- CARD BODY = TABLE -->
+                            <section class="slds-card__body">
+                                <div class="slds-scrollable--x">
+                                    <apex:pageBlock >
+                                        <apex:dataTable value="{!ProdList}" var="pl" border="1" style="border-style:hidden;width:100%;" align="center" styleClass="slds-table slds-table--bordered">
+                                            <apex:column value="{!pl.PName}" headerValue="Name" headerClass="slds-text-heading--label slds-text-align--center" />
+                                            <apex:column value="{!pl.PCode}" headerValue="Product Code" styleClass="slds-text-align--center" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <apex:column headerValue="Quantity" styleClass="slds-text-align--center" headerClass="slds-text-heading--label slds-text-align--center">
+                                                <apex:outputText value="{0, number, integer}">
+                                                    <apex:param value="{!pl.Qty}" />
+                                                </apex:outputText>
+                                            </apex:column>
+                                            <apex:column value="{!pl.QtyShipped}" headerValue="Quantity Shipped" styleClass="slds-text-align--center" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <apex:repeat var="f" value="{!TotalShip}">
+                                                <apex:column headerValue="{!f}" styleClass="slds-text-align--center" headerClass="slds-text-heading--label slds-text-align--center">
+                                                    {!IF(pmap[pl.Pcode+'-'+f]==0,'',pmap[pl.Pcode+'-'+f])}
+                                                </apex:column>
+                                            </apex:repeat>
+                                        </apex:dataTable>
+                                    </apex:pageBlock>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+                    <!-- / Products v Shipments CARD -->
+
+                </div>
+
+                <div class="slds-grid slds-m-top--large">
+                    <!-- Shipments CARD -->
+                    <div class="slds-col slds-col-rule--right slds-p-right--large">
+
+                        <div class="slds-card">
+
+                            <header class="slds-card__header slds-grid">
+                                <div class="slds-col slds-media slds-media--center">
+                                    <div class="slds-media__figure">
+                                        <svg aria-hidden="true" class="slds-icon slds-icon-standard-contact slds-icon--medium">
+                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#shipment')}"></use>
+                                        </svg>
+                                    </div>
+                                    <div class="slds-media__body">
+                                        <h3 class="slds-text-heading--small">Shipments</h3>
+                                    </div>
+                                </div>
+                            </header>
+
+
+                            <!-- CARD BODY = TABLE -->
+                            <section class="slds-card__body">
+                                <div class="slds-scrollable--x">
+                                    <apex:pageBlock >
+                                        <apex:dataTable value="{!ShipmentList}" var="sl" border="1" style="border-style:hidden;width:100%;" align="center" styleClass="slds-table slds-table--bordered">
+                                            <apex:column value="{!sl.AwanaOrder}" styleClass="slds-text-align--center" headerValue="Awana Order" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <apex:column value="{!sl.WBOrderID}" styleClass="slds-text-align--center" headerValue="WB Order ID" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <apex:column value="{!sl.WBShipmentID}" styleClass="slds-text-align--center" headerValue="WB Shipment ID" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <apex:column value="{!sl.ShipDate}" styleClass="slds-text-align--center" headerValue="Ship Date" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <apex:column value="{!sl.ModifiedOn}" styleClass="slds-text-align--center" headerValue="Modified Date" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <apex:column value="{!sl.isVoided}" styleClass="{!IF(sl.isVoided=true,'slds-text-color_error slds-text-align--center', 'slds-text-align--center')}"
+                                                headerValue="is Voided" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <!-- 
+                                                "{'slds-text-align--center'}" 
+                                                slds-text-color_success
+                                                style="{!IF(sl.isVoided=true,'color:red;font-weight: bold', 'color:black')}"
+                                                
+                                            -->
+
+                                            <apex:column value="{!sl.latestTrackingEvent}" styleClass="{!IF(sl.latestTrackingEvent='Delivered','slds-text-color_success slds-text-align--center', 'slds-text-align--center')}"
+                                                headerValue="Latest Tracking Event" headerClass="slds-text-heading--label slds-text-align--center"
+                                            />
+                                            <apex:column headerValue="Tracking URL" styleClass="slds-text-align--center" headerClass="slds-text-heading--label slds-text-align--center">
+                                                <apex:outputlink value="{!sl.trackingUrl}" target="_blank">{!sl.tracking}</apex:outputlink>
+                                            </apex:column>
+                                        </apex:dataTable>
+                                    </apex:pageBlock>
+                                </div>
+                            </section>
+                        </div>
+
+                    </div>
+                    <!-- Shipments CARD -->
+                </div>
+                <!-- / RELATED LIST CARDS -->
+            </div>
+            <!-- / PRIMARY CONTENT WRAPPER -->
+        </div>
+    </body>
+
+
+
+    </html>
+
+</apex:page>

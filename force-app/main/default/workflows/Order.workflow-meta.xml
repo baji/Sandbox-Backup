@@ -1,0 +1,1133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>Campaign_Member_Exist_with_promo_code</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Duplicate Contact submitted to Renewal Free Shipping Campaign - Void</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>anveshk@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Membership_Templates/Notification_to_Admins</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Awana_Prepay_Invoice</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Email Awana Prepay Invoice</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Prepay_Invoice_MENA</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Credit_Receipt</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Email Credit Receipt</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Email_Credit_Receipt</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_Internal_invoice_receipt_to_customer_when_order_goes_to_Order_Confirmed</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Email Internal [invoice] receipt to customer when order goes to Order Confirmed</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Email_Internal_Invoice_Receipt</template>
+    </alerts>
+    <alerts>
+        <fullName>Email_credit_card_receipt_Not_the_End</fullName>
+        <description>Email credit card receipt - Not the End</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/EmailCreditCardReceiptNottheEnd</template>
+    </alerts>
+    <alerts>
+        <fullName>EmailcreditcardreceipttocustomerwhenordergoestoJDE</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Email [credit card] receipt to customer when order goes to JDE</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/Email_Credit_Card_Receipt</template>
+    </alerts>
+    <alerts>
+        <fullName>EmailinvoicereceipttocustomerwhenordergoestoJDE</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Email [invoice] receipt to customer when order goes to JDE</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/EmailInvoiceReceipt</template>
+    </alerts>
+    <alerts>
+        <fullName>MOZO_Welcome_email_with_Instruction</fullName>
+        <description>MOZO Welcome email with Instruction</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Mozo_Templates/welcome_to_Mozo</template>
+    </alerts>
+    <alerts>
+        <fullName>Membership_Renewal_Email</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Membership Renewal Campaign Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Membership_Templates/Order_Membership_Renew_with_Promo_Code</template>
+    </alerts>
+    <alerts>
+        <fullName>Negative_Opportunity_E_Mail_Alert</fullName>
+        <description>Negative Opportunity E-Mail Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>erikt@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jenh@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Admin_only_Templates/Negative_Opportunity_Warning</template>
+    </alerts>
+    <alerts>
+        <fullName>OPP_Duplicate_Alert</fullName>
+        <description>OPP - Duplicate Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jasonp@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jenh@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/OPP_Duplicate_Alert</template>
+    </alerts>
+    <alerts>
+        <fullName>OPP_Manual_Charge_On_Hold</fullName>
+        <description>OPP - Manual Charge On Hold</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>jasonp@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>jenh@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <recipients>
+            <recipient>timr@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Admin_only_Templates/OPP_Manual_Charge_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>OPP_Send_Notification_for_Paid_Prepay_MENA</fullName>
+        <ccEmails>jenniferl@awana.org</ccEmails>
+        <ccEmails>meter@awana.org</ccEmails>
+        <ccEmails>internationalshipping@awana.org</ccEmails>
+        <ccEmails>internationalorders@awana.org</ccEmails>
+        <description>OPP - Send Notification for Paid Prepay MENA</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Customer_Care_Templates/OPP_Order_Paid_Notification_for_Shipping</template>
+    </alerts>
+    <alerts>
+        <fullName>OPP_Shipping_Address_Null</fullName>
+        <description>OPP - Shipping Address Null</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>erikt@awana.church</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Admin_only_Templates/OPP_Shipping_Address_Null</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_Confirmed_10_000</fullName>
+        <description>Order Confirmed &gt;= $10,000</description>
+        <protected>false</protected>
+        <recipients>
+            <recipient>davidro@awana.org</recipient>
+            <type>user</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Admin_only_Templates/Order_Confirmed_10_000</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_confirmation_email_to_customer</fullName>
+        <ccEmails>sfapps@awana.org</ccEmails>
+        <description>Order confirmation email to customer</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Billing_Email__c</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>Customer_Care_Templates/EmailInvoiceReceipt</template>
+    </alerts>
+    <alerts>
+        <fullName>Order_on_Hold_notification_to_Customer_Services</fullName>
+        <ccEmails>customerservice@awana.org</ccEmails>
+        <description>Order on Hold notification to Customer Services</description>
+        <protected>false</protected>
+        <senderType>CurrentUser</senderType>
+        <template>Customer_Care_Templates/Order_on_Hold_notification_to_Ministry_Services</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>Billing_Email_Field_Update</fullName>
+        <field>Billing_Email__c</field>
+        <formula>Chargent_Order__r.ChargentOrders__Billing_Email__c</formula>
+        <name>Billing Email Field Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Canada_Order_Company</fullName>
+        <description>Update Company on Order to Awana Canada</description>
+        <field>Company__c</field>
+        <formula>&apos;Awana Canada&apos;</formula>
+        <name>Canada Order Company</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Error_Log_When_Opportunity_Closes</fullName>
+        <field>Error_Log__c</field>
+        <name>Clear Error Log When Opportunity Closes</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Clear_Error_Log_When_Order_Closes</fullName>
+        <field>Error_Log__c</field>
+        <name>Clear Error Log When Order Closes</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Null</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>First_Shipment_Date_Time</fullName>
+        <field>First_Shipment__c</field>
+        <formula>NOW()</formula>
+        <name>First Shipment Date/Time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>INQ_Assign_Default_Opp_Name_Converte</fullName>
+        <description>Update the Opportunity Name for Converted Inquiries</description>
+        <field>Name</field>
+        <formula>&quot;P- &quot;+ Account.Name +&quot;-&quot;+  TEXT( DATEVALUE( CreatedDate ) )</formula>
+        <name>INQ - Assign Default Opp Name-Converted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>INQ_Assign_Default_Opp_Name_Return</fullName>
+        <description>Updates the Opportunity Name for Returning Churches</description>
+        <field>Name</field>
+        <formula>&quot;CB- &quot;+ Account.Name +&quot;-&quot;+ TEXT( DATEVALUE(CreatedDate) )</formula>
+        <name>INQ - Assign Default Opp Name - Return</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>OPP_Manual_Charge_On_Hold</fullName>
+        <description>Places Canada Opportunity on hold if Manual Charge is unchecked</description>
+        <field>Status</field>
+        <literalValue>Order on Hold</literalValue>
+        <name>OPP - Manual Charge On Hold</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Order_Being_Fulfilled</fullName>
+        <field>Order_Being_Fulfilled__c</field>
+        <literalValue>1</literalValue>
+        <name>Order Being Fulfilled</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Order_Being_Fulfilled_Date</fullName>
+        <field>Order_Being_Fulfilled_Date__c</field>
+        <formula>Now()</formula>
+        <name>Order Being Fulfilled Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Order_Cancelled_in_Intacct</fullName>
+        <field>Order_Being_Fulfilled__c</field>
+        <literalValue>0</literalValue>
+        <name>Order Cancelled in Intacct</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Order_Submitted_Date_Time</fullName>
+        <field>Order_Submitted__c</field>
+        <formula>NOW()</formula>
+        <name>Order Submitted Date/Time</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Order_Submitted_Prepay</fullName>
+        <description>Update Opportunity Stage to Order Awaiting Payment</description>
+        <field>Status</field>
+        <literalValue>Order Awaiting Payment</literalValue>
+        <name>Order Submitted Prepay</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Package_Shipped_field_update</fullName>
+        <field>Package_Shipped__c</field>
+        <literalValue>0</literalValue>
+        <name>Package Shipped field update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Promo_Email_Sent</fullName>
+        <field>Promo_Email_Sent__c</field>
+        <literalValue>1</literalValue>
+        <name>Update Promo Email Sent</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <outboundMessages>
+        <fullName>CA_Credit_Card</fullName>
+        <apiVersion>40.0</apiVersion>
+        <description>Calls integration to fill CACCInvQueue</description>
+        <endpointUrl>https://ci6.awana.org/tFillCACCInvQw</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>false</includeSessionId>
+        <integrationUser>castiron@awana.org</integrationUser>
+        <name>CA Credit Card</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>NewCM</fullName>
+        <apiVersion>19.0</apiVersion>
+        <description>Send a new CM to Financial System via CMQueue.</description>
+        <endpointUrl>https://ci6.awana.org/tFillCreditMemoQw</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>timr@awana.org</integrationUser>
+        <name>New Credit Memo</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>NewOrder</fullName>
+        <apiVersion>8.0</apiVersion>
+        <description>Send a new order to Financial System via Cast Iron.</description>
+        <endpointUrl>https://ci6.awana.org/tNewOrderQw</endpointUrl>
+        <fields>AccountId</fields>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>castiron@awana.org</integrationUser>
+        <name>New Order</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>OrderCancelled</fullName>
+        <apiVersion>19.0</apiVersion>
+        <description>Update inventory for a cancelled Order via CastIron.</description>
+        <endpointUrl>https://ci6.awana.org/tOrderCanw</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>castiron@awana.org</integrationUser>
+        <name>Order Cancelled</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>OrderSubmitted</fullName>
+        <apiVersion>19.0</apiVersion>
+        <description>Update inventory for a new Order via CastIron.</description>
+        <endpointUrl>https://ci6.awana.org/tOrderSubw</endpointUrl>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>castiron@awana.org</integrationUser>
+        <name>Order Submitted</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <outboundMessages>
+        <fullName>Sync_Intacct_Account</fullName>
+        <apiVersion>19.0</apiVersion>
+        <endpointUrl>https://ci6.awana.org/tSyncAcctWS</endpointUrl>
+        <fields>AccountId</fields>
+        <fields>Id</fields>
+        <includeSessionId>true</includeSessionId>
+        <integrationUser>timr@awana.org</integrationUser>
+        <name>Sync Intacct Account</name>
+        <protected>false</protected>
+        <useDeadLetterQueue>false</useDeadLetterQueue>
+    </outboundMessages>
+    <rules>
+        <fullName>CA Credit Card</fullName>
+        <actions>
+            <name>CA_Credit_Card</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <description>Call integration for charging Canada credit card orders</description>
+        <formula>Company__c ==&apos;Awana Canada&apos;  &amp;&amp;  ISPICKVAL(Payment_Terms__c, &apos;Credit Card&apos;)  &amp;&amp;  Chargent_Order__r.ChargentOrders__Manual_Charge__c</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Canada default Company</fullName>
+        <actions>
+            <name>Canada_Order_Company</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Assign Awana Canada as the country for Canada orders</description>
+        <formula>Account.Name = &apos;Awana International Canada&apos; || Account.Mailing_Address_Book__c =&apos;4&apos;</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Clear Error Log When Order Closes</fullName>
+        <actions>
+            <name>Clear_Error_Log_When_Order_Closes</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Invoiced,Credit Issued,Order Cancelled</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Credit Card Receipt</fullName>
+        <actions>
+            <name>EmailcreditcardreceipttocustomerwhenordergoestoJDE</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8 AND 9</booleanFilter>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>Credit Card</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.CreatedById</field>
+            <operation>notEqual</operation>
+            <value>Nate Kauffman</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.TotalAmount</field>
+            <operation>greaterThan</operation>
+            <value>USD 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Company__c</field>
+            <operation>equals</operation>
+            <value>Awana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Opportunity_Source__c</field>
+            <operation>notEqual</operation>
+            <value>NotTheEnd</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.ExtraEmail__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Has_Donation__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Has_brite__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Credit Card Receipt - Not the End</fullName>
+        <actions>
+            <name>Email_credit_card_receipt_Not_the_End</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>Credit Card</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.CreatedById</field>
+            <operation>notEqual</operation>
+            <value>Nate Kauffman</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.TotalAmount</field>
+            <operation>greaterThan</operation>
+            <value>USD 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Company__c</field>
+            <operation>equals</operation>
+            <value>Awana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Opportunity_Source__c</field>
+            <operation>equals</operation>
+            <value>NotTheEnd</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Credit Receipt</fullName>
+        <actions>
+            <name>Email_Credit_Receipt</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Credit Issued</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>Sales Credit</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.ExtraEmail__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Name</field>
+            <operation>notEqual</operation>
+            <value>Awana International Canada</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Mailing_Address_Book__c</field>
+            <operation>notEqual</operation>
+            <value>4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Has_brite__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Internal Receipt</fullName>
+        <actions>
+            <name>Email_Internal_invoice_receipt_to_customer_when_order_goes_to_Order_Confirmed</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>Internal</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.ExtraEmail__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Name</field>
+            <operation>notEqual</operation>
+            <value>Awana International Canada</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Mailing_Address_Book__c</field>
+            <operation>notEqual</operation>
+            <value>4</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Has_brite__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <description>Prints receipts for internal orders.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Invoice Receipt</fullName>
+        <actions>
+            <name>EmailinvoicereceipttocustomerwhenordergoestoJDE</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6 AND 7 AND 8</booleanFilter>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Confirmed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>Net 30</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.CreatedById</field>
+            <operation>notEqual</operation>
+            <value>Nate Kauffman</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.TotalAmount</field>
+            <operation>greaterThan</operation>
+            <value>USD 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Company__c</field>
+            <operation>equals</operation>
+            <value>Awana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.ExtraEmail__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Has_Donation__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Confirmation_Email_Sent__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Email Invoice Receipt-Baji Test</fullName>
+        <actions>
+            <name>Order_confirmation_email_to_customer</name>
+            <type>Alert</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>1 AND 2 AND 3 AND 4 AND 5 AND 6</booleanFilter>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Being Fulfilled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>Net 30</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Has_Donation__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.TotalAmount</field>
+            <operation>greaterThan</operation>
+            <value>USD 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Company__c</field>
+            <operation>equals</operation>
+            <value>Awana</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.ExtraEmail__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>First Shipment Date%2FTime</fullName>
+        <actions>
+            <name>First_Shipment_Date_Time</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.First_Shipment__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Shipments__c</field>
+            <operation>greaterThan</operation>
+            <value>0</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Free Shipping Renewal Promo</fullName>
+        <actions>
+            <name>Membership_Renewal_Email</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Update_Promo_Email_Sent</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order.Send_Free_Shipping_coupon__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Promo_code__c</field>
+            <operation>startsWith</operation>
+            <value>renew</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Promo_Email_Sent__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Billing_Email__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>INQ - Update Account Status</fullName>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Registration Signed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Prospect,Dropped</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <description>Update Account Status to Ready to Activate when Opportunity Stage = Registration Signed</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OPP - Duplicate Alert</fullName>
+        <actions>
+            <name>OPP_Duplicate_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Error_Log__c</field>
+            <operation>contains</operation>
+            <value>has already been captured</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OPP - Manual Charge</fullName>
+        <actions>
+            <name>OPP_Manual_Charge_On_Hold</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>OPP_Manual_Charge_On_Hold</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>For Canada Orders, if payment term is Credit Card and Manual Charge is unchecked, sends out email notification and puts order On Hold</description>
+        <formula>Company__c ==&apos;Awana Canada&apos;  &amp;&amp;  ISPICKVAL(Payment_Terms__c, &apos;Credit Card&apos;)  &amp;&amp;  Chargent_Order__c &lt;&gt; null &amp;&amp; NOT(Chargent_Order__r.ChargentOrders__Manual_Charge__c)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OPP - Negative Amount</fullName>
+        <actions>
+            <name>Negative_Opportunity_E_Mail_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Sends out an email alert when an Opportunity is an Order and is a negative amount.</description>
+        <formula>AND(  TotalAmount &lt;0,OwnerId=&quot;005500000014UD2&quot;)</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>OPP - Send Notification for Paid Prepay KM</fullName>
+        <active>false</active>
+        <description>Sends notification if an Opp Stage changes for Order Awaiting Payment to Order Paid.  Used for Kidzmatter Prepay Orders</description>
+        <formula>AND( ISCHANGED(Status), ISPICKVAL(PRIORVALUE(Status) , &quot;Order Awaiting Payment&quot;), ISPICKVAL(Status,&quot;Order Paid&quot;), ISPICKVAL(Payment_Terms__c,&quot;PrePay&quot;),  Company__c = &quot;Kidzmatter&quot; )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>OPP - Send Notification for Paid Prepay MENA</fullName>
+        <actions>
+            <name>OPP_Send_Notification_for_Paid_Prepay_MENA</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <description>Sends notification if an Opp Stage changes for Order Awaiting Payment to Order Paid.  Used for MENA</description>
+        <formula>AND( ISCHANGED(Status), ISPICKVAL(PRIORVALUE(Status) , &quot;Order Awaiting Payment&quot;), ISPICKVAL(Status,&quot;Order Paid&quot;), ISPICKVAL(Payment_Terms__c,&quot;PrePay&quot;),  Company__c = &quot;Awana&quot; )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>OPP - Shipping Address Null</fullName>
+        <actions>
+            <name>OPP_Shipping_Address_Null</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.ShippingStreet</field>
+            <operation>contains</operation>
+            <value>null</value>
+        </criteriaItems>
+        <description>WF Rule triggers when shipping address contains &quot;Null&quot;</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Being Fulfilled</fullName>
+        <actions>
+            <name>Order_Being_Fulfilled</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Confirmed,Order Invoiced,Order Shipped,Order Being Fulfilled</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Being Fulfilled Date</fullName>
+        <actions>
+            <name>Order_Being_Fulfilled_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Being Fulfilled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Order_Being_Fulfilled_Date__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Cancelled</fullName>
+        <actions>
+            <name>OrderCancelled</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Cancelled</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>notEqual</operation>
+            <value>Sales Credit</value>
+        </criteriaItems>
+        <description>Order cancelled and ready to be sent to update inventory.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Cancelled in Intacct</fullName>
+        <actions>
+            <name>Order_Cancelled_in_Intacct</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Cancelled</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Confirmed %3E%3D %2410%2C000</fullName>
+        <actions>
+            <name>Order_Confirmed_10_000</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.TotalAmount</field>
+            <operation>greaterOrEqual</operation>
+            <value>&quot;USD 10,000&quot;</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Confirmed</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Entered I</fullName>
+        <actions>
+            <name>NewOrder</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Submitted</value>
+        </criteriaItems>
+        <description>Order entered and ready to be sent to Intacct.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Paid Prepay</fullName>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Paid</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>PrePay</value>
+        </criteriaItems>
+        <description>Order Paid and Payment Terms = &quot;Prepay&quot; and ready to be sent to update inventory.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Submitted</fullName>
+        <actions>
+            <name>OrderSubmitted</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>notEqual</operation>
+            <value>PrePay,Payment to be Collected,Sales Credit,Sales Credit - Refunded</value>
+        </criteriaItems>
+        <description>Order submitted and Payment Terms &lt;&gt; &quot;Prepay&quot; and ready to be sent to update inventory.</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Submitted Date%2FTime</fullName>
+        <actions>
+            <name>Order_Submitted_Date_Time</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Order_Submitted__c</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order Submitted Prepay - Awana</fullName>
+        <actions>
+            <name>Email_Awana_Prepay_Invoice</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>Order_Submitted_Prepay</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Name</field>
+            <operation>startsWith</operation>
+            <value>O</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>PrePay</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Company__c</field>
+            <operation>equals</operation>
+            <value>Awana</value>
+        </criteriaItems>
+        <description>Order submitted and Payment Terms = &quot;Prepay&quot;, change status to Order Awaiting Payment</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Order on Hold</fullName>
+        <actions>
+            <name>Order_on_Hold_notification_to_Customer_Services</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order on Hold</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sales Credit Submitted</fullName>
+        <actions>
+            <name>NewCM</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Order.Status</field>
+            <operation>equals</operation>
+            <value>Order Submitted</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Order.Payment_Terms__c</field>
+            <operation>equals</operation>
+            <value>Sales Credit,Sales Credit - Refunded</value>
+        </criteriaItems>
+        <description>Sales Credit submitted and ready to be sent to Intacct.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Sync Intacct Account</fullName>
+        <actions>
+            <name>Sync_Intacct_Account</name>
+            <type>OutboundMessage</type>
+        </actions>
+        <active>true</active>
+        <description>Sync or create an Intacct account with the SFDC account associated with a new Opportunity.</description>
+        <formula>true</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Order Billing Email</fullName>
+        <actions>
+            <name>Billing_Email_Field_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(      ISCHANGED( Chargent_Order__c),      NOT(     ISNULL(Chargent_Order__r.ChargentOrders__Billing_Email__c)     )     )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

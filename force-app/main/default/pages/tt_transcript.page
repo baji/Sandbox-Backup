@@ -1,0 +1,16 @@
+<apex:page standardController="Contact" title="My Transcript" tabStyle="Training_Tracker__tab">
+    <apex:sectionheader title="Transcript" subtitle="{!Contact.Name}" />
+    &#171;&#160;<a href="/a0X">Back to Course Catalog</a>
+    <br /><br />
+     <apex:pageMessage severity="error" >
+     <b>When updating Training Tracker Credits for your leaders and The Year of Service tab appears. Click on the tab and</b>
+     <b>enter a 0 value in the Year of Service field and click Save. This will insure that the leader's total credits will be</b>             
+     <b>calculated correctly.</b> 
+       <p></p>                                      
+    </apex:pageMessage>
+    <div style="text-align:right; font-size:14pt; padding:6px; ">
+        <span>My Total RIUs</span>:&nbsp;
+        <span style="font-size:16pt; font-weight:bold;">{!Contact.Total_RIU_s__c}</span>
+    </div>
+    <apex:relatedList list="TT_Credits__r" pageSize="999" />
+</apex:page>

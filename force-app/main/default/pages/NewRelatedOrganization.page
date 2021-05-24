@@ -1,0 +1,47 @@
+<apex:page standardController="npe5__Affiliation__c" standardStylesheets="false" applyBodyTag="false" recordSetVar="affiliations" extensions="NewRelatedOrganizationController">
+    <!--<apex:includeLightning /> -->
+    <script>
+         //var previousOnload = window.onload;
+         window.onload = function() { 
+             //alert('loading...');
+             var myUserContext = "{!$User.UITheme}";
+             //alert(myUserContext);
+             if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d') {
+                 createNew();
+             }else if (myUserContext == 'Theme3') {
+                 init();    
+             }
+              
+         }
+         function init(){
+            var myUserContext = "{!$User.UITheme}";
+            alert(myUserContext);
+            checkParam(myUserContext);
+        }
+        function createNew() {
+          //alert('new sforce.one 1123');
+          //alert('{!$CurrentPage.parameters.accId}');
+          var myUserContext = "{!$User.UITheme}";
+           if (myUserContext == 'Theme4t' || myUserContext == 'Theme4d') {
+               // The Visualforce page is in S1 or Lightning Experience
+               sforce.one.createRecord("npe5__Affiliation__c",null,{ 
+                    "npe5__Organization__c": "{!$CurrentPage.parameters.accId}",
+                    "npe5__Contact__c": "{!conId}"  
+                });
+           } else if (myUserContext == 'Theme3') {
+               // The Visualforce page is  running in Classic
+               window.parent.location = '/' + event.getParams().recordId;
+           }
+          
+        }
+     </script>
+    <body>
+        <apex:form >
+        
+            <apex:actionFunction name="checkParam" action="{!checkParam}" reRender="test" >
+                <apex:param name="theme" assignTo="{!theme}" value=""/>
+            </apex:actionFunction>
+            <apex:outputPanel id="test"></apex:outputPanel>
+        </apex:form>
+    </body>
+</apex:page>

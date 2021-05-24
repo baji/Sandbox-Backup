@@ -1,0 +1,2011 @@
+<apex:page Controller="USMissinoary_DataEntryCtrl" showHeader="true" wizard="true" sidebar="false" tabStyle="Account">
+     <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+    <tr><td>&nbsp;</td></tr>
+ <script>
+ 
+document.getElementsByTagName('img')[0].src='{!$Resource.AwanaLogo}'
+ </script>
+<style>
+.picklistArrowRight, .rightArrowIcon, .picklistArrowLeft{
+   width:40px !important;
+}
+    .quickfindInput {
+    background-image: url('{!$Resource.MagniferGlass}');
+    background-repeat: no-repeat;
+    background-position: 2px 2px;
+    border-radius: 5px 5px 5px 5px;
+    padding-left: 22px;
+    padding-top: 2px;
+    height: 15px;
+    border: 2px inset;
+    }
+    .rich-tabpanel{
+    
+        width:81%;
+    }
+        .headerRow1 th{
+        display:none;
+        }
+        body .pbBody table.list tr.headerRow td, body .pbBody table.list tr.headerRow th{
+        
+        width:15%;font-size: 1.0em;
+        }   
+        .accountTab .tertiaryPalette, .individualPalette .accountBlock .tertiaryPalette, .layoutEdit .individualPalette .accountBlock .tertiaryPalette{
+        background-color:#FFFFFF;
+        }  
+        .apexp .bPageBlock.apexDefaultPageBlock .pbBody .pbSubheader {
+            border-top: 0 none;
+            color: black;
+        } 
+        .detailPage .bPageBlock, .editPage .bPageBlock {
+            border-top-width: 3px;
+        } 
+        .ui-tabs .ui-tabs-panel{
+        position:absolute;
+        padding: 0 1.4em;
+        }
+        
+        body .bPageFooter a, body .bPageFooter {
+            border: medium none;
+            color: #1797C0;
+        } 
+       
+        body .pbBody table.list tr th, body .pbBody table.list tr td{
+            font-size:13px;
+        }
+        body .pbBody table.list tr.headerRow td, body .pbBody table.list tr.headerRow th{
+        
+            width:144px;
+        }
+        .rich-tab-header{
+            font-weight:bold;
+            font-size: 13px;
+        }
+        .tabWidth{
+            width:106px;
+        }
+        .rich-tabhdr-side-cell {
+            border-top-color: #C0C0C0;
+            height: 30px;
+        }
+        .activeTab {background-color: #236FBD; color:white; background-image:none}
+        .inactiveTab { background-color: lightgrey; color:black; background-image:none}
+        
+        body button, body .x-btn, body .btn, body .btnDisabled, body .btnCancel, body .menuButton .menuButtonButton{
+            padding: 3px 12px;
+            font-size:1.1em;
+        }
+        .viewTextStyle{
+            font-weight:bold;
+            font-style:italic;
+            color:gray;
+        }
+        .editTextSize{
+            font-size:14px;
+            font-weight:bold;
+            width:250px;
+        }
+        select{
+            width:140px;
+        }
+        .bPageBlock .labelCol{font-size:1.1em;}
+        .bPageBlock .dataCol{font-size: 1.2em;}
+        .deco a {text-decoration:none;}
+        .deco a:hover{text-decoration:none;}
+</style>
+    
+ <apex:form >
+ 
+  
+  <script type='text/javascript'>
+    var check1;
+    function test2(obj){
+          
+     var obj1=document.getElementsByClassName('cls_newcon');
+    
+     var obj_hdn=document.getElementsByClassName('cls_accID');
+          
+     var accname=obj.innerHTML;
+     var accid ;
+     for(i=0;i<obj_hdn.length;i++)
+     {
+     var hdn_val=obj_hdn[i].value;
+     var split_val=hdn_val.split("^^")
+     if(split_val[1]==accname)
+     accid=split_val[0]    
+     }
+     obj1[1].value=accname
+     obj1[0].value=accid
+     for(i=0;i<obj1.length;i++)
+     {
+         if(obj1[i].type=='text')
+         {     
+             obj1[i].value=accname 
+             check1=accname    
+         }
+     }
+     
+    }
+    function test_aftercon(){
+        var obj1=document.getElementsByClassName('cls_newcon');
+    
+         var obj_hdn=document.getElementsByClassName('cls_accID');
+              
+         var accname=check1;
+         var accid ;
+         for(i=0;i<obj_hdn.length;i++)
+         {
+         var hdn_val=obj_hdn[i].value;
+         var split_val=hdn_val.split("^^")
+         if(split_val[1]==accname)
+         accid=split_val[0]    
+         }
+         obj1[1].value=accname
+         obj1[0].value=accid
+         for(i=0;i<obj1.length;i++)
+         {
+             if(obj1[i].type=='text')
+             {     
+                 obj1[i].value=accname
+                      
+             }
+         }
+    }
+    var check;
+    function test(obj){
+           
+     var obj1=document.getElementsByClassName('cls_taskacc');
+     var obj2=obj1[0].getElementsByTagName('input');
+     var obj_hdn=document.getElementsByClassName('cls_accID');
+          
+     var accname=obj.innerHTML;
+     var accid ;
+     for(i=0;i<obj_hdn.length;i++)
+     {
+     var hdn_val=obj_hdn[i].value;
+     var split_val=hdn_val.split("^^")
+     if(split_val[1]==accname)
+     accid=split_val[0]
+     }
+     obj2[1].value=accname
+     obj2[0].value=accid
+          
+     for(i=0;i<obj2.length;i++)
+     {
+         if(obj2[i].type=='text')
+         {     
+             obj2[i].value=accname
+             check=accname           
+         }
+     }
+        
+    }
+   function test_after(){
+         var obj1=document.getElementsByClassName('cls_taskacc');
+         var obj2=obj1[0].getElementsByTagName('input');
+         var obj_hdn=document.getElementsByClassName('cls_accID');
+              
+         var accname=check;
+         var accid ;
+         for(i=0;i<obj_hdn.length;i++)
+         {
+         var hdn_val=obj_hdn[i].value;
+         var split_val=hdn_val.split("^^")
+         if(split_val[1]==accname)
+         accid=split_val[0]
+         }
+         obj2[1].value=accname
+         obj2[0].value=accid
+        
+         for(i=0;i<obj2.length;i++)
+         {
+             if(obj2[i].type=='text')
+             {  
+                     obj2[i].value=accname;  
+             }
+         }
+    } 
+    
+    function showNewContactDivision(){
+        if(document.getElementById('conDiv').style.display =='none')
+        {
+             document.getElementById('conDiv').style.display = 'block';
+             document.getElementById('conDetailsDivision').style.display = 'none';
+             }
+        else
+             document.getElementById('conDiv').style.display = 'none';
+         return false; 
+    }
+    function showNewOppDivision(){
+        if(document.getElementById('oppDiv').style.display =='none')
+        {
+             document.getElementById('oppDiv').style.display = 'block';
+             document.getElementById('oppDetailsDivision').style.display = 'none';
+             }
+        else
+             document.getElementById('oppDiv').style.display = 'none';
+         return false;
+    
+    }
+    function showNewTaskDivision(){
+        if(document.getElementById('taskDiv').style.display =='none')
+        {
+             document.getElementById('taskDiv').style.display = 'block';
+             document.getElementById('taskDetailsDivison').style.display = 'none';                                    
+        }
+        else
+             document.getElementById('taskDiv').style.display = 'none';
+         return false; 
+    }
+    function default_sel_relatedto() {
+        var div = document.getElementsByClassName('cls_taskacc');
+        var sel = div[0].getElementsByTagName('select');
+        
+        var inp=div[0].getElementsByTagName('input');
+        
+        var select = sel[0];
+        var len = select.options.length;
+        for(var i=0; i < len; i ++) {
+           
+            if(select.options[i].text == "Opportunity") {
+                select.options[i].selected = true;
+            }
+        }
+        for(i=0;i<inp.length;i++)
+         {
+             var name_split = inp[i].name;
+             var name_split1 = name_split.split(":");
+             if(inp[i].type == 'hidden' && name_split1[3] == 'j_id633_lktp')
+             {  
+                     inp[i].value="006";  
+             }
+         }
+    }
+    function noenter(ev)  { 
+
+        if (window.event && window.event.keyCode == 13 || ev.which == 13) {
+            Search();
+            return false;
+         } else {
+              return true;
+         }
+     }
+     function noenter1(ev1)  { 
+
+        if (window.event && window.event.keyCode == 13 || ev1.which == 13) {
+            Searchpmm();
+            return false;
+         } else {
+              return true;
+         }
+     }
+     function testRadio(){
+     
+     var rad=document.getElementsByClassName('cls_radio');
+     var chk=0;
+     for(var i=0;i<rad.length;i++)
+       {
+       if(rad[i].checked==true)
+       {
+       chk=1;
+       }
+       }
+        if(chk==1)
+        {
+       document.getElementById('oppDiv').style.display = 'block';
+       var td_cls=document.getElementsByTagName('span');
+       var result='';
+           for(var i=0;i<td_cls.length;i++)
+           {
+                var split_val=td_cls[i].id.split(":");
+                if(split_val[5]=='acc_name'){
+                
+                result=document.getElementById(td_cls[i].id).innerHTML;
+                }
+           } 
+                var td_cls=document.getElementsByTagName('input');
+           for(var i=0;i<td_cls.length;i++)
+           {
+                var split_val=td_cls[i].id.split(":");
+                if(split_val[3]=='opp_name'){
+                document.getElementById(td_cls[i].id).value='MA-'+result;
+                }          
+           }
+      
+        }
+        else{
+        document.getElementById('oppDiv').style.display = 'none';
+        alert("Please select the primary contact")
+        return false;
+        }
+    }
+    function testTaskRadio(){
+     
+     var rad=document.getElementsByClassName('cls_radio_opp');
+     var chk=0;
+     for(var i=0;i<rad.length;i++)
+     {      
+           if(rad[i].checked == true)
+           {
+               chk=1;            
+           }       
+     }
+        if(chk==1)
+        {
+           document.getElementById('taskDiv').style.display = 'block';
+        }
+        else{
+        document.getElementById('taskDiv').style.display = 'none';
+        alert("Please select the Opportunity")
+        return false;
+        }
+    }
+      function oppDiv(){
+        if(document.getElementById('oppDiv').style.display =='none')
+             document.getElementById('oppDiv').style.display = 'block';
+        else
+             document.getElementById('oppDiv').style.display = 'none';
+         return false;
+     }
+     function conDiv(){
+         if(document.getElementById('conDiv').style.display =='none')
+             document.getElementById('conDiv').style.display = 'block';
+        else
+             document.getElementById('conDiv').style.display = 'none';
+         return false;
+     }
+     function closeOppDiv()
+     {
+         document.getElementById('oppDiv').style.display = 'none';
+         document.getElementById('oppDetailsDivision').style.display = 'block';
+     }
+     function closeConDiv()
+     {
+         document.getElementById('conDiv').style.display = 'none';
+         document.getElementById('conDetailsDivision').style.display = 'block';
+     }
+      function closeTaskDiv()
+     {
+        document.getElementById('taskDiv').style.display = 'none';
+        document.getElementById('taskDetailsDivison').style.display = 'block'; 
+     }
+     rad_val='';
+     function testR(obj){
+     rad_val=obj.value;
+         return false;
+     }
+     function set_radio_value()
+     {
+     var rad=document.getElementsByClassName('cls_radio');
+     for(var i=0;i<rad.length;i++)
+       {
+          if(rad[i].value==rad_val)
+          {
+              rad[i].checked=true;
+          }
+         else
+         {
+             rad[i].checked=false;
+         }
+       }
+     }
+     
+     
+     function testReq(){
+         alert(document.getElementById('ConLastName').value)
+     }
+     
+     
+     
+</script> 
+<!--  <c:Tabpanel >   -->
+
+  
+<div style="width:194px;margin:0px 16px;float:left;"> 
+
+<apex:actionRegion > 
+    <div style="width:221px;height:270px;margin:3px -11px;float:left;">
+    <apex:pageBlock title="Search">
+            <br/>
+            <apex:outputLabel >Account Name</apex:outputLabel>
+            <tr><td>&nbsp;</td></tr>
+            <apex:inputText value="{!searchtext}" id="acc" onkeypress="return noenter(event)"   styleClass="quickfindInput" />
+            <br/>
+            <apex:outputLabel >City</apex:outputLabel><br/>                                                                    
+            <apex:inputText id="searchtextCID" value="{!searchtextCID}" onkeypress="return noenter(event)" styleClass="quickfindInput"/>
+            <br/>
+            <apex:outputLabel >State</apex:outputLabel><br/>            
+            <apex:inputText id="state" value="{!state}" onkeypress="return noenter(event)" styleClass="quickfindInput"/>
+            <br/><br/>
+            <apex:inputCheckbox value="{!inactiveCheckbox}"></apex:inputCheckbox>check for inactive churches
+            <br/><br/>
+                 <apex:commandButton value="search"  action="{!search}" reRender="resultsblock" status="status"  />
+     
+        <apex:actionStatus id="status" > 
+            <apex:facet name="start">
+               <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+            </apex:facet>
+        </apex:actionStatus>
+
+    </apex:pageBlock>
+    </div>
+    <div style="width:221px;height:350px;margin:-10px -11px;float:left;overflow:auto;"> 
+     <apex:pageBlock title="Accounts" id="resultsblock">
+  
+                     <apex:pageMessage summary="{!Err}" severity="warning" strength="2" rendered="{!Err != ''}" title="Warning:"/>
+                    
+                     <apex:pageBlockTable value="{!searchResults}" var="o">   
+                                 
+                         <apex:column headerValue="Name" styleClass="clsValid">
+                           <apex:commandLink id="aName" styleClass="accName" value="{!o.name}" status="status" reRender="test_acc,test_add,test_programs,test_opportunity,test_contact,Results,Results_1,Results1,Results_2,Results_3_1,Results2_1,Results_4_1,Results_5_1,Results2,Results_3,Results3,Results_4,Results4,Results_5,Results5,Results_6,Results_7,Results_8,conDetails,oppDetails,tasks,taskDivi" >
+   <!-- for auto population of Account Name in the New task add the above function in the above line  onclick="test(this);" -->
+                              <apex:param name="name" value="{!o.id}" assignTo="{!s}" />
+                              
+                            </apex:commandLink>
+                            <input type="hidden" name="accId" id="accId" class="cls_accID" value="{!o.id}^^{!o.name}"/>
+                         </apex:column>
+                         <apex:column headerValue="City" value="{!o.Physical_City__c}"/>
+                         <apex:column headerValue="State" value="{!o.Physical_State__c}"/>           
+                   </apex:pageBlocktable>                  
+    
+        <apex:actionStatus id="status" > 
+            <apex:facet name="start">
+               <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+            </apex:facet>
+        </apex:actionStatus>  
+    </apex:pageBlock>
+    </div>
+    </apex:actionRegion>
+
+        
+</div>
+<apex:tabPanel switchType="client" activeTabClass="activeTab" inactiveTabClass="inactiveTab">
+<apex:Tab label="Account"  title="Account">
+<div style="width:957px;margin:0px 18px;float:left;">
+<apex:actionRegion >
+<apex:pageBlock id="accDetBlock"> 
+   
+    <table width="100%" align="center">
+      
+            <tr><td>&nbsp;</td></tr>      
+         <tr>
+            <td width="15%" align="left" style="font-size:1.1em;font-weight:bold;">Account Summary</td>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="21%" align="left">&nbsp;
+            <apex:commandButton value="Save"  action="{!updateAccount}" status="status" reRender="accDetBlock"/>&nbsp; 
+            <apex:commandButton value="Edit" action="{!accedit}" status="status" reRender="accDetBlock"/>&nbsp;
+            <apex:commandButton value="Cancel" status="status" action="{!canEdit}" reRender="accDetBlock" rendered="{!acceditbtn == true}"/>
+            </td>
+            <td width="43%" align="right">&nbsp;</td>
+           </tr>              
+    </table>
+         <apex:actionStatus id="status" > 
+                <apex:facet name="start">
+                   <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                </apex:facet>
+            </apex:actionStatus>  
+        <apex:pageBlockSection id="test_acc" rendered="{!acctablehide == false}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Account Name:" for="AccountName"/>
+                     <apex:outputField value="{!act.name}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Customer ID:" for="custid"/>
+                     <apex:outputField value="{!act.Mailing_Address_Book__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Registration Number:" for="AccountName"/>
+                     <apex:outputField value="{!act.Registration_Number__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Registration Date:" for="AccountName"/>
+                     <apex:outputField value="{!act.Registration_Date__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Status:" for="AccountName"/>
+                     <apex:outputField value="{!act.Status__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Expiration Date:" for="AccountName"/>
+                     <apex:outputField value="{!act.Date_Inactive__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Phone:" for="AccountName"/>
+                     <apex:outputField value="{!act.Phone}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Fax:" for="AccountName"/>
+                     <apex:outputField value="{!act.Fax}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Account Owner:" for="AccountName"/>
+                     <apex:outputField value="{!act.OwnerId}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Website:" for="AccountName"/>
+                     <apex:outputField value="{!act.Website}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Primary Ethnic Group:" for="AccountName"/>
+                     <apex:outputField value="{!act.Primary_Ethnic_Group__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Church Attendance:" for="AccountName"/>
+                     <apex:outputField value="{!act.Church_Attendance__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>              
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Denomination:" for="AccountName"/>
+                     <apex:outputField value="{!act.Denomination__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Language:" for="AccountName"/>
+                     <apex:outputField value="{!act.Language__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Account On Hold:" for="AccountName"/>
+                     <apex:outputField value="{!act.Account_On_Hold__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Hold Comments:" for="AccountName"/>
+                     <apex:outputField value="{!act.Hold_Comments__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <!--<apex:pageBlockSectionItem helpText="This field applicable only for Key Church Visits. PMM is the primary care taker for any ministry connections in this Church">
+                     <apex:outputLabel value="Primary Moves Manager:" for="AccountName"/>
+                     <apex:outputField value="{!act.Primary_Moves_Manager__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>-->
+                 
+             </apex:pageBlockSection>
+             
+             
+             <apex:pageBlockSection id="test_acc1" rendered="{!acceditbtn == true}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Account Name:" for="AccountName"/>
+                     <apex:outputField value="{!act.name}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Customer ID:" for="custid"/>
+                     <apex:outputField value="{!act.Mailing_Address_Book__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Registration Number:" />
+                     <apex:outputField value="{!act.Registration_Number__c}" />
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Registration Date:" />
+                     <apex:outputField value="{!act.Registration_Date__c}" />
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Status:" />
+                     <apex:outputField value="{!act.Status__c}" />
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Expiration Date:" />
+                     <apex:outputField value="{!act.Date_Inactive__c}" />
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Phone:" />
+                     <apex:inputField value="{!act.Phone}" />
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Fax:" />
+                     <apex:inputField value="{!act.Fax}"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Account Owner:" for="AccountName"/>
+                     <apex:inputField value="{!act.OwnerId}" id="AccountName" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Website:" for="AccountName"/>
+                     <apex:inputField value="{!act.Website}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Primary Ethnic Group:" for="AccountName"/>
+                     <apex:inputField value="{!act.Primary_Ethnic_Group__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Church Attendance:" for="AccountName"/>
+                     <apex:inputField value="{!act.Church_Attendance__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>                
+                                
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Denomination:" for="AccountName"/>
+                     <apex:inputField value="{!act.Denomination__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Language:" for="AccountName"/>
+                     <apex:inputField value="{!act.Language__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Account On Hold:" for="AccountName"/>
+                     <apex:inputField value="{!act.Account_On_Hold__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Hold Comments:" for="AccountName"/>
+                     <apex:inputField value="{!act.Hold_Comments__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem helpText="This field applicable only for Key Church Visits. PMM is the primary care taker for any ministry connections in this Church">
+                     <apex:outputLabel value="Primary Moves Manager:" for="AccountName">                    
+                     </apex:outputLabel>
+                     <!--<apex:inputField value="{!act.Primary_Moves_Manager__c}" id="AccountName"/>-->
+                 </apex:pageBlockSectionItem>
+             </apex:pageBlockSection>             
+ </apex:pageBlock>
+ </apex:actionRegion>
+</div>
+</apex:Tab>
+
+<apex:Tab label="Address" >  
+   
+    <div style="width:957px;height:auto;margin:0px 0px;float:left;vertical-align:top;">
+        <apex:actionRegion >
+        <apex:pageBlock id="addDetBlock">
+        
+         <table width="100%" align="center">
+          <tr><td>&nbsp;</td></tr>
+         <tr>
+            <td width="15%" align="left" style="font-size:1.1em;font-weight:bold;">Address Summary</td>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="21%" align="left">&nbsp;
+            <apex:commandButton value="Save"  action="{!updateAddress}" status="status" reRender="addDetBlock"/>&nbsp; 
+            <apex:commandButton value="Edit" action="{!addEdit}" status="status" reRender="addDetBlock"/>&nbsp;
+            <apex:commandButton value="Cancel" status="status" action="{!canaddEdit}" reRender="addDetBlock" rendered="{!addeditbtn == true}"/>  
+            <apex:actionStatus id="status" > 
+                <apex:facet name="start">
+                   <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                </apex:facet>
+            </apex:actionStatus>
+            </td>
+            <td width="43%" align="right">&nbsp;</td>
+           </tr>     
+           <tr><td>&nbsp;</td></tr>         
+    </table>
+         
+     <apex:pageBlockSection id="test_add" rendered="{!addtablehide == false}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing Street:" for="BillingStreet"/>
+                     <apex:outputField value="{!act.BillingStreet}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing City:" for="custid"/>
+                     <apex:outputField value="{!act.BillingCity}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing County:" for="AccountName"/>
+                     <apex:outputField value="{!act.Billing_County__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing State:" for="AccountName"/>
+                     <apex:outputField value="{!act.BillingState}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing Zip:" for="AccountName"/>
+                     <apex:outputField value="{!act.BillingPostalcode}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing Country:" for="AccountName"/>
+                     <apex:outputField value="{!act.BillingCountry}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical Street:" for="BillingStreet"/>
+                     <apex:outputField value="{!act.Physical_Street_1__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical City:" for="custid"/>
+                     <apex:outputField value="{!act.Physical_City__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical County:" for="AccountName"/>
+                     <apex:outputField value="{!act.Physical_County__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical State:" for="AccountName"/>
+                     <apex:outputField value="{!act.Physical_State__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical Zip:" for="AccountName"/>
+                     <apex:outputField value="{!act.Physical_Zip__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical Country:" for="AccountName"/>
+                     <apex:outputField value="{!act.PhysicalCountry__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping Street:" for="BillingStreet"/>
+                     <apex:outputField value="{!act.ShippingStreet}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping City:" for="custid"/>
+                     <apex:outputField value="{!act.ShippingCity}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping County:" for="AccountName"/>
+                     <apex:outputField value="{!act.Shipping_County__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping State:" for="AccountName"/>
+                     <apex:outputField value="{!act.ShippingState}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping Zip:" for="AccountName"/>
+                     <apex:outputField value="{!act.ShippingPostalcode}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping Country:" for="AccountName"/>
+                     <apex:outputField value="{!act.ShippingCountry}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing Street:" for="BillingStreet"/>
+                     <apex:outputField value="{!act.Mailing_Street_1__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing City:" for="custid"/>
+                     <apex:outputField value="{!act.Mailing_City__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing County:" for="AccountName"/>
+                     <apex:outputField value="{!act.Mailing_Country__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing State:" for="AccountName"/>
+                     <apex:outputField value="{!act.Mailing_State_Province__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing Zip:" for="AccountName"/>
+                     <apex:outputField value="{!act.Mailing_Zip_Postal_Code__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing Country:" for="AccountName"/>
+                     <apex:outputField value="{!act.Mailing_Country__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>                
+                 
+        </apex:pageBlockSection>
+             
+        <apex:pageBlockSection id="test_add_1" rendered="{!addeditbtn == true}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing Street:" for="BillingStreet"/>
+                     <apex:outputField value="{!act.BillingStreet}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing City:" for="custid"/>
+                     <apex:outputField value="{!act.BillingCity}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing County:" for="AccountName"/>
+                     <apex:outputField value="{!act.Billing_County__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing State:" for="AccountName"/>
+                     <apex:outputField value="{!act.BillingState}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing Zip:" for="AccountName"/>
+                     <apex:outputField value="{!act.BillingPostalcode}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Billing Country:" for="AccountName"/>
+                     <apex:outputField value="{!act.BillingCountry}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical Street:" for="BillingStreet"/>
+                     <apex:outputField value="{!act.Physical_Street_1__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical City:" for="custid"/>
+                     <apex:outputField value="{!act.Physical_City__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical County:" for="AccountName"/>
+                     <apex:outputField value="{!act.Physical_County__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical State:" for="AccountName"/>
+                     <apex:outputField value="{!act.Physical_State__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical Zip:" for="AccountName"/>
+                     <apex:outputField value="{!act.Physical_Zip__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Physical Country:" for="AccountName"/>
+                     <apex:outputField value="{!act.PhysicalCountry__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping Street:" for="BillingStreet"/>
+                     <apex:inputField value="{!act.ShippingStreet}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping City:" for="custid"/>
+                     <apex:inputField value="{!act.ShippingCity}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping County:" for="AccountName"/>
+                     <apex:inputField value="{!act.Shipping_County__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping State:" for="AccountName"/>
+                     <apex:inputField value="{!act.ShippingState}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping Zip:" for="AccountName"/>
+                     <apex:inputField value="{!act.ShippingPostalcode}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Shipping Country:" for="AccountName"/>
+                     <apex:inputField value="{!act.ShippingCountry}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing Street:" for="BillingStreet"/>
+                     <apex:inputField value="{!act.Mailing_Street_1__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing City:" for="custid"/>
+                     <apex:inputField value="{!act.Mailing_City__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing County:" for="AccountName"/>
+                     <apex:inputField value="{!act.Mailing_Country__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing State:" for="AccountName"/>
+                     <apex:inputField value="{!act.Mailing_State_Province__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing Zip:" for="AccountName"/>
+                     <apex:inputField value="{!act.Mailing_Zip_Postal_Code__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mailing Country:" for="AccountName"/>
+                     <apex:inputField value="{!act.Mailing_Country__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                                  
+           </apex:pageBlockSection> 
+                      
+        <table>
+            <tr><td>&nbsp;</td></tr>
+        </table>   
+      </apex:pageBlock>
+      </apex:actionRegion>
+   </div>
+</apex:Tab> 
+                     
+<apex:Tab label="Contact" > 
+<apex:actionRegion >
+<div style="width:980px;height:300px;margin:0px 0px;float:left;vertical-align:top;">
+            
+    <table width="100%" align="center">
+         <tr>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="20%" align="left">&nbsp;
+            <input type="button" value="New" class="btn" width="43px" onClick="javascript:return showNewContactDivision()"/>                  
+            <apex:actionStatus id="status" > 
+                <apex:facet name="start">
+                   <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                </apex:facet>
+            </apex:actionStatus>
+            </td>
+            <td width="43%" align="right">&nbsp;</td>
+        </tr>              
+       </table> 
+    <table width="100%" align="center">        
+             <tr>            
+                <td  width="14%" align="left" style="color:#000;font-weight:bold;font-size: 1.0em;">Contact Name&nbsp;</td>
+                <td  width="14%" align="left" style="color:#000;font-weight:bold;font-size: 1.0em;">Church Role</td>
+                <td  width="14%" align="left" style="color:#000;font-weight:bold;font-size: 1.0em;">Awana Role</td>                
+                <td  width="14%" align="left" style="color:#000;font-weight:bold;font-size: 1.0em;">Home Phone</td>
+                <td  width="14%" align="left" style="color:#000;font-weight:bold;font-size: 1.0em;">Mobile</td>
+                <td  width="14%" align="left" style="color:#000;font-weight:bold;font-size: 1.0em;">Active</td>
+                <td  width="16%" align="left" style="color:#000;font-weight:bold;font-size: 1.0em;">Email</td>    
+               </tr>                        
+    </table> 
+<apex:outputPanel layout="block" style="overflow:auto;width:992px;height:200px;">
+<apex:pageBlock mode="edit" id="contactsDiv" tabStyle="Contact">
+                            
+            <apex:pageBlockTable value="{!cons}" var="acc1" id="conDetails">               
+                             
+               <apex:column > 
+                    <apex:commandLink value="{!acc1.name}" reRender="test_contact,conDet" status="status" oncomplete="closeConDiv()">
+                       <apex:param name="conId" value="{!acc1.id}" assignTo="{!sc}" />
+                        <apex:actionStatus id="status" > 
+                            <apex:facet name="start">
+                               <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                            </apex:facet>
+                        </apex:actionStatus>
+                    
+                    </apex:commandLink>   
+                </apex:column>                                             
+                <apex:column >{!acc1.Church_Role__c}</apex:column>
+                <apex:column >{!acc1.Awana_Role__c}</apex:column>                                  
+                <apex:column >{!acc1.HomePhone}</apex:column>
+                <apex:column >{!acc1.MobilePhone}</apex:column>
+                <apex:column ><apex:outputField value="{!acc1.Active__c}"/></apex:column>
+                <apex:column >{!acc1.Email}</apex:column>
+          
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+   </apex:outputPanel>     
+</div>
+<div style="width:957px;margin:0px 0px;float:left;display:block;" id="conDetailsDivision">        
+<apex:pageBlock id="sconPB" tabStyle="Contact">
+      <apex:pageBlockSection title="Contact Details" collapsible="false"></apex:pageBlockSection>
+  
+       <table width="100%" align="center">
+         <tr>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="21%" align="left">&nbsp;
+            
+            <apex:commandButton value="Save"  action="{!update2}" reRender="sconPB,contactsDiv" status="status"/>&nbsp; 
+            <apex:commandButton value="Edit" action="{!edit}" reRender="sconPB" status="status"/>&nbsp;
+            <apex:commandButton value="Cancel" action="{!conCancel}" reRender="sconPB" status="status" rendered="{!editbtn == true}" />
+            <apex:actionStatus id="status" > 
+                <apex:facet name="start">
+                   <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                </apex:facet>
+            </apex:actionStatus>
+            </td>
+            <td width="43%" align="right">&nbsp;</td>
+        </tr>              
+    </table> 
+          
+<apex:pageBlockSection id="test_contact"  rendered="{!tablehide == false}">
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="First Name:" for="custid"/>
+                     <apex:outputField value="{!cnt.FirstName}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Last Name:" for="BillingStreet"/>
+                     <apex:outputField value="{!cnt.LastName}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Contact Owner:" for="OwnerName"/>
+                     <apex:outputField value="{!cnt.OwnerId}" id="OwnerName"/>
+                 </apex:pageBlockSectionItem>                
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Account Phone:" for="custid"/>
+                     <apex:outputField value="{!cnt.Phone}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mobile Phone:" for="custid"/>
+                     <apex:outputField value="{!cnt.MobilePhone}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home Phone:" for="custid"/>
+                     <apex:outputField value="{!cnt.HomePhone}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Other Phone:" for="custid"/>
+                     <apex:outputField value="{!cnt.OtherPhone}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Email:" for="custid"/>
+                     <apex:outputField value="{!cnt.Email}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Fax:" for="custid"/>
+                     <apex:outputField value="{!cnt.Fax}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mail Code:" for="custid"/>
+                     <apex:outputField value="{!cnt.Mail_Code__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Alternate Email Address:" for="custid"/>
+                     <apex:outputField value="{!cnt.Alternate_Email_Address__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Email Opt Out:" for="custid"/>
+                     <apex:outputField value="{!cnt.HasOptedOutOfEmail}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Title:" for="custid"/>
+                     <apex:outputField value="{!cnt.Title}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Gender:" for="custid"/>
+                     <apex:outputField value="{!cnt.Gender__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Active:" for="custid"/>
+                     <apex:outputField value="{!cnt.Active__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Church Role Status:" for="custid"/>
+                     <apex:outputField value="{!cnt.Church_Role_Status__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>                 
+                 <!--<apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Commander College Level:" for="custid"/>
+                     <apex:outputField value="{!cnt.Commander_College_Level__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>                                
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Handbook Award:" for="custid"/>
+                     <apex:outputField value="{!cnt.Handbook_Award__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Leader Award:" for="custid"/>
+                     <apex:outputField value="{!cnt.Leader_Award__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Total RIUs:" for="custid"/>
+                     <apex:outputField value="{!cnt.Total_RIU_s__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>-->
+                      
+                 <apex:pageBlockSectionItem >                
+                     <apex:outputLabel value="Church Role:" for="custid"/>
+                     <apex:outputField value="{!cnt.Church_Role__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Awana Role:" for="custid"/>
+                     <apex:outputField value="{!cnt.Awana_Role__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home Street:" for="BillingStreet"/>
+                     <apex:outputField value="{!cnt.OtherStreet}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home City:" for="custid"/>
+                     <apex:outputField value="{!cnt.OtherCity}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home County:" for="AccountName"/>
+                     <apex:outputField value="{!cnt.Home_County__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home State:" for="AccountName"/>
+                     <apex:outputField value="{!cnt.OtherState}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home Zip:" for="AccountName"/>
+                     <apex:outputField value="{!cnt.OtherPostalcode}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home Country:" for="AccountName"/>
+                     <apex:outputField value="{!cnt.OtherCountry}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 
+</apex:pageBlockSection>
+
+<apex:pageBlockSection id="test_contct_1" rendered="{!editbtn == true}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="First Name:" for="custid"/>
+                     <apex:inputField value="{!cnt.FirstName}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Last Name:" for="BillingStreet"/>
+                     <apex:inputField value="{!cnt.LastName}" id="ConLastName" required="false"/>
+                 </apex:pageBlockSectionItem>
+                
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Owner:" for="ConAccountName"/>
+                     <apex:inputField value="{!cnt.OwnerId}" id="ConAccountName" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Account Phone:" for="custid"/>
+                     <apex:inputField value="{!cnt.Phone}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mobile Phone:" for="custid"/>
+                     <apex:inputField value="{!cnt.MobilePhone}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home Phone:" for="custid"/>
+                     <apex:inputField value="{!cnt.HomePhone}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Other Phone:" for="custid"/>
+                     <apex:inputField value="{!cnt.OtherPhone}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Email:" for="custid"/>
+                     <apex:inputField value="{!cnt.Email}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Fax:" for="custid"/>
+                     <apex:inputField value="{!cnt.Fax}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Mail Code:" for="custid"/>
+                     <apex:inputField value="{!cnt.Mail_Code__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Alternate Email Address:" for="custid"/>
+                     <apex:inputField value="{!cnt.Alternate_Email_Address__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Email Opt Out:" for="custid"/>
+                     <apex:inputField value="{!cnt.HasOptedOutOfEmail}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Title:" for="custid"/>
+                     <apex:inputField value="{!cnt.Title}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Gender:" for="custid"/>
+                     <apex:inputField value="{!cnt.Gender__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Active:" for="custid"/>
+                     <apex:inputField value="{!cnt.Active__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Church Role Status:" for="custid"/>
+                     <apex:inputField value="{!cnt.Church_Role_Status__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>                 
+                 <!--<apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Commander College Level:" for="custid"/>
+                     <apex:inputField value="{!cnt.Commander_College_Level__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>                               
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Handbook Award:" for="custid"/>
+                     <apex:outputField value="{!cnt.Handbook_Award__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Leader Award:" for="custid"/>
+                     <apex:outputField value="{!cnt.Leader_Award__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Total RIUs:" for="custid"/>
+                     <apex:outputField value="{!cnt.Total_RIU_s__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>-->
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Church Role:" for="custid"/>
+                     <apex:inputField value="{!cnt.Church_Role__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Awana Role:" for="custid"/>
+                     <apex:inputField value="{!cnt.Awana_Role__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem> 
+                 
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home Street:" for="BillingStreet"/>
+                     <apex:inputField value="{!cnt.OtherStreet}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home City:" for="custid"/>
+                     <apex:inputField value="{!cnt.OtherCity}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home County:" for="AccountName"/>
+                     <apex:inputField value="{!cnt.Home_County__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home State:" for="AccountName"/>
+                     <apex:inputField value="{!cnt.OtherState}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home Zip:" for="AccountName"/>
+                     <apex:inputField value="{!cnt.OtherPostalcode}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Home Country:" for="AccountName"/>
+                     <apex:inputField value="{!cnt.OtherCountry}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 
+</apex:pageBlockSection>
+            
+</apex:pageBlock>
+</div>
+
+<div style="width:957px;margin:0px 0px;float:left;display:none;" id="conDiv"> 
+
+    <apex:pageBlock id="conDiv" title="New Contact" >
+        <table width="100%" align="center" style="font-size:12px;font-weight:bold;">              
+           
+          <tr>
+            <td width="10%" align="left" style="font-size:12px;font-weight:bold;">First Name&nbsp;</td>
+            <td width="35%" align="left"><apex:inputField style="width:200px" value="{!con.FirstName}" required="false" ></apex:inputField>
+            </td>
+            <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Last Name&nbsp;</td>
+            <td width="45%" align="left">
+            <apex:inputField style="width:200px" value="{!con.LastName}" required="false"> </apex:inputField>
+            </td>
+          </tr>
+          
+          <tr>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Contact Owner&nbsp;</td>
+            <td width="30%" align="left"><apex:inputField style="width:200px" styleClass="cls_newcon" value="{!con.OwnerId}" required="false" ></apex:inputField>
+            </td>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Account Phone&nbsp;</td>
+            <td width="43%" align="left">
+            <apex:inputField value="{!con.Phone}" required="false" style="width:200px"> </apex:inputField>
+            </td>
+          </tr>
+          
+          <tr>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Title&nbsp;</td>
+            <td width="30%" align="left"><apex:inputField style="width:200px" value="{!con.Title}" required="false" ></apex:inputField>
+            </td>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Mobile&nbsp;</td>
+            <td width="43%" align="left">
+            <apex:inputField value="{!con.MobilePhone}" style="width:200px" required="false"> </apex:inputField>
+            </td>
+          </tr>
+          <tr>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Gender&nbsp;</td>
+            <td width="30%" align="left"><apex:inputField style="width:200px" value="{!con.Gender__c}" required="false" ></apex:inputField>
+            </td>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Home Phone&nbsp;</td>
+            <td width="43%" align="left">
+            <apex:inputField value="{!con.HomePhone}" style="width:200px" required="false"> </apex:inputField>
+            </td>
+          </tr>
+          <tr>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Email&nbsp;</td>
+            <td width="30%" align="left"><apex:inputField value="{!con.Email}" style="width:200px" required="false"> </apex:inputField>
+            </td>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Alternate Email Address&nbsp;</td>
+            <td width="43%" align="left">
+            <apex:inputField value="{!con.Alternate_Email_Address__c}" style="width:200px" required="false"> </apex:inputField>
+            </td>
+          </tr>         
+          <tr>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Mail Code&nbsp;</td>
+            <td width="30%" align="left"><apex:inputField style="width:200px" value="{!con.Mail_Code__c}" required="false" ></apex:inputField>
+            </td>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Fax&nbsp;</td>
+            <td width="43%" align="left">
+            <apex:inputField value="{!con.Fax}" style="width:200px" required="false"> </apex:inputField>
+            </td>            
+          </tr>
+          <tr><td>&nbsp;</td></tr>
+          <tr>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Email Opt Out&nbsp;</td>
+            <td width="30%" align="left"><apex:inputField value="{!con.HasOptedOutOfEmail}"></apex:inputField>
+            </td>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Active&nbsp;</td>
+            <td width="43%" align="left"><apex:inputField value="{!con.Active__c}" required="false" ></apex:inputField>
+            </td>
+          </tr>
+          <tr>
+          <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Church Role Status&nbsp;</td>
+            <td width="43%" align="left">
+            <apex:inputField value="{!con.Church_Role_Status__c}" style="width:200px" required="false"> </apex:inputField>
+            </td>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Commander College Level&nbsp;</td>
+            <td width="43%" align="left">
+            <!--<apex:inputField value="{!con.Commander_College_Level__c}" required="false"> </apex:inputField>-->
+            </td>
+          </tr>
+          <tr>
+            <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Awana Role&nbsp;</td>
+            <td width="30%" align="left" colspan="3">
+            <table width="50%">
+            <tr><td>
+            <apex:inputField style="width:200px" value="{!con.Awana_Role__c}" required="false" ></apex:inputField>
+            </td></tr>
+            </table>
+            </td>                     
+          </tr>          
+          <tr>
+            <td width="7%" align="left">Church Role&nbsp;</td>
+            <td width="30%" align="left" colspan="3"><apex:inputField style="width:200px" value="{!con.Church_Role__c}" required="false" ></apex:inputField>
+            </td>          
+          </tr>                    
+          <tr><td>&nbsp;</td></tr>
+            <tr>           
+            <td align="center" colspan="4">&nbsp;
+            <apex:actionStatus id="status" > 
+                    <apex:facet name="start">
+                       <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                    </apex:facet>
+           </apex:actionStatus>
+            <apex:commandButton value="Save & New" action="{!conSave}" style="font-size: 0.9em;" status="status" reRender="conDiv,conDetails"/>
+            <input type="button" value="Cancel" class="btn" style="font-size: 0.9em;" onClick="closeConDiv()"/>
+            </td>            
+           </tr>
+        </table>      
+        <tr><td>&nbsp;</td></tr>        
+    
+    </apex:pageBlock> 
+</div>
+</apex:actionRegion>
+
+</apex:Tab>
+
+<apex:Tab label="Opportunity" >
+<div style="width:957px;height:300px;margin:0px 0px;float:left;vertical-align:top;">
+<table width="100%" align="center">
+         <tr>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="20%" align="left">&nbsp;
+            <input type="button" value="New" style="font-size: 1em;" class="btn" onclick="javascript:return showNewOppDivision()"/>                       
+            </td>
+            <td width="43%" align="right">&nbsp;</td>
+        </tr>              
+       </table>        
+<table width="100%" align="center">        
+         <tr>            
+            <td  width="16%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">&nbsp;&nbsp;Opportunity Name</td>
+            <td  width="14%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Opportunity Owner&nbsp;</td>                       
+            <td  width="15%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Type&nbsp;</td>
+            <td  width="15%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">&nbsp;&nbsp;&nbsp;&nbsp;Stage</td>            
+            <td  width="16%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Region</td>
+            <td  width="14%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Interest</td>
+            <td  width="15%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Created Date</td>
+           </tr>                        
+</table> 
+<apex:outputPanel layout="block" style="overflow:auto;width:991px;height:200px;">
+    <apex:pageBlock mode="edit" tabStyle="Opportunity" id="OppDivision">
+        <apex:pageBlockTable value="{!opps}" var="ops" id="oppDetails" >
+        <apex:column >
+             <apex:commandLink value="{!ops.name}" reRender="oppDet1,test_opportunity" status="status" oncomplete="closeOppDiv()">
+                       <apex:param name="oppId" value="{!ops.id}" assignTo="{!oppId}" />
+                       <apex:param name="oppType" value="{!ops.Type}" assignTo="{!oppType}" />
+                    <apex:actionStatus id="status" > 
+                        <apex:facet name="start">
+                           <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                        </apex:facet>
+                    </apex:actionStatus>                    
+             </apex:commandLink>
+        </apex:column>  
+        <apex:column value="{!ops.OwnerId}" headerValue=" " styleClass="deco" onclick="return false;">
+        
+ <!--       <apex:outputField value="{!ops.OwnerId}" />   -->
+       
+        </apex:column>
+        <apex:column ><apex:outputfield value="{!ops.Type}"/></apex:column>
+        <apex:column ><apex:outputfield value="{!ops.StageName}"/></apex:column>
+        <apex:column ><apex:outputField value="{!ops.Region__c}"/></apex:column>
+        <apex:column ><apex:outputfield value="{!ops.Interest__c}"/></apex:column>        
+        <apex:column ><apex:outputfield value="{!ops.Created_Date_Time__c}"/></apex:column>            
+    </apex:pageBlockTable>       
+</apex:pageBlock>
+</apex:outputPanel>
+</div>
+<div style="width:957px;margin:0px 0px;float:left;display:block;" id="oppDetailsDivision">        
+<apex:pageBlock id="oppPB" tabStyle="Opportunity">
+     
+     <apex:pageBlockSection title="Opportunity Details" collapsible="false"></apex:pageBlockSection>                     
+     <table width="100%" align="center">
+             <tr><td>&nbsp;</td></tr>
+             <tr>
+                <td width="15%" align="left">&nbsp;</td>
+                <td width="15%" align="left">&nbsp;</td>
+                <td width="21%" align="left">&nbsp;
+                
+                <apex:commandButton value="Save"  action="{!oppUpdate}" status="status" reRender="oppPB,oppDetails" />&nbsp; 
+                <apex:commandButton value="Edit" action="{!oppedit}" status="status" reRender="oppPB"/>&nbsp;
+                <apex:commandButton value="Cancel" action="{!oppCancel}" status="status" reRender="oppPB" rendered="{!oppeditbtn == true}"/>
+                <apex:commandButton value="Cancel" action="{!oppTypeCancel}" status="status" reRender="oppPB" rendered="{!oppeditbtntype == true}"/>
+                <apex:actionStatus id="status" > 
+                    <apex:facet name="start">
+                       <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                    </apex:facet>
+                 </apex:actionStatus>
+                </td>
+                <td width="43%" align="right">&nbsp;</td>
+            </tr>
+            <tr><td>&nbsp;</td></tr>              
+        </table> 
+<apex:pageBlockSection id="test_opportunity"  rendered="{!opptablehide == false}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Opportunity Name:" for="BillingStreet"/>
+                     <apex:outputField value="{!optnew.Name}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Opportunity Owner:" for="custid"/>
+                     <apex:outputField value="{!optnew.OwnerId}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Type:" for="AccountName"/>
+                     <apex:outputField value="{!optnew.Type}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Stage:" for="custid"/>
+                     <apex:outputField value="{!optnew.StageName}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Probability:" for="custid"/>
+                     <apex:outputField value="{!optnew.Probability}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Close Date:" for="custid"/>
+                     <apex:outputField value="{!optnew.CloseDate}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                                 
+                  <apex:pageBlockSectionItem >
+                      <apex:outputLabel value="Contact:" for="custid"/>
+                      <apex:repeat value="{!optnew.OpportunityContactRoles}" var="role">
+                      <apex:outputField value="{!role.ContactId}" styleClass="deco"/>                      
+                      </apex:repeat>
+                                    
+                 </apex:pageBlockSectionItem>
+                 
+                 
+</apex:pageBlockSection>
+
+<apex:pageBlockSection id="test_opportunity_1"  rendered="{!oppeditbtn == true}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Opportunity Name:" for="BillingStreet"/>
+                     <apex:inputField value="{!optnew.Name}" id="AccountName" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Opportunity Owner:" for="custid"/>
+                     <apex:inputField value="{!optnew.OwnerId}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Type:" for="AccountName"/>
+                     <apex:inputField value="{!optnew.Type}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Stage:" for="custid"/>
+                     <apex:inputField value="{!optnew.StageName}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Probability:" for="custid"/>
+                     <apex:inputField value="{!optnew.Probability}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Close Date:" for="custid"/>
+                     <apex:inputField value="{!optnew.CloseDate}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>   
+                 <apex:pageBlockSectionItem >
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem dataStyle="display:none;">
+                     <apex:outputLabel value="Contact:" style="display:none;"></apex:outputLabel>
+                     <apex:inputField value="{!opprole.ContactId}" required="false"/>
+                 </apex:pageBlockSectionItem>       
+                 
+</apex:pageBlockSection>
+<apex:pageBlockSection id="test_opportunity_2"  rendered="{!oppeditbtntype == true}">
+                
+                <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Opportunity Name:" for="AccountName"/>
+                     <apex:inputField value="{!optnew.Name}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >                   
+                 </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Region:" for="AccountName"/>
+                     <apex:inputField value="{!optnew.Region__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <!--<apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Donation Amount:" for="custid"/>
+                     <apex:inputField value="{!optnew.Donation_Amount__c}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem> -->               
+                <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Country:" for="AccountName"/>
+                     <apex:inputField value="{!optnew.Country__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                 </apex:pageBlockSectionItem>      
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Interest:" for="AccountName"/>
+                     <apex:inputField value="{!optnew.Interest__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Close Date:" for="AccountName"/>
+                     <apex:inputField value="{!optnew.CloseDate}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>                              
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Type:" for="custid"/>
+                     <apex:inputField value="{!optnew.Type}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Stage:" for="custid"/>
+                     <apex:inputField value="{!optnew.StageName}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Contact:"></apex:outputLabel>
+                     <apex:inputField value="{!opprole.ContactId}" required="false"/>
+                 </apex:pageBlockSectionItem>
+             <!--    <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="User"></apex:outputLabel>
+                     <apex:inputField value="{!oppteam.UserId}" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Team Role"></apex:outputLabel>
+                     <apex:inputField value="{!oppteam.TeamMemberRole}" required="false"/>
+                 </apex:pageBlockSectionItem>  
+              -->   
+</apex:pageBlockSection>
+
+</apex:pageBlock>
+</div>  
+
+<div style="width:1000px;margin:0px 0px;float:left;display:none;" id="oppDiv">
+    <apex:pageBlock id="oppDivi" title="New Opportunity">
+             <table width="100%" align="center" >
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">&nbsp;</td>
+                <td width="24%" align="left">
+                </td>                
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-weight:bold;">RecordType&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:outputField value="{!opp.RecordTypeId}"> </apex:outputField>
+                </td>
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Opportunity Name&nbsp;</td>
+                <td width="43%" align="left">
+                   <apex:inputField id="opp_name" value="{!opp.Name}" required="false"> </apex:inputField>
+                </td>
+                </tr>                
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Region&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField value="{!opp.Region__c}"> </apex:inputField>
+                </td>
+                <!--<td width="10%" align="left" style="font-size:12px;font-weight:bold;">Donation Amount&nbsp;</td>
+                <td width="43%" align="left">
+                 <apex:inputField value="{!opp.Donation_Amount__c}"> </apex:inputField>
+                </td>-->
+                </tr>
+                <tr><td>&nbsp;</td></tr>                    
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Country&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField value="{!opp.Country__c}"> </apex:inputField>
+                </td>                
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Interest&nbsp;</td>
+                <td width="43%" align="left">
+                   <apex:inputField value="{!opp.Interest__c}"> </apex:inputField>
+                </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>                    
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Type&nbsp;</td>
+                <td width="24%" align="left">                  
+                   <apex:inputField value="{!opp.Type}" required="false"> </apex:inputField>
+                </td>
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Stage&nbsp;</td>
+                <td width="43%" align="left">
+                <apex:inputField value="{!opp.StageName}" required="false" > </apex:inputField>                  
+                </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Contact Role&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField value="{!role.ContactId}" required="false"> </apex:inputField>  
+                </td>
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">ClosedDate&nbsp;</td>
+                <td width="43%" align="left">
+                 <apex:inputField value="{!opp.CloseDate}" required="false"> </apex:inputField>
+                </td>
+                </tr>                
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-weight:bold;">Team Member&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField value="{!otm.UserId}" required="false"> </apex:inputField>
+                </td>
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Member Role&nbsp;</td>
+                <td width="43%" align="left">
+                   <apex:inputField value="{!otm.TeamMemberRole}" required="false"> </apex:inputField>
+                </td>
+                </tr>               
+                <tr><td>&nbsp;</td></tr>   
+                <tr>                
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Notes&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputTextarea value="{!opp.MA_Opportunity_Notes__c}"> </apex:inputTextarea>
+                </td>               
+                </tr>
+               <apex:actionStatus id="status" > 
+                        <apex:facet name="start">
+                           <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                        </apex:facet>
+              </apex:actionStatus> 
+          
+          
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+            <td width="11%" align="left">&nbsp;</td>
+            <td width="27%" align="left">&nbsp;</td>
+            <td width="20%" align="left">&nbsp;
+            <apex:commandButton value="Save & New" action="{!oppSave}" status="status" reRender="oppDivi,oppDetails,oppDivision" />
+            <input type="button" value="Cancel" class="btn" onClick="closeOppDiv()"/>
+            </td>
+            <td width="43%" align="right">&nbsp;</td>
+           </tr>
+            </table>  
+   
+</apex:pageBlock>
+</div>
+
+ </apex:Tab>
+<apex:Tab label="Task">
+<div style="width:957px;height:300px;margin:0px 0px;float:left;vertical-align:top;">
+<table width="100%" align="center">
+         <tr>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="20%" align="left">&nbsp;
+            <input type="button" value="New Task" style="font-size: 1em;" class="btn" onClick="javascript:return showNewTaskDivision()"/>                       
+            </td>
+            <td width="43%" align="right">&nbsp;</td>
+        </tr>              
+       </table>    
+<table width="100%" align="center">        
+         <tr>            
+            <td  width="17%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Subject</td>
+            <td  width="11%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Assigned To&nbsp;</td>                       
+            <td  width="12%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Due Date&nbsp;</td>
+            <td  width="12%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Type</td>            
+            <td  width="11%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Priority</td>
+            <td  width="12%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Status</td>
+            <td  width="13%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Related To</td>
+            <td  width="15%" align="left" style="color:#000;font-weight:bold;font-size: 1.0;">Contact Name</td>
+           </tr>                        
+</table> 
+<apex:outputPanel layout="block" style="overflow:auto;width:991px;height:200px;">
+    <apex:pageBlock id="taskDivi" tabStyle="Opportunity">
+        <apex:pageBlockTable value="{!tasks}" var="tsks" id="tasks" >
+        <apex:column >
+             <apex:commandLink value="{!tsks.Subject}" reRender="taskDet" status="status" oncomplete="closeTaskDiv()">
+                       <apex:param name="taskId" value="{!tsks.id}" assignTo="{!taskId}" />
+                 <apex:actionStatus id="status" > 
+                    <apex:facet name="start">
+                       <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                    </apex:facet>
+                </apex:actionStatus>
+                    
+             </apex:commandLink>         
+           </apex:column> 
+           <apex:column value="{!tsks.OwnerId}" headerValue=" " styleClass="deco" onclick="return false;">
+           <!-- <apex:outputfield value="{!tsks.OwnerId}"/> -->
+            </apex:column>            
+                  
+           <apex:column > <apex:outputfield value="{!tsks.ActivityDate}"/> </apex:column>
+           <apex:column > <apex:outputfield value="{!tsks.Type}"/> </apex:column>
+           <apex:column > <apex:outputfield value="{!tsks.Priority}"/> </apex:column>
+           <apex:column > <apex:outputfield value="{!tsks.Status}"/> </apex:column>
+           <apex:column value="{!tsks.WhatId}" headerValue=" " onclick="window.open('{!$Label.SF_DOMAIN}/{!tsks.WhatId}');return false" />
+           
+           <apex:column value="{!tsks.WhoId}" headerValue=" " onclick="window.open('{!$Label.SF_DOMAIN}/{!tsks.WhoId}');return false">
+           <!-- <apex:outputfield value="{!tsks.WhoId}"/> -->
+            </apex:column>
+          
+           
+           
+    </apex:pageBlockTable>       
+</apex:pageBlock>
+</apex:outputPanel>
+</div> 
+<div style="width:957px;margin:0px 0px;float:left;display:block;" id="taskDetailsDivison">
+    <apex:pageBlock id="taskDet" tabStyle="Opportunity">
+      <apex:pageBlockSection title="Task Details" collapsible="false"></apex:pageBlockSection> 
+      
+       <table width="100%" align="center">
+         <tr>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="15%" align="left">&nbsp;</td>
+            <td width="21%" align="left">&nbsp;           
+            <apex:commandButton value="Save"  action="{!taskUpdate}" status="status" reRender="taskDet,tasks"/>&nbsp;
+            <apex:commandButton reRender="taskDet" value="Edit" status="status" action="{!taskedit}" />
+            <apex:commandButton value="Cancel" status="status" reRender="taskDet" rendered="{!taskeditbtn == true}" action="{!taskCancel}"/>
+             <apex:actionStatus id="status" > 
+                    <apex:facet name="start">
+                       <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                    </apex:facet>
+             </apex:actionStatus>
+            </td>
+            <td width="43%" align="right">&nbsp;</td>
+           </tr>              
+        </table> 
+                      
+           <apex:pageBlockSection id="test_task"  rendered="{!tasktablehide == false}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Subject:" for="BillingStreet"/>
+                     <apex:outputField value="{!tasknew.Subject}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Assigned To" for="custid"/>
+                     <apex:outputField value="{!tasknew.OwnerId}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="DueDate:" for="AccountName"/>
+                     <apex:outputField value="{!tasknew.ActivityDate}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Type:" for="custid"/>
+                     <apex:outputField value="{!tasknew.Type}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Priority:" for="custid"/>
+                     <apex:outputField value="{!tasknew.Priority}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Status:" for="custid"/>
+                     <apex:outputField value="{!tasknew.Status}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Contact Name:" for="custid"/>
+                     <apex:outputField value="{!tasknew.WhoId}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 
+</apex:pageBlockSection>
+
+<apex:pageBlockSection id="test_task_1"  rendered="{!taskeditbtn == true}">
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Subject:" for="BillingStreet"/>
+                     <apex:inputField value="{!tasknew.Subject}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Assigned To" for="custid"/>
+                     <apex:inputField value="{!tasknew.OwnerId}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="DueDate:" for="AccountName"/>
+                     <apex:inputField value="{!tasknew.ActivityDate}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Type:" for="custid"/>
+                     <apex:inputField value="{!tasknew.Type}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Priority:" for="custid"/>
+                     <apex:inputField value="{!tasknew.Priority}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Status:" for="custid"/>
+                     <apex:inputField value="{!tasknew.Status}" id="custid" required="false"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Contact Name:" for="custid"/>
+                     <apex:inputField value="{!tasknew.WhoId}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 
+                 
+</apex:pageBlockSection>
+         
+    </apex:pageBlock>
+</div> 
+        
+<div style="width:957px;height:375px;margin:0px 0px;float:left;display:none;" id="taskDiv"> 
+  
+    <apex:pageBlock id="taskNewDiv" title="New Task" tabStyle="Opportunity">
+    
+        <table width="100%" align="center" style="font-size:12px;font-weight:bold;">              
+                
+                <tr><td>&nbsp;</td></tr>                
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Assigned To&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField style="width:200px" value="{!mytask.OwnerId}" required="false"></apex:inputField>
+                </td>
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Subject&nbsp;</td>
+                <td width="43%" align="left">
+                   <apex:inputField value="{!mytask.Subject}" id="tname" required="false" > 
+                   <div class="error" id="tnameReq">Error.</div>
+                   </apex:inputField>
+                </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Due Date&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField style="width:200px" value="{!mytask.ActivityDate}" required="false"></apex:inputField>
+                </td>
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Type&nbsp;</td>
+                <td width="43%" align="left">
+                  <apex:inputField style="width:200px" value="{!mytask.Type}" required="false"></apex:inputField>
+                </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Priority&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField style="width:200px" value="{!mytask.Priority}" required="false"></apex:inputField>
+                </td>
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Status&nbsp;</td>
+                <td width="43%" align="left">
+                  <apex:inputField style="width:200px" value="{!mytask.Status}" required="false"></apex:inputField>
+                </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Contact Name&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField style="width:200px" value="{!mytask.WhoId}" required="false"></apex:inputField>
+                </td>
+                <td width="10%" align="left" style="font-size:12px;font-weight:bold;">Comments&nbsp;</td>
+                <td width="43%" align="left">
+                  <apex:inputField style="width:200px" value="{!mytask.Description}" required="false"></apex:inputField>
+                </td>
+                </tr>
+                <tr><td>&nbsp;</td></tr>
+                <tr>
+                <td width="7%" align="left" style="font-size:12px;font-weight:bold;">Related To&nbsp;</td>
+                <td width="24%" align="left">
+                   <apex:inputField styleClass="cls_taskacc" style="width:200px" value="{!mytask.WhatId}" required="false"></apex:inputField>
+                </td>
+                
+                </tr> 
+            <tr><td>&nbsp;</td></tr>
+            <tr>
+            <td align="center" colspan="4">&nbsp;
+            <apex:actionStatus id="status" > 
+                    <apex:facet name="start">
+                       <img id="theImage" src="{!$Resource.blackSpinningArrows}" width="20" height="20"/> 
+                    </apex:facet>
+           </apex:actionStatus>
+            <apex:commandButton value="Save & New" style="font-size: 0.9em;" action="{!taskSave}" status="status" rerender="taskNewDiv,tasks,taskDivi" />
+   <!--     <apex:commandButton value="Save & New" style="font-size: 0.9em;" action="{!taskSave}" status="status" rerender="taskNewDiv,tasks,taskDivi" oncomplete="test_after();"/>  -->
+         
+            <input type="button" value="Cancel" style="font-size: 0.9em;" class="btn" onClick="closeTaskDiv()"/>
+            </td>
+            
+           </tr> 
+        </table>    
+     
+    </apex:pageBlock>      
+</div>   
+ 
+ </apex:Tab>
+ <apex:Tab label="Programs" >  
+   
+    <div style="width:957px;height:254px;margin:0px 0px;float:left;vertical-align:top;">
+        <apex:actionRegion >
+        <apex:pageBlock id="programsBlock">
+               <table width="100%" align="center">
+                 <tr><td>&nbsp;</td></tr>
+                 <tr>
+                    <td width="15%" align="left" style="font-size:1.1em;font-weight:bold;">Program Summary</td>
+                    <td width="15%" align="left">&nbsp;</td>                   
+                    <td width="43%" align="right">&nbsp;</td>
+                  </tr>
+                  <tr><td>&nbsp;</td></tr>              
+            </table>
+            
+            <apex:pageBlockSection id="test_programs" >
+                 <!--<apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Total Active Programs:" for="BillingStreet"/>
+                     <apex:outputField value="{!act.Total_Active_Programs__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Puggles:" for="custid"/>
+                     <apex:outputField value="{!act.Active_Puggles_Clubs__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Cubbies:" for="AccountName"/>
+                     <apex:outputField value="{!act.Active_Cubbies_Clubs__c}" id="AccountName"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Sparks:" for="custid"/>
+                     <apex:outputField value="{!act.Active_Sparks_Clubs__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="T&T:" for="custid"/>
+                     <apex:outputField value="{!act.Active_T_T_Clubs__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Trek:" for="custid"/>
+                     <apex:outputField value="{!act.Active_Trek_Clubs__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Journey:" for="custid"/>
+                     <apex:outputField value="{!act.Active_Journey_Clubs__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Truthseekers:" for="custid"/>
+                     <apex:outputField value="{!act.Active_Truthseekers__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="High Power Soccer:" for="custid"/>
+                     <apex:outputField value="{!act.High_Power_Soccer__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Awana at Home:" for="custid"/>
+                     <apex:outputField value="{!act.Awana_at_Home__c}" id="custid"/>
+                 </apex:pageBlockSectionItem>-->
+                 
+            </apex:pageBlockSection>
+        </apex:pageBlock> 
+       </apex:actionRegion>
+    </div>   
+</apex:Tab>
+</apex:tabPanel>
+
+<!--  </c:Tabpanel>  -->
+
+<script> 
+    
+    function taskValidate1(){
+        
+       var obj1=document.getElementsByClassName('cls_valid1');
+       var len=obj1.length;
+       var valid=0;
+       for(i=0;i<len;i++)
+        {           
+            id=obj1[i].id
+           
+            split_id=id.split(":")
+            if(split_id[3]=='tname' && document.getElementById(id).value == '')
+            {
+             document.getElementById('tnameReq').style.display = 'block';
+             document.getElementById('tnameReq').innerHTML = "* Please enter subject for the task";
+             valid = 1; 
+             alert("1")
+            }
+         
+        }
+        if(valid == 1){alert("2")
+            return false;
+            
+        }
+       else{return true;}
+    }
+    function validateTaskName1(id)
+{
+    var val=document.getElementById(id).value;
+    if(val==""){
+         document.getElementById('tnameReq').style.display = 'block';
+         document.getElementById('tnameReq').innerHTML = "* Please enter subject for the task";
+         return false;
+     }
+     else{
+         document.getElementById('tnameReq').style.display = 'none';
+     }
+    
+}
+</script>
+<style type="text/css">
+.error {
+    display:none;
+    color:#B22222;
+    font-size: 9px;
+    font-weight: bold;
+    font-family: Verdana;
+    padding: 4px;
+.tstyle{
+    font-size:large;
+    }
+}
+.apexp .bPageBlock .error {border: 2px none #CC0000; }
+
+</style>
+<style>
+    .vfHelpText a{position:relative; white-space: normal;}
+    .vfHelpText a span {display: none;}
+    .vfHelpText a:hover span {display: block; position:absolute; top:1.25em; padding:2px 5px; left:0em; width:15em;z-index:100;border:1px solid orange;background-color:#FEFDB9;color:black;}
+    </style>
+ </apex:form> 
+</apex:page>

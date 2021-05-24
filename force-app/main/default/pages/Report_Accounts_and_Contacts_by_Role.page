@@ -1,0 +1,260 @@
+<apex:page id="page" controller="Report_Accounts_by_Role_Controller" contentType="{!IF(isExport = true, "application/vnd.ms-excel#Primary_Missionary_report.xls", '')}" showHeader="false" sidebar="false" standardStylesheets="true">
+<style>
+.Heading{
+    font-weight:bold;
+}
+.textHeading
+{
+    font-size:0.9em;    
+}
+body .pbBody table.list tr.headerRow td, body .pbBody table.list tr.headerRow th{ width:150px;}
+body .btnSharing, body .btnImportant {font-size: 1.0em;padding: 0px 7px 1px;}
+.error {
+    display:none;
+    color:#B22222;
+    font-size: 9px;
+    font-weight: bold;
+    font-family: Verdana;
+    padding: 4px;
+.tstyle{
+    font-size:large;
+    }
+}
+</style>
+
+<script>
+    
+    function awanaRoleValidation(){       
+       if(document.getElementById('page:block:form:AwanaRoleId').value == 'test' && document.getElementById('page:block:form:churchRoleId').value == 'test'){
+           alert("select any one role");
+           return false;
+       }
+       if((document.getElementById('page:block:form:AwanaRoleId').value != 'test' || document.getElementById('page:block:form:churchRoleId').value != 'test') &&(document.getElementById('page:block:form:AwanaRoleState').value == 'test' && document.getElementById('page:block:form:mgrId').value == '')){
+           alert("Select State or Primary Missionary");
+           return false;
+       }
+       if((document.getElementById('page:block:form:AwanaRoleId').value != 'test' || document.getElementById('page:block:form:churchRoleId').value != 'test') &&(document.getElementById('page:block:form:AwanaRoleState').value != 'test' || document.getElementById('page:block:form:mgrId').value != '')){
+           reportResults();
+       }
+    }
+       
+</script>
+
+<table>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr >
+        <td >&nbsp;</td>
+        <td >&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td>
+        <td style="width:700px"><apex:image value="{!$Resource.AwanaGrayLogo}"/></td>
+        <td style="width:50px">&nbsp;</td>
+        <td style="width:150px">
+            <apex:outputLabel style="align:right;"><h2><b>Welcome: </b></h2> <h3>{!$User.FirstName} {!$User.LastName}</h3></apex:outputLabel>
+        </td>
+    </tr>
+</table>
+
+<table><tr><td>&nbsp;</td></tr></table>
+<apex:pageBlock title="Account Team and Contacts" id="block">
+<apex:form id="form">
+       <table>
+       
+       <tr>    
+             
+           <td>
+               <b>Select:&nbsp;&nbsp;</b>
+               <apex:selectList multiselect="false" size="1" value="{!pickedValue}" required="true" id="AwanaRoleState">
+                    <apex:selectOption itemValue="test" itemLabel="State"/>
+                    <apex:selectOption itemValue="AL" itemLabel="Alabama"/>
+                    <apex:selectOption itemValue="AK" itemLabel="Alaska"/>
+                    <apex:selectOption itemValue="AZ" itemLabel="Arizona"/>
+                    <apex:selectOption itemLabel="Arkansas" itemValue="AR"/>
+                    <apex:selectOption itemLabel="California" itemValue="CA"/>
+                    <apex:selectOption itemLabel="Colorado" itemValue="CO"/>
+                    <apex:selectOption itemLabel="Connecticut" itemValue="CT"/>
+                    <apex:selectOption itemLabel="District of Columbia" itemValue="DC"/>
+                    <apex:selectOption itemLabel="Delaware" itemValue="DE"/>
+                    <apex:selectOption itemLabel="Florida" itemValue="FL"/>
+                    <apex:selectOption itemLabel="Georgia" itemValue="GA"/>
+                    <apex:selectOption itemLabel="Hawaii" itemValue="HI"/>
+                    <apex:selectOption itemLabel="Idaho" itemValue="ID"/>
+                    <apex:selectOption itemLabel="Illinois" itemValue="IL"/>
+                    <apex:selectOption itemLabel="Indiana" itemValue="IN"/>
+                    <apex:selectOption itemLabel="Iowa" itemValue="IA"/>
+                    <apex:selectOption itemLabel="Kansas" itemValue="KS"/>
+                    <apex:selectOption itemLabel="Kentucky" itemValue="KY"/>
+                    <apex:selectOption itemLabel="Louisiana" itemValue="LA"/>
+                    <apex:selectOption itemLabel="Maine" itemValue="ME"/>
+                    <apex:selectOption itemLabel="Maryland" itemValue="MD"/>
+                    <apex:selectOption itemLabel="Massachusetts" itemValue="MA"/>
+                    <apex:selectOption itemLabel="Michigan" itemValue="MI"/>
+                    <apex:selectOption itemLabel="Minnesota" itemValue="MN"/>
+                    <apex:selectOption itemLabel="Mississippi" itemValue="MS"/>
+                    <apex:selectOption itemLabel="Missouri" itemValue="MO"/>
+                    <apex:selectOption itemLabel="Montana" itemValue="MT"/>
+                    <apex:selectOption itemLabel="Nebraska" itemValue="NE"/>
+                    <apex:selectOption itemLabel="Nevada" itemValue="NV"/>
+                    <apex:selectOption itemLabel="New Hampshire" itemValue="NH"/>
+                    <apex:selectOption itemLabel="New Jersey" itemValue="NJ"/>
+                    <apex:selectOption itemLabel="New Mexico" itemValue="NM"/>
+                    <apex:selectOption itemLabel="New York" itemValue="NY"/>
+                    <apex:selectOption itemLabel="North Carolina" itemValue="NC"/>
+                    <apex:selectOption itemLabel="North Dakota" itemValue="ND"/>
+                    <apex:selectOption itemLabel="Ohio" itemValue="OH"/>
+                    <apex:selectOption itemLabel="Oklahoma" itemValue="OK"/>
+                    <apex:selectOption itemLabel="Oregon" itemValue="OR"/>
+                    <apex:selectOption itemLabel="Pennsylvania" itemValue="PA"/>
+                    <apex:selectOption itemLabel="Rhode Island" itemValue="RI"/>
+                    <apex:selectOption itemLabel="South Carolina" itemValue="SC"/>
+                    <apex:selectOption itemLabel="South Dakota" itemValue="SD"/>
+                    <apex:selectOption itemLabel="Tennessee" itemValue="TN"/>
+                    <apex:selectOption itemLabel="Texas" itemValue="TX"/>
+                    <apex:selectOption itemLabel="Utah" itemValue="UT"/>
+                    <apex:selectOption itemLabel="Vermont" itemValue="VT"/>
+                    <apex:selectOption itemLabel="Virginia" itemValue="VA"/>
+                    <apex:selectOption itemLabel="Washington" itemValue="WA"/>
+                    <apex:selectOption itemLabel="West Virginia" itemValue="WV"/>
+                    <apex:selectOption itemLabel="Wisconsin" itemValue="WI"/>
+                    <apex:selectOption itemLabel="Wyoming" itemValue="WY"/>               
+               </apex:selectList>
+           </td>
+           <td>
+           <apex:selectList multiselect="false" size="1" value="{!pickedAwanaRole}" required="true" id="AwanaRoleId">
+               <apex:selectOption itemLabel="Awana Role" itemValue="test"/>
+               <apex:selectOption itemLabel="Commander" itemValue="Commander"/>
+               <apex:selectOption itemLabel="Adopt-A-Club Coordinator" itemValue="Adopt-A-Club Coordinator"/>
+               <apex:selectOption itemLabel="Alumni / Award Recipient" itemValue="Alumni / Award Recipient"/>
+               <apex:selectOption itemLabel="Awana at Home Director" itemValue="Awana at Home Director"/>
+               <apex:selectOption itemLabel="Clubber Parent" itemValue="Clubber Parent"/>
+               <apex:selectOption itemLabel="Club Leader" itemValue="Club Leader"/>
+               <apex:selectOption itemLabel="Club Secretary" itemValue="Club Secretary"/>
+               <apex:selectOption itemLabel="Cubbies Director" itemValue="Cubbies Director"/>
+               <apex:selectOption itemLabel="Cubbies Leader" itemValue="Cubbies Leader"/>
+               <apex:selectOption itemLabel="Entrusted Leader" itemValue="Entrusted Leader"/>
+               <apex:selectOption itemLabel="Game Director" itemValue="Game Director"/>
+               <apex:selectOption itemLabel="High Power Soccer Leader" itemValue="High Power Soccer Leader"/>
+               <apex:selectOption itemLabel="Homeschool Parent" itemValue="Homeschool Parent"/>
+               <apex:selectOption itemLabel="Journey Director" itemValue="Journey Director"/>
+               <apex:selectOption itemLabel="Journey Leader" itemValue="Journey Leader"/>
+               <apex:selectOption itemLabel="Puggles Director" itemValue="Puggles Director"/>
+               <apex:selectOption itemLabel="Puggles Leader" itemValue="Puggles Leader"/>
+               <apex:selectOption itemLabel="Sparks Director" itemValue="Sparks Director"/>
+               <apex:selectOption itemLabel="Sparks Leader" itemValue="Sparks Leader"/>
+               <apex:selectOption itemLabel="T&T Director" itemValue="T&T Director"/>
+               <apex:selectOption itemLabel="T&T Leader" itemValue="T&T Leader"/>
+               <apex:selectOption itemLabel="Trek Director" itemValue="Trek Director"/>
+               <apex:selectOption itemLabel="Trek Leader" itemValue="Trek Leader"/>
+               <apex:selectOption itemLabel="Truthseekers Leader" itemValue="Truthseekers Leader"/>
+           </apex:selectList>
+           </td>
+           <td>
+                <apex:selectList multiselect="false" size="1" value="{!pickedChurchRole}" id="churchRoleId">
+                   <apex:selectOption itemLabel="Church Role" itemValue="test"/>
+                   <apex:selectOption itemLabel="Pastor / Associate Pastor" itemValue="Pastor / Associate Pastor"/> 
+                   <apex:selectOption itemLabel="Children's Pastor / Director" itemValue="Children\'s Pastor / Director"/> 
+                   <apex:selectOption itemLabel="Youth Pastor / Director" itemValue="Youth Pastor / Director"/> 
+                   <apex:selectOption itemLabel="Church Staff Member" itemValue="Church Staff Member"/>           
+               </apex:selectList>
+           </td>   
+        <apex:actionRegion >                   
+           <td>
+               <apex:inputHidden value="{!usrid}" id="targetId"/>
+           <!--    <apex:inputField id="mgrId" value="{!usr.ManagerId}" style="width:175px;" required="false"/>  -->
+               <apex:inputField id="mgrId" value="{!aUser.OwnerId}" style="width:175px;" required="false"/>  
+                   
+                   <apex:actionFunction action="{!reportResults}" name="reportResults" />
+                          
+           </td>
+ 
+         </apex:actionRegion>      
+           <td>
+               <input type="button" id="awr" value="Run Report" style="font-family: Arial,Helvetica,sans-serif;border-radius: 8px;background-color:#ECA348;color:white;font-weight:bold;" onclick="return awanaRoleValidation()" status="status" reRender="resultsblock"/>                          
+           </td>
+           
+           <td>               
+           <!--   <a href="#" onclick="window.open('/apex/Report_Accounts_Contacts_by_Role_Export?aState={!pickedValue}&aRole={!pickedAwanaRole}&cState={!pickedValue1}&cRole={!pickedChurchRole}&usrId={!usr.ManagerId}');" >Click to Export Data</a>  -->
+              <input type="button" value="Export Data" style="font-family: Arial,Helvetica,sans-serif;border-radius: 8px;background-color:#ECA348; color:white;font-weight:bold;" onclick="window.open('/apex/Report_Accounts_Contacts_by_Role_Export?aState={!pickedValue}&aRole={!pickedAwanaRole}&cState={!pickedValue1}&cRole={!pickedChurchRole}&usrId={!aUser.OwnerId}');" />
+           </td>
+           
+           <td>
+               <input type="button" value="Add to Campaign" style="font-family: Arial,Helvetica,sans-serif;border-radius: 8px;background-color:#ECA348;color:white;font-weight:bold;" onclick="window.open('/apex/AddtoCampaign?aState={!pickedValue}&aRole={!pickedAwanaRole}&cState={!pickedValue1}&cRole={!pickedChurchRole}&usrId={!aUser.OwnerId}');"/>
+           </td> 
+       </tr>       
+       <tr><td>&nbsp;</td></tr>
+       
+       <tr>
+           <td>&nbsp;</td>
+           <td>&nbsp;</td>
+           <td>&nbsp;</td>  
+           <!--          
+           <td> 
+                         
+              <a href="#" onclick="window.open('/apex/Report_Accounts_Contacts_by_Role_Export?aState={!pickedValue}&aRole={!pickedAwanaRole}&cState={!pickedValue1}&cRole={!pickedChurchRole}&usrId={!usr.ManagerId}');" >Click to Export Data</a>
+              <input type="button" value="Export Data" style="border-radius: 8px;background-color:#ECA348;" onclick="window.open('/apex/Report_Accounts_Contacts_by_Role_Export?aState={!pickedValue}&aRole={!pickedAwanaRole}&cState={!pickedValue1}&cRole={!pickedChurchRole}&usrId={!usr.ManagerId}');" />
+           </td>
+           <td>
+               <input type="button" value="Add to Campaign" style="border-radius: 8px;background-color:#ECA348;" onclick="window.open('/apex/AddtoCampaign?aState={!pickedValue}&aRole={!pickedAwanaRole}&cState={!pickedValue1}&cRole={!pickedChurchRole}&usrId={!usr.ManagerId}');"/>
+           </td> 
+           -->
+       </tr>
+     
+     </table>
+    
+    <apex:pageBlock title="Contacts under the State:  {!pickedValue}" id="resultsblock">
+            <apex:pageBlockButtons >
+                    <apex:outputPanel style="text-align: right" layout="block" >                                    
+                <apex:commandButton styleClass="btnImportant" rendered="{!Con.HasPrevious}" action="{!PREVIOUS}"  status="waitingStatusLoad"  value="Previous" rerender="resultsblock" oncomplete="process_club()"/>
+                <apex:commandButton styleClass="btnImportant" rendered="{!Con.HasNext}" action="{!NEXT}" status="waitingStatusLoad"  value="Next" rerender="resultsblock" oncomplete="process_club()"/>               
+                <apex:actionStatus id="waitingStatusLoad">                   
+                       <apex:facet name="start">                           
+                           <img class="waitingImage" src="/img/loading.gif" width="18px" height="18px"/>                    
+                           <span class="waitingDescription"><font size="2">Please wait...</font></span>                                          
+                       </apex:facet>
+                       <apex:facet name="stop"></apex:facet>
+               </apex:actionStatus> 
+             </apex:outputPanel> 
+        </apex:pageBlockButtons>  
+                              
+        <apex:pageBlockTable value="{!searchResults}" var="acc"> 
+              
+        <apex:column headerValue="Account Name" >{!acc.Name}</apex:column>
+        <apex:column headerValue="Customer ID" >{!acc.Mailing_Address_Book__c}</apex:column>
+        <apex:column headerValue="City" >{!acc.Physical_City__c}</apex:column>
+        <apex:column headerValue="State" >{!acc.Physical_State__c}</apex:column>
+        <apex:column headerValue="Contact Name" >        
+        <apex:repeat value="{!acc.npe5__Affiliations__r}" var="c">
+            {!c.npe5__Contact__r.Name}<br/>
+        </apex:repeat> 
+        </apex:column>
+        <apex:column headerValue="Contact Email" >
+        <apex:repeat value="{!acc.npe5__Affiliations__r}" var="c">
+            {!c.npe5__Contact__r.Email}<br/>
+        </apex:repeat> 
+        </apex:column>
+        <apex:column headerValue="Awana Role" >
+        <apex:repeat value="{!acc.npe5__Affiliations__r}" var="c">
+            {!c.Awana_Role__c}<br/>
+        </apex:repeat> 
+        </apex:column>
+        <apex:column headerValue="Church Role" >
+        <apex:repeat value="{!acc.npe5__Affiliations__r}" var="c">
+            {!c.Church_Role__c}<br/>
+        </apex:repeat> 
+        </apex:column>
+      
+        <apex:column headerValue="Primary Missionary" >
+        
+        <apex:repeat value="{!acc.accountTeamMemberS}" var="c">
+            {!c.user.name}<br/>
+        </apex:repeat>
+        </apex:column>
+       
+        <apex:column headerValue="Account Owner" >{!acc.Owner.Name}</apex:column>
+    </apex:pageBlockTable>
+      
+    </apex:pageBlock>
+          
+</apex:form>
+</apex:pageBlock>
+</apex:page>

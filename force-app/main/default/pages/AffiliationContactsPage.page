@@ -1,0 +1,32 @@
+<apex:page standardController="Account" extensions="AffiliationContactExtension" title="Affiliation Contacts">
+        
+    <apex:form >
+        
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!pcAffiliations}" var="PCAffs">
+                    <apex:column >
+                        <apex:outputLink value="/{!PCAffs.Id}" target="_parent">{!PCAffs.Name}</apex:outputLink>
+                    </apex:column>
+                    <apex:column >
+                        <apex:outputLink value="/{!PCAffs.npe5__Contact__c}" target="_parent">{!PCAffs.npe5__Contact__r.FirstName} {!PCAffs.npe5__Contact__r.LastName}</apex:outputLink>
+                    </apex:column>  
+                    <apex:column value="{!PCAffs.Church_Role__c}"/>
+                    <apex:column value="{!PCAffs.Awana_Role_Text__c}"/>
+                    <apex:column value="{!PCAffs.Authorized_Purchaser__c}" />
+                    <apex:column value="{!PCAffs.npe5__Status__c}" />
+                    <apex:column value="{!PCAffs.Mozo_User_Level__c}" /> 
+                    <apex:column value="{!PCAffs.Organization_Owner__c}" /> 
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+        <apex:outputPanel style="padding-bottom:15px;" layout="block">
+            <div style="float:left;">
+                <apex:commandLink action="{!QueryPreviousRecords}" rendered="{!HasPreviousRecords}">Previous</apex:commandlink>
+                <apex:commandLink rendered="{!!HasPreviousRecords}" style="text-decoration:none;cursor:default;">Previous</apex:commandLink>
+                |&nbsp;
+                <apex:commandLink action="{!QueryNextRecords}" rendered="{!HasNextRecords}">Next</apex:commandlink>
+                <apex:commandLink rendered="{!!HasNextRecords}" style="text-decoration:none;cursor:default;">Next</apex:commandLink>
+                &gt;
+            </div>
+        </apex:outputPanel>
+    </apex:form>
+</apex:page>

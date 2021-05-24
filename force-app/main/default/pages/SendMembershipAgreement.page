@@ -1,0 +1,164 @@
+<apex:page id="page" standardController="Contact" extensions="SendMembershipAgreement" showHeader="false" lightningstylesheets="true">
+    
+    <apex:outputPanel rendered="{!if($User.UIThemeDisplayed == 'Theme4d',true,false)}">
+    
+    <style>
+        html {
+        overflow: hidden; /* Hide scrollbars */
+        }
+    </style> 
+    <apex:slds /> 
+    <apex:form id="form">
+        
+        <apex:pageMessages id="showmsg"></apex:pageMessages>
+        <!--<center>
+            <h2 style="font-size: 22px;margin-left:10px" class="slds-form-element__label"> Send Document</h2>
+        </center>-->
+        
+        <br/>
+        
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">                                    
+                            <span> Please select the name of the Account.</span>                                    
+                        </h2>
+                    </div>
+                </header>
+            </div>
+        </article>
+        <br/>
+        <div class="slds-form"  role="list">
+            <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_horizontal">                   
+                    <label class="slds-form-element__label" for="horizontal-input-id-01">Select Account:</label>
+                    <div class="slds-form-element__control">
+                        <apex:selectList size="1" id="applicant" value="{!selectedAccount}" styleClass="slds-select">
+                            <apex:selectOptions value="{!Accounts}" />
+                        </apex:selectList>                        
+                    </div>
+                </div>            
+            </div>
+        </div>    
+        
+        <br/>
+        
+        <article class="slds-card">
+            <div class="slds-card__header slds-grid">
+                <header class="slds-media slds-media_center slds-has-flexi-truncate">
+                    <div class="slds-media__body">
+                        <h2 class="slds-card__header-title">                                    
+                            <span> Use Send Agreement if you wish to send the Document to the Contact.</span>                                    
+                        </h2>
+                    </div>
+                </header>
+            </div>
+        </article>
+        <br/>
+        <div class="slds-form"  role="list">
+            <div class="slds-form__item" role="listitem">
+                <div class="slds-form-element slds-form-element_horizontal">                   
+                    <label class="slds-form-element__label" for="horizontal-input-id-01">Select Language:</label>
+                    <div class="slds-form-element__control">
+                        <apex:selectList size="1" id="chooseLanguage" value="{!language}" styleClass="slds-select">
+                            <apex:selectOption itemValue="English" itemLabel="English"/>
+                            <apex:selectOption itemValue="Spanish" itemLabel="Spanish"/>
+                        </apex:selectList>                        
+                    </div>
+                </div>            
+            </div>
+        </div> 
+        <br/><br/>
+        <div class="slds-grid slds-grid_align-center">
+            
+        <apex:commandButton value="Send Agreement" action="{!sendAgreement}" styleClass="slds-button slds-button_neutral"></apex:commandButton> 
+        </div>
+    </apex:form>
+    </apex:outputPanel>
+<!---- classic -->    
+    
+    <apex:outputPanel rendered="{!if($User.UIThemeDisplayed == 'Theme3',true,false)}">
+    
+    <html>
+        <body onload="moveTo(0,0); resizeTo(700,425);"></body>
+    </html>
+    <script language="JavaScript" type="text/javascript">
+    function closeWindow(){
+        window.top.close();
+    }
+    
+    </script>
+    
+    <apex:form >
+        
+        <apex:pageMessages id="showmsg"></apex:pageMessages>
+        <table>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                
+                <h1 style="font-size: 22px;margin-left:10px"> Send Document</h1>
+                
+                <td style="padding-left: 0px; padding-top: 10px">
+                    <apex:pageBlock >
+                        <apex:pageBlockSection >
+                            Please select the name of the Account.
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td>
+                    <apex:outputLabel style="padding-right: 10px;font-weight:bold;">Select Account:</apex:outputLabel>
+                    <apex:selectList size="1" id="applicant" value="{!selectedAccount}">
+                        <apex:selectOptions value="{!Accounts}" />
+                    </apex:selectList>
+                </td>
+            </tr>
+            
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td style="padding-left: 1px; padding-top: 20px">
+                    <apex:pageBlock >
+                        <apex:pageBlockSection >
+                            Use Send Agreement if you wish to send the Document to the Contact.
+                        </apex:pageBlockSection>
+                    </apex:pageBlock>
+                </td>
+            </tr> 
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td style="padding-left: 1px;">
+                    <apex:outputLabel style="padding-right: 10px;font-weight:bold;">Select Language:</apex:outputLabel>
+                    
+                    <apex:selectList id="chooseLanguage" value="{!language}" size="1">
+                        <apex:selectOption itemValue="English" itemLabel="English"/>
+                        <apex:selectOption itemValue="Spanish" itemLabel="Spanish"/>
+                    </apex:selectList>
+                    <br/><br/><br/>
+                    <div style="margin-left:5px">
+                        
+                            <apex:commandButton value="Send Agreement" action="{!sendAgreement}"></apex:commandButton>  
+                     
+                    </div>
+                    
+                    
+                </td>
+            </tr>
+
+        </table> 
+        
+    </apex:form>
+    
+    </apex:outputPanel>
+    
+</apex:page>

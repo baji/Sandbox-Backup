@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>npsp__Opportunity_Email_Acknowledgment</fullName>
+        <description>Opportunity Email Acknowledgment</description>
+        <protected>false</protected>
+        <recipients>
+            <field>npsp__Primary_Contact__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>npsp__NPSP_Email_Templates/npsp__NPSP_Opportunity_Acknowledgment</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>INQ_Assign_Default_Opp_Name_Converte</fullName>
+        <description>Update the Opportunity Name for Converted Inquiries</description>
+        <field>Name</field>
+        <formula>&quot;P- &quot;+ Account.Name +&quot;-&quot;+  TEXT( DATEVALUE( CreatedDate ) )</formula>
+        <name>INQ - Assign Default Opp Name-Converted</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>INQ_Assign_Default_Opp_Name_Return</fullName>
+        <description>Updates the Opportunity Name for Returning Churches</description>
+        <field>Name</field>
+        <formula>&quot;CB- &quot;+ Account.Name +&quot;-&quot;+ TEXT( DATEVALUE(CreatedDate) )</formula>
+        <name>INQ - Assign Default Opp Name - Return</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>INQ_Update_Account_Status</fullName>
+        <description>Update the Account Status to Ready to Activate</description>
+        <field>Status__c</field>
+        <literalValue>Ready to Activate</literalValue>
+        <name>INQ - Update Account Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+        <targetObject>AccountId</targetObject>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>npsp__Opportunity_AcknowledgmentStatus_Update</fullName>
+        <description>Sets the Acknowledgment Status to &quot;Acknowledged&quot;</description>
+        <field>npsp__Acknowledgment_Status__c</field>
+        <literalValue>Acknowledged</literalValue>
+        <name>Opportunity Acknowledgment Status Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>npsp__Opportunity_Acknowledgment_Date_Update</fullName>
+        <description>sets the Acknowledgment Date to Today.</description>
+        <field>npsp__Acknowledgment_Date__c</field>
+        <formula>Today()</formula>
+        <name>Opportunity Acknowledgment Date Update</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>npsp__Opportunity_Copy_FMV_to_Amount</fullName>
+        <description>Copy the Opportunities Fair Market Value field to the Amount field.</description>
+        <field>Amount</field>
+        <formula>npsp__Fair_Market_Value__c</formula>
+        <name>Opportunity Copy FMV to Amount</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>INQ - Assign Default Opp Name - Converted</fullName>
+        <actions>
+            <name>INQ_Assign_Default_Opp_Name_Converte</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Prospect</value>
+        </criteriaItems>
+        <description>Assigns a Default Opportunity Name for Converted Inquiries (Registration Opportunity Record Type)</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>INQ - Assign Default Opp Name - Returning</fullName>
+        <actions>
+            <name>INQ_Assign_Default_Opp_Name_Return</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Dropped</value>
+        </criteriaItems>
+        <description>Assigns a Default Opportunity Name for Registration Opportunities for churches with Dropped Status</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>INQ - Update Account Status</fullName>
+        <actions>
+            <name>INQ_Update_Account_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Opportunity.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Registration</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Registration Signed</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.Status__c</field>
+            <operation>equals</operation>
+            <value>Prospect,Dropped</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Account.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>US Organization</value>
+        </criteriaItems>
+        <description>Update Account Status to Ready to Activate when Opportunity Stage = Registration Signed</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Notification Task</fullName>
+        <actions>
+            <name>Tribute_Notification_Task</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Opportunity.Notification_Type__c</field>
+            <operation>equals</operation>
+            <value>Phone,Mail</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Account Type based on Opportunity Stage</fullName>
+        <active>true</active>
+        <booleanFilter>1 OR 2</booleanFilter>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Lost</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.StageName</field>
+            <operation>equals</operation>
+            <value>Closed Won</value>
+        </criteriaItems>
+        <description>This workflow rule updates Account type based on the opportunity stage.</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>npsp__Opportunity Copy FMV to Amount</fullName>
+        <actions>
+            <name>npsp__Opportunity_Copy_FMV_to_Amount</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <booleanFilter>(1 OR 2) AND (3 AND 4)</booleanFilter>
+        <criteriaItems>
+            <field>Opportunity.Amount</field>
+            <operation>equals</operation>
+            <value>USD 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.Amount</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.npsp__Fair_Market_Value__c</field>
+            <operation>notEqual</operation>
+            <value>USD 0</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Opportunity.npsp__Fair_Market_Value__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <description>Enable this rule to copy the Fair Market Value to the Amount field, when the Amount is zero or blank.</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>npsp__Opportunity Email Acknowledgment</fullName>
+        <actions>
+            <name>npsp__Opportunity_Email_Acknowledgment</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>npsp__Opportunity_AcknowledgmentStatus_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>npsp__Opportunity_Acknowledgment_Date_Update</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <description>Emails an acknowledgement to the Primary Contact for an Opportunity when the Acknowledgement Status is set to Email Acknowledgement Now.</description>
+        <formula>TEXT(npsp__Acknowledgment_Status__c) = $Label.npsp__sendAcknowledgmentFireStatus &amp;&amp;  npsp__Primary_Contact__r.Email &lt;&gt; NULL &amp;&amp;  npsp__Primary_Contact__r.npsp__Do_Not_Contact__c &lt;&gt; True &amp;&amp;  npsp__Primary_Contact__r.HasOptedOutOfEmail &lt;&gt; True &amp;&amp;  npsp__Primary_Contact__r.npsp__Deceased__c &lt;&gt; True</formula>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Tribute_Notification_Task</fullName>
+        <assignedTo>anveshk@awana.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <offsetFromField>Opportunity.CreatedDate</offsetFromField>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Tribute Notification Task</subject>
+    </tasks>
+</Workflow>

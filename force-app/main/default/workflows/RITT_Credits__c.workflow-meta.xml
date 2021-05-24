@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>RITTCreditRequestApproved</fullName>
+        <description>RITT Credit Request Approved</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>RITT/RITTCreditRequestApproved</template>
+    </alerts>
+    <alerts>
+        <fullName>RITTCreditRequestRejected</fullName>
+        <description>RITT Credit Request Rejected</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Contact__c</field>
+            <type>contactLookup</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>RITT/RITTCreditRequestRejected</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>TT_Credit_Course_Credits</fullName>
+        <field>Total_Credits__c</field>
+        <formula>Course_RIU_s__c</formula>
+        <name>TT Credit - Course Credits</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>TT_Credit_Course_Number</fullName>
+        <field>Course_Number__c</field>
+        <formula>RITT_Courses__r.Course_Title__c</formula>
+        <name>TT Credit - Course Number</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>TT_Credit_Course_Type_Ongoing_Service</fullName>
+        <field>RecordTypeId</field>
+        <lookupValue>Ongoing_Service</lookupValue>
+        <lookupValueType>RecordType</lookupValueType>
+        <name>TT Credit Course Type - Ongoing Service</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>TT_Credit_Service_Credits</fullName>
+        <field>Total_Credits__c</field>
+        <formula>Service_Credits__c</formula>
+        <name>TT Credit - Service Credits</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>TT Credit - Service Credits</fullName>
+        <actions>
+            <name>TT_Credit_Service_Credits</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <formula>AND ( RecordTypeId = &apos;01250000000DoPy&apos;, Service_Credits__c &gt; 0, ISCHANGED( Service_Credits__c ) )</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>TT Credit Course Type - Ongoing Service</fullName>
+        <actions>
+            <name>TT_Credit_Course_Type_Ongoing_Service</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>RITT_Credits__c.Course_Type__c</field>
+            <operation>equals</operation>
+            <value>Ongoing Service</value>
+        </criteriaItems>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+</Workflow>

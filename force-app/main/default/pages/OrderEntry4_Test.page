@@ -1,0 +1,374 @@
+<apex:page showheader="true" sidebar="true" standardStylesheets="false" standardController="Order" id="OrderEntryPage" title="Order Entry" lightningStylesheets="true"  docType="html-5.0" tabStyle="Order">
+    <html xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <apex:slds /> 
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js" />
+        <apex:includeScript value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js" />
+        <apex:includeScript value="/soap/ajax/21.0/connection.js" />
+        <apex:includeScript value="/soap/ajax/21.0/apex.js" /> 
+        <apex:includeScript value="https://sfv5.online.qas.com/SalesforceV5RapidSearch/Scripts/allEDQForSalesforce.js"/> 
+        <apex:includeScript value="https://sfv5.online.qas.com/SalesforceV5RapidSearch/Scripts/edqDetailPageButton.js"/> 
+        <script type="text/javascript" src="{!$Resource.LiveAddress}" />
+        
+        <script type="text/javascript">
+            // get the session id
+            var __sfdcSessionId = '{!GETSESSIONID()}';
+        
+        // get image urls for preloading
+        var __loading_url = '{!URLFOR($Resource.Loading_SpinningArrows)}';
+        var __plus_url = '{!URLFOR($Resource.Small_Circle_Plus)}';
+        var __checkmark_url = '{!URLFOR($Resource.Small_Circle_Checkmark)}';
+        var __information_url = '{!URLFOR($Resource.Small_Circle_Information)}';
+        var __exclamation_url = '{!URLFOR($Resource.Small_Circle_Exclamation)}';
+        var __delete_url = '{!URLFOR($Resource.Small_Circle_Delete)}';
+        var __puzzle_url = '{!URLFOR($Resource.Small_Puzzle_Piece)}';
+        window.EDQConfigurationsUrl='{!URLFOR("/resource/EDQConfigurations")}' 
+        window.EDQGlobalSettingsUrl='{!URLFOR("/resource/EDQGlobalSettings")}' 
+        window.EDQSessionTokenUrl='{!URLFOR("/resource/EDQSessionToken")}' 
+        </script> 
+
+        <script type="text/javascript" src="{!$Resource.OrderEntry4_JavaScript}" /> 
+        
+        <style>
+            .ui-autocomplete-loading { background: url('{!$Resource.Loading_SpinningArrows}') right center no-repeat; }
+            .prices { font-family: "Courier New", Courier, monospace; font-weight:bold; font-size:1.1em; text-align:right; width:120px; }
+            .top-label { font-size:12px; }
+            .two-pixel-padding { padding:2px; } 
+            .input-container-left { display: inline-block; }
+            .input-container-left div { float:left; }
+            .credit-card-input { float: left; border-right: 1px dashed #AAA; padding-right: 10px; margin-right: 10px; width:auto; }
+            .address-input { overflow:hidden; width:auto; }
+            .select-address-table { border-collapse:collapse; width:100%; }
+            .required { color:red; padding-left:2px; }
+            .bPageBlock .detailList .dataCol { width: 50%; }
+        </style>
+        <apex:stylesheet value="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/ui-lightness/jquery-ui.css" />
+        
+        <body class="slds-scope">
+            <div class="slds-page-header" style="padding:0px;background-color: white;border: 0px;">
+            	<span class="slds-icon_container slds-icon-utility-fulfillment_order" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                    <svg aria-hidden="true" class="slds-button__icon slds-button__icon_large">
+                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#fulfillment_order')}"></use>
+                    </svg>   
+                </span>
+                <span id="OrderEntryHeader" style="font-size: x-large; ">Order Entry</span>
+            </div>
+            <apex:form >
+                <apex:actionfunction name="refresher" action="{!quicksave}" reRender="OrderTotal" />
+            </apex:form>
+            
+            
+            <article class="slds-card">
+                <div class="slds-card__body" style="margin: 3px 0px 0px 0px;">
+                    <!--  -->
+                    <div id="CreateOrderPageBlockContainer" style="display:none;"> 
+                        <apex:pageBlock id="CreateOrderPageBlock">
+                            
+                            <apex:facet name="header" >
+                                <div class="pbHeader" style="border-bottom: 1px solid #DBDBDB;">
+                                    <div class="slds-builder-header" style="width: 100%;display: inline-block;">
+                                        <div id="CreateOrderTitleLeft" style="display:inline;font-size: large;padding: 1%;"><h2>Create Order</h2></div>
+                                        <div id="CreateOrderTitleRight" style="display:inline;font-size: large;"><a id="ShowOrHide" style="color:white;margin-right: 1%;float: right;">hide</a></div>
+                                    </div>
+                                </div>
+                            </apex:facet>
+                            <div class="slds-form" style="padding: 15px;">
+                                <apex:pageBlockSection columns="2" id="CreateOrderDetail">
+                                    
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <span class="slds-icon_container slds-icon-utility-company" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                            	<svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                	<use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#company')}"></use>
+                                                </svg>   
+                                            </span>
+                                            <apex:outputLabel value="Select Company: " for="CreateOrderCompany" styleClass="slds-select__label"/>
+                                            <select id="CreateOrderCompany" onChange="getPriceBooksByCompany();" class="slds-select"></select>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>                                    
+                                    
+                                    <apex:pageBlockSectionItem id="IsSalesCreditContainer">
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <span class="slds-icon_container slds-icon-utility-money" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                            	<svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                	<use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#money')}"></use>
+                                                </svg>   
+                                            </span>    
+                                            <apex:outputLabel value="Sales Credit" for="IsSalesCredit" id="IsSalesCreditLabel" styleClass="slds-checkbox__label">
+                                                <button class="slds-button slds-button_icon" style="margin-top: -4px">
+                                                    <span class="slds-icon_container slds-icon-utility-quick_text" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#quick_text')}"></use>
+                                                        </svg>   
+                                                    </span>
+                                                </button>
+                                            </apex:outputLabel>                                            
+                                            <span class="slds-checkbox slds-checkbox_standalone">
+                                                <input type="checkbox" id="IsSalesCredit" onClick="getAllPriceBooks();" style="height: 1.85rem;width: 6.5%;"/>
+                                                <span class="slds-checkbox_faux" style="height: 1.85rem;width: 6.5%;"></span>
+                                            </span>             
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>  
+                                    
+                                    
+                                    <apex:pageBlockSectionItem > 
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <apex:outputPanel id="FindAccountContainer">
+                                                <span class="slds-icon_container slds-icon-standard-account" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                    <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                        <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#account')}"></use>
+                                                    </svg>   
+                                            	</span>
+                                                <apex:outputLabel value="Select Account: " for="FindAffiliations"  styleClass="slds-select__label"/>
+                                                <input type="hidden" id="FindAccount" style="width:220px;" />
+                                                <a id="FindAccountLink" style="display:none;">
+                                                    <span class="slds-icon_container slds-icon-utility-info">
+                                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#info')}"></use>
+                                                        </svg>   
+                                                    </span>    
+                                                </a>&nbsp;
+                                                <input type="hidden" id="FindAccountSalesforceId" />                                        
+                                            </apex:outputPanel>
+                                            <select id="FindAffiliations" onChange="getWhichTypeObject();" class="slds-select"></select>                                            
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    
+                                    <apex:pageBlockSectionItem id="OriginalOrderDateContainer" >
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <span class="slds-icon_container slds-icon-utility-date_input" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#date_input')}"></use>
+                                                </svg>   
+                                            </span>    
+                                            <apex:outputLabel value="Original Order Date (related to Credit):" for="OriginalOrderDate" id="OriginalOrderDateLabel" styleClass="slds-select__label"/>
+                                            <div>
+                                                <input type="text" id="OriginalOrderDate" disabled="true" placeholder="mm/dd/yyyy" class="slds-input"/>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>
+                                                
+                                    <!--<apex:pageBlockSectionItem id="CustomerIdContainer" >
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <span class="slds-icon_container slds-icon-utility-date_input">
+                                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#date_input')}"></use>
+                                                </svg>   
+                                            </span>    
+                                            <apex:outputLabel value="Customer Id" for="DisplayCustomerId" id="DisplayCustomerIdLabel" styleClass="slds-select__label"/>
+                                            <div id="DisplayCustomerIdContainer" style="width:50%">
+                                                <a id="DisplayCustomerId" class="slds-input slds-form-element__static" disabled="disabled" style="background-color: unset;text-decoration: none;"></a>  
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>-->
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <span class="slds-icon_container slds-icon-utility-notebook" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#notebook')}"></use>
+                                                </svg>   
+                                            </span>      
+                                            <apex:outputLabel value="Price Book: " for="CreateOrderPriceBook" styleClass="slds-select__label">
+                                                <button class="slds-button slds-button_icon" style="margin-top: -4px">
+                                                    <span class="slds-icon_container slds-icon-utility-quick_text" title="Pricebook determines the price of every item enetered in an order. Changing this after [Save & Enter items] is clicked will delete all line items (Products).">
+                                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#quick_text')}"></use>
+                                                        </svg>   
+                                                    </span>
+                                                </button>
+                                            </apex:outputLabel> 
+                                            <div>
+                                                <select id="CreateOrderPriceBook" onChange="getWhichCompany();" class="slds-select"></select>
+                                            </div>
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem id="FindAwanaRoleContainer">
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <span class="slds-icon_container slds-icon-utility-user_role" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#user_role')}"></use>
+                                                </svg>   
+                                            </span>    
+                                            <apex:outputLabel value="Awana Role:" for="FindAwanaRole" id="FindAwanaRoleLabel" styleClass="slds-select__label"/>
+                                            <div id="FindAwanaRoleContainer" style="width:50%">
+                                                <a id="FindAwanaRole" class="slds-input slds-form-element__static" disabled="disabled" style="background-color: unset;text-decoration: none;"></a>
+                                            </div>
+                                        </apex:outputPanel>          
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <span class="slds-icon_container slds-icon-utility-dayview" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#dayview')}"></use>
+                                                </svg>   
+                                            </span>     
+                                            <apex:outputLabel value="Membership Days Remaining: " for="FindExpireDays" id="FindExpireDaysLabel" styleClass="slds-select__label"/>
+                                            <div id="FindExpireDaysContainer" style="width:50%">
+                                                <a id="FindExpireDays" class="slds-input slds-form-element__static" disabled="disabled" style="background-color: unset;text-decoration: none;"></a>
+                                            </div>
+                                        </apex:outputPanel>         
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputPanel styleClass="slds-form-element__control">    
+                                            <span class="slds-icon_container slds-icon-standard-contact" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#contact')}"></use>
+                                                </svg>   
+                                            </span>         
+                                            <apex:outputLabel value="Contact Name: " for="DisplayContactName" id="DisplayContactNameLabel" styleClass="slds-select__label"/>
+                                            <div id="DisplayContactNameContainer" style="width:50%">
+                                                <a id="DisplayContactName" class="slds-input slds-form-element__static" disabled="disabled" style="background-color: unset;text-decoration: none;"></a>  
+                                            </div>
+                                        </apex:outputPanel> 
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem id="IsAccountOwnerContainer">
+                                        <apex:outputPanel styleClass="slds-form-element__control">
+                                            <span class="slds-icon_container slds-icon-utility-user" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#user')}"></use>
+                                                </svg>   
+                                            </span>    
+                                            <apex:outputLabel value="Account Owner? " for="IsAccountOwner" id="IsAccountOwnerLabel" styleClass="slds-checkbox__label">
+                                                <button class="slds-button slds-button_icon" style="margin-top: -4px">
+                                                    <span class="slds-icon_container slds-icon-utility-quick_text" title="Check this box to note that this is an Account Owner who can perform Membership Upgrades. Account Onwers have the Church/Awana Role of Pastor,Club Secretary, or Commander.">
+                                                        <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                            <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/utility-sprite/svg/symbols.svg#quick_text')}"></use>
+                                                        </svg>   
+                                                    </span>
+                                                </button>
+                                            </apex:outputLabel>                                            
+                                            <span class="slds-checkbox slds-checkbox_standalone">
+                                                <input type="checkbox" id="IsAccountOwner" onClick="getAllPriceBooks();" disabled="disabled" style="height: 1.85rem;width: 6.5%;"/>
+                                                <span class="slds-checkbox_faux" style="height: 1.85rem;width: 6.5%;"></span>
+                                            </span>             
+                                        </apex:outputPanel>                                                            
+                                    </apex:pageBlockSectionItem>  
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputPanel styleClass="slds-form-element__control">    
+                                            <span class="slds-icon_container slds-icon-standard-channel_program_members" title="Check this box to create a Sales Credit. Sales Credit items will be entered with a negative price, and the Payment Terms will be set to 'Sales Credit'.">
+                                                <svg aria-hidden="true" class="slds-button__icon slds-button__icon_small">
+                                                <use xlink:href="{!URLFOR($Asset.SLDS, 'assets/icons/standard-sprite/svg/symbols.svg#channel_program_members')}"></use>
+                                                </svg>   
+                                            </span>    
+                                            <apex:outputLabel value="Membership Level: " for="DisplayMemberLevel" id="DisplayMemberLevelLabel" styleClass="slds-select__label"/>
+                                            <div id="DisplayMemberLevelContainer" style="width:50%">
+                                                <a id="DisplayMemberLevel" class="slds-input slds-form-element__static" disabled="disabled" style="background-color: unset;text-decoration: none;"></a>  
+                                            </div>
+                                        </apex:outputPanel> 
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem >
+                                        <apex:outputPanel >
+                                            <input type="hidden" id="CreateOrderContact" />
+                                        </apex:outputPanel>
+                                    </apex:pageBlockSectionItem>
+                                    
+                                    <apex:pageBlockSectionItem id="AffiliateIdContainer" >
+                                        <input id="AffiliateId" type="hidden" name="AffiliateId" />
+                                    </apex:pageBlockSectionItem>        
+                                </apex:pageBlockSection> 
+                                
+                                <apex:outputPanel >
+                                    <p id="CreateOrderAreYouSure"></p>
+                                </apex:outputPanel>
+                                
+                                <apex:pageBlockButtons location="bottom" >
+                                    <apex:outputPanel id="pbButtons" styleClass="slds-form-element__control" style="padding-left: 100px;">            
+                                        <input type="button" value="Create Order" id="btnCreateOrder" onclick="createOrder();" class="slds-button slds-button_neutral"/>
+                                    </apex:outputPanel>
+                                </apex:pageBlockButtons>
+                            </div>
+                        </apex:pageBlock>
+                    </div> 
+                    <!--- --->
+                    
+                    <apex:pageBlock id="OrderDetailPageBlock">
+                        
+                        <apex:facet name="header" >
+                            <div class="pbHeader" style="border-bottom: 1px solid #DBDBDB; padding: 12px;">
+                                <div id="OrderDetailTitleLeft" style="display:inline; "><h2>Order Summary</h2></div>
+                                <div id="OrderDetailTitleRight" style="display:inline; float:right;"><a id="ShowOrHide">hide</a></div>
+                            </div>
+                        </apex:facet>
+                        
+                        <apex:pageBlockSection columns="2" id="OrderDetailSection" title="Order">
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Order Name: " for="OrderDetailName" id="OrderDetailNameLabel" />
+                                <div id="OrderDetailNameContainer">
+                                    <a id="OrderDetailName"></a>
+                                </div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Date Started: " for="OrderDetailDateStarted" id="OrderDetailDateStartedLabel" />
+                                <div id="OrderDetailDateStarted"></div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Account: " for="OrderDetailAccount" id="OrderDetailAccountLabel" />
+                                <div id="OrderDetailAccountContainer">
+                                    <a id="OrderDetailAccount"></a>
+                                </div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Order Price Book: " for="OrderDetailPriceBook" id="OrderDetailPriceBookLabel" />
+                                <div id="OrderDetailPriceBook"></div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Contact: " for="OrderDetailContact" id="OrderDetailContactLabel" />
+                                <div id="OrderDetailContactContainer">
+                                    <a id="OrderDetailContact"></a>
+                                </div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Order Stage: " for="OrderDetailStage" id="OrderDetailStageLabel" />
+                                <div id="OrderDetailStage"></div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Company: " for="OrderDetailCompany" id="OrderDetailCompanyLabel" />
+                                <div id="OrderDetailCompany"></div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Shipping Method: " for="OrderShippingMethod" id="OrderShippingMethodLabel" />
+                                <div id="OrderShippingMethod"></div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Church/Awana Role: " for="OrderRole" id="OrderRoleLabel" />
+                                <div id="OrderRoleContainer">
+                                    <a id="OrderRole"></a>
+                                </div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Days Remaining: " for="OrderDaysLeft" id="OrderDaysLeftLabel" />
+                                <div id="OrderDaysLeftContainer">
+                                    <a id="OrderDaysLeft"></a>
+                                </div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Membership Level: " for="MemberLevelHtml" id="MemberLevelHtmlLabel" />
+                                <div id="MemberLevelHtmlContainer">
+                                    <a id="MemberLevelHtml"></a>
+                                </div>
+                            </apex:pageBlockSectionItem>
+                            <apex:pageBlockSectionItem >
+                                <apex:outputLabel value="Account Owner: " for="AccountOwnerHtml" id="AccountOwnerHtmlLabel" />
+                                <div id="AccountOwnerHtmlContainer">
+                                    <a id="AccountOwnerHtml"></a>
+                                </div>
+                            </apex:pageBlockSectionItem>
+                        </apex:pageBlockSection> 
+                    </apex:pageBlock>
+                </div>
+                
+            </article>
+            
+            
+        </body>
+        
+    </html>
+</apex:page>

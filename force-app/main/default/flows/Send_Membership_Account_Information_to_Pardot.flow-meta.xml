@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <processMetadataValues>
+            <name>apexSelection</name>
+            <value>
+                <stringValue>PardotNewChurchInsert</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>Call Pardot to Create Prospect</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <actionName>PardotNewChurchInsert</actionName>
+        <actionType>apex</actionType>
+        <connector>
+            <targetReference>myRule_1_A2</targetReference>
+        </connector>
+        <inputParameters>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>accountId</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>maxOccurs</name>
+                <value>
+                    <numberValue>1.0</numberValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>objectType</name>
+                <value>
+                    <stringValue></stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <name>accountId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>emailAlertSelection</name>
+            <value>
+                <stringValue>Send_Welcome_Email_to_New_Member_church</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A2</name>
+        <label>New Membership welcome email</label>
+        <locationX>100</locationX>
+        <locationY>300</locationY>
+        <actionName>Account.Send_Welcome_Email_to_New_Member_church</actionName>
+        <actionType>emailAlert</actionType>
+        <inputParameters>
+            <name>SObjectRowId</name>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision</name>
+        <label>myDecision</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>Check Member Registration</label>
+        </rules>
+    </decisions>
+    <description>Create Prospect in Pardot for newly added Account through membership.</description>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>(ISCHANGED([Account].Registration_Level__c) &amp;&amp; 
+( ISPICKVAL( [Account].Registration_Level__c ,&quot;R1&quot;)) &amp;&amp; 
+ISPICKVAL( PriorValue([Account].Registration_Level__c) , &quot;R0&quot;) &amp;&amp; 
+ISPICKVAL( [Account].Registration_Status__c ,&quot;New&quot;) &amp;&amp; 
+[Account].RecordType.Name  =&quot;US Organization&quot; &amp;&amp;
+NOT(ISBLANK([Account].Applicant__c )) )
+ ||
+ ( ISPICKVAL( [Account].Registration_Status__c ,&quot;Reinstated&quot;) &amp;&amp; ISCHANGED([Account].Registration_Status__c) &amp;&amp; ( ISPICKVAL( [Account].Registration_Level__c ,&quot;R1&quot;)) &amp;&amp; NOT(ISBLANK([Account].Applicant__c ))
+  )</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>(ISCHANGED({!myVariable_current.Registration_Level__c}) &amp;&amp; 
+( ISPICKVAL( {!myVariable_current.Registration_Level__c} ,&quot;R1&quot;)) &amp;&amp; 
+ISPICKVAL( PriorValue({!myVariable_current.Registration_Level__c}) , &quot;R0&quot;) &amp;&amp; 
+ISPICKVAL( {!myVariable_current.Registration_Status__c} ,&quot;New&quot;) &amp;&amp; 
+{!myVariable_current.RecordType.Name}  =&quot;US Organization&quot; &amp;&amp;
+NOT(ISBLANK({!myVariable_current.Applicant__c} )) )
+ ||
+ ( ISPICKVAL( {!myVariable_current.Registration_Status__c} ,&quot;Reinstated&quot;) &amp;&amp; ISCHANGED({!myVariable_current.Registration_Status__c}) &amp;&amp; ( ISPICKVAL( {!myVariable_current.Registration_Level__c} ,&quot;R1&quot;)) &amp;&amp; NOT(ISBLANK({!myVariable_current.Applicant__c} ))
+  )</expression>
+    </formulas>
+    <interviewLabel>Send_Membership_Account_Information_to_Pardot-5_InterviewLabel</interviewLabel>
+    <label>Send Membership Account Information to Pardot</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>Account</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <startElementReference>myDecision</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>Account</objectType>
+    </variables>
+</Flow>

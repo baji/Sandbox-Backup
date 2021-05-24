@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Flow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionCalls>
+        <processMetadataValues>
+            <name>postTargetUserType</name>
+            <value>
+                <stringValue>REFERENCE</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>textJson</name>
+            <value>
+                <stringValue>{&quot;mentions&quot;:[],&quot;message&quot;:&quot;AFFILIATION&lt;&lt;{![npe5__Affiliation__c].Name}&gt;&gt;  1st TIME COMMANDER \nhttp://na59.salesforce.com/{![npe5__Affiliation__c].Id}&quot;}</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>1st-Time Commander Chatter Feed</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>AFFILIATION&lt;&lt;{!myVariable_current.Name}&gt;&gt;  1st TIME COMMANDER 
+http://na59.salesforce.com/{!myVariable_current.Id}</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>type</name>
+            <value>
+                <stringValue>USER</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>myVariable_current.npe5__Organization__r.Owner.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>postTargetUserType</name>
+            <value>
+                <stringValue>REFERENCE</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>textJson</name>
+            <value>
+                <stringValue>{&quot;mentions&quot;:[],&quot;message&quot;:&quot;AFFILIATION&lt;&lt;{![npe5__Affiliation__c].Name}&gt;&gt; COMMANDER REMOVED\nhttp://na59.salesforce.com/{![npe5__Affiliation__c].Id}&quot;}</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_3_A1</name>
+        <label>Commander Removal Chatter Feed</label>
+        <locationX>300</locationX>
+        <locationY>200</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>AFFILIATION&lt;&lt;{!myVariable_current.Name}&gt;&gt; COMMANDER REMOVED
+http://na59.salesforce.com/{!myVariable_current.Id}</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>type</name>
+            <value>
+                <stringValue>USER</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>myVariable_current.npe5__Organization__r.Owner.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <actionCalls>
+        <processMetadataValues>
+            <name>postTargetUserType</name>
+            <value>
+                <stringValue>REFERENCE</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>textJson</name>
+            <value>
+                <stringValue>{&quot;mentions&quot;:[],&quot;message&quot;:&quot;AFFILIATION&lt;&lt;{![npe5__Affiliation__c].Name}&gt;&gt; COMMANDER STATUS IS NOW &lt;&lt; {![npe5__Affiliation__c].npe5__Status__c}&gt;&gt;\nhttp://na59.salesforce.com/{![npe5__Affiliation__c].Id}&quot;}</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>myRule_5_A1</name>
+        <label>Commander Status Chatter Feed</label>
+        <locationX>500</locationX>
+        <locationY>200</locationY>
+        <actionName>chatterPost</actionName>
+        <actionType>chatterPost</actionType>
+        <inputParameters>
+            <name>text</name>
+            <value>
+                <stringValue>AFFILIATION&lt;&lt;{!myVariable_current.Name}&gt;&gt; COMMANDER STATUS IS NOW &lt;&lt; {!myVariable_current.npe5__Status__c}&gt;&gt;
+http://na59.salesforce.com/{!myVariable_current.Id}</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>type</name>
+            <value>
+                <stringValue>USER</stringValue>
+            </value>
+        </inputParameters>
+        <inputParameters>
+            <name>subjectNameOrId</name>
+            <value>
+                <elementReference>myVariable_current.npe5__Organization__r.Owner.Id</elementReference>
+            </value>
+        </inputParameters>
+    </actionCalls>
+    <apiVersion>49.0</apiVersion>
+    <assignments>
+        <name>myVariable_waitStartTimeAssignment</name>
+        <label>myVariable_waitStartTimeAssignment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>myVariable_waitStartTimeVariable</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>$Flow.CurrentDateTime</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>myDecision</targetReference>
+        </connector>
+    </assignments>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>0.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision</name>
+        <label>myDecision</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision2</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_1</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>First-Time Commander</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision2</name>
+        <label>myDecision2</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision4</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_3</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_3_A1</targetReference>
+            </connector>
+            <label>Commander Removed</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>2.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision4</name>
+        <label>myDecision4</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_5</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
+                <leftValueReference>formula_myRule_5</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_5_A1</targetReference>
+            </connector>
+            <label>Commander Status Changed</label>
+        </rules>
+    </decisions>
+    <description>Notifying an Account Owner with a Chatter Feed when Commander Role Has Changed</description>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([npe5__Affiliation__c].npe5__Organization__c.Registration_Level__c ,&apos;R1&apos;) &amp;&amp;
+INCLUDES([npe5__Affiliation__c].Awana_Role__c ,&apos;Commander&apos;) &amp;&amp;
+NOT(INCLUDES(PRIORVALUE([npe5__Affiliation__c].Awana_Role__c ),&apos;Commander&apos;)) ||
+(NOT(ISNULL([npe5__Affiliation__c].Id  )) &amp;&amp; ISNULL(PRIORVALUE([npe5__Affiliation__c].Id )) &amp;&amp; NOT(INCLUDES(PRIORVALUE([npe5__Affiliation__c].Awana_Role__c ),&apos;Commander&apos;))
+&amp;&amp; INCLUDES([npe5__Affiliation__c].Awana_Role__c ,&apos;Commander&apos;) &amp;&amp; ISPICKVAL([npe5__Affiliation__c].npe5__Organization__c.Registration_Level__c ,&apos;R1&apos;) )   </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_current.npe5__Organization__r.Registration_Level__c} ,&apos;R1&apos;) &amp;&amp;
+INCLUDES({!myVariable_current.Awana_Role__c} ,&apos;Commander&apos;) &amp;&amp;
+NOT(INCLUDES(PRIORVALUE({!myVariable_current.Awana_Role__c} ),&apos;Commander&apos;)) ||
+(NOT(ISNULL({!myVariable_current.Id}  )) &amp;&amp; ISNULL(PRIORVALUE({!myVariable_current.Id} )) &amp;&amp; NOT(INCLUDES(PRIORVALUE({!myVariable_current.Awana_Role__c} ),&apos;Commander&apos;))
+&amp;&amp; INCLUDES({!myVariable_current.Awana_Role__c} ,&apos;Commander&apos;) &amp;&amp; ISPICKVAL({!myVariable_current.npe5__Organization__r.Registration_Level__c} ,&apos;R1&apos;) )</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>NOT(INCLUDES([npe5__Affiliation__c].Awana_Role__c ,&apos;Commander&apos;) ) &amp;&amp;
+INCLUDES(PRIORVALUE([npe5__Affiliation__c].Awana_Role__c ),&apos;Commander&apos;)  &amp;&amp; ISPICKVAL([npe5__Affiliation__c].npe5__Organization__c.Registration_Level__c ,&apos;R1&apos;)</stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_3</name>
+        <dataType>Boolean</dataType>
+        <expression>NOT(INCLUDES({!myVariable_current.Awana_Role__c} ,&apos;Commander&apos;) ) &amp;&amp;
+INCLUDES(PRIORVALUE({!myVariable_current.Awana_Role__c} ),&apos;Commander&apos;)  &amp;&amp; ISPICKVAL({!myVariable_current.npe5__Organization__r.Registration_Level__c} ,&apos;R1&apos;)</expression>
+    </formulas>
+    <formulas>
+        <processMetadataValues>
+            <name>originalFormula</name>
+            <value>
+                <stringValue>ISPICKVAL([npe5__Affiliation__c].npe5__Organization__c.Registration_Level__c ,&apos;R1&apos;) &amp;&amp;
+(ISPICKVAL(PRIORVALUE([npe5__Affiliation__c].npe5__Status__c ),&apos;Current&apos;) &amp;&amp;
+ISPICKVAL([npe5__Affiliation__c].npe5__Status__c,&apos;Former&apos; ) &amp;&amp; INCLUDES([npe5__Affiliation__c].Awana_Role__c ,&apos;Commander&apos;)) || (ISPICKVAL(PRIORVALUE([npe5__Affiliation__c].npe5__Status__c ),&apos;Former&apos;) &amp;&amp;
+ISPICKVAL([npe5__Affiliation__c].npe5__Status__c,&apos;Current&apos; ) &amp;&amp; INCLUDES([npe5__Affiliation__c].Awana_Role__c ,&apos;Commander&apos;) &amp;&amp; ISPICKVAL([npe5__Affiliation__c].npe5__Organization__c.Registration_Level__c ,&apos;R1&apos;)) </stringValue>
+            </value>
+        </processMetadataValues>
+        <name>formula_myRule_5</name>
+        <dataType>Boolean</dataType>
+        <expression>ISPICKVAL({!myVariable_current.npe5__Organization__r.Registration_Level__c} ,&apos;R1&apos;) &amp;&amp;
+(ISPICKVAL(PRIORVALUE({!myVariable_current.npe5__Status__c} ),&apos;Current&apos;) &amp;&amp;
+ISPICKVAL({!myVariable_current.npe5__Status__c},&apos;Former&apos; ) &amp;&amp; INCLUDES({!myVariable_current.Awana_Role__c} ,&apos;Commander&apos;)) || (ISPICKVAL(PRIORVALUE({!myVariable_current.npe5__Status__c} ),&apos;Former&apos;) &amp;&amp;
+ISPICKVAL({!myVariable_current.npe5__Status__c},&apos;Current&apos; ) &amp;&amp; INCLUDES({!myVariable_current.Awana_Role__c} ,&apos;Commander&apos;) &amp;&amp; ISPICKVAL({!myVariable_current.npe5__Organization__r.Registration_Level__c} ,&apos;R1&apos;))</expression>
+    </formulas>
+    <interviewLabel>Feed_Tracking_on_Affiliation_Commander_Role-5_InterviewLabel</interviewLabel>
+    <label>Feed Tracking on Affiliation Commander Role</label>
+    <processMetadataValues>
+        <name>ObjectType</name>
+        <value>
+            <stringValue>npe5__Affiliation__c</stringValue>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>ObjectVariable</name>
+        <value>
+            <elementReference>myVariable_current</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>OldObjectVariable</name>
+        <value>
+            <elementReference>myVariable_old</elementReference>
+        </value>
+    </processMetadataValues>
+    <processMetadataValues>
+        <name>TriggerType</name>
+        <value>
+            <stringValue>onAllChanges</stringValue>
+        </value>
+    </processMetadataValues>
+    <processType>Workflow</processType>
+    <startElementReference>myVariable_waitStartTimeAssignment</startElementReference>
+    <status>Active</status>
+    <variables>
+        <name>myVariable_current</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>true</isOutput>
+        <objectType>npe5__Affiliation__c</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_old</name>
+        <dataType>SObject</dataType>
+        <isCollection>false</isCollection>
+        <isInput>true</isInput>
+        <isOutput>false</isOutput>
+        <objectType>npe5__Affiliation__c</objectType>
+    </variables>
+    <variables>
+        <name>myVariable_waitStartTimeVariable</name>
+        <dataType>DateTime</dataType>
+        <isCollection>false</isCollection>
+        <isInput>false</isInput>
+        <isOutput>false</isOutput>
+        <value>
+            <elementReference>$Flow.CurrentDateTime</elementReference>
+        </value>
+    </variables>
+</Flow>

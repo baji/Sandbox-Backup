@@ -1,0 +1,26 @@
+<apex:page standardController="Lead" extensions="DuplicateMatcherExtn">
+   <apex:pageBlock >
+       <apex:outputLabel value="Accounts" style="font-weight:bold; font-size: 1.0em; font-family: Arial,Helvetica,sans-serif; float:left"/>
+       <apex:pageBlockTable value="{!dupAccounts}" var="acc">
+           <apex:column value="{!acc.Name}"/>           
+           <apex:column value="{!acc.Mailing_Address_Book__c}"/>
+           <apex:column value="{!acc.Physical_City__c}"/>
+           <apex:column value="{!acc.Physical_State__c}"/>
+           <apex:column value="{!acc.Registration_Level__c}"/>
+       </apex:pageBlockTable> 
+      <apex:outputLabel rendered="{!dupAccounts != null  && dupAccounts.size == 0}">No Duplicate Account Records found!</apex:outputLabel>
+       
+       <br/> <br/>
+       
+       <apex:outputLabel value="Contacts" style="font-weight:bold; font-size: 1.0em; font-family: Arial,Helvetica,sans-serif; float:left"/>
+       <apex:pageBlockTable value="{!dupContacts}" var="con">
+           <apex:column value="{!con.Name}"/>
+           <apex:column value="{!con.AccountId}"/>
+           <apex:column value="{!con.Email}"/>
+           <apex:column value="{!con.MailingCity}"/>
+           <apex:column value="{!con.MailingState}"/>
+           	
+       </apex:pageBlockTable>
+       <apex:outputLabel rendered="{!dupContacts != null  && dupContacts.size == 0}">No Duplicate Contact Records found!</apex:outputLabel>
+   </apex:pageBlock>
+</apex:page>

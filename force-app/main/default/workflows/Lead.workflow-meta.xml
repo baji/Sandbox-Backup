@@ -1,0 +1,496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workflow xmlns="http://soap.sforce.com/2006/04/metadata">
+    <alerts>
+        <fullName>ACQ_Notify_new_owner</fullName>
+        <description>ACQ - Notify new owner</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>Customer_Care_Templates/ACQ_Alert_Missy_about_new_inquiry</template>
+    </alerts>
+    <alerts>
+        <fullName>GW_Volunteers__Volunteer_Signup_Notification_Email_Alert_Lead</fullName>
+        <description>Volunteer Signup Notification Email Alert - Lead</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>GW_Volunteers__Volunteers_Email_Templates/GW_Volunteers__Volunteer_Signup_Notification</template>
+    </alerts>
+    <alerts>
+        <fullName>GW_Volunteers__Volunteer_Signup_Thank_You_Email_Alert_Lead</fullName>
+        <description>Volunteer Signup Thank You Email Alert - Lead</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>GW_Volunteers__Volunteers_Email_Templates/GW_Volunteers__Volunteer_Signup_Thank_You</template>
+    </alerts>
+    <alerts>
+        <fullName>INQ_Not_the_End_Summit_Email_Alert</fullName>
+        <description>INQ - Not the End Summit Email Alert</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderType>CurrentUser</senderType>
+        <template>All/INQ_Not_the_End_Summit</template>
+    </alerts>
+    <alerts>
+        <fullName>INQ_SP_Alert_to_missy_about_new_inquiry</fullName>
+        <ccEmails>jenniferl@awana.org</ccEmails>
+        <description>INQ SP - Alert to missy about new inquiry</description>
+        <protected>false</protected>
+        <recipients>
+            <type>owner</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All/NewinquiryinSalesforce</template>
+    </alerts>
+    <alerts>
+        <fullName>INQ_SP_New_Inquiry_Email</fullName>
+        <description>INQ SP - New Inquiry Email</description>
+        <protected>false</protected>
+        <recipients>
+            <field>Email</field>
+            <type>email</type>
+        </recipients>
+        <senderAddress>donotreply@awana.org</senderAddress>
+        <senderType>OrgWideEmailAddress</senderType>
+        <template>All/Spanish_Inquiry_Email_Response</template>
+    </alerts>
+    <fieldUpdates>
+        <fullName>ACQ_30_Days_Free_Source</fullName>
+        <field>LeadSource</field>
+        <literalValue>30 Days Free</literalValue>
+        <name>ACQ - 30 Days Free Source</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ACQ_30_Days_Free_Status</fullName>
+        <field>Status</field>
+        <literalValue>New</literalValue>
+        <name>ACQ - 30 Days Free Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ACQ_Add_International_Inquiry_Owner</fullName>
+        <description>Add the owner designated to handle international leads form regardless of inquiry source.</description>
+        <field>OwnerId</field>
+        <lookupValue>International_Team</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>ACQ - Add International Inquiry Owner</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>ACQ_Update_Inquiry_Status</fullName>
+        <description>Set Status to &quot;International&quot;</description>
+        <field>Status</field>
+        <literalValue>International</literalValue>
+        <name>ACQ-Update Inquiry Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>AQC_Populate_Billing_Country</fullName>
+        <field>Country</field>
+        <formula>Physical_Country__c</formula>
+        <name>AQC - Populate Billing Country</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Add_Acquisition_Queue</fullName>
+        <field>OwnerId</field>
+        <lookupValue>Acquisition_Team</lookupValue>
+        <lookupValueType>Queue</lookupValueType>
+        <name>Add Acquisition Queue</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Central_Region</fullName>
+        <field>Region__c</field>
+        <literalValue>Central Region</literalValue>
+        <name>Central Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Eastern_Region</fullName>
+        <field>Region__c</field>
+        <literalValue>East Region</literalValue>
+        <name>Eastern Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>InquiryStatus</fullName>
+        <field>Status</field>
+        <literalValue>New</literalValue>
+        <name>Inquiry Status</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>RCCG_INQ_Assignment_East</fullName>
+        <field>OwnerId</field>
+        <lookupValue>erikt@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>RCCG INQ - Assignment East</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>RCCG_INQ_Assignment_West</fullName>
+        <field>OwnerId</field>
+        <lookupValue>erikt@awana.org</lookupValue>
+        <lookupValueType>User</lookupValueType>
+        <name>RCCG INQ - Assignment West</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>LookupValue</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Lead_Created_in_SF</fullName>
+        <field>Lead_Created_in_SF__c</field>
+        <formula>IF(ISBLANK( pi__created_date__c ),&apos;Yes&apos;,&apos;No&apos;)</formula>
+        <name>Update Lead Created in SF</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Lead_custom_Last_activity_date</fullName>
+        <field>Last_Activity_Custom__c</field>
+        <formula>NOW()</formula>
+        <name>Update Lead custom Last activity date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Update_Stage_Date</fullName>
+        <field>Stage_Date__c</field>
+        <formula>Today()</formula>
+        <name>Update Stage Date</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Formula</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <fieldUpdates>
+        <fullName>Western_Region</fullName>
+        <field>Region__c</field>
+        <literalValue>West Region</literalValue>
+        <name>Western Region</name>
+        <notifyAssignee>false</notifyAssignee>
+        <operation>Literal</operation>
+        <protected>false</protected>
+        <reevaluateOnChange>false</reevaluateOnChange>
+    </fieldUpdates>
+    <rules>
+        <fullName>ACQ - 30 Days Free Source</fullName>
+        <actions>
+            <name>ACQ_30_Days_Free_Source</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <actions>
+            <name>ACQ_30_Days_Free_Status</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Acquisition</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.LeadSource</field>
+            <operation>equals</operation>
+            <value>30 Days Free</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Physical_Country__c</field>
+            <operation>equals</operation>
+            <value>United States,US,UNITED STATES,U.S.,United States of America,USA,U.S.A.</value>
+        </criteriaItems>
+        <description>Updates the lead source to 30 Days Free if not a web or missionary inquiry</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>ACQ - Existing Lead filled out inquiry form</fullName>
+        <actions>
+            <name>Existing_Lead_Needs_More_Information</name>
+            <type>Task</type>
+        </actions>
+        <active>true</active>
+        <formula>AND( RecordType.Name &lt;&gt; &apos;Acquisition&apos;, ISCHANGED( Club_Interest__c ))</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>ACQ - Notify new owner</fullName>
+        <actions>
+            <name>ACQ_Notify_new_owner</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <formula>AND(RecordType.DeveloperName = &quot;Acquisition&quot;, ISCHANGED( OwnerId ) , OwnerId &lt;&gt;&quot;00G2F000000SRkn&quot;,  IsConverted =False)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>ACQ - Populate Billing Country</fullName>
+        <actions>
+            <name>AQC_Populate_Billing_Country</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.Physical_Country__c</field>
+            <operation>notEqual</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Country</field>
+            <operation>equals</operation>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Physical_Country__c</field>
+            <operation>equals</operation>
+            <value>United States,US,UNITED STATES,United States of America,U.S.,U.S.A.</value>
+        </criteriaItems>
+        <description>Populate Billing Country with Physical Country when Lead is created</description>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>GW_Volunteers__Volunteer Signup - Lead</fullName>
+        <actions>
+            <name>GW_Volunteers__Volunteer_Signup_Notification_Email_Alert_Lead</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>GW_Volunteers__Volunteer_Signup_Thank_You_Email_Alert_Lead</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>GW_Volunteers__Volunteer_Signup_Thank_You_Sent_Lead</name>
+            <type>Task</type>
+        </actions>
+        <active>false</active>
+        <criteriaItems>
+            <field>Lead.GW_Volunteers__Volunteer_Status__c</field>
+            <operation>equals</operation>
+            <value>New Sign Up</value>
+        </criteriaItems>
+        <description>When a new lead is created from a volunteer signup, send a thank you and notify the volunteer manager</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>INQ - Not the End Summit Email Notification</fullName>
+        <actions>
+            <name>INQ_Not_the_End_Summit_Email_Alert</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Marketing Inquiry</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.LeadSource</field>
+            <operation>equals</operation>
+            <value>Conference</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.OwnerId</field>
+            <operation>equals</operation>
+            <value>Mike Handler</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>INQ SP - New Inquiry Email</fullName>
+        <actions>
+            <name>INQ_SP_Alert_to_missy_about_new_inquiry</name>
+            <type>Alert</type>
+        </actions>
+        <actions>
+            <name>INQ_SP_New_Inquiry_Email</name>
+            <type>Alert</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Spanish Inquiry</value>
+        </criteriaItems>
+        <description>Sends out an email to inquirer and inquiry owner when a new spanish inquiry is created</description>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>Lead Stage Tracking</fullName>
+        <actions>
+            <name>Update_Stage_Date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>Created for tracking inquiry stage.</description>
+        <formula>ISCHANGED(Stages__c) &amp;&amp;  !ISPICKVAL(Stages__c, &apos;New Lead&apos;)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>PJ Inquiry</fullName>
+        <actions>
+            <name>InquiryStatus</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.RecordTypeId</field>
+            <operation>equals</operation>
+            <value>Marketing Inquiry</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.LeadSource</field>
+            <operation>equals</operation>
+            <value>Web</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.Marketing_Type__c</field>
+            <operation>equals</operation>
+            <value>PJ Inquiry</value>
+        </criteriaItems>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <rules>
+        <fullName>RCCG INQ - Assignment East</fullName>
+        <actions>
+            <name>RCCG_INQ_Assignment_East</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.Denomination__c</field>
+            <operation>equals</operation>
+            <value>Redeemed Christian Church of God</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.PhysicalState__c</field>
+            <operation>equals</operation>
+            <value>VA,DC,MD,FL,SC,NC,CT,ME,NH,RI,VT,MA,AL,MS,GA,PA,DE,NJ,IN,MI,OH,WV,WI,MN</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>RCCG INQ - Assignment West</fullName>
+        <actions>
+            <name>RCCG_INQ_Assignment_West</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.Denomination__c</field>
+            <operation>equals</operation>
+            <value>Redeemed Christian Church of God</value>
+        </criteriaItems>
+        <criteriaItems>
+            <field>Lead.PhysicalState__c</field>
+            <operation>equals</operation>
+            <value>ND,SD,KS,MO,AR,LA,TX,OK,CO,UT,AZ,NM,CA,NV,HI,OR,MT,WA,AK,ID</value>
+        </criteriaItems>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Rule to check Lead converted</fullName>
+        <actions>
+            <name>Update_Lead_custom_Last_activity_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <criteriaItems>
+            <field>Lead.IsConverted</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </criteriaItems>
+        <description>This rule will check if the lead is converted and update the Last Activity date (Last_Activity_Custom__c)</description>
+        <triggerType>onCreateOrTriggeringUpdate</triggerType>
+    </rules>
+    <rules>
+        <fullName>Rule to check Lead status change</fullName>
+        <actions>
+            <name>Update_Lead_custom_Last_activity_date</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This rule will check if the lead status is changed and update the Last Activity date (Last_Activity_Custom__c)</description>
+        <formula>ISCHANGED(Status)</formula>
+        <triggerType>onAllChanges</triggerType>
+    </rules>
+    <rules>
+        <fullName>Update Created in SF</fullName>
+        <actions>
+            <name>Update_Lead_Created_in_SF</name>
+            <type>FieldUpdate</type>
+        </actions>
+        <active>true</active>
+        <description>This rule updated the Lead_Created_in_SF__c field to &apos;Yes&apos; or &apos;No&apos; based on the pardot manged package field value</description>
+        <formula>true</formula>
+        <triggerType>onCreateOnly</triggerType>
+    </rules>
+    <tasks>
+        <fullName>Existing_Lead_Needs_More_Information</fullName>
+        <assignedTo>erikt@awana.org</assignedTo>
+        <assignedToType>user</assignedToType>
+        <description>This existing lead filled out an inquiry form.  Please change record type to Acquisition and reassign ownership to Acquisition Team.</description>
+        <dueDateOffset>3</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>High</priority>
+        <protected>false</protected>
+        <status>Not Started</status>
+        <subject>Existing Lead Needs More Information</subject>
+    </tasks>
+    <tasks>
+        <fullName>GW_Volunteers__Volunteer_Signup_Thank_You_Sent_Lead</fullName>
+        <assignedToType>owner</assignedToType>
+        <description>An automatic email has been sent to the lead thanking them for signing up to be a volunteer.</description>
+        <dueDateOffset>0</dueDateOffset>
+        <notifyAssignee>false</notifyAssignee>
+        <priority>Normal</priority>
+        <protected>false</protected>
+        <status>Completed</status>
+        <subject>Volunteer Signup Thank You Sent - Lead</subject>
+    </tasks>
+</Workflow>

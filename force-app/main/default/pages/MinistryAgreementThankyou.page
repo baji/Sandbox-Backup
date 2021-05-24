@@ -1,0 +1,15 @@
+<apex:page showHeader="false">
+    <br/><br/>
+    <div>
+      <div style="text-align:center;">
+        <apex:image url="{!$Resource.AwanaLogo2}" style="width:20%;"/>
+      </div>
+      <br/><br/><br/>
+      <div style="text-align:left;padding-left:290px;">
+          <h1 style="font-size:30px;">Thank You!</h1><br/><br/>
+      </div>
+      <div style="text-align:center;">
+          <h3 >Your AWANA Ministry Agreement signing is completed successfully. Please Contact partnercare@awana.org or 9789922724 for queries.</h3>
+      </div>
+  </div>
+</apex:page>

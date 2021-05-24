@@ -1,0 +1,278 @@
+<apex:page controller="GLPostReportView" action="{!getData}" showHeader="false" applyBodyTag="false" renderAs="pdf" applyHtmlTag="false">
+   <head>
+       <style type="text/css" media="print">  
+           .stationName {
+                font-family: "Courier New";
+                font-weight: bold;
+                font-size:300%;
+            }
+            .stationName:before{
+                
+                color: #16577d;
+                content: "SALESFORCE";
+            }
+            th{
+              color:#ffffff;
+              font-weight: bold;
+              font-size: 12pt;
+            }
+            td
+            {
+                font-family: arial;
+                font-size: 9pt;
+            }
+            td.active {
+                border: 1px solid blue;
+                border-style:double;
+            }
+            td.tdWidth{
+                width : 70px;
+            }
+            .spanColor{
+              color: #ea0505;
+              font-weight: bold;
+              font-size:large;
+            }
+            .thWidth{
+                width:30%;
+            }
+       </style>
+   </head>
+   <h1 class="stationName">GL-POST</h1>
+   <p>Pre-Post Report</p>
+   
+  <apex:pageblock >
+      <apex:pageMessages ></apex:pageMessages>
+    <table border="" cellpadding="1" width="100%">
+        <tr style="background-color:#16577d">
+            <th>
+                <apex:outputText value="Batch Num"/> 
+            </th>
+             <th>
+                <apex:outputText value="Type"/> 
+            </th>
+             <th> 
+                <apex:outputText value="GL Account"/> 
+            </th>
+             <th>
+                <apex:outputText value="Debit"/> 
+            </th>
+             <th>
+                <apex:outputText value="Credit"/> 
+            </th>
+             <th>
+                <apex:outputText value="Gift Date"/> 
+            </th>
+            <th>
+                <apex:outputText value="Post Date"/> 
+            </th>
+            <th class="thWidth">
+                <apex:outputText value="Reference"/> 
+            </th>
+        </tr>
+      <apex:repeat value="{!listOppWrap}" var="opp">
+              <tr>
+                  <td>
+                      <apex:outputText value="{!opp.batchNumber}"/>
+                  </td>
+                  <td>
+                      <apex:outputText value="{!opp.key}"/> 
+                  </td>
+
+                  <td>
+                      <apex:outputText value="{!opp.debitAccountNumber}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="$"/><apex:outputText value="{!opp.amount}" style="margin-left:2px;"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value=" "/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!opp.closeDate}" /></apex:outputText>
+                  </td>
+                  <td>
+                      <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!opp.closeDate}" /></apex:outputText>
+                  </td>
+                  <td>
+                      <apex:outputText value=" "/> 
+                  </td>
+              </tr>
+              <apex:repeat value="{!mapAllocations[opp.subKey]}" var="gau">
+                <tr>
+                  <td>
+                       <apex:outputText value="{!opp.batchNumber}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{!opp.key}"/> 
+                  </td>
+
+                  <td>
+                      <apex:outputText value="{!gau.Credit_Account_Number__c}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value=" "/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="$"/> <apex:outputText value="{!gau.npsp__Amount__c}" style="margin-left:2px;"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!gau.npsp__Opportunity__r.closedate}" /></apex:outputText>
+                  </td>
+                  <td>
+                      <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!gau.npsp__Opportunity__r.closedate}" /></apex:outputText>
+                  </td>
+                  <td>
+                      <apex:outputText value="Summarized" rendered="{!gau.isSummarize__c}"/> 
+                  </td>
+              </tr>
+              </apex:repeat>
+      </apex:repeat>
+      <apex:repeat value="{!listPreviousGiftAdjustMent}" var="opp">
+            <tr>
+                <td>
+                      <apex:outputText value="{!opp.batchNumber1}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{!opp.key}"/> 
+                  </td>
+
+                  <td>
+                      <apex:outputText value="{!opp.debitAccountNumber}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value=""/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="$"/><apex:outputText value="{!opp.amount}" style="margin-left:2px;"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!opp.closeDate}" /></apex:outputText>
+                  </td>
+                  <td>
+                       <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!opp.postDate}" /></apex:outputText>
+                  </td>
+                  <td>
+                      <apex:outputText value="Gift amount adjusted"/><apex:outputLabel value=" | " rendered="{!if(opp.adjustReason != null,true,false)}" Styleclass="spanColor"/><apex:outputText value="{!opp.adjustReason}"/> 
+                  </td>
+            </tr>
+       </apex:repeat>
+       <apex:repeat value="{!listGiftAdjustMent}" var="opp">
+            <tr>
+                <td>
+                      <apex:outputText value="{!opp.batchNumber1}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{!opp.key}"/> 
+                  </td>
+
+                  <td>
+                      <apex:outputText value="{!opp.debitAccountNumber}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="$"/><apex:outputText value="{!opp.currentAmount}" style="margin-left:2px;"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value=""/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!opp.closeDate}" /></apex:outputText>
+                  </td>
+                  <td>
+                       <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!opp.postDate}" /></apex:outputText>
+                  </td>
+                  <td>
+                      <apex:outputText value="Gift amount adjusted"/><apex:outputLabel value=" | " rendered="{!if(opp.adjustReason != null,true,false)}" Styleclass="spanColor"/><apex:outputText value="{!opp.adjustReason}"/> 
+                  </td>
+            </tr>
+       </apex:repeat>
+       <apex:repeat value="{!listAllPreviousAdjust}" var="adj">
+            <tr>
+                <td>
+                      <apex:outputText value="{!adj.batchNumber}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{!adj.key}"/> 
+                  </td>
+
+                  <td>
+                      <apex:outputText value="{!adj.creditAccountNumber}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="$"/><apex:outputText value="{!adj.amount}" style="margin-left:2px;"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value=""/> 
+                  </td>
+                  <td>
+                        <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!adj.closeDate}" /></apex:outputText>
+                  </td>
+                  <td>
+                      <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!adj.postDate}" /></apex:outputText> 
+                  </td>
+                  <td>
+                      <apex:outputText value="Allocation amount adjusted"/><apex:outputLabel value=" | " rendered="{!if(adj.adjustReason != null,true,false)}" Styleclass="spanColor"/><apex:outputText value="{!adj.adjustReason}"/>  
+                  </td>
+            </tr>
+       </apex:repeat>
+        <apex:repeat value="{!listAllocationAdjust}" var="adj">
+            <tr>
+                <td>
+                      <apex:outputText value="{!adj.batchNumber}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="{!adj.key}"/> 
+                  </td>
+
+                  <td>
+                      <apex:outputText value="{!adj.creditAccountNumber}"/> 
+                  </td>
+                  <td>
+                      <apex:outputText value=""/> 
+                  </td>
+                  <td>
+                      <apex:outputText value="$"/> <apex:outputText value="{!adj.currentAmount}" style="margin-left:2px;"/> 
+                  </td>
+                  <td>
+                        <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!adj.closeDate}" /></apex:outputText>
+                  </td>
+                  <td>
+                      <apex:outputText value="{0,date,MM/dd/yy}"> <apex:param value="{!adj.postDate}" /></apex:outputText> 
+                  </td>
+                  <td>
+                      <apex:outputText value="Allocation amount adjusted"/><apex:outputLabel value=" | " rendered="{!if(adj.adjustReason != null,true,false)}" Styleclass="spanColor"/><apex:outputText value="{!adj.adjustReason}"/> 
+                  </td>
+            </tr>
+       </apex:repeat>
+            <tr style="height: 70px;">
+                <td>
+                      <apex:outputText value=""/> 
+                  </td>
+                  <td>
+                      <apex:outputText value=""/> 
+                  </td>
+
+                  <td>
+                      <apex:outputText value="Total : "/> 
+                  </td>
+                  <td class="tdWidth">
+                      <apex:outputText value="$" /> <apex:outputText value="{!oppTotalAmount}" style="margin-left:2px;"/> 
+                  </td>
+                  <td class="tdWidth">
+                      <apex:outputText value="$"/><apex:outputText value="{!allocationTotlAmount}" style="margin-left:2px;"/> 
+                  </td>
+                  <td>
+                        <apex:outputText value=""/>
+                  </td>
+                  <td>
+                      <apex:outputText value=""/>
+                  </td>
+                  <td>
+                      <apex:outputText value=" "/> 
+                  </td>
+            </tr>
+      </table> 
+  </apex:pageblock>
+ 
+    
+</apex:page>

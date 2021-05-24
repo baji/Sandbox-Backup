@@ -1,0 +1,496 @@
+<apex:page standardController="Account" extensions="SSAccountAddressVerification" standardStylesheets="true" showHeader="false" sidebar="false" id="accountAddressPage">
+    
+	<apex:includeScript value="/soap/ajax/24.0/connection.js"/>    
+    <apex:includeScript value="/soap/ajax/24.0/apex.js"/>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//d79i1fxsrar4t.cloudfront.net/jquery.liveaddress/5.2/jquery.liveaddress.min.js"></script>
+   
+    <style>
+        .alert {
+            padding: 20px;
+            background-color: #f44336;
+            color: white;
+            opacity: 1;
+            transition: opacity 0.6s;
+            margin-bottom: 15px;
+        }
+    
+    	.alert.success {background-color: #4CAF50;}
+    
+    	.alert.warning {background-color: #ff9800;}
+    
+    	.closebtn {
+            margin-left: 15px;
+            color: white;
+            font-weight: bold;
+            float: right;
+            font-size: 22px;
+            line-height: 20px;
+            cursor: pointer;
+            transition: 0.3s;
+    	}
+                    
+		.closebtn:hover {
+     		color: black;
+    	}
+                    
+		.overlay {
+            display: none;
+            height: 100%;
+            left: 0;
+            position: fixed;
+            top: 0;
+            opacity: 0.3;
+            -moz-opacity: 0.3;
+            width: 100%;
+            -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+            filter: alpha(opacity=30);
+            background: #000;
+            -khtml-opacity: 0.3;
+            z-index: 1000;
+    	}
+                    
+    	.loader {
+            background: url('/img/loading32.gif') scroll no-repeat 0 0;
+            width: 32px;
+            height: 32px;
+            position: absolute;
+            left: 50%;
+    	}                       
+	</style>
+                    
+<script type="text/javascript">
+                        
+    var ss = jQuery.LiveAddress({
+        key: "30359933662776702",
+        waitForStreet: true,
+        debug: true,
+        autocomplete: 10,
+        target: "US",
+        addresses: [
+            {
+                country: "#billingCountry",
+                address1: "#billingStreet",
+                locality: "#billingCity",
+                administrative_area: "#billingState",
+                postal_code: "#billingZip"
+            },
+            {
+                country: "#shippingCountry",
+                address1: "#shippingStreet",
+                locality: "#shippingCity",
+                administrative_area: "#shippingState",
+                postal_code: "#shippingZip"
+            },
+            {
+                country: "#physicalCountry",
+                address1: "#physicalStreet",
+                locality: "#physicalCity",
+                administrative_area: "#physicalState",
+                postal_code: "#physicalZip"
+            },
+            {
+                country: "#mailCountry",
+                address1: "#mailStreet",
+                locality: "#mailCity",
+                administrative_area: "#mailState",
+                postal_code: "#mailZip"
+            }
+        ]
+    });
+                        
+	function updateAccount(){
+		startLoading();
+                        
+        sforce.connection.sessionId = '{!$Api.Session_ID}';
+        var account = new sforce.SObject("Account");        
+        
+        account.id = '{!acc.id}';
+                        
+        if('{!showEditBilling}' == 'true'){
+            console.log('bill');
+            if(document.getElementById("billingStreet").value == "" && document.getElementById("billingCity").value == "" &&
+               document.getElementById("billingState").value == "" && document.getElementById("billingZip").value == "" &&
+               document.getElementById("billingCountry").value == "")
+            {
+                stopLoading();
+            	alert('Please fill the address to save this record.');                 	
+			}else{
+                account.BillingStreet = document.getElementById("billingStreet").value;
+                account.BillingCity = document.getElementById("billingCity").value;
+                account.BillingState = document.getElementById("billingState").value;
+                account.BillingPostalCode = document.getElementById("billingZip").value;
+                account.BillingCountry = document.getElementById("billingCountry").value;
+                saveAccount(JSON.stringify(account));  
+        	}                      
+    	}else if('{!showEditShipping}' == 'true'){
+        	console.log('ship');
+            if(document.getElementById("shippingStreet").value == "" && document.getElementById("shippingCity").value == "" &&
+               document.getElementById("shippingState").value == "" && document.getElementById("shippingZip").value =="" &&
+               document.getElementById("shippingCountry").value == "")
+            {
+            	stopLoading();
+            	alert('Please fill the address to save this record.'); 
+    		}else{ 
+                account.ShippingStreet = document.getElementById("shippingStreet").value;
+                account.ShippingCity = document.getElementById("shippingCity").value;
+                account.ShippingState = document.getElementById("shippingState").value;
+                account.ShippingPostalCode = document.getElementById("shippingZip").value;
+                account.ShippingCountry = document.getElementById("shippingCountry").value;
+                saveAccount(JSON.stringify(account)); 
+            }
+		}else if('{!showEditPhysical}' == 'true'){
+            console.log('physical');
+            if(document.getElementById("physicalStreet").value == "" && document.getElementById("physicalCity").value == "" && 
+               document.getElementById("physicalState").value == "" && document.getElementById("physicalZip").value == "" &&
+               document.getElementById("physicalCountry").value == "")
+            {
+                stopLoading();
+                alert('Please fill the address to save this record.'); 
+            }else{
+                account.Physical_Street_1__c = document.getElementById("physicalStreet").value;
+                account.Physical_Street_2__c = document.getElementById("physicalStreet2").value;
+                account.Physical_City__c = document.getElementById("physicalCity").value;
+                account.Physical_State__c = document.getElementById("physicalState").value;
+                account.Physical_Zip__c = document.getElementById("physicalZip").value;
+                account.PhysicalCountry__c = document.getElementById("physicalCountry").value;
+                saveAccount(JSON.stringify(account)); 
+            }
+        }else if('{!showEditMailing}' == 'true'){                       
+        	console.log('Mailing');
+            if(document.getElementById("mailStreet").value == "" && document.getElementById("mailCity").value =="" &&
+               document.getElementById("mailState").value == "" && document.getElementById("mailZip").value == "" &&
+               document.getElementById("mailCountry").value == "")
+            {
+            	stopLoading();
+                alert('Please fill the address to save this record.'); 
+            }else{
+                account.Mailing_Street_1__c = document.getElementById("mailStreet").value;
+                account.Mailing_Street_2__c = document.getElementById("mailStreet2").value;
+                account.Mailing_City__c = document.getElementById("mailCity").value;
+                account.Mailing_State_Province__c = document.getElementById("mailState").value;
+                account.Mailing_Zip_Postal_Code__c = document.getElementById("mailZip").value;
+                account.Mailing_Country__c = document.getElementById("mailCountry").value;
+                saveAccount(JSON.stringify(account)); 	
+            }                                             
+        }
+    }
+    
+    function startLoading() {
+        $('#load_scrl').css('top', $(document).scrollTop() + 200);
+        $('.loadingBox').show();
+    }
+    
+    function stopLoading() {
+        $('.loadingBox').hide();
+        $('.smarty-ui').hide();
+        $("#successMsg").delay(3000).fadeOut(2000);
+        $("#errorMsg").delay(3000).fadeOut(2000);
+    }
+    </script>
+    
+    <apex:form id="addressForm">
+        <div id="load_scrl" class="loadingBox loader" style="display:none"> </div>
+        <div class="loadingBox overlay"> </div>        
+        <apex:actionFunction name="saveAccount" action="{!saveAccount}" rerender="addressPb" oncomplete="stopLoading();">
+            <apex:param name="accVal" value="" assignTo="{!accVal}"/>
+        </apex:actionFunction>
+        <apex:pageBlock id="addressPb">
+            
+            <div class="alert success" id="successMsg" style="position: absolute;top: 0;right: 0;display:{!IF(showSuccessMsg == true, 'block','none')};">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>  
+                <strong>Success!</strong> Address updated successfully.
+            </div>
+            <div class="alert" id="errorMsg" style="position: absolute;top: 0;right: 0;display:{!IF(showErrorMsg == true, 'block','none')};">
+                <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+                <strong>Danger!</strong> Something went wrong. Please contact support.
+            </div>
+            <apex:pageBlockButtons location="both">
+                
+                <apex:commandButton action="{!showBillEdit}" onclick="startLoading();" value="Change Billing Address" id="billChange" rendered="{!AND(!showEditBilling,!showEditShipping,!showEditPhysical,!showEditMailing)}"/>  
+                <apex:commandButton onclick="updateAccount();return false;" value="Save" id="Save" rendered="{!OR(showEditBilling,showEditShipping,showEditPhysical,showEditMailing)}" style="margin-left: 150px;"/>                
+                <apex:commandButton action="{!hideBillEdit}" onclick="startLoading();" value="Cancel" id="Cancel" rendered="{!OR(showEditBilling,showEditShipping,showEditPhysical,showEditMailing)}"/> 
+                <apex:commandButton action="{!showShipEdit}" onclick="startLoading();" value="Change Shipping Address" id="shipChange" rendered="{!AND(!showEditBilling,!showEditShipping,!showEditPhysical,!showEditMailing)}"/>  
+                <apex:commandButton action="{!showPhysEdit}" onclick="startLoading();" value="Change Physical Address" id="physChange" rendered="{!AND(!showEditBilling,!showEditShipping,!showEditPhysical,!showEditMailing)}"/>  
+                <apex:commandButton action="{!showMailEdit}" onclick="startLoading();" value="Change Mailing Address" id="mailChange" rendered="{!AND(!showEditBilling,!showEditShipping,!showEditPhysical,!showEditMailing)}"/>  
+                Click <a href="/{!acc.Id}" onclick="startLoading();">here</a> to go back.
+                
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="addressPbsBill" columns="2" title="Billing Address" rendered="{!AND(!showEditShipping,!showEditPhysical,!showEditMailing)}">
+                
+                <apex:pageBlockSectionItem id="addressPbsiBill1">
+                    <apex:outputLabel >Billing Street</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditBilling}">                           
+                            <input type="text" value="{!acc.BillingStreet}" id="billingStreet" name="street" placeholder="street"/>
+                        </apex:outputPanel>    
+                        <apex:outputField value="{!acc.BillingStreet}" rendered="{!!showEditBilling}"/>
+                    </apex:outputPanel>    
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiBill2">
+                    <apex:outputLabel >Billing City</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditBilling}">
+                            <input type="text" value="{!acc.BillingCity}" id="billingCity" name="city" placeholder="city"/>
+                        </apex:outputPanel>    
+                        <apex:outputField value="{!acc.BillingCity}" rendered="{!!showEditBilling}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiBill3">
+                    <apex:outputLabel >Billing State</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditBilling}">
+                            <input type="text" value="{!acc.BillingState}" id="billingState" name="state" placeholder="state"/>
+                        </apex:outputPanel>                           
+                        <apex:outputField value="{!acc.BillingState}" rendered="{!!showEditBilling}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiBill4">
+                    <apex:outputLabel >Billing PostalCode</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditBilling}">
+                            <input type="text" value="{!acc.BillingPostalCode}" id="billingZip" name="ZIP" placeholder="ZIP"/>                            
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.BillingPostalCode}" rendered="{!!showEditBilling}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>              
+                
+                <apex:pageBlockSectionItem id="addressPbsiBill5">                    
+                    <apex:outputLabel >Billing Country</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditBilling}">
+                            <input type="text" value="{!acc.BillingCountry}" id="billingCountry" name="country" placeholder="country"/>
+                        </apex:outputPanel>                        
+                        <apex:outputField value="{!acc.BillingCountry}" rendered="{!!showEditBilling}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>  
+                
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel ></apex:outputLabel>
+                    <apex:outputPanel rendered="{!!showEditBilling}">      
+                        <apex:variable value="{!acc.BillingStreet},{!acc.BillingCity},{!acc.BillingState} {!acc.BillingPostalCode},{!acc.BillingCountry}" var="billAddress" />
+                        <apex:map rendered="{!if(AND(ISBLANK(acc.BillingCity),ISBLANK(acc.BillingState),ISBLANK(acc.BillingCountry)),false,true)}" width="300px" height="200px" mapType="roadmap" zoomLevel="15" center="{!billAddress}">
+                            <apex:mapMarker title="{!billAddress}" position="{!billAddress}"/>
+                        </apex:map> 
+                        <apex:outputLabel rendered="{!if(AND(ISBLANK(acc.BillingCity),ISBLANK(acc.BillingState),ISBLANK(acc.BillingCountry)),true,false)}">Address not sufficient.Can not load map.</apex:outputLabel>
+                    </apex:outputPanel>
+                </apex:pageblockSectionItem> 
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection id="addressPbsShip" columns="2" title="Shipping Address" rendered="{!AND(!showEditBilling,!showEditPhysical,!showEditMailing)}">
+                <apex:pageBlockSectionItem id="addressPbsiShip1">
+                    <apex:outputLabel >Shipping Street</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditShipping}">
+                            <input type="text" value="{!acc.ShippingStreet}" id="shippingStreet" name="street" placeholder="street"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.ShippingStreet}" rendered="{!!showEditShipping}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiShip2">
+                    <apex:outputLabel >Shipping City</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditShipping}">
+                            <input type="text" value="{!acc.ShippingCity}" id="shippingCity" name="city" placeholder="city"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.ShippingCity}" rendered="{!!showEditShipping}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiShip3">
+                    <apex:outputLabel >Shipping State</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditShipping}">
+                            <input type="text" value="{!acc.ShippingState}" id="shippingState" name="state" placeholder="state"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.ShippingState}" rendered="{!!showEditShipping}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiShip4">
+                    <apex:outputLabel >Shipping PostalCode</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditShipping}">
+                            <input type="text" value="{!acc.ShippingPostalCode}" id="shippingZip" name="ZIP" placeholder="ZIP"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.ShippingPostalCode}" rendered="{!!showEditShipping}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiShip5">
+                    <apex:outputLabel >Shipping Country</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditShipping}">
+                            <input type="text" value="{!acc.ShippingCountry}" id="shippingCountry" name="country" placeholder="country"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.ShippingCountry}" rendered="{!!showEditShipping}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel ></apex:outputLabel>
+                    <apex:outputPanel rendered="{!!showEditShipping}">      
+                        <apex:variable value="{!acc.ShippingStreet},{!acc.ShippingCity},{!acc.ShippingState} {!acc.ShippingPostalCode},{!acc.ShippingCountry}" var="shipAddress" />
+                        <apex:map rendered="{!if(AND(ISBLANK(acc.ShippingCity),ISBLANK(acc.ShippingState),ISBLANK(acc.ShippingCountry)),false,true)}" width="300px" height="200px" mapType="roadmap" zoomLevel="15" center="{!shipAddress}">
+                            <apex:mapMarker title="{!shipAddress}" position="{!shipAddress}"/>
+                        </apex:map> 
+                        <apex:outputLabel rendered="{!if(AND(ISBLANK(acc.ShippingCity),ISBLANK(acc.ShippingState),ISBLANK(acc.ShippingCountry)),true,false)}">Address not sufficient.Can not load map.</apex:outputLabel>
+                    </apex:outputPanel>
+                </apex:pageblockSectionItem>                 
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection id="addressPbsPhy" columns="2" title="Physical Address" rendered="{!AND(!showEditBilling,!showEditShipping,!showEditMailing)}">
+                <apex:pageBlockSectionItem id="addressPbsiPhysical1">
+                    <apex:outputLabel >Physical Street1</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditPhysical}">
+                            <input type="text" value="{!acc.Physical_Street_1__c}" id="physicalStreet" name="street" placeholder="street"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Physical_Street_1__c}" rendered="{!!showEditPhysical}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiPhysical2">
+                    <apex:outputLabel >Physical Street2</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditPhysical}">
+                            <input type="text" value="{!acc.Physical_Street_2__c}" id="physicalStreet2" name="street2" placeholder="street2"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Physical_Street_2__c}" rendered="{!!showEditPhysical}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiPhysical3">
+                    <apex:outputLabel >Physical City</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditPhysical}">
+                            <input type="text" value="{!acc.Physical_City__c}" id="physicalCity" name="city" placeholder="city"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Physical_City__c}" rendered="{!!showEditPhysical}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiPhysical4">
+                    <apex:outputLabel >Physical State</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditPhysical}">
+                            <input type="text" value="{!acc.Physical_State__c}" id="physicalState" name="state" placeholder="state"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Physical_State__c}" rendered="{!!showEditPhysical}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiPhysical5">
+                    <apex:outputLabel >Physical PostalCode</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditPhysical}">
+                            <input type="text" value="{!acc.Physical_Zip__c}" id="physicalZip" name="ZIP" placeholder="ZIP"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Physical_Zip__c}" rendered="{!!showEditPhysical}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel ></apex:outputLabel>
+                    <apex:outputPanel rendered="{!!showEditPhysical}">      
+                        <apex:variable value="{!acc.Physical_Street_1__c},{!acc.Physical_City__c},{!acc.Physical_State__c} {!acc.Physical_Zip__c},{!acc.Physical_County__c}" var="phyAddress" />
+                        <apex:map rendered="{!if(AND(ISBLANK(acc.Physical_City__c),ISBLANK(acc.Physical_State__c),ISBLANK(acc.Physical_County__c)),false,true)}" width="300px" height="200px" mapType="roadmap" zoomLevel="15" center="{!phyAddress}">
+                            <apex:mapMarker title="{!phyAddress}" position="{!phyAddress}"/>
+                        </apex:map> 
+                        <apex:outputLabel rendered="{!if(AND(ISBLANK(acc.Physical_City__c),ISBLANK(acc.Physical_State__c),ISBLANK(acc.Physical_County__c)),true,false)}">Address not sufficient.Can not load map.</apex:outputLabel>
+                    </apex:outputPanel>
+                </apex:pageblockSectionItem>  
+                
+                <apex:pageBlockSectionItem id="addressPbsiPhysical6">
+                    <apex:outputLabel >Physical Country</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditPhysical}">
+                            <input type="text" value="{!acc.PhysicalCountry__c}" id="physicalCountry" name="country" placeholder="country"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.PhysicalCountry__c}" rendered="{!!showEditPhysical}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection id="addressPbsMail" columns="2" title="Mailing Address" rendered="{!AND(!showEditBilling,!showEditShipping,!showEditPhysical)}">
+                <apex:pageBlockSectionItem id="addressPbsiMail1">
+                    <apex:outputLabel >Mailing Street1</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditMailing}">
+                            <input type="text" value="{!acc.Mailing_Street_1__c}" id="mailStreet" name="street" placeholder="street"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Mailing_Street_1__c}" rendered="{!!showEditMailing}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiMail2">
+                    <apex:outputLabel >Mailing Street2</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditMailing}">
+                            <input type="text" value="{!acc.Mailing_Street_2__c}" id="mailStreet2" name="street2" placeholder="street2"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Mailing_Street_2__c}" rendered="{!!showEditMailing}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiMail3">
+                    <apex:outputLabel >Mailing City</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditMailing}">
+                            <input type="text" value="{!acc.Mailing_City__c}" id="mailCity" name="city" placeholder="city"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Mailing_City__c}" rendered="{!!showEditMailing}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiMail4">
+                    <apex:outputLabel >Mailing State</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditMailing}">
+                            <input type="text" value="{!acc.Mailing_State_Province__c}" id="mailState" name="state" placeholder="state"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Mailing_State_Province__c}" rendered="{!!showEditMailing}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="addressPbsiMail5">
+                    <apex:outputLabel >Mailing PostalCode</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditMailing}">
+                            <input type="text" value="{!acc.Mailing_Zip_Postal_Code__c}" id="mailZip" name="ZIP" placeholder="ZIP"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Mailing_Zip_Postal_Code__c}" rendered="{!!showEditMailing}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageblockSectionItem >
+                    <apex:outputLabel ></apex:outputLabel>
+                    <apex:outputPanel rendered="{!!showEditMailing}">                           
+                        <apex:variable value="{!acc.Mailing_Street_1__c},{!acc.Mailing_City__c},{!acc.Mailing_State_Province__c} {!acc.Mailing_Zip_Postal_Code__c},{!acc.Mailing_Country__c}" var="mailAddress" />                                                
+                        <apex:map rendered="{!if(OR(ISBLANK(acc.Mailing_City__c),ISBLANK(acc.Mailing_State_Province__c),ISBLANK(acc.Mailing_Country__c)),false,true)}" width="300px" height="200px" mapType="roadmap" zoomLevel="15" center="{!mailAddress}">
+                            <apex:mapMarker title="{!mailAddress}" position="{!mailAddress}"/>
+                        </apex:map>   
+                        <apex:outputLabel rendered="{!if(OR(ISBLANK(acc.Mailing_City__c),ISBLANK(acc.Mailing_State_Province__c),ISBLANK(acc.Mailing_Country__c)),true,false)}">Address not sufficient.Can not load map.</apex:outputLabel>
+                    </apex:outputPanel>
+                </apex:pageblockSectionItem>  
+                
+                <apex:pageBlockSectionItem id="addressPbsiMail6">
+                    <apex:outputLabel >Mailing Country</apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:outputPanel rendered="{!showEditMailing}">
+                            <input type="text" value="{!acc.Mailing_Country__c}" id="mailCountry" name="country" placeholder="country"/>
+                        </apex:outputPanel>
+                        <apex:outputField value="{!acc.Mailing_Country__c}" rendered="{!!showEditMailing}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>            
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

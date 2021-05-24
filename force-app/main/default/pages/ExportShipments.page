@@ -1,0 +1,18 @@
+<apex:page showHeader="false" controller="ShipmentAPI" contentType="application/vnd.ms-excel#Shipments.xls" language="en-US"
+    cache="true" readonly="true" standardStylesheets="true">
+
+
+    <apex:dataTable value="{!ProdList}" var="pl">
+        <apex:column value="{!pl.PName}" headerValue="Name" />
+        <apex:column value="{!pl.PCode}" headerValue="Product Code" />
+        <apex:column value="{!pl.Qty}" headerValue="Quantity" />
+        <apex:column value="{!pl.QtyShipped}" headerValue="Quantity Shipped" />
+        <apex:repeat var="f" value="{!TotalShip}">
+            <apex:column headerValue="{!f}">
+                {!IF(pmap[pl.Pcode+'-'+f]==0,'',pmap[pl.Pcode+'-'+f])}
+            </apex:column>
+        </apex:repeat>
+    </apex:dataTable>
+
+
+</apex:page>
